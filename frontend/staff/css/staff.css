@@ -1,0 +1,63 @@
+
+
+#cadre_afaire {
+	border : solid;
+	border-color : black;
+	width : 900px ;
+	height : 200px;
+	position : relative ;
+	top : 80px ;
+	left : 450px ;
+	overflow-y: scroll;	
+}
+
+#cadre_encours {
+	border : solid;
+	border-color : black;
+	width : 900px ;
+	height : 200px;
+	position : relative ;
+	top : 80px ;
+	left : 450px ;
+	overflow-y: scroll;	
+}
+#cadre_envoye {
+	border : solid;
+	border-color : black;
+	width : 900px ;
+	height : 200px;
+	position : relative ;
+	top : 80px ;
+	left : 450px ;
+	overflow-y: scroll;	
+}
+
+#titre_colonne_afaire {
+	position : relative ;
+	top : 83px ;
+	left : 450px ;
+	border : solid;
+	border-color : black;
+	width : 906px ;
+	height : 20px;	
+}
+
+#titre_colonne_encours {
+	position : relative ;
+	top : 83px ;
+	left : 450px ;
+	border : solid;
+	border-color : black;
+	width : 906px ;
+	height : 20px;	
+}
+
+#titre_colonne_envoye {
+	position : relative ;
+	top : 83px ;
+	left : 450px ;
+	border : solid;
+	border-color : black;
+	width : 906px ;
+	height : 20px;	
+}
