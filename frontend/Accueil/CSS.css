@@ -1,0 +1,140 @@
+body{
+    color: black;
+    background-color: black;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav li{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+nav {
+    width: 100%;
+    margin: 0 auto;
+    background-color: aliceblue;
+    position: sticky;
+    top: 0px;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+nav a:hover{
+    color: orange;
+    border-bottom: 2px solid orange ;
+}
+
+nav img{
+    border-radius: 50%;
+    display: block;
+    max-width: 80%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    padding-top: 50px;
+    height: 50px;
+    text-align: center;
+   
+}
+
+
+footer ul {
+    list-style-type: none;
+}
+
+footer li {
+    float: left;
+    width: 25%;
+    text-align: center;
+    
+}
+
+footer a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+
+/* défilement*/
+
+#def_photos {
+    width: 300px;
+    height: 200px;
+    border: none;
+    margin: 50px 60px; 
+    padding: 10px;
+    position: relative;
+}   
+
+#def_photos ul {
+    list-style-type: none;
+}
+
+
+@keyframes slide{
+
+    10%{left:0px;}
+    35%{left:-50px;}
+    45%{left:-100%;}
+    55%{left: -100%;}
+    65%{left: -150%;}
+    75%{left:-150%;}
+    85%{left:-200%;}
+    95%{left: -100%;}
+
+}
+
+#picContent img{
+    width: 700px;
+    height: 500px;
+    margin: 10px;
+    opacity: 0.9;
+
+}
+
+#picContent {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    position: absolute;
+    top:0;
+    padding:0
+
+}
+
+#picContent {
+    animation: slide 2s  linear infinite;
+}
+
+
+#section_avis{
+    align-items: center;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    margin: 10%;
+    padding:10px;
+    position: absolute;
+    border: rgba(0, 0, 0, 0.17);
+    border-radius: 10px;
+    background-color : rgba(0, 0, 0, 0.17);
+    justify-content: center;
+    
+
+}
