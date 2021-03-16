@@ -2,15 +2,15 @@
 
 # dependencies
 node_modules
-/test_REACT/node_modules
-/test_REACT/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-/test_REACT/coverage
+coverage
 
 # production
-/test_REACT/build
+build
 
 # misc
 .DS_Store
