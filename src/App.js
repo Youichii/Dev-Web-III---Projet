@@ -69,3 +69,41 @@ export default App;
 
 //npm run build ==> lancer la production (créé un dossier 'build'). Seul le dossier build est utile 
 //serve -s build -p 8000 ==> lancer le serveur en locoal sur le port 8000
+
+
+
+//////////////////////////////////////
+
+
+import Navbar from './Navbar';
+import Accueil from './Accueil';
+import Accueil from './Informations';
+import Accueil from './Staff';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Switch>
+            <Route exact path="/"> 
+              <Accueil />
+            </Route>
+
+            <Route exact path="/informations"> 
+              <Informations />
+            </Route>
+
+            <Route exact path="/staff"> 
+              <Staff />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
