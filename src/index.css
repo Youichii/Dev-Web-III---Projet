@@ -75,6 +75,9 @@ nav img{
 
 /*----------STAFF-----------*/
 
+.staff {
+  color:white;
+}
 #cadre_afaire {
 	border : solid;
 	border-color : #808080;

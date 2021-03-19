@@ -1,6 +1,6 @@
 const Staff = () => {
     return (
-        <div className="home">
+        <div className="staff">
             <div>
                 <table id="titre_colonne_afaire">
                     <tr>
