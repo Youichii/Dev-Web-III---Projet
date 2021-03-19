@@ -1,4 +1,13 @@
 const Panier = () => {
+
+    const [aliments, setAliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
+                                            {"id" : "B", "nom" : "viande", "quantite" : 7, "prix_unite" : 8}, 
+                                            {"id" : "C", "nom" : "clem", "quantite" : 9, "prix_unite" : 260}]);
+
+    const changer_prix = () => {
+        console.log('hello ninjas', e);
+    }
+
     return (
         <div className="panier">
             
@@ -15,7 +24,15 @@ const Panier = () => {
 
                         <div id="info_aliments">
                             <table id="aliments">
-                    
+                                {aliments.map(element => (
+                                    <tr>
+                                        <td width="290px" className="case_aliments">{element.nom}</td>
+                                        <td className="case_aliment qtite_aliment">
+                                            <input className="nombre_aliment" type="number" value={element.quantite} onChange={changer_prix(this, element.id)} min="0" max="100" />
+                                        </td>
+                                        <td id={element.id} className="case_aliment" width="250px">{element.prix_unite}*{element.quantite}{"€"}</td>
+                                    </tr>
+                                ))}
                             </table>
                         </div>
                         
@@ -29,7 +46,9 @@ const Panier = () => {
                             <div className="elem_liste" id="elem_heure">
                                 <li>
                                     <label for="heure_livraison">Heure</label><br />
-                                    <div id="heure_livraison"></div>
+                                    <div id="heure_livraison">
+
+                                    </div>
                                 </li>
                             </div>
 
