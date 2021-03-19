@@ -1,8 +1,8 @@
 /*import { useState } from 'react'*/
 import Navbar from './Navbar';
 import Accueil from './Accueil';
-import Accueil from './Informations';
-import Accueil from './Staff';
+import Informations from './Informations';
+import Staff from './Staff';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
