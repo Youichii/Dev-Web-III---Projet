@@ -4,9 +4,10 @@
   box-sizing: border-box;
   margin: 0;
   font-family: "Quicksand";
-  color: #333;
+  /*color: #333;*//*couleur texte exemple*/
+  background-color: black;
 }
-.navbar {
+/*.navbar {
   padding: 20px;
   display: flex;
   align-items: center;
@@ -27,8 +28,49 @@
 }
 .navbar a:hover {
   color: #f1356d;
+}*/ /*Code de l'exemple*/
+
+
+
+
+/*----------NAVBAR-----------*/
+
+nav ul{
+  list-style-type: none;
 }
 
+nav li{
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+  margin: 0 auto;
+  background-color: aliceblue;
+  position: sticky;
+  top: 0px;
+}
+
+nav a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  border-bottom: 2px solid transparent;
+  padding: 10px 0px;
+}
+
+nav a:hover{
+  color: orange;
+  border-bottom: 2px solid orange ;
+}
+
+nav img{
+  border-radius: 50%;
+  display: block;
+  max-width: 80%;
+}
 
 
 /*----------STAFF-----------*/
@@ -111,46 +153,6 @@
 }
 
 
-
-
-/*----------NAVBAR-----------*/
-
-nav ul{
-  list-style-type: none;
-}
-
-nav li{
-  float: left;
-  width: 20%;
-  text-align: center;
-}
-
-nav {
-  width: 100%;
-  margin: 0 auto;
-  background-color: aliceblue;
-  position: sticky;
-  top: 0px;
-}
-
-nav a {
-  display: block;
-  text-decoration: none;
-  color: white;
-  border-bottom: 2px solid transparent;
-  padding: 10px 0px;
-}
-
-nav a:hover{
-  color: orange;
-  border-bottom: 2px solid orange ;
-}
-
-nav img{
-  border-radius: 50%;
-  display: block;
-  max-width: 80%;
-}
 
 /*----------CONNEXION-----------*/
 
