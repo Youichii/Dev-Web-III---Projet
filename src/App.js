@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
+import Panier from './Panier';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
 
             <Route exact path="/staff"> 
               <Staff />
+            </Route>
+
+            <Route exact path="/panier"> 
+              <Panier />
             </Route>
           </Switch>
         </div>
