@@ -5,6 +5,7 @@ import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
+import Inscription from './Inscription';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
 
             <Route exact path="/connexion"> 
               <Connexion />
+            </Route>
+
+            <Route exact path="/inscription"> 
+              <Inscription />
             </Route>
           </Switch>
         </div>
