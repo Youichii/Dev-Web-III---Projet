@@ -4,6 +4,7 @@ import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
+import Connexion from './Connexion';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -27,6 +28,10 @@ function App() {
 
             <Route exact path="/panier"> 
               <Panier />
+            </Route>
+
+            <Route exact path="/connexion"> 
+              <Connexion />
             </Route>
           </Switch>
         </div>

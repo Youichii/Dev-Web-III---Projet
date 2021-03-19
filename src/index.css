@@ -162,6 +162,149 @@ nav img{
 
 /*-------------------------------------------------------CONNEXION---------------------------------------------------------------*/
 
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+  font-family: Monaco, futura-pt,Tahoma,Geneva,Verdana,Arial,sans-serif;
+  background-color: #EEEEEE
+}
+
+.header {
+  background-color: #9933cc;
+  color: #ffffff;
+  padding: 15px;
+}
+
+#cadre_connexion {
+	width : 650px ;
+	height : 650px ;
+	border : solid;
+	border-color : grey;
+	left: 600px;
+    position: relative;
+    top: 80px;
+	background-color:white;
+}
+
+
+#bouton_connexion {
+	font-size:25px;
+	width : 50px ;
+	padding: 20px 100px 10px 100px;
+	text-decoration: underline;
+}
+
+#bouton_inscription {
+	font-size:25px;
+	width : 50% ;
+	cursor: pointer;
+}
+
+a:link {
+	color : black;
+	text-decoration:none;
+}
+a:visited {
+	color :black;
+	text-decoration:none;
+}
+a:active {
+	color:black;
+	text-decoration:none;
+}
+
+#bouton_inscription:hover{
+	color: #a6a6a6;
+}
+
+#boutons_choix {
+	padding: 40px 0px 80px 10px;
+}
+
+#titre_connexion {
+	font-size:22px;
+	text-align:center;
+	padding:0px 0px 35px 0px;
+}
+
+#user {
+	font-size:19px;
+	
+}
+.div_text_user {
+	text-align:center;
+	padding: 0px 0px 35px 0px;
+}
+.div_user {
+	position: relative;
+    left: 152px;
+    padding: 0px 0px 15px 0px;
+	color: #767676;
+}
+
+#text_user {
+	width: 340px;
+    height: 40px;
+	border-radius: 0px/0px;
+    border-width: 1px;	
+}
+#text_user:focus {
+	border-color:RGB(165,203,237);/*#edcba5;*/
+	border-width: 2px;	
+	outline:  none;
+}
+
+#text_mdp {
+	width: 340px;
+    height: 40px;
+	border-radius: 0px/0px;
+    border-width: 1px;
+}
+#text_mdp:focus {
+	border-color:RGB(165,203,237);/*#edcba5;*/
+	border-width: 2px;	
+	outline:  none;
+}
+
+#pwd{
+	font-size:19px;
+}
+
+
+#connexion_envoi{
+    position: relative;
+    left: 175px;
+}
+
+#bouton_connexion_envoi {
+	background-color: #242120;
+    border: none;
+    color: white;
+    width: 300px;
+    height: 33px;
+    font-size: 18px;
+	cursor: pointer;
+}
+#bouton_connexion_envoi:hover{
+	background-color: #777777;
+	font-weight: bold;
+}
+
+#pwd_oubli {
+	text-align: center;
+    padding: 30px 0px 0px 0px;
+	font-size: 13px;
+	color: #242120;
+}
+
+#pwd_oubli:hover{
+	color: #a6a6a6;
+	cursor: pointer;
+}
+
 
 /*-------------------------------------------------------Inscription---------------------------------------------------------------*/
 
