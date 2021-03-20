@@ -89,7 +89,7 @@ const Inscription = () => {
                         </div>
                         
                         <div id="connexion_envoi">
-                            <input id="bouton_connexion_envoi" type="submit" value="CONNEXION" onclick="connexion();" />
+                            <input id="bouton_connexion_envoi" type="submit" value="CONNEXION" />
                         </div>
                     </form>
                     
