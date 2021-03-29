@@ -1,5 +1,3 @@
-//test juste dans la branche test-branche : test raté : autre test
-
 const Accueil = () => {
     return (
         <div className="accueil">
