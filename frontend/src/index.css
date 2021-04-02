@@ -78,37 +78,44 @@ nav img{
 
 /*-------------------------------------------------------STAFF---------------------------------------------------------------*/
 
+* {
+	font-family: futura-pt,Verdana,Arial,sans-serif;
+	color:white;
+	font-size: 20px;
+}
 .staff {
   color:white;
 }
+
 #cadre_afaire {
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
-	height : 200px;
+	width : 1100px ;
+	height : 300px;
 	position : relative ;
 	top : 10px ;
 	left : 450px ;
 	overflow-y: scroll;	
+	color:white;
 }
 
 #cadre_encours {
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
-	height : 200px;
+	width : 1100px ;
+	height : 300px;
 	position : relative ;
-	top : 10px ;
+	top : 50px ;
 	left : 450px ;
 	overflow-y: scroll;	
 }
 #cadre_envoye {
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
-	height : 200px;
+	width : 1100px ;
+	height : 300px;
 	position : relative ;
-	top : 10px ;
+	top : 90px ;
 	left : 450px ;
 	overflow-y: scroll;	
 }
@@ -119,44 +126,33 @@ nav img{
 	left : 450px ;
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
+	width : 1100px ;
 	height : 20px;
 	font-size : 20px;	
 }
 
 #titre_colonne_encours {
 	position : relative ;
-	top : 13px ;
+	top : 53px ;
 	left : 450px ;
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
+	width : 1100px ;
 	height : 20px;	
 	font-size : 20px;
 }
 
 #titre_colonne_envoye {
 	position : relative ;
-	top : 13px ;
+	top : 93px ;
 	left : 450px ;
 	border : solid;
 	border-color : #808080;
-	width : 906px ;
+	width : 1100px ;
 	height : 20px;	
 	font-size : 20px;
 }
 
-#cadre_encours {
-	font-size:16px;
-}
-
-#cadre_afaire{
-	font-size:16px;
-}
-
-#cadre_envoye {
-	font-size:16px;
-}
 
 
 
