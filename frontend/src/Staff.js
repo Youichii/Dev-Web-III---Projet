@@ -43,119 +43,90 @@ const Staff = () => {
 
     return (
         <div className="staff">
-            <div>
-                <table id="titre_colonne_afaire">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_afaire">
+
+            <div className="c_cadre_commandes">
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div class="i_heures">Heure</div>
+					<div class="i_noms">Nom</div>
+					<div class="i_contacts">Contact</div>
+					<div class="i_adresses">Adresse</div>
+					<div class="i_prix_titre">Prix</div>
+					<div class="i_heures_prevues">Heure <br /> prévue</div>
+                </div>
+                <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
                     {afaire.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape1(element.id)}>suivant</button></td>
+
+                        <div className="i_commande c_commande">
+                            <tr id={element.id}> 
+                                <div width='72px' className="i_heure">{element.heure_passee}</div>
+                                <div width='112px' className="i_nom">{element.nom}</div> 
+                                <div width='105px' className="i_contact">{element.contact}</div> 
+                                <div width='220px' className="i_adresse">{element.adresse}</div>
+                                <div width='80px' className="i_prix_commande">{element.prix}</div> 
+                                <div width='72px' className="i_heure_prevue">{element.heure_prevue}</div>
+                                <div>
+                                    <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
+                                </div> 
                             </tr>
-                        </table>
+                        </div>
                     ))}
                 </div>
             </div>
 
-            <div>
-                <table id="titre_colonne_encours">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_encours">
+            <div className="c_cadre_commandes">
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div class="i_heures">Heure</div>
+					<div class="i_noms">Nom</div>
+					<div class="i_contacts">Contact</div>
+					<div class="i_adresses">Adresse</div>
+					<div class="i_prix_titre">Prix</div>
+					<div class="i_heures_prevues">Heure <br /> prévue</div>
+                </div>
+                <div className="i_commandes_encours c_commandes" id="cadre_encours">
                     {encours.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape2(element.id)}>suivant</button></td>
+
+                        <div className="i_commande c_commande">
+                            <tr id={element.id}> 
+                                <div width='72px' className="i_heure">{element.heure_passee}</div>
+                                <div width='112px' className="i_nom">{element.nom}</div> 
+                                <div width='105px' className="i_contact">{element.contact}</div> 
+                                <div width='220px' className="i_adresse">{element.adresse}</div>
+                                <div width='80px' className="i_prix_commande">{element.prix}</div> 
+                                <div width='72px' className="i_heure_prevue">{element.heure_prevue}</div>
+                                <div>
+                                    <button class="i_bouton_suivant" onClick={() => envoi_etape2(element.id)}>suivant</button>
+                                </div> 
                             </tr>
-                        </table>
+                        </div>
                     ))}
                 </div>
             </div>
 
-            <div>
-                <table id="titre_colonne_envoye">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_envoye">
+            <div className="c_cadre_commandes">
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div class="i_heures">Heure</div>
+					<div class="i_noms">Nom</div>
+					<div class="i_contacts">Contact</div>
+					<div class="i_adresses">Adresse</div>
+					<div class="i_prix_titre">Prix</div>
+					<div class="i_heures_prevues">Heure <br /> prévue</div>
+                </div>
+                <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
                     {envoye.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape3(element.id)}>suivant</button></td>
+
+                        <div className="i_commande c_commande">
+                            <tr id={element.id}> 
+                                <div width='72px' className="i_heure">{element.heure_passee}</div>
+                                <div width='112px' className="i_nom">{element.nom}</div> 
+                                <div width='105px' className="i_contact">{element.contact}</div> 
+                                <div width='220px' className="i_adresse">{element.adresse}</div>
+                                <div width='80px' className="i_prix_commande">{element.prix}</div> 
+                                <div width='72px' className="i_heure_prevue">{element.heure_prevue}</div>
+                                <div>
+                                    <button class="i_bouton_suivant" onClick={() => envoi_etape3(element.id)}>suivant</button>
+                                </div> 
                             </tr>
-                        </table>
+                        </div>
                     ))}
                 </div>
             </div>

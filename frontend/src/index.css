@@ -79,80 +79,197 @@ nav img{
 /*-------------------------------------------------------STAFF---------------------------------------------------------------*/
 
 * {
-	font-family: futura-pt,Verdana,Arial,sans-serif;
-	color:white;
-	font-size: 20px;
+	font-family:Helvitica, sans-serif;
 }
-.staff {
-  color:white;
-}
-
-#cadre_afaire {
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 300px;
-	position : relative ;
-	top : 10px ;
-	left : 450px ;
-	overflow-y: scroll;	
-	color:white;
-	background-color: white;
+.header {
+	background-color: black;
+  color: #ffffff;
+  padding: 15px;
 }
 
-#cadre_encours {
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 300px;
-	position : relative ;
-	top : 50px ;
-	left : 450px ;
-	overflow-y: scroll;	
+
+.c_titres_commandes {
+  display: grid;
+  grid-template-columns: 10% 13% 17% 20% 9% 15%;
+  grid-template-rows: auto  ;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 2px;
+  color : white ;
 }
-#cadre_envoye {
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 300px;
-	position : relative ;
-	top : 90px ;
-	left : 450px ;
-	overflow-y: scroll;	
+.c_titres_commandes > div {
+  text-align: center;
+  padding: 10px 10px 0px 10px;
+  font-size: 21px;
+}
+.i_titres_commandes {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  
+  grid-row-start: 2;
+  grid-row-end: 3;
+  
+  border: solid;
+  border-color: #808080;
+}
+.c_cadre_commandes {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto auto ;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 10px;
+  grid-row-gap: 0px; /*soit rien, c'est stylé?*/
+}
+.c_commandes {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto ;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 5px;
+}
+.c_commande {
+  display: grid;
+  grid-template-columns: 10% 13% 18% 21% 10% 13% 10% ;
+  grid-template-rows: auto auto ;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 5px;
+  color : white;
+}
+.c_commande > div {
+    text-align: center;
+    font-size: 18px;
 }
 
-#titre_colonne_afaire {
-	position : relative ;
-	top : 13px ;
-	left : 450px ;
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 20px;
-	font-size : 20px;	
+
+.i_commande {
+  grid-column-start: 1;
+  grid-column-end: 2;
+
+}
+.i_heures {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.i_heure {
+  grid-column-start: 1;
+  grid-column-end: 2;
+
 }
 
-#titre_colonne_encours {
-	position : relative ;
-	top : 53px ;
-	left : 450px ;
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 20px;	
-	font-size : 20px;
+.i_noms {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.i_nom {
+  grid-column-start: 2;
+  grid-column-end: 3;
+ 
 }
 
-#titre_colonne_envoye {
-	position : relative ;
-	top : 93px ;
-	left : 450px ;
-	border : solid;
-	border-color : #808080;
-	width : 1100px ;
-	height : 20px;	
-	font-size : 20px;
+.i_contacts {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
+.i_contact {
+  grid-column-start: 3;
+  grid-column-end: 4;
+
+}
+
+.i_adresses {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.i_adresse {
+  grid-column-start: 4;
+  grid-column-end: 5;
+
+}
+
+.i_prix_titre {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.i_prix_commande {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  text-align: center;
+}
+
+.i_heures_prevues {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.i_heure_prevue {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+.i_bouton_suivant {
+  grid-column-start: 7;
+  grid-column-end: 8;
+  
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+
+.i_commandes_afaire {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 3;
+  grid-row-end: 6;
+    
+  border : solid;
+  border-color : #808080;
+  overflow-y: scroll;	
+  font-size : 22px
+}
+.i_commandes_encours {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 10;
+  
+  border : solid;
+  border-color : #808080;
+  overflow-y: scroll;
+  font-size : 22px;
+  
+}
+.i_commandes_envoye {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 11;
+  grid-row-end: 14;
+  
+  border : solid;
+  border-color : #808080;
+  overflow-y: scroll;	
+  font-size : 22px;
+}
+
 
 
 
