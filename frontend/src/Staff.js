@@ -18,6 +18,8 @@ const Staff = () => {
     const [encours, setEncours] = useState([]);
 
     const [envoye, setEnvoye] = useState([]);
+
+    const [informations_commande, setInformationsCommande] = useState("");
     
     const envoi_etape1 =(identifiant) => {
         const newAfaire = afaire.filter(element => element.id !== identifiant);
@@ -41,6 +43,29 @@ const Staff = () => {
         setEnvoye(newEnvoye) ;
     }
 
+    const afficher_commande = (commande) => {
+        let liste_aliments ;
+        let liste_finale = "<div class='info_commande'><div>Détails de la commande " + commande + "</div><br>" ;
+        
+        if (commande in afaire) {
+            liste_aliments = afaire[commande]["commande"];
+        }
+        else if (commande in encours) {
+            liste_aliments = encours[commande]["commande"];
+        }
+        else if (commande in envoye) {
+            liste_aliments = envoye[commande]["commande"];
+        }
+        
+        for (i=0 ; i<liste_aliments.length ; i++){
+            liste_finale += "<div>- " + liste_aliments[i] + "</div>";
+        }
+        liste_finale += "</div>" ;
+        
+        setInformationsCommande(liste_finale) ; 
+        //document.getElementById('id_details_commande').innerHTML = liste_finale;
+    }
+
     return (
         <div className="staff">
 
@@ -56,7 +81,7 @@ const Staff = () => {
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
                     {afaire.map( element => (
 
-                        <div className="i_commande c_commande">
+                        <div className="i_commande c_commande" onClick={afficher_commande(element.id)}>
                             <tr id={element.id}> 
                                 <div width='72px' className="i_heure">{element.heure_passee}</div>
                                 <div width='112px' className="i_nom">{element.nom}</div> 
@@ -71,6 +96,7 @@ const Staff = () => {
                         </div>
                     ))}
                 </div>
+                <div id="id_details_commande" class="details_commande">{informations_commande}</div>
             </div>
 
             <div className="c_cadre_commandes">
