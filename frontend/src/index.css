@@ -158,143 +158,194 @@ nav img{
 
 /*-------------------------------------------------------CONNEXION---------------------------------------------------------------*/
 
-[class*="col-"] {
-  float: left;
-  padding: 15px;
-}
+* {
+	box-sizing: border-box;
+	font-family:Helvitica,sans-serif;
+  }  
+  html {
+	font-family: Monaco, futura-pt,Tahoma,Geneva,Verdana,Arial,sans-serif;
+	background-color: #EEEEEE
+  }
+  
+  
+  .c_cadre {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: 15% 70% 15% ;
+	grid-gap: 2px;
+	padding: 5px;
+  }
+  .c_info_connexion {
+	display: grid;
+	grid-template-columns: 15% 30% 10% 30% 15%;
+	grid-template-rows: auto auto auto auto auto auto auto auto ;
+	grid-gap: 2px;
+	padding: 5px;
+  }
+  .i_info_connexion {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 6;
 
-.header {
-  background-color: #9933cc;
-  color: #ffffff;
-  padding: 15px;
-}
-
-#cadre_connexion {
-	width : 650px ;
 	height : 650px ;
 	border : solid;
 	border-color : grey;
-	left: 600px;
-    position: relative;
-    top: 80px;
 	background-color:white;
-}
-
-
-#bouton_connexion {
+  }
+  .i_bouton_connexion {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	
 	font-size:25px;
-	width : 50px ;
-	padding: 20px 100px 10px 100px;
 	text-decoration: underline;
-}
-
-#bouton_inscription {
+	text-align: center;
+	padding: 30px 0px 0px 0px;
+  }
+  .i_bouton_inscription {
+	grid-column-start: 4;
+	grid-column-end: 5;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	
 	font-size:25px;
-	width : 50% ;
 	cursor: pointer;
-}
+	text-align: center;
+	padding: 30px 0px 0px 0px;
+  }
+  
 
-a:link {
-	color : black;
-	text-decoration:none;
-}
-a:visited {
-	color :black;
-	text-decoration:none;
-}
-a:active {
-	color:black;
-	text-decoration:none;
-}
+  a:link {
+	  color : black;
+	  text-decoration:none;
+  }
+  a:visited {
+	  color :black;
+	  text-decoration:none;
+  }
+  a:active {
+	  color:black;
+	  text-decoration:none;
+  }
 
-#bouton_inscription:hover{
-	color: #a6a6a6;
-}
-
-#boutons_choix {
-	padding: 40px 0px 80px 10px;
-}
-
-#titre_connexion {
+  
+  .i_bouton_inscription:hover{
+	  color: #a6a6a6;
+  }
+  
+  .i_titre_connexion {
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	
 	font-size:22px;
 	text-align:center;
-	padding:0px 0px 35px 0px;
-}
-
-#user {
-	font-size:19px;
+  }
+  .i_titre_adresse {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
 	
-}
-.div_text_user {
-	text-align:center;
-	padding: 0px 0px 35px 0px;
-}
-.div_user {
-	position: relative;
-    left: 152px;
-    padding: 0px 0px 15px 0px;
 	color: #767676;
-}
+  }
+  .i_champ_adresse {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+  }
+  #text_user {
+	  width: 100%;
+	  height: 40px;
+	  border-radius: 0px/0px;
+	  border-width: 1px;	
+  }
+  #text_user:focus {
+	  border-color:RGB(165,203,237);
+	  border-width: 2px;	
+	  outline:  none;
+  }
+  .i_titre_mdp {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	
+	color: #767676;
+  }
+  .i_champ_mdp {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 5;
+  }
+  #text_mdp {
+	  width: 100%;
+	  height: 40px;
+	  border-radius: 0px/0px;
+	  border-width: 1px;
+  }
+  #text_mdp:focus {
+	  border-color:RGB(165,203,237);
+	  border-width: 2px;	
+	  outline:  none;
+  }
 
-#text_user {
-	width: 340px;
-    height: 40px;
-	border-radius: 0px/0px;
-    border-width: 1px;	
-}
-#text_user:focus {
-	border-color:RGB(165,203,237);/*#edcba5;*/
-	border-width: 2px;	
-	outline:  none;
-}
+  .i_bouton_envoi {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 5;
+	grid-row-end: 6;
 
-#text_mdp {
-	width: 340px;
-    height: 40px;
-	border-radius: 0px/0px;
-    border-width: 1px;
-}
-#text_mdp:focus {
-	border-color:RGB(165,203,237);/*#edcba5;*/
-	border-width: 2px;	
-	outline:  none;
-}
-
-#pwd{
-	font-size:19px;
-}
-
-
-#connexion_envoi{
-    position: relative;
-    left: 175px;
-}
-
-#bouton_connexion_envoi {
+	text-align:center;
+  }
+  
+  #bouton_connexion_envoi {
 	background-color: #242120;
-    border: none;
-    color: white;
-    width: 300px;
-    height: 33px;
-    font-size: 18px;
+	border: none;
+	color: white;
+	width: 300px;
+	height: 33px;
+	font-size: 18px;
 	cursor: pointer;
-}
-#bouton_connexion_envoi:hover{
+  }
+  #bouton_connexion_envoi:hover{
 	background-color: #777777;
 	font-weight: bold;
-}
-
-#pwd_oubli {
-	text-align: center;
-    padding: 30px 0px 0px 0px;
+  }
+  
+  .i_mdp_oubli {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 6;
+	grid-row-end: 7;
+	
+	text-align:center;
 	font-size: 13px;
 	color: #242120;
-}
-
-#pwd_oubli:hover{
-	color: #a6a6a6;
-	cursor: pointer;
-}
+  }
+  .i_mdp_oubli:hover {
+	  color: #a6a6a6;
+	  cursor: pointer;
+  }
+  
+  .c_zones_info {
+	display: grid;
+	grid-template-columns: 10% 80% 10%;
+	grid-template-rows: auto auto auto auto auto auto auto auto ;
+	grid-gap: 2px;
+	padding: 5px;
+  }
+  .i_zones_info {
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row-start: 4;
+	grid-row-end: 8;
+  }
 
 
 /*-------------------------------------------------------Inscription---------------------------------------------------------------*/
