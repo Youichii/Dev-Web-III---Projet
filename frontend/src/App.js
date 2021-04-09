@@ -6,6 +6,12 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
+<<<<<<< Updated upstream
+=======
+import AppTest from './App_test';
+import ProfilPrive from './ProfilPrive';
+
+>>>>>>> Stashed changes
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -38,6 +44,11 @@ function App() {
             <Route exact path="/inscription"> 
               <Inscription />
             </Route>
+
+            <Route exact path="/profil-prive"> 
+              <ProfilPrive />
+            </Route>
+
           </Switch>
         </div>
       </div>

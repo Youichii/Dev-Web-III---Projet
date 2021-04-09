@@ -3,9 +3,9 @@ import Button from './Button'
 
 
 
-const Header = ({title, onAdd, showAdd}) => {  
+const Header = ({title, headerclass}) => {  
     return (
-        <header className='header'>
+        <header className={headerclass}>
             <h1>{title}</h1> 
             <Button color={ showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd} />               
         </header>
@@ -13,7 +13,8 @@ const Header = ({title, onAdd, showAdd}) => {
 }
 
 Header.defaultProps = {
-    title: 'Client Tracker'  //define a default title for the header
+    title: 'Client Tracker',  //define a default title for the header
+    headerclass : 'header'
 }
 
 Header.propTypes = {
