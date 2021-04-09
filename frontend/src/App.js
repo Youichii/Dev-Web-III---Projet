@@ -6,12 +6,9 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
-<<<<<<< Updated upstream
-=======
 import AppTest from './App_test';
 import ProfilPrive from './ProfilPrive';
 
->>>>>>> Stashed changes
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
