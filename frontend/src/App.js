@@ -7,10 +7,7 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import AppTest from './App_test';
-<<<<<<< HEAD
-import ProfilPrive from './ProfilPrive';
-=======
->>>>>>> Informations-HTML
+import ProfilPrive from './ProfilPrive'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 

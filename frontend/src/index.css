@@ -604,11 +604,7 @@ html {
 
 
 
-<<<<<<< HEAD
 /*---------------------------------- informations --------------------------- */
-=======
-
->>>>>>> Informations-HTML
 
 
 div .Informations {
@@ -665,7 +661,6 @@ ul.Hours {
 	list-style-type: none;
 	margin-bottom: 15%;
 	margin-top: 5%;
-<<<<<<< HEAD
 }
 
 /* ------------------------------------- Profil Privé ------------------------------------- */
@@ -686,6 +681,4 @@ div .profilPrive {
 
 div .profilheader {
 	min-width: 200px;
-=======
->>>>>>> Informations-HTML
 }

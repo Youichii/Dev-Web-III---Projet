@@ -4,14 +4,9 @@ import PropTypes from 'prop-types'
 
 const Header = ({title, headerclass}) => {  
     return (
-<<<<<<< HEAD
-        <header className={headerclass}>
-            <h1>{title}</h1>            
-=======
         <header className='header'>
             <h1>{title}</h1> 
                            
->>>>>>> Informations-HTML
         </header>
     )
 }
