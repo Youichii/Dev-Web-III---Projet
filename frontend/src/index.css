@@ -45,14 +45,12 @@ nav ul{
 nav li{
   float: left;
   width: 20%;
-  text-align: center;
 }
 
 nav {
   width: 100%;
   margin: 0 auto;
-  background-color: aliceblue;
-  position: sticky;
+  position: relative;
   top: 0px;
 }
 
@@ -73,6 +71,10 @@ nav img{
   border-radius: 50%;
   display: block;
   max-width: 80%;
+}
+
+div .navbar {
+	background-color: black;
 }
 
 
@@ -167,11 +169,11 @@ nav img{
   padding: 15px;
 }
 
-.header {
+/*.header {
   background-color: #9933cc;
   color: #ffffff;
   padding: 15px;
-}
+}*/
 
 #cadre_connexion {
 	width : 650px ;
@@ -309,11 +311,11 @@ a:active {
   padding: 15px;
 }
 
-.header {
+/*.header {
   background-color: #9933cc;
   color: #ffffff;
   padding: 15px;
-}
+}*/
 
 #cadre_connexion {
 	width : 650px ;
@@ -415,11 +417,11 @@ html {
   font-family: "Lucida Sans", sans-serif;
 }
 
-.header {
+/*.header {
   background-color: #9933cc;
   color: #ffffff;
   padding: 15px;
-}
+}*/
 
 .menu ul {
   list-style-type: none;
@@ -602,7 +604,11 @@ html {
 
 
 
+<<<<<<< HEAD
 /*---------------------------------- informations --------------------------- */
+=======
+
+>>>>>>> Informations-HTML
 
 
 div .Informations {
@@ -659,6 +665,7 @@ ul.Hours {
 	list-style-type: none;
 	margin-bottom: 15%;
 	margin-top: 5%;
+<<<<<<< HEAD
 }
 
 /* ------------------------------------- Profil Privé ------------------------------------- */
@@ -679,4 +686,6 @@ div .profilPrive {
 
 div .profilheader {
 	min-width: 200px;
+=======
+>>>>>>> Informations-HTML
 }

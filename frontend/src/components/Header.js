@@ -4,8 +4,14 @@ import PropTypes from 'prop-types'
 
 const Header = ({title, headerclass}) => {  
     return (
+<<<<<<< HEAD
         <header className={headerclass}>
             <h1>{title}</h1>            
+=======
+        <header className='header'>
+            <h1>{title}</h1> 
+                           
+>>>>>>> Informations-HTML
         </header>
     )
 }
@@ -25,3 +31,6 @@ Header.propTypes = {
 } */
 
 export default Header
+
+
+//<Button color={ showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd} />  Pour ajouter le components "button"

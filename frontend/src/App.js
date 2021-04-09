@@ -7,7 +7,10 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import AppTest from './App_test';
+<<<<<<< HEAD
 import ProfilPrive from './ProfilPrive';
+=======
+>>>>>>> Informations-HTML
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
@@ -36,6 +39,10 @@ function App() {
 
             <Route exact path="/connexion"> 
               <Connexion />
+            </Route>
+
+            <Route exact path="/App_test"> 
+              <AppTest />
             </Route>
 
             <Route exact path="/inscription"> 
