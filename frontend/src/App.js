@@ -6,6 +6,8 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
+import AppTest from './App_test';
+
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -33,6 +35,10 @@ function App() {
 
             <Route exact path="/connexion"> 
               <Connexion />
+            </Route>
+
+            <Route exact path="/App_test"> 
+              <AppTest />
             </Route>
 
             <Route exact path="/inscription"> 
