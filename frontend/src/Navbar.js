@@ -9,7 +9,7 @@ const Navbar = () => {
                     <li><a href="informations">Informations</a></li>
                     <li><img src={logo} href="page1.html" alt="logo"/></li>
                     <li><a href="menu">Menu</a></li>
-                    <li><a href="compte">Profil</a></li>
+                    <li><a href="profil-prive">Profil</a></li>
                 </ul>
             </nav>
         </div>

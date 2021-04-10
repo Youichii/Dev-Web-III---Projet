@@ -9,7 +9,11 @@ const Picture = ( { url, desc } ) => {
                 <img src= { url } alt= { desc }></img>
             </div>
             <div className="picbutton">
-                <Button color= { "grey" } text= { "Téléchargez une nouvelle photo" } onClick= { () => { window.prompt('Ajoutez votre url de photo') }}/>
+                <form action="/profil-prive">
+                    Changer d'avatar :
+                    <input className="btn" type="file" id="myFile" name="filename"></input>
+                    <input className="btn" type="submit"></input>
+                </form>
             </div>
         </div>
     )
@@ -21,3 +25,5 @@ Picture.defaultProps = {
 }
 
 export default Picture
+
+//<Button color= { "grey" } text= { "Téléchargez une nouvelle photo" } onClick= { () => { window.prompt('Ajoutez votre url de photo') }}/>

@@ -700,17 +700,18 @@ div.profilepicture {
 }
 
 
-button.btn{
-	background-image: url("./img/button.jpg") ;
+input.btn{
+	background-color: rgb(102, 102, 102);
 	border-radius: 50px;
-	min-width: 150px;
+	min-width: 70px;
 	min-height: 20px;
 	font-size: 15px;
 	font-weight: 800;
 	font-family: Georgia, 'Times New Roman', Times, serif;
-	margin-top: 2%;
+	margin-top: 1%;
 	width: 20%;
 	opacity: 0.9;
+	margin-bottom: 1%;
 }
 
 div.privateinfo{
