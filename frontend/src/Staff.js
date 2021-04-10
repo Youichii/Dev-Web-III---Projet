@@ -106,17 +106,15 @@ const Staff = () => {
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
                     {afaire.map( element => (
                         <div className="i_commande c_commande" id={element.id} onMouseOver="nouveau_bg({element.id})" onMouseLeave="ancien_bg({element.id}, {type_couleur})" onClick={() => setCommande(element.id)} onLoad={maj_classe}>
-                            <tr> 
-                                <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
-                                <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
-                                <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
-                                <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
-                                <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
-                                <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
-                                <div className={`i_div_bouton ${type_couleur}`}>
-                                    <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
-                                </div> 
-                            </tr>
+                            <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
+                            <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
+                            <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
+                            <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
+                            <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
+                            <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
+                            <div className={`i_div_bouton ${type_couleur}`}>
+                                <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
+                            </div> 
                         </div>
                     ))}
                 </div>
@@ -143,17 +141,15 @@ const Staff = () => {
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
                     {encours.map( element => (
                         <div className="i_commande c_commande" id={element.id} onMouseOver="nouveau_bg({element.id})" onMouseLeave="ancien_bg({element.id}, {type_couleur})" onClick={() => setCommande(element.id)} onLoad={maj_classe}>
-                            <tr> 
-                                <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
-                                <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
-                                <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
-                                <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
-                                <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
-                                <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
-                                <div className={`i_div_bouton ${type_couleur}`}>
-                                    <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
-                                </div> 
-                            </tr>
+                            <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
+                            <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
+                            <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
+                            <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
+                            <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
+                            <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
+                            <div className={`i_div_bouton ${type_couleur}`}>
+                                <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
+                            </div> 
                         </div>
                     ))}
                 </div>
@@ -171,17 +167,15 @@ const Staff = () => {
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
                     {envoye.map( element => (
                         <div className="i_commande c_commande" id={element.id} onMouseOver="nouveau_bg({element.id})" onMouseLeave="ancien_bg({element.id}, {type_couleur})" onClick={() => setCommande(element.id)} onLoad={maj_classe}>
-                            <tr> 
-                                <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
-                                <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
-                                <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
-                                <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
-                                <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
-                                <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
-                                <div className={`i_div_bouton ${type_couleur}`}>
-                                    <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
-                                </div> 
-                            </tr>
+                            <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
+                            <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
+                            <div width='105px' className={`i_contact ${type_couleur}`}>{element.contact}</div> 
+                            <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
+                            <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
+                            <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
+                            <div className={`i_div_bouton ${type_couleur}`}>
+                                <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
+                            </div> 
                         </div>
                     ))}
                 </div>
