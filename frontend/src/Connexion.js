@@ -2,8 +2,8 @@ const Connexion = () => {
     return (
         <div className="connexion c_cadre">
             <div id="cadre_connexion" className="i_info_connexion c_info_connexion">
-                <div className="i_bouton_connexion">SE CONNECTER</div>
-				<div className="i_bouton_inscription">S'INSCRIRE</div>
+                <div className="i_bouton_connexion">CONNEXION</div>
+				<div className="i_bouton_inscription">INSCRIPTION</div>
 				<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
 
                 <div class="i_zones_info c_zones_info">
