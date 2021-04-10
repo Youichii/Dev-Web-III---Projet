@@ -679,6 +679,15 @@ div .profilPrive {
 	background-color: rgb(0, 0, 0);
 }
 
-div .profilheader {
+.profilheader {
 	min-width: 200px;
+}
+
+div.picture img {
+	min-width: 180px;
+	max-width: 30%;
+	max-height: 20%;
+	margin: 5% 2%;
+	border-radius: 50%;
+	
 }
