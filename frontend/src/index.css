@@ -298,55 +298,48 @@ a:active {
 
 
 /*-------------------------------------------------------Inscription---------------------------------------------------------------*/
-
 .header {
 	background-color: black;
 	color: #ffffff;
 	padding: 15px;
-  }
-  
-  html {
+}
+html {
 	font-family: Monaco, futura-pt,Tahoma,Geneva,Verdana,Arial,sans-serif;
 	background-color: black ;
 	color : white;
-  }
+}
+body {
+	font-family:DejaVu Sans Mono, monospace;
+}
   
-  body {
-	  font-family:DejaVu Sans Mono, monospace;
-  }
   
-  
-  .c_cadre_inscription {
-	  display: grid;
-	  grid-template-columns: 30% 40% 30%;
-	  grid-template-rows: 10% 70% 20% ;
-	  grid-gap: 2px;
-	  padding: 5px;
-  }
-  
-  .c_info_inscription {
-	  display: grid;
-	  grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
-	  grid-template-rows: 4% 6% 4% 5% 66% 36%;
-	  grid-gap: 0px;
-	  padding: 5px;
-  }
-  
-  .i_info_inscription{
-	  grid-column-start: 2;
-	  grid-column-end: 3;
-	
-	  grid-row-start: 2;
-	  grid-row-end: 6;
-	  height : 1140px ;
-	  border : solid;
-	  border-color : grey;
-	  background-color:#181616;
-  }
-  .i_bouton_con {
+.c_cadre_inscription {
+	display: grid;
+	grid-template-columns: 30% 40% 30%;
+	grid-template-rows: 10% 70% 20% ;
+	grid-gap: 2px;
+	padding: 5px;
+}
+.c_info_inscription {
+	display: grid;
+	grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
+	grid-template-rows: 2% 6% 5% 6% 66% 36%;
+	grid-gap: 0px;
+	padding: 5px;
+}
+.i_info_inscription{
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 6;
+	height : 1140px ;
+	border : solid;
+	border-color : grey;
+	background-color:#181616;
+}
+.i_bouton_con {
 	grid-column-start: 2;
 	grid-column-end: 5;
-	
 	grid-row-start: 2;
 	grid-row-end: 3;
 	
@@ -356,9 +349,8 @@ a:active {
 	color: #9BADB2;
 	background-color: #435259;
 	cursor: pointer;
-  }
-  
-  .i_bouton_insc {
+}
+.i_bouton_insc {
 	grid-column-start: 5;
 	grid-column-end: 8;
 	grid-row-start: 2;
@@ -369,27 +361,12 @@ a:active {
 	padding: 23px 0px 0px 0px;
 	color: white;
 	background-color: #FB3F3F;
-  }
-  
-  a:link {
-	  color : black;
-	  text-decoration:none;
-  }
-  a:visited {
-	  color :black;
-	  text-decoration:none;
-  }
-  a:active {
-	  color:black;
-	  text-decoration:none;
-  }
-  
-  .i_bouton_con:hover{
-	  color: #FD8D8D;
-	  background-color:#667D88;
-  }
-  
-  .i_titre_connexion {
+}
+.i_bouton_con:hover{
+	color: #FD8D8D;
+	background-color:#667D88;
+}
+.i_titre_connexion {
 	grid-column-start: 3;
 	grid-column-end: 7;
 	
@@ -399,182 +376,233 @@ a:active {
 	font-size:22px;
 	text-align:center;
 	color : #F1F7FD;
-  }
-  
-  /*----------------------------*/
-  
-  .c_champs_informations {
-	  display: grid;
-	  grid-template-columns: 40% 20% 40%;
-	  grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 28%;
-	  grid-gap: 0px;
-	  padding: 5px;
-  }
-  .i_champs_informations{
-	  grid-column-start: 3;
+}
+
+a:link {
+	color : black;
+	text-decoration:none;
+}
+a:visited {
+	color :black;
+	text-decoration:none;
+}
+a:active {
+	color:black;
+	text-decoration:none;
+}
+
+
+.c_champs_informations {
+	display: grid;
+	grid-template-columns: 40% 20% 40%;
+	grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 7% 3% 5% 2% 9% 4% 13%;
+	grid-gap: 0px;
+	padding: 5px;
+}
+.i_champs_informations{
+	grid-column-start: 3;
 	grid-column-end: 7;
 	grid-row-start: 5;
 	grid-row-end: 9;
-  }
-  .i_titre_nom{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 1;
-	  grid-row-end: 2;
-  }
-  .i_champ_nom{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 2;
-	  grid-row-end: 3;
-  }
-  /*#nom_user*/
-  input {
-	  width: 100%;
-	  height: 45px;
-	  border-radius: 0px/0px;
-	  border-width: 1px;
-	  background-color: #181616;
-	  border: 1px solid #a0b3b0;
-	  padding: 5px 10px 5px 10px;
-	  color: white;
-  }
-  input:focus {
-	  border-color:#FB3F3F;
-	  border-width: 2px;	
-	  outline:  none;
-  }
-  .i_titre_prenom{
-	  grid-column-start: 3;
-	  grid-column-end: 4;
-	  grid-row-start: 1;
-	  grid-row-end: 2;
-  }
-  .i_champ_prenom{
-	  grid-column-start: 3;
-	  grid-column-end: 4;
-	  grid-row-start: 2;
-	  grid-row-end: 3;
-  }
-  .i_titre_adresse_insc{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 3;
-	  grid-row-end: 4;
-  }
-  .i_champ_adresse_insc{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 4;
-	  grid-row-end: 5;
-  }
-  .i_titre_anniversaire{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 5;
-	  grid-row-end: 6;
-  }
-  .i_champ_anniversaire{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 6;
-	  grid-row-end: 7;
-  }
-  .i_titre_telephone{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 7;
-	  grid-row-end: 8;
-  }
-  .i_champ_telephone{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 8;
-	  grid-row-end: 9;
-  }
-  .i_titre_mail{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 9;
-	  grid-row-end: 10;
-  }
-  .i_champ_mail{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 10;
-	  grid-row-end: 11;
-  }
-  .i_titre_sexe{
-	  grid-column-start: 3;
-	  grid-column-end: 4;
-	  grid-row-start: 5;
-	  grid-row-end: 6;
-  }
-  .i_champ_sexe{
-	  grid-column-start: 3;
-	  grid-column-end: 4;
-	  grid-row-start: 6;
-	  grid-row-end: 7;
-  }
-  .i_titre_mdp_insc{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 11;
-	  grid-row-end: 12;
-  }
-  .i_champ_mdp_insc{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 12;
-	  grid-row-end: 13;
-  }
-  .i_titre_newsletter{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 13;
-	  grid-row-end: 14;
-  }
-  .i_champ_newsletter{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 14;
-	  grid-row-end: 15;
-  }
-  .i_titre_politique{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 15;
-	  grid-row-end: 16;
-  }
-  .i_champ_politique{
-	  grid-column-start: 1;
-	  grid-column-end: 2;
-	  grid-row-start: 16;
-	  grid-row-end: 17;
-  }
-  .item23{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 17;
-	  grid-row-end: 18;
-  }
-  .i_champ_captcha{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 18;
-	  grid-row-end: 19;
-  }
-  .i_bouton_envoi_insc{
-	  grid-column-start: 1;
-	  grid-column-end: 4;
-	  grid-row-start: 19;
-	  grid-row-end: 20;
-  }
+}
+.i_titre_nom{
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+.i_champ_nom{
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+input[type=text], input[type=password] {
+	width: 100%;
+	height: 45px;
+	border-radius: 0px/0px;
+	border-width: 1px;
+	background-color: #181616;
+	border: 1px solid #a0b3b0;
+	padding: 5px 10px 5px 10px;
+	color: white;
+	font-family: DejaVu Sans Mono, monospace;
+	font-size: 15px;
+}
+input[type=text]:focus, input[type=password]:focus {
+	border-color:#FB3F3F;
+	border-width: 2px;	
+	outline:  none;
+}
+.i_titre_prenom{
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+.i_champ_prenom{
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+.i_titre_adresse_insc{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+.i_champ_adresse_insc{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 4;
+	grid-row-end: 5;
+}
+.i_titre_anniversaire{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 5;
+	grid-row-end: 6;
+}
+.i_champ_anniversaire{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 6;
+	grid-row-end: 7;
+}
+.i_titre_telephone{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 7;
+	grid-row-end: 8;
+}
+.i_champ_telephone{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 8;
+	grid-row-end: 9;
+}
+.i_titre_mail{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 9;
+	grid-row-end: 10;
+}
+.i_champ_mail{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 10;
+	grid-row-end: 11;
+}
+.i_titre_sexe{
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 5;
+	grid-row-end: 6;
+}
+.i_champ_sexe{
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 6;
+	grid-row-end: 7;
+}
+.i_titre_mdp_insc{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 11;
+	grid-row-end: 12;
+}
+.i_champ_mdp_insc{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 12;
+	grid-row-end: 13;
+}
+.i_champ_newsletter{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 13;
+	grid-row-end: 14;
+}
+.i_champ_politique{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 14;
+	grid-row-end: 15;
+}
+.i_titre_captcha{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 15;
+	grid-row-end: 16;
+}
+.i_champ_captcha{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 16;
+	grid-row-end: 17;
+}
+.i_bouton_envoi_insc{
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 17;
+	grid-row-end: 18;
+	text-align:center;
+}
+
+#bouton_inscription_envoi {
+	background-color: #FB3F3F;
+    border: none;
+    color: white;
+    width: 300px;
+    height: 45px;
+    font-size: 18px;
+	cursor: pointer;
+}
+#bouton_inscription_envoi:hover{
+	background-color:#FD8D8D;
+}
+#bouton_inscription_envoi:focus{
+	outline:0;
+}
   
-  
-  .pol {
-	  color: #767676;
-  }
+.pol {
+	color: #767676;
+}
+
+select {
+    height: 57px;
+    border-radius: 0px/0px;
+    border-width: 1px;
+    background-color: #181616;
+    border: 1px solid #a0b3b0;
+    padding: 5px 10px 5px 10px;
+    color: white;
+	font-family: DejaVu Sans Mono, monospace;
+    font-size: 15px;
+}
+select:focus {
+	border-color:#FB3F3F;
+	border-width: 2px;	
+	outline:  none;
+}
+.selec_jour {
+	width: 20%;
+}
+.selec_mois {
+	width: 35%;
+}
+.selec_annee {
+	width: 25%;
+}
+
+
+#radio_femme {
+	padding: 5px 0px 3px 0px;
+}
+#radio_homme {
+	padding: 5px 0px 3px 0px;
+}
 
 /*-------------------------------------------------------PANIER DE COMMANDE---------------------------------------------------------------*/
 
