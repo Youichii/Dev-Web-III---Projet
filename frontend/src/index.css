@@ -84,188 +84,189 @@ nav img{
 }
 .header {
 	background-color: black;
-  color: orange;
-  padding: 15px;
+	color: orange;
+	padding: 15px;
 }
 
 
 .c_titres_commandes {
-  display: grid;
-  grid-template-columns: 10% 13% 17.5% 21.5% 9.5% 13%;
-  grid-template-rows: auto  ;
-  grid-gap: 2px;
-  background-color: black;
-  padding: 2px;
-  color : white ;
+	display: grid;
+	grid-template-columns: 10% 13% 17.5% 21.5% 9.5% 13%;
+	grid-template-rows: auto  ;
+	grid-gap: 2px;
+	background-color: black;
+	padding: 2px;
+	color : white ;
 }
 .c_titres_commandes > div {
-  text-align: center;
-  padding: 10px 10px 0px 10px;
-  font-size: 21px;
-  background-color: #FF3333;
+	text-align: center;
+	padding: 10px 10px 0px 10px;
+	font-size: 21px;
+	background-color: #FF3333;
 }
 .i_titres_commandes {
-  grid-column-start: 4;
-  grid-column-end: 7;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  
-  /*border: solid;*/
-  border-color: #808080;
-  background-color: #F4F4F4;
+	grid-column-start: 4;
+	grid-column-end: 7;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	
+	border-color: #808080;
+	background-color: #F4F4F4;
 }
 .c_cadre_commandes {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
-  grid-template-rows: auto auto auto auto auto auto auto auto auto auto ;
-  grid-gap: 5px;
-  background-color: black;
-  padding: 20px;
-  grid-row-gap: 0px; /*soit rien, c'est stylé?*/
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+	grid-template-rows: auto auto auto auto auto auto auto auto auto auto ;
+	grid-gap: 5px;
+	background-color: black;
+	padding: 20px;
+	grid-row-gap: 0px;
 }
 .c_commandes {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto ;
-  grid-gap: 0px;
-  background-color: black;
-  padding: 5px;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto ;
+	grid-gap: 0px;
+	background-color: black;
+	padding: 5px;
 }
 .c_commande {
-  display: grid;
-  grid-template-columns: 10% 13% 18% 22% 10% 13% 12% ;
-  grid-template-rows: auto auto ;
-  grid-gap: 3px;
-  background-color: black;
-  padding: 0px;
-  color : white;
+	display: grid;
+	grid-template-columns: 10% 13% 18% 22% 10% 13% 12% ;
+	grid-template-rows: auto auto ;
+	grid-gap: 3px;
+	background-color: black;
+	padding: 0px;
+	color : white;
 }
 .c_commande > div {
     text-align: center;
     font-size: 18px;
+	border-radius: 3px;
 }
 
 
 .i_commande {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  background-color: #F4F4F4;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	background-color: #F4F4F4;
 }
-.i_commande > :hover {
-	background-color: black;
-  }
-.i_commande:hover {
-	background-color: black;
-}
+
 .i_heures {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_heure {
-  grid-column-start: 1;
-  grid-column-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 2;
 }
 
 .i_noms {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_nom {
-  grid-column-start: 2;
-  grid-column-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 3;
 }
 
 .i_contacts {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_contact {
-  grid-column-start: 3;
-  grid-column-end: 4;
+	grid-column-start: 3;
+	grid-column-end: 4;
 }
 
 .i_adresses {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 4;
+	grid-column-end: 5;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_adresse {
-  grid-column-start: 4;
-  grid-column-end: 5;
+	grid-column-start: 4;
+	grid-column-end: 5;
 }
 
 .i_prix_titre {
-  grid-column-start: 5;
-  grid-column-end: 6;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 5;
+	grid-column-end: 6;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_prix_commande {
-  grid-column-start: 5;
-  grid-column-end: 6;
-  text-align: center;
+	grid-column-start: 5;
+	grid-column-end: 6;
+	text-align: center;
 }
 
 .i_heures_prevues {
-  grid-column-start: 6;
-  grid-column-end: 7;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 6;
+	grid-column-end: 7;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
 .i_heure_prevue {
-  grid-column-start: 6;
-  grid-column-end: 7;
+	grid-column-start: 6;
+	grid-column-end: 7;
 }
 
 .i_bouton_suivant {
-  grid-column-start: 7;
-  grid-column-end: 8;
-  grid-row-start: 1;
-  grid-row-end: 2;
+	grid-column-start: 7;
+	grid-column-end: 8;
+	grid-row-start: 1;
+	grid-row-end: 2;
+
+  	background-color: #181616;
+    color: white;
+    border: none;
+    font-style: italic;
+	border-radius: 5px;
+    cursor: pointer;
 }
 
 
 .i_commandes_afaire {
-  grid-column-start: 4;
-  grid-column-end: 7;
-  grid-row-start: 3;
-  grid-row-end: 6;
-    
-  /*border : solid;*/
-  border-color : #808080;
-  overflow-y: scroll;	
-  font-size : 22px;
-  background-color: #F4F4F4;
+	grid-column-start: 4;
+	grid-column-end: 7;
+	grid-row-start: 3;
+	grid-row-end: 6;
+		
+	border-color : #808080;
+	overflow-y: scroll;	
+	font-size : 22px;
+	background-color: #F4F4F4;
 }
 .i_commandes_encours {
-  grid-column-start: 4;
-  grid-column-end: 7;
-  grid-row-start: 7;
-  grid-row-end: 10;
-  
-  border : solid;
-  border-color : #808080;
-  overflow-y: scroll;
-  font-size : 22px;
+	grid-column-start: 4;
+	grid-column-end: 7;
+	grid-row-start: 7;
+	grid-row-end: 10;
+	
+	border : solid;
+	border-color : #808080;
+	overflow-y: scroll;
+	font-size : 22px;
   
 }
 .i_commandes_envoye {
-  grid-column-start: 4;
-  grid-column-end: 7;
-  grid-row-start: 11;
-  grid-row-end: 14;
-  
-  border : solid;
-  border-color : #808080;
-  overflow-y: scroll;	
-  font-size : 22px;
+	grid-column-start: 4;
+	grid-column-end: 7;
+	grid-row-start: 11;
+	grid-row-end: 14;
+	
+	border : solid;
+	border-color : #808080;
+	overflow-y: scroll;	
+	font-size : 22px;
 }
 
 
@@ -276,7 +277,6 @@ nav img{
     grid-row-end: 4;
 }
 .info_commande {
-	/*background-color: red;*/
 	border : solid;
   	border-color : #4D4D4D;
 	font-size : 20px;

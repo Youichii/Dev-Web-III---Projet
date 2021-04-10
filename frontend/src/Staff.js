@@ -55,6 +55,42 @@ const Staff = () => {
         setCompteur(entre) ; 
     }
 
+    const nouveau_bg = (identifiant) => {
+        let ligne_info = document.getElementById(identifiant);
+        let couleur_survol = "#9DAEB5";
+        
+        ligne_info.style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_heure")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_adresse")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_heure_prevue")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_div_bouton")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.backgroundColor="#4A4444";
+    }
+
+    const ancien_bg = (identifiant, couleur) => {
+        let ligne_info = document.getElementById(identifiant);
+        let couleur_quitter ;
+        if (couleur == "couleur_bg1") {
+            couleur_quitter = "#FFE5E5";
+        }
+        else {
+            couleur_quitter = "white";
+        }
+        
+        ligne_info.style.backgroundColor="#F4F4F4";
+        ligne_info.getElementsByClassName("i_heure")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_adresse")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_heure_prevue")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_div_bouton")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.backgroundColor="#181616"; 
+    }
+
     return (
         <div className="staff">
 
@@ -69,7 +105,7 @@ const Staff = () => {
                 </div>
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
                     {afaire.map( element => (
-                        <div className="i_commande c_commande" onClick={() => setCommande(element.id)} onLoad={maj_classe}>
+                        <div className="i_commande c_commande" id="' + val + '" onMouseOver="nouveau_bg({element.id})" onMouseLeave="ancien_bg({element.id}, {type_couleur})" onClick={() => setCommande(element.id)} onLoad={maj_classe}>
                             <tr id={element.id}> 
                                 <div width='72px' className={`i_heure ${type_couleur}`}>{element.heure_passee}</div>
                                 <div width='112px' className={`i_nom ${type_couleur}`}>{element.nom}</div> 
@@ -77,7 +113,7 @@ const Staff = () => {
                                 <div width='220px' className={`i_adresse ${type_couleur}`}>{element.adresse}</div>
                                 <div width='80px' className={`i_prix_commande ${type_couleur}`}>{element.prix}</div> 
                                 <div width='72px' className={`i_heure_prevue ${type_couleur}`}>{element.heure_prevue}</div>
-                                <div className={type_couleur}>
+                                <div className={`i_div_bouton ${type_couleur}`}>
                                     <button class="i_bouton_suivant" onClick={() => envoi_etape1(element.id)}>suivant</button>
                                 </div> 
                             </tr>
