@@ -316,7 +316,7 @@ a:active {
   }
   
   
-  .grid_container {
+  .c_cadre_inscription {
 	  display: grid;
 	  grid-template-columns: 30% 40% 30%;
 	  grid-template-rows: 10% 70% 20% ;
@@ -324,7 +324,7 @@ a:active {
 	  padding: 5px;
   }
   
-  .grid_container2 {
+  .c_info_inscription {
 	  display: grid;
 	  grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
 	  grid-template-rows: 4% 6% 4% 5% 66% 36%;
@@ -332,7 +332,7 @@ a:active {
 	  padding: 5px;
   }
   
-  .item1{
+  .i_info_inscription{
 	  grid-column-start: 2;
 	  grid-column-end: 3;
 	
@@ -403,26 +403,26 @@ a:active {
   
   /*----------------------------*/
   
-  .grid_container3 {
+  .c_champs_informations {
 	  display: grid;
 	  grid-template-columns: 40% 20% 40%;
 	  grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 28%;
 	  grid-gap: 0px;
 	  padding: 5px;
   }
-  .item2{
+  .i_champs_informations{
 	  grid-column-start: 3;
 	grid-column-end: 7;
 	grid-row-start: 5;
 	grid-row-end: 9;
   }
-  .item3{
+  .i_titre_nom{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 1;
 	  grid-row-end: 2;
   }
-  .item4{
+  .i_champ_nom{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 2;
@@ -444,109 +444,109 @@ a:active {
 	  border-width: 2px;	
 	  outline:  none;
   }
-  .item5{
+  .i_titre_prenom{
 	  grid-column-start: 3;
 	  grid-column-end: 4;
 	  grid-row-start: 1;
 	  grid-row-end: 2;
   }
-  .item6{
+  .i_champ_prenom{
 	  grid-column-start: 3;
 	  grid-column-end: 4;
 	  grid-row-start: 2;
 	  grid-row-end: 3;
   }
-  .item7{
+  .i_titre_adresse_insc{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 3;
 	  grid-row-end: 4;
   }
-  .item8{
+  .i_champ_adresse_insc{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 4;
 	  grid-row-end: 5;
   }
-  .item9{
+  .i_titre_anniversaire{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 5;
 	  grid-row-end: 6;
   }
-  .item10{
+  .i_champ_anniversaire{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 6;
 	  grid-row-end: 7;
   }
-  .item11{
+  .i_titre_telephone{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 7;
 	  grid-row-end: 8;
   }
-  .item12{
+  .i_champ_telephone{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 8;
 	  grid-row-end: 9;
   }
-  .item13{
+  .i_titre_mail{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 9;
 	  grid-row-end: 10;
   }
-  .item14{
+  .i_champ_mail{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 10;
 	  grid-row-end: 11;
   }
-  .item15{
+  .i_titre_sexe{
 	  grid-column-start: 3;
 	  grid-column-end: 4;
 	  grid-row-start: 5;
 	  grid-row-end: 6;
   }
-  .item16{
+  .i_champ_sexe{
 	  grid-column-start: 3;
 	  grid-column-end: 4;
 	  grid-row-start: 6;
 	  grid-row-end: 7;
   }
-  .item17{
+  .i_titre_mdp_insc{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 11;
 	  grid-row-end: 12;
   }
-  .item18{
+  .i_champ_mdp_insc{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 12;
 	  grid-row-end: 13;
   }
-  .item19{
+  .i_titre_newsletter{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 13;
 	  grid-row-end: 14;
   }
-  .item20{
+  .i_champ_newsletter{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 14;
 	  grid-row-end: 15;
   }
-  .item21{
+  .i_titre_politique{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 15;
 	  grid-row-end: 16;
   }
-  .item22{
+  .i_champ_politique{
 	  grid-column-start: 1;
 	  grid-column-end: 2;
 	  grid-row-start: 16;
@@ -558,13 +558,13 @@ a:active {
 	  grid-row-start: 17;
 	  grid-row-end: 18;
   }
-  .item24{
+  .i_champ_captcha{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 18;
 	  grid-row-end: 19;
   }
-  .item25{
+  .i_bouton_envoi_insc{
 	  grid-column-start: 1;
 	  grid-column-end: 4;
 	  grid-row-start: 19;
