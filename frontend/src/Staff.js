@@ -59,7 +59,6 @@ const Staff = () => {
         let ligne_info = document.getElementById(identifiant);
         let couleur_survol = "#9DAEB5";
         
-        ligne_info.style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_heure")[0].style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_survol;
@@ -80,7 +79,6 @@ const Staff = () => {
             couleur_quitter = "white";
         }
         
-        ligne_info.style.backgroundColor="#F4F4F4";
         ligne_info.getElementsByClassName("i_heure")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
