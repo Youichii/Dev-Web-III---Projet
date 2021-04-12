@@ -8,6 +8,8 @@ const Panier = () => {
 
     const [heures, setHeures] = useState([]);
 
+    const [total, setTotal] = useState(0);
+
     const init_heures = () => {
         const intermediaire = [] ;
         let min = 1080 ; //18h
@@ -42,14 +44,19 @@ const Panier = () => {
 			
 				<div className="i_info_aliments c_info_aliments" id="info_aliments">
                     {aliments.map(element => (
-                        <tr>
-                            <td width="290px" className="case_aliments">{element.nom}</td>
-                            <td className="case_aliment qtite_aliment">
-                                <input className="nombre_aliment" type="number" value={element.quantite} onChange={changer_prix(this, element.id)} min="0" max="100" />
-                            </td>
-                            <td id={element.id} className="case_aliment" width="250px">{element.prix_unite}*{element.quantite}{"€"}</td>
-                        </tr>
+                        <div class='c_info_ligne i_info_ligne'>
+                            <div class='i_nom_aliment'>{element.nom}</div>
+
+                            <div class='i_quantite_aliment'> 
+                            <input className="nombre_aliment" type="number" value={element.quantite} onChange={changer_prix(this, element.id)} min="0" max="100" />
+                            </div> 
+
+                            <div id={element.id}  class='i_prix_aliment'> 
+                                {element.prix_unite}*{element.quantite}{"€"}
+                            </div>
+                        </div>
                     ))}
+                    <div class='i_prix_total'>{total}</div>
 				</div>
 			</div>
 
