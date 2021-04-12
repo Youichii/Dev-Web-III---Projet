@@ -398,27 +398,40 @@ a:active {
 
 html {
 	font-family: "Lucida Sans", sans-serif;
-  }
+	background-color:black;
+	color:white;
+}
 .header {
-	background-color: #9933cc;
+	background-color: black;
 	color: #ffffff;
 	padding: 15px;
 }
 
+
 .panier {
 	display: grid;
 	grid-template-columns: 10% 35% 10% 35% 10%;
-	grid-template-rows: 8% 60% 5% 20% 7%;
+	grid-template-rows: 8% 480px 5% 170px 7%;
 	grid-gap: 0px;
 	padding: 5px;
 }
+
 .c_info_panier {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
-	grid-template-rows: auto;
-	grid-gap: 0px;
-	padding: 5px;
+	grid-template-rows: 50px;
+	grid-gap: 2px;
+	padding: 0px;
 }
+.i_info_panier {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	border: solid;
+	border-color: grey;
+}
+
 .c_info_reception {
 	display: grid;
 	grid-template-columns: 40% 60%;
@@ -438,36 +451,26 @@ html {
 .c_info_aliments {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
-	grid-template-rows: auto;
-	grid-gap: 0px;
+	grid-template-rows: 45px 45px 45px 45px 45px 45px 45px 45px 45px 45px 45px 45px 45px;
 	padding: 5px;
+	overflow-y: scroll;	
+	border-top: 2px solid grey;
+	background-color: #181616;
 }
 .i_info_aliments {
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 5;
 	grid-row-start: 2;
 	grid-row-end: 3;
-	border: solid;
-	border-color: grey;
-}
-.i_info_panier {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
-	border: solid;
-	border-color: grey;
 }
 
-.i_commentaire {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 5;
-	border: solid;
-	border-color: grey;
-}
 
+.titres {
+	font-size: 22px;
+	background-color:#FF3333;
+	text-align: center;
+	padding: 10px;
+}
 .i_titre_produit {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -487,17 +490,20 @@ html {
 	grid-row-end: 2;
 }
 
+
 .i_info_ligne {
 	grid-column-start: 1;
 	grid-column-end: 4;
+	text-align: center;
 }
 .c_info_ligne {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
 	grid-template-rows: auto;
-	grid-gap: 0px;
+	grid-gap: 4px;
 	padding: 5px;
 }
+
 .i_nom_aliment {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -510,17 +516,24 @@ html {
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
+.nombre_aliment {
+	width: 40px;
+}
 .i_prix_aliment {
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
+.i_info_ligne > div {
+	border-radius: 3px;
+	padding: 7px 0px 0px 0px;
+	font-size: 20px;
+}
 .i_prix_total {
 	grid-column-start: 3;
 	grid-column-end: 4;
 }
-
 
 .i_heure {
 	grid-column-start: 1;
@@ -547,6 +560,16 @@ html {
 	grid-row-end: 3;
 }
 
+.i_commentaire {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 5;
+	border: solid;
+	border-color: grey;
+}
+
+
 .c_boutons {
 	display: grid;
 	grid-template-columns: 33% 33% 33%;
@@ -569,4 +592,13 @@ html {
 .i_bouton_annuler {
 	grid-column-start: 3;
 	grid-column-end: 4;
+}
+
+.couleur_bg1{
+	background-color : #FFE5E5 ;
+	color : black;
+}
+.couleur_bg2{
+	background-color : white ;
+	color : black;
 }
