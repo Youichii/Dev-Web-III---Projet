@@ -3,6 +3,7 @@ var swig = require('swig');
 var mailer = require('express-mailer');
 var path = require('path');
 var app = express();
+/** hh **/
 
 /**app.use(express.logger());
 app.use(express.bodyParser());**/
