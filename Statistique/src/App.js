@@ -3,7 +3,7 @@ import NavPatron from './components/NavPatron';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Stat from './components/pages/Stat';
-/** kkk **/
+/** kkkk **/
 
 function App() {
   return (
