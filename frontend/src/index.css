@@ -95,6 +95,7 @@ nav img{
 	--texte_commande: white;
 	--bg_boutons: #F7C27E;/*#181616;*/
 	--bg_details: #4D4D4D;
+	/* --bg_bouton_livrer: red; */
   	--bg_bouton_surplace: #f5deb3;
   }
   /*var(--bg_boutons)*/
@@ -121,7 +122,7 @@ nav img{
 	grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
-    grid-row-end: 2;
+    grid-row-end: 3;
 }
 .i_cadre_envoi {
 	grid-column-start: 1;
@@ -249,7 +250,7 @@ nav img{
 	text-align: left;
 }
 
-.i_adresses {
+/*.i_adresses {
 	grid-column-start: 4;
 	grid-column-end: 5;
 	grid-row-start: 1;
@@ -258,26 +259,26 @@ nav img{
 .i_adresse {
 	grid-column-start: 4;
 	grid-column-end: 5;
-}
+}*/
 
 .i_prix_titre {
-	grid-column-start: 5;
-	grid-column-end: 6;
+	grid-column-start: 4;
+	grid-column-end: 5;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 .i_prix_commande {
-	grid-column-start: 5;
-	grid-column-end: 6;
+	grid-column-start: 4;
+	grid-column-end: 5;
 	text-align: right;
 }
 
-.i_heures_prevues {
+/*.i_heures_prevues {
 	grid-column-start: 6;
 	grid-column-end: 7;
 	grid-row-start: 1;
 	grid-row-end: 2;
-}
+}*/
 .i_heure_prevue {
 	grid-column-start: 1; /*6-7*/
 	grid-column-end: 2;
@@ -542,7 +543,7 @@ nav img{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 2;
-	grid-row-end: 2;
+	grid-row-end: 3;
 	
 	border: 4px solid white;
 	width: 100px;
@@ -589,7 +590,7 @@ nav img{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 2;
-	grid-row-end: 2;
+	grid-row-end: 3;
 	
 	border: 4px solid white;
 	width: 100px;
