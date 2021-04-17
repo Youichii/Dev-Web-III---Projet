@@ -88,6 +88,11 @@ nav img{
 
 /*-------------------------------------------------------CONNEXION---------------------------------------------------------------*/
 
+:root {
+	--principale: #F7C27E ; /*#FB3F3F;*/
+	--survol_bouton : #fbe0bd;
+}
+
 * {
 	box-sizing: border-box;
 	font-family:Helvitica,sans-serif;
@@ -111,7 +116,7 @@ body {
 .c_info_connexion {
 	display: grid;
 	grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
-	grid-template-rows: 4% 12% 8% 12% 15% 15% 15% 20%;
+	grid-template-rows: 4% 12% 8% 12% 15% 15% 15% 18%;
 	grid-gap: 0px;
 	padding: 5px;
 }
@@ -136,7 +141,7 @@ body {
 	text-align: center;
 	padding: 23px 0px 0px 0px;
 	color: white;
-	background-color: #FB3F3F;
+	background-color: var(--principale);
 }
 .i_bouton_inscription {
 	grid-column-start: 5;
@@ -168,21 +173,22 @@ a:active {
 
 
 .i_bouton_inscription:hover{
-	color: #FD8D8D;
+	color: var(--principale);
 	background-color:#667D88;
 }
 
 .i_titre_connexion {
 	grid-column-start: 3;
 	grid-column-end: 7;
-	
 	grid-row-start: 4;
 	grid-row-end: 5;
 	
 	font-size:22px;
 	text-align:center;
 	color : #F1F7FD;
+	background-color: #181616;
 }
+
 .i_titre_adresse {
 	grid-column-start: 2;
 	grid-column-end: 3;
@@ -190,12 +196,17 @@ a:active {
 	grid-row-end: 2;
 	
 	color: #767676;
+	background-color: #181616;
+	/*padding: 0px 0px 15px 0px;*/
 }
 .i_champ_adresse {
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 3;
+
+	/*padding: 0px 0px 15px 0px;*/
+	background-color: #181616;
 }
 #text_user {
 	width: 100%;
@@ -208,10 +219,11 @@ a:active {
 	color : white;	
 }
 #text_user:focus {
-	border-color:#FB3F3F;
+	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
 }
+
 .i_titre_mdp {
 	grid-column-start: 2;
 	grid-column-end: 3;
@@ -219,12 +231,17 @@ a:active {
 	grid-row-end: 4;
 	
 	color: #767676;
+	background-color: #181616;
+	/*padding: 0px 0px 15px 0px;*/
 }
 .i_champ_mdp {
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 4;
 	grid-row-end: 5;
+
+	background-color: #181616;
+	/*padding: 0px 0px 35px 0px;*/
 }
 #text_mdp {
 	width: 100%;
@@ -237,7 +254,7 @@ a:active {
 	color : white;
 }
 #text_mdp:focus {
-	border-color:#FB3F3F;
+	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
 }
@@ -249,10 +266,11 @@ a:active {
 	grid-row-end: 7;
 
 	text-align:center;
+	background-color: #181616;
 }
 
 #bouton_connexion_envoi {
-	background-color: #FB3F3F;
+	background-color: var(--principale);
     border: none;
     color: white;
     width: 300px;
@@ -261,7 +279,7 @@ a:active {
 	cursor: pointer;
 }
 #bouton_connexion_envoi:hover{
-	background-color:#FD8D8D;
+	background-color:var(--survol_bouton);
 }
 
 .i_mdp_oubli {
@@ -271,11 +289,14 @@ a:active {
 	grid-row-end: 8;
 	
 	text-align:center;
+	/* padding: 30px 0px 0px 0px;*/
 	font-size: 13px;
-	color: #BC0404;
+	color: #9e743d;
+	background-color: #181616;
 }
 .i_mdp_oubli:hover {
 	color: #a6a6a6;
+	/*color:#FA0606;*/
 	cursor: pointer;
 }
 
@@ -284,16 +305,15 @@ a:active {
 	grid-template-columns: 10% 80% 10%;
 	grid-template-rows: 8% 21% 8% 21% 4% 17% 19%;
 	grid-gap: 2px;
-	padding: 5px;
+	padding: 0px;
 }
 .i_zones_info {
 	grid-column-start: 3;
 	grid-column-end: 7;
-	
 	grid-row-start: 5;
 	grid-row-end: 9;
+	background-color: #181616;
 }
-
 
 input {
 	font-family:DejaVu Sans Mono, monospace;
