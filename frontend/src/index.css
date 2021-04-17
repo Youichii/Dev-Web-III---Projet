@@ -96,7 +96,7 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 1000px 20% ;
+	grid-template-rows: 10% 1140px 20% ;
 	grid-gap: 2px;
 	padding: 5px;
 }
@@ -406,6 +406,7 @@ select {
     color: white;
 	font-family: "Lucida Sans", sans-serif; /*DejaVu Sans Mono, monospace;*/
     font-size: 15px;
+	margin: 0px 12px 0px 0px;
 }
 select:focus {
 	border-color:var(--principale);
@@ -419,7 +420,7 @@ select:focus {
 	width: 35%;
 }
 .selec_annee {
-	width: 25%;
+	width: 27%;
 }
 
 #radio_femme {
