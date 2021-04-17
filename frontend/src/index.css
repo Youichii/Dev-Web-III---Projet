@@ -2,13 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: "Quicksand";
-  /*color: #333;*//*couleur texte exemple*/
-  background-color: black;
-}
+
 /*.navbar {
   padding: 20px;
   display: flex;
@@ -85,32 +79,31 @@ nav img{
 
 
 /*-------------------------------------------------------Inscription---------------------------------------------------------------*/
-.header {
-	background-color: black;
-	color: #ffffff;
-	padding: 15px;
+:root {
+	--principale:#F7C27E ; /*#FB3F3F;*/
+	--survol_bouton : #fbe0bd;
+	--bg: #181616;
+	--bordure : #a0b3b0;
 }
+/*var(--bordure)*/
 html {
-	font-family: Monaco, futura-pt,Tahoma,Geneva,Verdana,Arial,sans-serif;
+	font-family: "Lucida Sans", sans-serif;
 	background-color: black ;
 	color : white;
-}
-body {
-	font-family:DejaVu Sans Mono, monospace;
 }
   
   
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 70% 20% ;
+	grid-template-rows: 10% 1000px 20% ;
 	grid-gap: 2px;
 	padding: 5px;
 }
 .c_info_inscription {
 	display: grid;
 	grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
-	grid-template-rows: 2% 6% 5% 6% 66% 36%;
+	grid-template-rows: 2% 6% 5% 6% 60%;
 	grid-gap: 0px;
 	padding: 5px;
 }
@@ -119,10 +112,11 @@ body {
 	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 6;
-	height : 1140px ;
+
+	/*height : 1140px ;*/
 	border : solid;
 	border-color : grey;
-	background-color:#181616;
+	background-color:var(--bg);
 }
 .i_bouton_con {
 	grid-column-start: 2;
@@ -147,25 +141,25 @@ body {
 	text-align: center;
 	padding: 23px 0px 0px 0px;
 	color: white;
-	background-color: #FB3F3F;
+	background-color: var(--principale);
 }
 .i_bouton_con:hover{
-	color: #FD8D8D;
+	color: var(--principale);
 	background-color:#667D88;
 }
 .i_titre_connexion {
 	grid-column-start: 3;
 	grid-column-end: 7;
-	
 	grid-row-start: 4;
 	grid-row-end: 5;
 	
 	font-size:22px;
 	text-align:center;
 	color : #F1F7FD;
+	background-color: var(--bg);
 }
 
-a:link {
+/*a:link {
 	color : black;
 	text-decoration:none;
 }
@@ -176,15 +170,16 @@ a:visited {
 a:active {
 	color:black;
 	text-decoration:none;
-}
+}*/
 
 
 .c_champs_informations {
 	display: grid;
 	grid-template-columns: 40% 20% 40%;
-	grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 7% 3% 5% 2% 9% 4% 13%;
+	grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 7% 3% 5% 2% 9% 4% 7%;
 	grid-gap: 0px;
 	padding: 5px;
+	background-color: var(--bg);
 }
 .i_champs_informations{
 	grid-column-start: 3;
@@ -197,27 +192,31 @@ a:active {
 	grid-column-end: 2;
 	grid-row-start: 1;
 	grid-row-end: 2;
+
+	background-color: var(--bg);
 }
 .i_champ_nom{
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 2;
 	grid-row-end: 3;
+
+	background-color: var(--bg);
 }
 input[type=text], input[type=password] {
 	width: 100%;
 	height: 45px;
 	border-radius: 0px/0px;
 	border-width: 1px;
-	background-color: #181616;
-	border: 1px solid #a0b3b0;
+	background-color: var(--bg);
+	border: 1px solid var(--bordure);
 	padding: 5px 10px 5px 10px;
 	color: white;
-	font-family: DejaVu Sans Mono, monospace;
+	/*font-family: DejaVu Sans Mono, monospace;*/
 	font-size: 15px;
 }
 input[type=text]:focus, input[type=password]:focus {
-	border-color:#FB3F3F;
+	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
 }
@@ -226,108 +225,144 @@ input[type=text]:focus, input[type=password]:focus {
 	grid-column-end: 4;
 	grid-row-start: 1;
 	grid-row-end: 2;
+
+	background-color: var(--bg);
 }
 .i_champ_prenom{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
+
+	background-color: var(--bg);
 }
 .i_titre_adresse_insc{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 3;
 	grid-row-end: 4;
+
+	background-color: var(--bg);
 }
 .i_champ_adresse_insc{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 4;
 	grid-row-end: 5;
+
+	background-color: var(--bg);
 }
 .i_titre_anniversaire{
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 5;
 	grid-row-end: 6;
+
+	background-color: var(--bg);
 }
 .i_champ_anniversaire{
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 6;
 	grid-row-end: 7;
+
+	background-color: var(--bg);
 }
 .i_titre_telephone{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 7;
 	grid-row-end: 8;
+
+	background-color: var(--bg);
 }
 .i_champ_telephone{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 8;
 	grid-row-end: 9;
+
+	background-color: var(--bg);
 }
 .i_titre_mail{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 9;
 	grid-row-end: 10;
+
+	background-color: var(--bg);
 }
 .i_champ_mail{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 10;
 	grid-row-end: 11;
+
+	background-color: var(--bg);
 }
 .i_titre_sexe{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 5;
 	grid-row-end: 6;
+
+	background-color: var(--bg);
 }
 .i_champ_sexe{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 6;
 	grid-row-end: 7;
+
+	background-color: var(--bg);
 }
 .i_titre_mdp_insc{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 11;
 	grid-row-end: 12;
+
+	background-color: var(--bg);
 }
 .i_champ_mdp_insc{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 12;
 	grid-row-end: 13;
+
+	background-color: var(--bg);
 }
 .i_champ_newsletter{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 13;
 	grid-row-end: 14;
+
+	background-color: var(--bg);
 }
 .i_champ_politique{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 14;
 	grid-row-end: 15;
+
+	background-color: var(--bg);
 }
 .i_titre_captcha{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 15;
 	grid-row-end: 16;
+
+	background-color: var(--bg);
 }
 .i_champ_captcha{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 16;
 	grid-row-end: 17;
+
+	background-color: var(--bg);
 }
 .i_bouton_envoi_insc{
 	grid-column-start: 1;
@@ -335,19 +370,22 @@ input[type=text]:focus, input[type=password]:focus {
 	grid-row-start: 17;
 	grid-row-end: 18;
 	text-align:center;
+
+	background-color: var(--bg);
 }
 
 #bouton_inscription_envoi {
-	background-color: #FB3F3F;
+	background-color: var(--principale);
     border: none;
     color: white;
     width: 300px;
     height: 45px;
     font-size: 18px;
 	cursor: pointer;
+	/*font-family:DejaVu Sans Mono, monospace;*/
 }
 #bouton_inscription_envoi:hover{
-	background-color:#FD8D8D;
+	background-color:var(--survol_bouton);
 }
 #bouton_inscription_envoi:focus{
 	outline:0;
@@ -355,21 +393,22 @@ input[type=text]:focus, input[type=password]:focus {
   
 .pol {
 	color: #767676;
+	background-color: var(--bg);
 }
 
 select {
     height: 57px;
     border-radius: 0px/0px;
     border-width: 1px;
-    background-color: #181616;
-    border: 1px solid #a0b3b0;
+    background-color: var(--bg);
+    border: 1px solid var(--bordure);
     padding: 5px 10px 5px 10px;
     color: white;
-	font-family: DejaVu Sans Mono, monospace;
+	font-family: "Lucida Sans", sans-serif; /*DejaVu Sans Mono, monospace;*/
     font-size: 15px;
 }
 select:focus {
-	border-color:#FB3F3F;
+	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
 }
@@ -383,11 +422,12 @@ select:focus {
 	width: 25%;
 }
 
-
 #radio_femme {
 	padding: 5px 0px 3px 0px;
+	background-color: var(--bg);
 }
 #radio_homme {
 	padding: 5px 0px 3px 0px;
+	background-color: var(--bg);
 }
 
