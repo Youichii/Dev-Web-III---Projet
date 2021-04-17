@@ -38,16 +38,21 @@
 
 /*-------------------------------------------------------NAVBAR---------------------------------------------------------------*/
 
+.Navbar {
+	display:grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 150px;
+    grid-gap: 2px;
+    padding: 0px 0px 0px 8px;
+}
 nav ul{
   list-style-type: none;
-  color: orange;
 }
 
 nav li{
   float: left;
   width: 20%;
   text-align: center;
-  color: orange;
 }
 
 nav {
@@ -148,7 +153,7 @@ body {
 }
 
 
-a:link {
+/*a:link {
 	color : black;
 	text-decoration:none;
 }
@@ -159,7 +164,7 @@ a:visited {
 a:active {
 	color:black;
 	text-decoration:none;
-}
+}*/
 
 
 .i_bouton_inscription:hover{
