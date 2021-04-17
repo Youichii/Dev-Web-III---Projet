@@ -218,25 +218,28 @@ const Panier = () => {
 				</div>
 				
                 <div class="i_apres_payement"></div>
-
-				<div className="i_adresse c_adresse" id="zone_adresse">
-                    <div className="i_adresse_livraison"> 
-                        <label for="adresse_livraison">Adresse de livraison</label><br /> 
-                        <input id="adresse_livraison" name="add_livraison" type="text" placeholder={client["adresse"]} /> 
-                    </div> 
-                    <div className="i_numero_maison"> 
-                        <label for="numero_maison">Numéro</label><br /> 
-                        <input id="numero_maison" name="num_maison" type="number" placeholder={client["numero"]} /> 
-                    </div> 
-                    <div className="i_code_postal"> 
-                        <label for="code_postal">Code postal</label><br /> 
-                        <input id="code_postal" name="num_postal" type="number" placeholder={client["postal"]} /> 
-                    </div> 
-                    <div className="i_ville"> 
-                        <label for="ville">Ville</label><br /> 
-                        <input id="ville" name="nom_ville" type="text" placeholder={client["ville"]} /> 
-                    </div> 
-				</div>
+                
+                {client.map(info => (
+                    <div className="i_adresse c_adresse" id="zone_adresse">
+                        <div className="i_adresse_livraison"> 
+                            <label for="adresse_livraison">Adresse de livraison</label><br /> 
+                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.adresse} /> 
+                        </div> 
+                        <div className="i_numero_maison"> 
+                            <label for="numero_maison">Numéro</label><br /> 
+                            <input id="numero_maison" name="num_maison" type="number" placeholder={info.numero} /> 
+                        </div> 
+                        <div className="i_code_postal"> 
+                            <label for="code_postal">Code postal</label><br /> 
+                            <input id="code_postal" name="num_postal" type="number" placeholder={info["postal"]} /> 
+                        </div> 
+                        <div className="i_ville"> 
+                            <label for="ville">Ville</label><br /> 
+                            <input id="ville" name="nom_ville" type="text" placeholder={info["ville"]} /> 
+                        </div> 
+                    </div>
+                ))}
+				
 			</div>
 
             <div className="i_commentaire" id="elem_commentaire">
