@@ -11,10 +11,12 @@ const Connexion = () => {
 					<div class="i_champ_adresse">
 						<input id="text_user" type="text" required maxlength="100" />
 					</div>
+
 					<div class="i_titre_mdp">MOT DE PASSE</div>
 					<div class="i_champ_mdp">
 						<input id="text_mdp" type="password" required maxlength="100" />
 					</div>
+					
 					<div class="i_bouton_envoi">
 						<input id="bouton_connexion_envoi" type="submit" value="CONNEXION" />
 					</div>
