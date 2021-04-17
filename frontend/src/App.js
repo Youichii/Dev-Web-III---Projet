@@ -1,4 +1,5 @@
 /*import { useState } from 'react'*/
+import React from 'react'
 import Navbar from './Navbar';
 import Accueil from './Accueil';
 import Informations from './Informations';

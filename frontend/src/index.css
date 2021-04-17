@@ -745,5 +745,10 @@ div.droite {
 }
 
 
+input{
+	color: bisque;
+}
 
-
+button {
+	color: white;
+}
