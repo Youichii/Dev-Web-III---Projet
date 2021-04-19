@@ -17,7 +17,8 @@ const Panier = () => {
     const [heures, setHeures] = useState([]);
 
     const [total, setTotal] = useState(0);
-    const [compteur, setCompteur] =  useState(1);
+    //const [compteur, setCompteur] =  useState(1);
+    let compteur = 1 ;
     const [type_couleur, setTypeCouleur] =  useState("couleur_bg1");
 
     useEffect(() => {
@@ -57,18 +58,6 @@ const Panier = () => {
         let total = 0 ;
         aliments.map(x => total+=x["quantite"]*x["prix_unite"]);
         setTotal(total) ;
-    }
-
-    const maj_classe = () => {
-        if (compteur%2 == 0) {
-            setTypeCouleur("couleur_bg1") ;
-        }
-        else {
-            setTypeCouleur("couleur_bg2") ;
-        }
-        let entre = compteur + 1 ;
-        setCompteur(entre) ; 
-        console.log("allo");
     }
 
     const incrementer = (identifiant) => {
@@ -123,6 +112,25 @@ const Panier = () => {
         document.getElementById('i_ligne_apres_2').style.borderColor= "#414141";
     }
 
+    const affichage_aliments = (element) => {
+        let type_couleur ;
+        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur++ ;
+
+        return (
+            <div className='c_info_ligne i_info_ligne'> 
+                <div className={`i_nom_aliment ${type_couleur}`}>{element.nom}</div> 
+                <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
+                    <button className='bouton_moins incrementeur' onClick={() => decrementer(element.id)} >-</button> 
+                    <input id={`${element.id}_input`} className='nombre_aliment' type='number' value={element.quantite} onChange={() => changer_prix(element.id)} min='0' max='100' />
+                    <button className='bouton_plus incrementeur' onClick={() => incrementer(element.id)}>+</button>
+                </div> 
+                <div id={element.id} className={`i_prix_aliment ${type_couleur}`}>{element.prix_unite*element.quantite}{" €"}</div> 
+            </div>
+        )
+    }
+
+
 
     return (
         <div className="panier">
@@ -146,17 +154,7 @@ const Panier = () => {
 				</div>
 			
 				<div className="i_info_aliments c_info_aliments" id="info_aliments">
-                    {aliments.map(element => (
-                        <div className='c_info_ligne i_info_ligne' onLoad={maj_classe}> 
-                            <div className={`i_nom_aliment ${type_couleur}`}>{element.nom}</div> 
-                            <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
-                                <button className='bouton_moins incrementeur' onClick={() => decrementer(element.id)} >-</button> 
-                                <input id={`${element.id}_input`} className='nombre_aliment' type='number' value={element.quantite} onChange={() => changer_prix(element.id)} min='0' max='100' />
-                                <button className='bouton_plus incrementeur' onClick={() => incrementer(element.id)}>+</button>
-                            </div> 
-                            <div id={element.id} className={`i_prix_aliment ${type_couleur}`}>{element.prix_unite*element.quantite}{" €"}</div> 
-                        </div>
-                    ))}
+                    {aliments.map(affichage_aliments)}
 				</div>
                 <div className="c_cadre_total i_cadre_total">
                     <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
