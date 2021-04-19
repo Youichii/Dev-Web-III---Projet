@@ -1,4 +1,38 @@
+import React, {useState, useEffect} from 'react'
+import Axios from 'axios'
+
 const Inscription = () => {
+
+	const inscrire = () => {
+
+		var radios = document.getElementsByName('myradio');
+		var valeur;
+		for(var i = 0; i < radios.length; i++){
+			if(radios[i].checked){
+			valeur = radios[i].value;
+			}
+		}
+
+		var jour = document.getElementsByName('selection_jour');
+		var mois = document.getElementsByName('selection_mois');
+		var annee = document.getElementsByName('selection_annee');
+		var date  = new Date(annee, mois, jour) ;
+
+        Axios.post('http://localhost:3001/api/users', {
+            name : document.getElementById("nom_user").value,
+			firstname : document.getElementById("prenom_user").value,
+			address : document.getElementById("adresse_user").value,
+			birthday : date,
+			phone : document.getElementById("telephone_user").value,
+			mail : document.getElementById("mail_user").value,
+			gender : valeur,
+			pwd : document.getElementById("mdp_user").value,
+        }).then(() => {
+            console.log("Successful")
+        })
+
+    }
+
     return (
         <div className="inscription c_cadre_inscription">
             <div id="cadre_inscription" class="i_info_inscription c_info_inscription">			
@@ -24,7 +58,7 @@ const Inscription = () => {
 				
 					<div className="i_titre_anniversaire pol">DATE DE NAISSANCE</div>
 					<div className="i_champ_anniversaire">
-                    <select className="selec_jour">
+                    <select id="selection_jour" className="selec_jour">
 							<option selected="selected" value="0">JJ</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -59,7 +93,7 @@ const Inscription = () => {
 							<option value="3">31</option>
 						</select>
 						
-						<select className="selec_mois">
+						<select id="selection_mois" className="selec_mois">
 							<option selected="selected" value="0">Mois</option>
 							<option value="Janvier">Janvier</option>
 							<option value="Février">Février</option>
@@ -75,7 +109,7 @@ const Inscription = () => {
 							<option value="Décembre">Décembre</option>
 						</select>
 						
-						<select className="selec_annee">
+						<select id="selection_annee" className="selec_annee">
 							<option selected="selected" value="0">AAAA</option>
 							<option value="2000">2000</option>
 							<option value="2001">2001</option>
@@ -118,7 +152,7 @@ const Inscription = () => {
 					</div>
 					
 					<div className="i_bouton_envoi_insc">
-						<input id="bouton_inscription_envoi" type="submit" value="S'INSCRIRE" onclick="inscription();" />
+						<input id="bouton_inscription_envoi" type="submit" value="S'INSCRIRE" onClick={inscrire} />
 					</div>
 				</div>
 			</div>
