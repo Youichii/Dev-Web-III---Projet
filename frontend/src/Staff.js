@@ -23,7 +23,7 @@ const Staff = () => {
     const [encours, setEncours] = useState([]);
     const [envoye, setEnvoye] = useState([]);
     const [informations_commande, setInformationsCommande] = useState("");
-    let compteurX = 1 ;
+    let compteur = 1 ;
     
     useEffect(() => {
         init() ;
@@ -162,16 +162,10 @@ const Staff = () => {
     }
 
     const elements_afaire = (elem) => {
-        let type_couleur = "couleur_bg2" ;
-        if (compteurX%2 == 0) {
-            type_couleur = "couleur_bg1" ;
-        }
-        compteurX = compteurX + 1 ;
-
-        let bg_bouton = type_couleur;
-		if (elem.adresse == "ici") {
-			bg_bouton = "couleur_surplace";
-		}
+        let type_couleur, bg_bouton ;
+        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur++ ;
+        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande")}>
@@ -188,16 +182,10 @@ const Staff = () => {
     }
 
     const elements_encours = (elem) => {
-        let type_couleur = "couleur_bg2" ;
-        if (compteurX%2 == 0) {
-            type_couleur = "couleur_bg1" ;
-        }
-        compteurX = compteurX + 1 ;
-
-        let bg_bouton = type_couleur;
-		if (elem.adresse == "ici") {
-			bg_bouton = "couleur_surplace";
-		}
+        let type_couleur, bg_bouton ;
+        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur++ ;
+        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande2")}>
@@ -214,16 +202,10 @@ const Staff = () => {
     }
 
     const elements_envoye = (elem) => {
-        let type_couleur = "couleur_bg2" ;
-        if (compteurX%2 == 0) {
-            type_couleur = "couleur_bg1" ;
-        }
-        compteurX = compteurX + 1 ;
-
-        let bg_bouton = type_couleur;
-		if (elem.adresse == "ici") {
-			bg_bouton = "couleur_surplace";
-		}
+        let type_couleur, bg_bouton ;
+        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur++ ;
+        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande3")}>
