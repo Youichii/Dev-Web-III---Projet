@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react" ;
+import Axios from 'axios'
 
 const Staff = () => {
     
@@ -28,6 +29,14 @@ const Staff = () => {
     useEffect(() => {
         init() ;
     }, []);
+
+    const submitUsername = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            Username : "clem",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
 
     const init = () => {
         let taille = "12% ";
