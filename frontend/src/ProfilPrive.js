@@ -35,7 +35,7 @@ const ProfilPrive = () => {
                     <label>*Your username*</label><br />
                     <input type="text" name="Username" maxLength="10" placeholder="Changer le pseudo" onChange="" />
                     <button onClick=" ">Modifier</button>
-                    <p>{cecile}</p>                    
+                    <p>{cecile} - 21 ans <br />14 janvier 1997</p>                    
                     <p>Clos de la Croisette 5 <br /> 1325 Chaumont Gistoux</p>
                     <input type="text" name="Username" maxLength="50" placeholder="Rue" onChange="" /><br/>
                     <input type="text" name="Username" maxLength="10" placeholder="Numéro" onChange="" /><br/>
