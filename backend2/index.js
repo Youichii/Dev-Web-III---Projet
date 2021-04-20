@@ -7,7 +7,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
-  database : 'profilprive'
+  database : 'nodemysql'
 })
 
 app.listen(3001, () => {
@@ -21,15 +21,6 @@ app.get('/', (req,res) => {
   res.send("hello");
 })
 
-app.post('/api/insert', (req, res) => {
-
-  const username = req.body.Username  //to take the variable from the html page
-  
-  const sqlInsert = "INSERT INTO `client`(`Username`) VALUES (?)"
-  db.query(sqlInsert, [username], (err, result) => {
-    console.log(err)
-  })
-})
 
 /*----- */
 
@@ -41,6 +32,7 @@ app.get('/api/users', (req, res) => {
   const sqlInsert = "SELECT id from clients where mail = ? and pwd = ?"
   db.query(sqlInsert, [mail, pwd], (err, result) => {
     console.log(err)
+    console.log("result : ", result)
   })
 })
 

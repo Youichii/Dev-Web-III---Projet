@@ -3,9 +3,9 @@ import Axios from 'axios'
 const Connexion = () => {
 
 	const recuperer_client = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            mail : "2",
-			pwd : "aa",
+        Axios.get('http://localhost:3001/api/users', {
+            mail : document.getElementById("text_user").value,
+			pwd : document.getElementById("text_mdp").value,
         }).then(() => {
             console.log("Hello")
         })
@@ -30,7 +30,7 @@ const Connexion = () => {
 					</div>
 					
 					<div class="i_bouton_envoi">
-						<input id="bouton_connexion_envoi" type="submit" value="CONNEXION" />
+						<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
 					</div>
 					<div class="i_mdp_oubli" id ="pwd_oubli">Mot de passe oublié ?</div>
 				</div>
