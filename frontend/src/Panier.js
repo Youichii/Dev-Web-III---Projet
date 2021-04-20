@@ -23,14 +23,49 @@ const Panier = () => {
     const [type_couleur, setTypeCouleur] =  useState("couleur_bg1");
 
 
-    const submitUsername = () => {
+    const recuperer_utilisateur = () => {
         Axios.post('http://localhost:3001/api/insert', {
-            Username : username,
+            identifiant : "2",
         }).then(() => {
             console.log("Hello")
         })
     }
-    
+
+    const ajouter_commande = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            table : "encours",
+            commande : "1001",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const supprimer_commande = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            table : "afaire",
+            commande : "1001",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const recuperer_panier = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            identifiantClient : "4",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const modifier_quantite = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            idCommande : "1002",
+            quantite : "2"
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
     useEffect(() => {
         const intermediaire = [] ;
         let min = 1080 ; //18h
