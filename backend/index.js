@@ -17,8 +17,12 @@ app.listen(3001, () => {
 app.use(express.json())
 app.use(cors())  //to avoid CORS policy
 
-app.get('/', (req,res) => {
-  res.send("hello");
+app.get('/api/get/:cecile', (req,res) => {
+  const name = req.params.cecile
+  const sqlGet = "SELECT * FROM `client` WHERE `Username` = ?"
+  db.query(sqlGet, name ,(err, result) => {
+    res.send(result)
+  })
 })
 
 app.post('/api/insert', (req, res) => {
