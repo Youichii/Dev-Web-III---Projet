@@ -1,4 +1,16 @@
+import Axios from 'axios'
+
 const Connexion = () => {
+
+	const recuperer_client = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            mail : "2",
+			pwd : "aa",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
     return (
         <div className="connexion c_cadre">
             <div id="cadre_connexion" className="i_info_connexion c_info_connexion">

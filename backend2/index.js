@@ -30,3 +30,17 @@ app.post('/api/insert', (req, res) => {
     console.log(err)
   })
 })
+
+/*----- */
+
+app.get('/api/users', (req, res) => {
+
+  const mail = req.body.mail 
+  const pwd = req.body.pwd  
+  
+  const sqlInsert = "SELECT id from clients where mail = ? and pwd = ?"
+  db.query(sqlInsert, [mail, pwd], (err, result) => {
+    console.log(err)
+  })
+})
+
