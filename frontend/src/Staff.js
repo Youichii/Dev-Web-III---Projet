@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react" ;
-import Axios from 'axios';
-const fetch = require("node-fetch");
+//import Axios from 'axios';
 
 const Staff = () => {
     
@@ -28,23 +27,32 @@ const Staff = () => {
     let compteur = 1 ;
     const [test, setTest] = useState(null);
 
-    let total_commandes ;
+    const [blogs, setBlogs] = useState(null);
+
+    let total_commandes = null;
     
     useEffect(() => {
-        recuperer_commandes() ;
+        fetch('http://localhost:3001/api/orders')
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setBlogs(data);
+            console.log("blog après data: ", blogs);
+        })
 
+        recuperer_commandes() ;
         init() ;
-        console.log("test3 : ", test);
     }, []);
 
     const recuperer_utilisateur = () => {
         let reponse ; 
-        Axios.get('http://localhost:3001/api/users', {
+        /*Axios.get('http://localhost:3001/api/users', {
             headers : { "identifiant" : "2" }
         }).then((response) => {
             reponse = response.data ;
             console.log(reponse);
-        })
+        })*/
     }
 
     const recuperer_commandes = () => {
@@ -58,15 +66,7 @@ const Staff = () => {
         const dat = response.data ;
         console.log(dat)*/
     }
-    async function getData() {
-        for (var i = 0; i < vhr.length; i++) {
-            let wttURL = "http://localhost:3001/api/orders"
-            await fetch(wttURL)
-                    .then(resp => resp.json()) // Transform the data into json
-                    .then(data => console.log(data.coins.Ethereum.btc_revenue))
-                    .catch(err => console.log(err));
-        }
-    }
+
 
     //console.log("filtre : ", test.filter(element => element.typeCommande === "afaire")) ;
     const ajouter_commandes = () => {
@@ -159,25 +159,7 @@ const Staff = () => {
             couleur_quitter = "var(--bg_ligne1)";
         }
         
-        let liste_aliments ;	
-        for (var i = 0; i < afaire.length; i++) {
-            if (afaire[i]["id"] == identifiant) {
-                liste_aliments = afaire[i] ;
-                break ;
-            }
-        }
-        for (var i = 0; i < envoye.length; i++) {
-            if (envoye[i]["id"] == identifiant) {
-                liste_aliments = envoye[i] ;
-                break ;
-            }
-        }
-        for (var i = 0; i < encours.length; i++) {
-            if (encours[i]["id"] == identifiant) {
-                liste_aliments = encours[i] ;
-                break ;
-            }
-        }
+        let liste_aliments = blogs.filter(element => element.typeCommande === identifiant) ;
         
         let bg_bouton = couleur_quitter;
         if (liste_aliments['adresse'] == "ici") {
@@ -194,73 +176,64 @@ const Staff = () => {
     }
 
 
-    const afficher_commande= (commande, identifiant) => {
+    const afficher_commande= (informations, identifiant) => {
+        fetch('http://localhost:3001/api/orders')
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setBlogs(data);
+            console.log("blog après data: ", blogs);
+        })
+        //ajouter des paramètres !!
         let nbr_lignes = "";
-        let liste_aliments ;	
-        for (var i = 0; i < afaire.length; i++) {
-            if (afaire[i]["id"] == commande) {
-                liste_aliments = afaire[i] ;
-                break ;
-            }
-        }
-        for (var i = 0; i < envoye.length; i++) {
-            if (envoye[i]["id"] == commande) {
-                liste_aliments = envoye[i] ;
-                break ;
-            }
-        }
-        for (var i = 0; i < encours.length; i++) {
-            if (encours[i]["id"] == commande) {
-                liste_aliments = encours[i] ;
-                break ;
-            }
-        }
+        let liste_aliments  = blogs.filter(element => element.typeCommande === identifiant) ;
         
-        let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + commande + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+        let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
         for (let i=0 ; i<liste_aliments["commande"].length ; i++){
             liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + liste_aliments["commande"][i][0] + "</div><div class=quantite_aliment>x&ensp;" + liste_aliments["commande"][i][1] + "</div></div>";
             
             nbr_lignes += "14% " ;
         }
         liste_finale += '</div> <div class="i_heure_detail">Heure passée : <span class="info_client">' + liste_aliments['heure_passee'] + '</span></div> \
-        <div class="i_adresse_detail">Adresse :  <span class="info_client">' + liste_aliments["adresse"] + '</span></div></div>' ;
+        <div class="i_adresse_detail">Adresse :  <span class="info_client">' + liste_aliments["address"] + '</span></div></div>' ;
         
         document.getElementById(identifiant).innerHTML = liste_finale;
         document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
     }
 
     const elements_afaire = (elem) => {
+        console.log("elem : ", elem);
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
-        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
-
+        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.nom}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.contact}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_prevue}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "afaire")}>
+                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => envoi_etape1(elem.id)}>OK</button>
                 </div> 
             </div>
         )
-
     }
 
     const elements_encours = (elem) => {
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
-        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande2")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.nom}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.contact}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_prevue}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "encours")}>
+                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => envoi_etape2(elem.id)}>OK</button>
                 </div> 
@@ -273,14 +246,14 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
-        (elem.adresse == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem.id, "id_details_commande3")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.nom}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.contact}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_prevue}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "envoye")}>
+                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => envoi_etape3(elem.id)}>OK</button>
                 </div> 
@@ -306,10 +279,10 @@ const Staff = () => {
                 </div>
 
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                    {afaire.map(elements_afaire)}
+                    {blogs && blogs.filter(element => element.typeCommande === "afaire").map(elements_afaire)}
                 </div>
 
-                <div id="id_details_commande" class="details_commande"></div>
+                <div id="afaire" class="details_commande"></div>
                 <div className="i_bout_cadre_afaire"></div>
             </div>
 
@@ -327,9 +300,9 @@ const Staff = () => {
 					<div class="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                    {encours.map(elements_encours)}
+                    {blogs && blogs.filter(element => element.typeCommande === "encours").map(elements_encours)}
                 </div>
-                <div id="id_details_commande2" className="details_commande"></div>
+                <div id="encours" className="details_commande"></div>
 				<div className="i_bout_cadre_afaire"></div>
             </div>
 
@@ -347,9 +320,9 @@ const Staff = () => {
 					<div class="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                    {envoye.map(elements_envoye)}
+                    {blogs && blogs.filter(element => element.typeCommande === "envoye").map(elements_envoye)}
                 </div>
-                <div id="id_details_commande3" className="details_commande"></div>
+                <div id="envoye" className="details_commande"></div>
 				<div className="i_bout_cadre_afaire"></div>
             </div>
 

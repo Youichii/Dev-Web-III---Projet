@@ -12,15 +12,15 @@ const Connexion = () => {
                     
                     <form>
                         <div id="user">
-                            <div class="div_user">ADRESSE E-MAIL</div>
-                            <div class="div_text_user">
+                            <div className="div_user">ADRESSE E-MAIL</div>
+                            <div className="div_text_user">
                                 <input id="text_user" type="text" required maxlength="100" />
                             </div>
                         </div>
                         
                         <div id="pwd">
-                            <div class="div_user">MOT DE PASSE</div>
-                            <div class="div_text_user"><input id="text_mdp" type="password" required maxlength="100" /></div>
+                            <div className="div_user">MOT DE PASSE</div>
+                            <div className="div_text_user"><input id="text_mdp" type="password" required maxlength="100" /></div>
                         </div>
                         
                         <div id="connexion_envoi">

@@ -12,22 +12,22 @@ const Inscription = () => {
                     
                     <form>
                         <div>
-                            <div class="div_infos">NOM</div>
-                            <div class="div_text_infos">
+                            <div className="div_infos">NOM</div>
+                            <div className="div_text_infos">
                                 <input type="texte" id="nom_user" required />
                             </div>
                         </div>
                         
                         <div>
-                            <div class="div_infos">PRENOM</div>
-                            <div class="div_text_infos">
+                            <div className="div_infos">PRENOM</div>
+                            <div className="div_text_infos">
                                 <input type="texte" id="prenom_user" required />
                             </div>
                         </div>
                         
                         <div>
-                            <div class="div_infos">ADRESSE</div>
-                            <div class="div_text_infos">
+                            <div className="div_infos">ADRESSE</div>
+                            <div className="div_text_infos">
                                 <input type="texte" id="adresse_user" required />
                             </div>
                         </div>

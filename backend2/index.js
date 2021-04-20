@@ -47,7 +47,7 @@ app.get('/api/users', (req, res) => { // /users/{user-ID}
 
 app.get('/api/orders', (req, res) => {
     
-  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, CL.firstname, CL.phone, CL.address, heure_reservee, sum(CO.quantite * PR.prix) \
+  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, CL.address, heure_reservee, sum(CO.quantite * PR.prix) as price \
                     FROM encours AS AF \
                     JOIN reservation AS RE ON AF.idCommande = RE.idCommande \
                     JOIN clients AS CL ON RE.idClient = CL.id \
