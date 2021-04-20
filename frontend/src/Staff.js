@@ -30,9 +30,36 @@ const Staff = () => {
         init() ;
     }, []);
 
-    const submitUsername = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            Username : "clem",
+    const recuperer_utilisateur = () => {
+        Axios.get('http://localhost:3001/api/users', {
+            identifiant : "2",
+            test : "coucou"
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const recuperer_commandes = () => {
+        Axios.get('http://localhost:3001/api/orders', {
+            Username : "clem", //à supprimer
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const ajouter_commandes = () => {
+        Axios.post('http://localhost:3001/api/orders', {
+            table : "encours",
+            commande : "xx",
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const supprimer_commandes = () => {
+        Axios.delete('http://localhost:3001/api/orders', {
+            table : "afaire",
+            commande : "xx",
         }).then(() => {
             console.log("Hello")
         })
@@ -293,6 +320,11 @@ const Staff = () => {
                 <div id="id_details_commande3" className="details_commande"></div>
 				<div className="i_bout_cadre_afaire"></div>
             </div>
+
+            <button class="i_bouton_suivant" onClick={() => recuperer_utilisateur()}>users</button>
+            <button class="i_bouton_suivant" onClick={() => recuperer_commandes()}>getorder</button>
+            <button class="i_bouton_suivant" onClick={() => ajouter_commandes()}>postorder</button>
+            <button class="i_bouton_suivant" onClick={() => supprimer_commandes()}>delorder</button>
         </div>
     );
 }

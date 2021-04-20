@@ -7,7 +7,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
-  database : 'profilprive'
+  database : 'nodemysql'
 })
 
 app.listen(3001, () => {
@@ -35,15 +35,17 @@ app.post('/api/insert', (req, res) => {
 
 app.get('/api/users', (req, res) => { // /users/{user-ID}
 
-    const identifiant = req.body.identifiant 
-    
-    const sqlInsert = "SELECT `firstname`, `address`, `phone` FROM `clients` where id = ? "
+    const identifiant = req.body.identifiant ;
+    console.log("id : ", identifiant);
+
+    const sqlInsert = "SELECT `firstname`, `address`, `phone` FROM `clients` where id = ?;";
     db.query(sqlInsert, [identifiant], (err, result) => {
-      console.log(err)
+      console.log("erreur : ", err);
+      console.log("result : ", result);
     })
 })
 
-  app.get('/api/orders', (req, res) => {
+app.get('/api/orders', (req, res) => {
     
     const sqlInsert = "SELECT * FROM afaire, encours, envoye"
     db.query(sqlInsert, [], (err, result) => {
@@ -51,7 +53,7 @@ app.get('/api/users', (req, res) => { // /users/{user-ID}
     })
 })
 
-  app.post('/api/orders', (req, res) => {
+app.post('/api/orders', (req, res) => {
 
     const table = req.body.table
     const commande  = req.body.commande
@@ -62,7 +64,7 @@ app.get('/api/users', (req, res) => { // /users/{user-ID}
     })
 })
 
-  app.delete('/api/orders', (req, res) => {
+app.delete('/api/orders', (req, res) => {
 
     const table = req.body.table
     const commande  = req.body.commande 
