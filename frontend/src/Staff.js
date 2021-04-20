@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react" ;
-import Axios from 'axios'
+import Axios from 'axios';
+const fetch = require("node-fetch");
 
 const Staff = () => {
     
@@ -25,44 +26,75 @@ const Staff = () => {
     const [envoye, setEnvoye] = useState([]);
     const [informations_commande, setInformationsCommande] = useState("");
     let compteur = 1 ;
+    const [test, setTest] = useState(null);
+
+    let total_commandes ;
     
     useEffect(() => {
+        recuperer_commandes() ;
+
         init() ;
+        console.log("test3 : ", test);
     }, []);
 
     const recuperer_utilisateur = () => {
+        let reponse ; 
         Axios.get('http://localhost:3001/api/users', {
-            identifiant : "2",
-            test : "coucou"
-        }).then(() => {
-            console.log("Hello")
+            headers : { "identifiant" : "2" }
+        }).then((response) => {
+            reponse = response.data ;
+            console.log(reponse);
         })
     }
 
     const recuperer_commandes = () => {
-        Axios.get('http://localhost:3001/api/orders', {
-            Username : "clem", //à supprimer
-        }).then(() => {
-            console.log("Hello")
-        })
+        let reponse ; 
+        /*Axios.get('http://localhost:3001/api/orders', {
+        }).then((response) => {
+            setTest(response.data) ;
+            total_commandes = response.data ;
+        })*/
+        /*const response = await Axios.get('http://localhost:3001/api/orders') ;
+        const dat = response.data ;
+        console.log(dat)*/
+    }
+    async function getData() {
+        for (var i = 0; i < vhr.length; i++) {
+            let wttURL = "http://localhost:3001/api/orders"
+            await fetch(wttURL)
+                    .then(resp => resp.json()) // Transform the data into json
+                    .then(data => console.log(data.coins.Ethereum.btc_revenue))
+                    .catch(err => console.log(err));
+        }
     }
 
+    //console.log("filtre : ", test.filter(element => element.typeCommande === "afaire")) ;
     const ajouter_commandes = () => {
-        Axios.post('http://localhost:3001/api/orders', {
-            table : "encours",
+        /*Axios.post('http://localhost:3001/api/orders', {
             commande : "xx",
         }).then(() => {
             console.log("Hello")
-        })
+        })*/
+        console.log("oui");
     }
 
     const supprimer_commandes = () => {
-        Axios.delete('http://localhost:3001/api/orders', {
-            table : "afaire",
-            commande : "xx",
+        /*Axios.delete('http://localhost:3001/api/orders', {
+            headers : { "commande" : "xx" }
         }).then(() => {
             console.log("Hello")
-        })
+        })*/
+        console.log("oui");
+    }
+
+    const maj_commandes = (identifiant) => {
+        //envoi_etape1() ;
+        ajouter_commandes();
+        let x =0;
+        while (test === null) {
+            x ++ ;
+        }
+        supprimer_commandes()
     }
 
     const init = () => {

@@ -35,21 +35,28 @@ app.post('/api/insert', (req, res) => {
 
 app.get('/api/users', (req, res) => { // /users/{user-ID}
 
-    const identifiant = req.body.identifiant ;
+    const identifiant = req.headers.identifiant ;
     console.log("id : ", identifiant);
 
     const sqlInsert = "SELECT `firstname`, `address`, `phone` FROM `clients` where id = ?;";
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("erreur : ", err);
-      console.log("result : ", result);
+      res.send(result) ;
     })
 })
 
 app.get('/api/orders', (req, res) => {
     
-    const sqlInsert = "SELECT * FROM afaire, encours, envoye"
+  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, CL.firstname, CL.phone, CL.address, heure_reservee, sum(CO.quantite * PR.prix) \
+                    FROM encours AS AF \
+                    JOIN reservation AS RE ON AF.idCommande = RE.idCommande \
+                    JOIN clients AS CL ON RE.idClient = CL.id \
+                    JOIN commandes AS CO ON AF.idCommande = CO.idCommande \
+                    JOIN produits AS PR ON CO.idProduit = PR.idProduit \
+                    GROUP BY idEncours, CO.idCommande" ;
     db.query(sqlInsert, [], (err, result) => {
-      console.log(err)
+      console.log("erreur : ", err);
+      res.send(result) ;
     })
 })
 
@@ -58,20 +65,19 @@ app.post('/api/orders', (req, res) => {
     const table = req.body.table
     const commande  = req.body.commande
     
-    const sqlInsert = "INSERT INTO `?`(`IDcommande`) VALUES (?)"
+    const sqlInsert = "INSERT INTO `encours`(`IDcommande`) VALUES (?)"
     db.query(sqlInsert, [table, commande], (err, result) => {
-      console.log(err)
+      console.log("erreur : ", err)
     })
 })
 
 app.delete('/api/orders', (req, res) => {
 
-    const table = req.body.table
-    const commande  = req.body.commande 
+    const commande  = req.headers.commande 
     
-    const sqlInsert = "DELETE FROM `?` where `IDcommande` = ?"
+    const sqlInsert = "DELETE FROM `encours` where `IDcommande` = ?"
     db.query(sqlInsert, [table, commande], (err, result) => {
-      console.log(err)
+      console.log("erreur : ", err)
     })
 })
 
