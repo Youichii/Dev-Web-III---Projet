@@ -32,17 +32,21 @@ const ProfilPrive = () => {
             <div className="privateinfo">
                     
                 <div className="gauche">
-                    <label>Your username</label><br />
-                    <input type="text" name="Username" maxLength="10" placeholder="enter your Username" onChange= {(e) => {
+                    <label>*Your username*</label><br />
+                    <input type="text" name="Username" maxLength="10" placeholder="Changer le pseudo" onChange="" />
+                    <p>Aurélien Brille</p>                    
+                    <p>Clos de la Croisette 5 <br /> 1325 Chaumont Gistoux</p>
+                    <input type="text" name="Username" maxLength="" placeholder="Changer l'adresse" onChange="" />
+                    <p>0495757504</p>
+                    <input type="text" name="Username" maxLength="20" placeholder="Changer le numéro de téléphone" onChange="" />
+                    <p>baurelien@hotmail.com</p>
+                    <input type="text" name="Username" maxLength="10" placeholder="Changer l'adresse mail" onChange="" /><br />
+                    <input type="text" name="Username" maxLength="50" placeholder="Changer username test" onChange= {(e) => {
                         setUsername(e.target.value)
                     }}/><br />
-                    <button onClick={submitUsername}>Submit</button>
-                    <button onClick={getCecile}>Cécile</button>
+                    <button onClick={submitUsername}>Username</button>
+                    <button onClick={getCecile}>Modifier</button>
                 </div>
-                
-                <div className="droite">
-                    Chaumont-Gistoux
-                </div>       
             </div>            
         </div>
     )
