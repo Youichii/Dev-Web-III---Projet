@@ -30,3 +30,46 @@ app.post('/api/insert', (req, res) => {
     console.log(err)
   })
 })
+
+/*------------- */
+
+app.get('/api/users', (req, res) => { // /users/{user-ID}
+
+    const identifiant = req.body.identifiant 
+    
+    const sqlInsert = "SELECT `firstname`, `address`, `phone` FROM `clients` where id = ? "
+    db.query(sqlInsert, [identifiant], (err, result) => {
+      console.log(err)
+    })
+})
+
+  app.get('/api/orders', (req, res) => {
+    
+    const sqlInsert = "SELECT * FROM afaire, encours, envoye"
+    db.query(sqlInsert, [], (err, result) => {
+      console.log(err)
+    })
+})
+
+  app.post('/api/orders', (req, res) => {
+
+    const table = req.body.table
+    const commande  = req.body.commande
+    
+    const sqlInsert = "INSERT INTO `?`(`IDcommande`) VALUES (?)"
+    db.query(sqlInsert, [table, commande], (err, result) => {
+      console.log(err)
+    })
+})
+
+  app.delete('/api/orders', (req, res) => {
+
+    const table = req.body.table
+    const commande  = req.body.commande 
+    
+    const sqlInsert = "DELETE FROM `?` where `IDcommande` = ?"
+    db.query(sqlInsert, [table, commande], (err, result) => {
+      console.log(err)
+    })
+})
+
