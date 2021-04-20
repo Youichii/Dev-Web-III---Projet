@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react" ;
+import Axios from 'axios'
 
 const Panier = () => {
     const [aliments, setAliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
@@ -21,6 +22,15 @@ const Panier = () => {
     let compteur = 1 ;
     const [type_couleur, setTypeCouleur] =  useState("couleur_bg1");
 
+
+    const submitUsername = () => {
+        Axios.post('http://localhost:3001/api/insert', {
+            Username : username,
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+    
     useEffect(() => {
         const intermediaire = [] ;
         let min = 1080 ; //18h
