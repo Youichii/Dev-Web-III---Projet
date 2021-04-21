@@ -17,20 +17,22 @@ app.listen(3001, () => {
 app.use(express.json())
 app.use(cors())  //to avoid CORS policy
 
-app.get('/api/get/:cecile', (req,res) => {
-  const name = req.params.cecile
-  const sqlGet = "SELECT * FROM `client` WHERE `Username` = ?"
+app.get('/api/get/:clientName', (req,res) => {
+  const name = req.params.clientName
+  const sqlGet = "SELECT * FROM `client` WHERE `ClientID` = ?"
   db.query(sqlGet, name ,(err, result) => {
     res.send(result)
+    console.log(result)
   })
 })
 
-app.post('/api/insert', (req, res) => {
-
-  const username = req.body.Username  //to take the variable from the html page
-  
-  const sqlInsert = "INSERT INTO `client`(`Username`) VALUES (?)"
-  db.query(sqlInsert, [username], (err, result) => {
+app.put('/api/put', (req, res) => {  
+  const username = req.body.username
+  const clientName = req.body.clientName  //to take the variable from the html page
+  console.log(username, clientName)
+  const sqlInsert = "UPDATE `client` SET `Username` = ? WHERE `client`.`ClientID` = ?;"
+  db.query(sqlInsert, [username, clientName], (err, result) => {
     console.log(err)
+    console.log(result)
   })
 })
