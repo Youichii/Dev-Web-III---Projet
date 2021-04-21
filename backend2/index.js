@@ -46,6 +46,7 @@ app.get('/api/orders', (req, res) => {
                     GROUP BY idEncours, CO.idCommande" ;
     db.query(sqlInsert, [], (err, result) => {
       console.log("erreur : ", err);
+      console.log("result : ", result);
       res.send(result) ;
     })
 })
