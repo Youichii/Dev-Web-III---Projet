@@ -599,3 +599,68 @@ html {
 	height : 50px;
 	width : 140px;
 }
+
+/* CSS Cécile // Historique */
+
+body {
+	background-color: black;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+   sans-serif;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+   monospace;
+}
+
+/* Barre de navigation */
+
+
+.navbar{ 
+ background-color: black;
+ grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+ grid-template-columns: 20% 20% 15% 20% 20%;
+ grid-template-rows: 100%;
+ display: grid;
+ width:100%;
+ text-align: center;
+ font-size: 80%;
+ /* margin-bottom: 5%; */
+ 
+}
+.navbar li{
+ height: fit-content;
+ width: ma;
+}
+
+.navbar a{
+ display : block;
+ color: white;
+ text-decoration: none;
+ margin-top:15%;
+ 
+}
+
+.navbar a:hover{
+ color : #dfb54f;
+ text-decoration-line: underline;
+ text-decoration-color: #dfb54f;
+}
+
+#img{
+ height: 90%;
+ width: 90%;
+ grid-column:3;
+ display: grid;
+ margin-left: 15%; 
+ 
+} 
+
+/*.......... Cadre.......*/
+
+.annee{
+ color:white;
+}

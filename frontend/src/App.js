@@ -6,6 +6,8 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
+import BannerPatron from "./BannerPatron";
+import Historique from "./Historique";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -37,6 +39,10 @@ function App() {
 
             <Route exact path="/inscription"> 
               <Inscription />
+            </Route>
+
+            <Route exact path="/historique"> 
+              <Historique />
             </Route>
           </Switch>
         </div>
