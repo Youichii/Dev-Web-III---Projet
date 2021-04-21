@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react" ;
-//import Axios from 'axios';
+import Axios from 'axios';
 
 const Staff = () => {
     
@@ -28,8 +28,10 @@ const Staff = () => {
     const [test, setTest] = useState(null);
 
     const [blogs, setBlogs] = useState(null);
+    const [autreblogs, setAutreblogs] = useState(null);
 
     let total_commandes = null;
+    let donnees ;
     
     useEffect(() => {
         fetch('http://localhost:3001/api/orders')
@@ -68,33 +70,22 @@ const Staff = () => {
     }
 
 
-    //console.log("filtre : ", test.filter(element => element.typeCommande === "afaire")) ;
-    const ajouter_commandes = () => {
-        /*Axios.post('http://localhost:3001/api/orders', {
-            commande : "xx",
+    const ajouter_commandes = (idCommande, type_commande) => {
+        Axios.post('http://localhost:3001/api/orders', {
+            commande : idCommande,
+            type: type_commande
         }).then(() => {
             console.log("Hello")
-        })*/
-        console.log("oui");
+        })
     }
 
-    const supprimer_commandes = () => {
-        /*Axios.delete('http://localhost:3001/api/orders', {
-            headers : { "commande" : "xx" }
+    const supprimer_commandes = (idCommande) => {
+        console.log("idcom : ", idCommande);
+        Axios.delete('http://localhost:3001/api/orders', {
+            headers : {"commande" : idCommande}
         }).then(() => {
             console.log("Hello")
-        })*/
-        console.log("oui");
-    }
-
-    const maj_commandes = (identifiant) => {
-        //envoi_etape1() ;
-        ajouter_commandes();
-        let x =0;
-        while (test === null) {
-            x ++ ;
-        }
-        supprimer_commandes()
+        })
     }
 
     const init = () => {
@@ -176,47 +167,49 @@ const Staff = () => {
     }
 
 
-    const afficher_commande= (informations, identifiant) => {
-        fetch('http://localhost:3001/api/orders')
-        .then(res => {
+    const load_panier = (informations, identifiant) => {
+        let identifiantCommande = informations.idCommande ; 
+        console.log("identifiantCommande : ", identifiantCommande);
+        return fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json' }
+        }).then(res => {
             return res.json();
         })
         .then(data => {
-            setBlogs(data);
-            console.log("blog après data: ", blogs);
-        })
-        //ajouter des paramètres !!
-        let nbr_lignes = "";
-        let liste_aliments  = blogs.filter(element => element.typeCommande === identifiant) ;
-        
-        let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
-        for (let i=0 ; i<liste_aliments["commande"].length ; i++){
-            liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + liste_aliments["commande"][i][0] + "</div><div class=quantite_aliment>x&ensp;" + liste_aliments["commande"][i][1] + "</div></div>";
+            donnees = data ;
+
+            let nbr_lignes = "";
+            let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.id + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            for (let i=0 ; i< data.length ; i++){
+                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["nomProduit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
+                
+                nbr_lignes += "14% " ;
+            }
+            liste_finale += '</div> <div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.heure_passee + '</span></div> \
+            <div class="i_adresse_detail">Adresse :  <span class="info_client">' + informations.address + '</span></div></div>' ;
             
-            nbr_lignes += "14% " ;
-        }
-        liste_finale += '</div> <div class="i_heure_detail">Heure passée : <span class="info_client">' + liste_aliments['heure_passee'] + '</span></div> \
-        <div class="i_adresse_detail">Adresse :  <span class="info_client">' + liste_aliments["address"] + '</span></div></div>' ;
-        
-        document.getElementById(identifiant).innerHTML = liste_finale;
-        document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
+            document.getElementById(identifiant).innerHTML = liste_finale;
+            document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
+        })
     }
+    //() => envoi_etape1(elem.id)
 
     const elements_afaire = (elem) => {
-        console.log("elem : ", elem);
+        //console.log("elem : ", elem);
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
         (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
-        
+
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "afaire")}>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "afaire")}>
                 <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
                 <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
                 <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
                 <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => envoi_etape1(elem.id)}>OK</button>
+                    <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCommande, "encours")}>OK</button>
                 </div> 
             </div>
         )
@@ -229,13 +222,13 @@ const Staff = () => {
         (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "encours")}>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "encours")}>
                 <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
                 <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
                 <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
                 <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => envoi_etape2(elem.id)}>OK</button>
+                    <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCommande, "envoye")}>OK</button>
                 </div> 
             </div>
         )
@@ -249,13 +242,13 @@ const Staff = () => {
         (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => afficher_commande(elem, "envoye")}>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "envoye")}>
                 <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
                 <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
                 <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
                 <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => envoi_etape3(elem.id)}>OK</button>
+                    <button class="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCommande)}>OK</button>
                 </div> 
             </div>
         )
