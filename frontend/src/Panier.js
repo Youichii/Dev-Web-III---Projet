@@ -24,16 +24,16 @@ const Panier = () => {
 
 
     const recuperer_utilisateur = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            identifiant : "2",
-        }).then(() => {
-            console.log("Hello")
+        console.log("rentre");
+        Axios.get('http://localhost:3001/api/users', {
+            headers : {"identifiant" : "2"}
+        }).then((response) => {
+            console.log("reponse : ", response.data);
         })
     }
 
     const ajouter_commande = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            table : "encours",
+        Axios.post('http://localhost:3001/api/orders', {
             commande : "1001",
         }).then(() => {
             console.log("Hello")
@@ -41,7 +41,7 @@ const Panier = () => {
     }
 
     const supprimer_commande = () => {
-        Axios.post('http://localhost:3001/api/insert', {
+        Axios.delete('http://localhost:3001/api/orders', {
             table : "afaire",
             commande : "1001",
         }).then(() => {
@@ -50,19 +50,21 @@ const Panier = () => {
     }
 
     const recuperer_panier = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            identifiantClient : "4",
-        }).then(() => {
-            console.log("Hello")
+        console.log("rentre panier");
+        Axios.get('http://localhost:3001/api/orders/users', {
+            headers : {"identifiantClient" : "2"}
+        }).then((response) => {
+            console.log("reponse : ", response.data);
         })
     }
 
     const modifier_quantite = () => {
-        Axios.post('http://localhost:3001/api/insert', {
-            idCommande : "1002",
-            quantite : "2"
-        }).then(() => {
-            console.log("Hello")
+        Axios.put('http://localhost:3001/api/orders/foods', {
+            idCommande : "1000",
+            idProduit : "3",
+            quantite : "4"
+        }).then((response) => {
+            console.log("response : ", response);
         })
     }
 
@@ -299,6 +301,12 @@ const Panier = () => {
 					<input id="bouton_annuler2" name="bout_annuler2" type="button" value="Retour" onClick={annuler_info} />
 				</div>
 			</div>
+
+            <input name="bout_annuler2" type="button" value="recup uti" onClick={recuperer_utilisateur} />
+            <input name="bout_annuler" type="button" value="ajout" onClick={ajouter_commande} />
+            <input name="bout_annule2" type="button" value="supp" onClick={supprimer_commande} />
+            <input name="bout_annulr2" type="button" value="panier" onClick={recuperer_panier} />
+            <input name="bout_annuer2" type="button" value="quantite" onClick={modifier_quantite} />
 
         </div>
     );
