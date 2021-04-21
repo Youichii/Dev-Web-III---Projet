@@ -33,17 +33,7 @@ app.post('/api/insert', (req, res) => {
 
 /*------------- */
 
-app.get('/api/users', (req, res) => { // /users/{user-ID}
 
-    const identifiant = req.headers.identifiant ;
-    console.log("id : ", identifiant);
-
-    const sqlInsert = "SELECT `firstname`, `address`, `phone` FROM `clients` where id = ?;";
-    db.query(sqlInsert, [identifiant], (err, result) => {
-      console.log("erreur : ", err);
-      res.send(result) ;
-    })
-})
 
 app.get('/api/orders', (req, res) => {
     
@@ -74,7 +64,6 @@ app.post('/api/orders', (req, res) => {
 app.delete('/api/orders', (req, res) => {
 
     const commande  = req.headers.commande 
-    console.log("commande : ", commande);
 
     const sqlInsert = "DELETE FROM `encours` where `IDcommande` = ?"
     db.query(sqlInsert, [commande], (err, result) => {
@@ -85,8 +74,6 @@ app.delete('/api/orders', (req, res) => {
 app.get('/api/panier/:idCommande', (req, res) => {
 
   const idCommande  = req.params.idCommande 
-  console.log("id : ", idCommande);
-  console.log("params : ", req.params.idCommande );
   
   const sqlInsert = "SELECT C.idCommande, PRO.idProduit, nomProduit, quantite \
                   FROM `commandes` AS C \

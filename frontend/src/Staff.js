@@ -28,7 +28,7 @@ const Staff = () => {
     const [test, setTest] = useState(null);
 
     const [blogs, setBlogs] = useState(null);
-    const [autreblogs, setAutreblogs] = useState(null);
+    const [changement, setChangement] = useState(true);
 
     let total_commandes = null;
     let donnees ;
@@ -43,39 +43,15 @@ const Staff = () => {
             console.log("blog après data: ", blogs);
         })
 
-        recuperer_commandes() ;
-        init() ;
-    }, []);
-
-    const recuperer_utilisateur = () => {
-        let reponse ; 
-        /*Axios.get('http://localhost:3001/api/users', {
-            headers : { "identifiant" : "2" }
-        }).then((response) => {
-            reponse = response.data ;
-            console.log(reponse);
-        })*/
-    }
-
-    const recuperer_commandes = () => {
-        let reponse ; 
-        /*Axios.get('http://localhost:3001/api/orders', {
-        }).then((response) => {
-            setTest(response.data) ;
-            total_commandes = response.data ;
-        })*/
-        /*const response = await Axios.get('http://localhost:3001/api/orders') ;
-        const dat = response.data ;
-        console.log(dat)*/
-    }
-
+    }, [changement]);
 
     const ajouter_commandes = (idCommande, type_commande) => {
         Axios.post('http://localhost:3001/api/orders', {
             commande : idCommande,
             type: type_commande
         }).then(() => {
-            console.log("Hello")
+            console.log("Hello");
+            setChangement(!changement) ;
         })
     }
 
@@ -84,22 +60,9 @@ const Staff = () => {
         Axios.delete('http://localhost:3001/api/orders', {
             headers : {"commande" : idCommande}
         }).then(() => {
-            console.log("Hello")
+            console.log("Hello");
+            setChangement(!changement) ;
         })
-    }
-
-    const init = () => {
-        let taille = "12% ";
-        let nbr_lignes_afaire = "12% ", nbr_lignes_encours = "12% ", nbr_lignes_envoye = "12% " ;
-
-        afaire.map(x => nbr_lignes_afaire += taille) ;
-        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
-
-        encours.map(x => nbr_lignes_encours += taille) ;
-        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
-
-        envoye.map(x => nbr_lignes_envoye += taille) ;
-        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
     }
 
     const envoi_etape1 =(identifiant) => {
@@ -108,7 +71,7 @@ const Staff = () => {
 
         setAfaire(newAfaire) ;
         setEncours(newEncours) ;
-        init() ;
+        //init() ;
     }
 
     const envoi_etape2 =(identifiant) => {
@@ -117,14 +80,14 @@ const Staff = () => {
 
         setEncours(newEncours) ;
         setEnvoye(newEnvoye) ;
-        init() ;
+        //init() ;
     }
 
     const envoi_etape3 =(identifiant) => {
         const newEnvoye = envoye.filter(element => element.id !== identifiant);
 
         setEnvoye(newEnvoye) ;
-        init() ;
+        //init() ;
     }
 
     const nouveau_bg = (identifiant) => {
@@ -196,7 +159,13 @@ const Staff = () => {
     //() => envoi_etape1(elem.id)
 
     const elements_afaire = (elem) => {
-        //console.log("elem : ", elem);
+        let taille = "12% ";
+        let nbr_lignes_afaire = "12% " ;
+
+        blogs.filter(element => element.typeCommande === "afaire").map(x => nbr_lignes_afaire += taille) ;
+        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
+
+        console.log("elem : ", elem);
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
@@ -216,6 +185,13 @@ const Staff = () => {
     }
 
     const elements_encours = (elem) => {
+        let taille = "12% ";
+        let  nbr_lignes_encours = "12% ";
+
+        blogs.filter(element => element.typeCommande === "encours").map(x => nbr_lignes_encours += taille) ;
+        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
+
+        console.log("elem : ", elem);
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
@@ -236,6 +212,13 @@ const Staff = () => {
     }
 
     const elements_envoye = (elem) => {
+        let taille = "12% ";
+        let nbr_lignes_envoye = "12% " ;
+
+        blogs.filter(element => element.typeCommande === "envoye").map(x => nbr_lignes_envoye += taille) ;
+        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
+
+        console.log("elem : ", elem);
         let type_couleur, bg_bouton ;
         (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
@@ -318,11 +301,6 @@ const Staff = () => {
                 <div id="envoye" className="details_commande"></div>
 				<div className="i_bout_cadre_afaire"></div>
             </div>
-
-            <button class="i_bouton_suivant" onClick={() => recuperer_utilisateur()}>users</button>
-            <button class="i_bouton_suivant" onClick={() => recuperer_commandes()}>getorder</button>
-            <button class="i_bouton_suivant" onClick={() => ajouter_commandes()}>postorder</button>
-            <button class="i_bouton_suivant" onClick={() => supprimer_commandes()}>delorder</button>
         </div>
     );
 }
