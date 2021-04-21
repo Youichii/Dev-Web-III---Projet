@@ -6,6 +6,8 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
+// import BannerPatron from "./BannerPatron.js";
+import Communaute from "./Communaute.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -34,6 +36,14 @@ function App() {
             <Route exact path="/connexion"> 
               <Connexion />
             </Route>
+
+            <Route exact path="/communaute"> 
+              <Communaute />
+            </Route>
+
+
+
+
 
             <Route exact path="/inscription"> 
               <Inscription />
