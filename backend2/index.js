@@ -34,7 +34,6 @@ app.post('/api/insert', (req, res) => {
 /*------------- */
 
 
-
 app.get('/api/orders', (req, res) => {
     
   const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, CL.address, heure_reservee, sum(CO.quantite * PR.prix) as price \
@@ -46,7 +45,7 @@ app.get('/api/orders', (req, res) => {
                     GROUP BY idEncours, CO.idCommande" ;
     db.query(sqlInsert, [], (err, result) => {
       console.log("erreur : ", err);
-      console.log("result : ", result);
+      //console.log("result : ", result);
       res.send(result) ;
     })
 })
@@ -55,10 +54,15 @@ app.post('/api/orders', (req, res) => {
 
     const type = req.body.type
     const commande  = req.body.commande
+    console.log("type : ", type, " commande : ", commande);
+    console.log("body : ", req.body);
+    //console.log("req : ", req);
     
     const sqlInsert = "UPDATE encours SET typeCommande = ? where idCommande = ?;"
     db.query(sqlInsert, [type, commande], (err, result) => {
-      console.log("erreur : ", err)
+      console.log("erreur : ", err);
+      console.log("result : ", result);
+      res.send(result) ;
     })
 })
 
