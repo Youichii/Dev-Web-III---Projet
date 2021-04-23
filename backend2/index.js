@@ -25,15 +25,7 @@ app.get('/api/get/:cecile', (req,res) => {
   })
 })
 
-app.post('/api/insert', (req, res) => {
-
-  const username = req.body.Username  //to take the variable from the html page
-  
-  const sqlInsert = "INSERT INTO `client`(`Username`) VALUES (?)"
-  db.query(sqlInsert, [username], (err, result) => {
-    console.log(err)
-  })
-})
+/*-----*/
 
 app.post('/api/users', (req, res) => {
 
@@ -45,9 +37,11 @@ app.post('/api/users', (req, res) => {
     const mail = req.body.mail 
     const gender = req.body.gender 
     const pwd = req.body.pwd 
+    //console.log("name : ", name);
   
-    const sqlInsert = "INSERT INTO `clients`(`name`, `firstname`, `address`, `birthday`, `phone`, `mail`, `gender`, `pwd`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    const sqlInsert = "INSERT INTO `clients`(`name`, `firstname`, `address`, `birthday`, `phone`, `mail`, `gender`, `pwd`, numero, postal, ville) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 10, 2030, 'Mons')"
     db.query(sqlInsert, [name, firstname, address, birthday, phone, mail, gender, pwd], (err, result) => {
-      console.log(err)
+      console.log(err) ;
+      res.send(result);
     })
   }) 

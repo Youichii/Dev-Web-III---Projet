@@ -3,6 +3,22 @@ import Axios from 'axios'
 
 const Inscription = () => {
 
+	const [liste_jours, setListeJours] = useState(null);
+	const [liste_mois, setListeMois] = useState(["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"]);
+	const [liste_annee, setListeAnnee] = useState(null);
+
+	useEffect(() => {
+		let jour = [], annee = [] ;
+        for (let i = 1 ; i<32 ; i++) {
+			jour.push(i);
+		}
+		for (let i = 2010 ; i>1950 ; i--) {
+			annee.push(i);
+		}
+		setListeJours(jour);
+		setListeAnnee(annee);
+    }, []);
+
 	const inscrire = () => {
 
 		var radios = document.getElementsByName('myradio');
@@ -13,22 +29,29 @@ const Inscription = () => {
 			}
 		}
 
-		var jour = document.getElementsByName('selection_jour');
-		var mois = document.getElementsByName('selection_mois');
-		var annee = document.getElementsByName('selection_annee');
+		var jour = document.getElementById('selection_jour').selectedIndex;
+		var mois = document.getElementById('selection_mois').selectedIndex;
+		var annee = document.getElementById('selection_annee').selectedIndex;
 		var date  = new Date(annee, mois, jour) ;
 
-        Axios.post('http://localhost:3001/api/users', {
-            name : document.getElementById("nom_user").value,
-			firstname : document.getElementById("prenom_user").value,
-			address : document.getElementById("adresse_user").value,
-			birthday : date,
-			phone : document.getElementById("telephone_user").value,
-			mail : document.getElementById("mail_user").value,
-			gender : valeur,
-			pwd : document.getElementById("mdp_user").value,
-        }).then(() => {
-            console.log("Successful")
+		var myInit = { method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({name : document.getElementById("nom_user").value,
+									firstname : document.getElementById("prenom_user").value,
+									address : document.getElementById("adresse_user").value,
+									birthday : date,
+									phone : document.getElementById("telephone_user").value,
+									mail : document.getElementById("mail_user").value,
+									gender : valeur,
+									pwd : document.getElementById("mdp_user").value})
+        };
+
+        fetch('http://localhost:3001/api/users', myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log("Successful");
         })
 
     }
@@ -55,65 +78,43 @@ const Inscription = () => {
 					<div className="i_champ_adresse_insc">
 						<input type="text" id="adresse_user" required />
 					</div>
+
+					<div className="i_titre_numero_insc pol">NUMERO</div>
+					<div className="i_champ_numero_insc">
+						<input type="number" id="numero_user" required />
+					</div>
+
+					<div className="i_titre_postal_insc pol">POSTAL</div>
+					<div className="i_champ_postal_insc">
+						<input type="number" id="postal_user" required />
+					</div>
+
+					<div className="i_titre_ville_insc pol">VILLE</div>
+					<div className="i_champ_ville_insc">
+						<input type="text" id="ville_user" required />
+					</div>
 				
 					<div className="i_titre_anniversaire pol">DATE DE NAISSANCE</div>
 					<div className="i_champ_anniversaire">
                     <select id="selection_jour" className="selec_jour">
 							<option selected="selected" value="0">JJ</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="3">4</option>
-							<option value="3">5</option>
-							<option value="3">6</option>
-							<option value="3">7</option>
-							<option value="3">8</option>
-							<option value="3">9</option>
-							<option value="3">10</option>
-							<option value="3">11</option>
-							<option value="3">12</option>
-							<option value="1">13</option>
-							<option value="2">14</option>
-							<option value="3">15</option>
-							<option value="3">16</option>
-							<option value="3">17</option>
-							<option value="3">18</option>
-							<option value="3">19</option>
-							<option value="3">20</option>
-							<option value="3">21</option>
-							<option value="3">22</option>
-							<option value="3">23</option>
-							<option value="3">24</option>
-							<option value="3">25</option>
-							<option value="3">26</option>
-							<option value="3">27</option>
-							<option value="3">28</option>
-							<option value="3">29</option>
-							<option value="3">30</option>
-							<option value="3">31</option>
+							{liste_jours && liste_jours.map(element => (
+								<option value={element}>{element}</option>
+							))}
 						</select>
-						
+
 						<select id="selection_mois" className="selec_mois">
 							<option selected="selected" value="0">Mois</option>
-							<option value="Janvier">Janvier</option>
-							<option value="Février">Février</option>
-							<option value="Mars">Mars</option>
-							<option value="Avril">Avril</option>
-							<option value="Mai">Mai</option>
-							<option value="Juin">Juin</option>
-							<option value="Juillet">Juillet</option>
-							<option value="Aout">Aout</option>
-							<option value="Septembre">Septembre</option>
-							<option value="Octobre">Octobre</option>
-							<option value="Novembre">Novembre</option>
-							<option value="Décembre">Décembre</option>
+							{liste_mois.map(element => (
+								<option value={element}>{element}</option>
+							))}
 						</select>
 						
 						<select id="selection_annee" className="selec_annee">
 							<option selected="selected" value="0">AAAA</option>
-							<option value="2000">2000</option>
-							<option value="2001">2001</option>
-							<option value="2002">2002</option>
+							{liste_annee && liste_annee.map(element => (
+								<option value={element}>{element}</option>
+							))}
 						</select>
 					</div>
 					
@@ -152,7 +153,7 @@ const Inscription = () => {
 					</div>
 					
 					<div className="i_bouton_envoi_insc">
-						<input id="bouton_inscription_envoi" type="submit" value="S'INSCRIRE" onClick={inscrire} />
+						<input id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
 					</div>
 				</div>
 			</div>

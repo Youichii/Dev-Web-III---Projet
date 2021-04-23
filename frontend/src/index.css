@@ -96,14 +96,14 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 1140px 20% ;
+	grid-template-rows: 10% 1245px 20% ;
 	grid-gap: 2px;
 	padding: 5px;
 }
 .c_info_inscription {
 	display: grid;
 	grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
-	grid-template-rows: 2% 6% 5% 6% 60%;
+	grid-template-rows: 2% 6% 5% 6% 81%;
 	grid-gap: 0px;
 	padding: 5px;
 }
@@ -111,7 +111,7 @@ html {
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
-	grid-row-end: 6;
+	grid-row-end: 3;
 
 	/*height : 1140px ;*/
 	border : solid;
@@ -175,8 +175,8 @@ a:active {
 
 .c_champs_informations {
 	display: grid;
-	grid-template-columns: 40% 20% 40%;
-	grid-template-rows: 2% 6% 2% 6% 2% 6% 2% 6% 2% 6% 2% 7% 3% 5% 2% 9% 4% 7%;
+	grid-template-columns: 25% 15% 20% 15% 25%;
+	grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 8% 4% 4% 3% 11% 5% 5%;
 	grid-gap: 0px;
 	padding: 5px;
 	background-color: var(--bg);
@@ -185,11 +185,11 @@ a:active {
 	grid-column-start: 3;
 	grid-column-end: 7;
 	grid-row-start: 5;
-	grid-row-end: 9;
+	grid-row-end: 6;
 }
 .i_titre_nom{
 	grid-column-start: 1;
-	grid-column-end: 2;
+	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
 
@@ -197,13 +197,13 @@ a:active {
 }
 .i_champ_nom{
 	grid-column-start: 1;
-	grid-column-end: 2;
+	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 3;
 
 	background-color: var(--bg);
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password],  input[type=number] {
 	width: 100%;
 	height: 45px;
 	border-radius: 0px/0px;
@@ -215,22 +215,22 @@ input[type=text], input[type=password] {
 	/*font-family: DejaVu Sans Mono, monospace;*/
 	font-size: 15px;
 }
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus,  input[type=number]:focus {
 	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
 }
 .i_titre_prenom{
-	grid-column-start: 3;
-	grid-column-end: 4;
+	grid-column-start: 4;
+	grid-column-end: 6;
 	grid-row-start: 1;
 	grid-row-end: 2;
 
 	background-color: var(--bg);
 }
 .i_champ_prenom{
-	grid-column-start: 3;
-	grid-column-end: 4;
+	grid-column-start: 4;
+	grid-column-end: 6;
 	grid-row-start: 2;
 	grid-row-end: 3;
 
@@ -252,23 +252,55 @@ input[type=text]:focus, input[type=password]:focus {
 
 	background-color: var(--bg);
 }
-.i_titre_anniversaire{
+.i_titre_numero_insc{
+	grid-column-start: 5;
+	grid-column-end: 6;
+	grid-row-start: 3;
+	grid-row-end: 4;
+
+	background-color: var(--bg);
+}
+.i_champ_numero_insc{
+	grid-column-start: 5;
+	grid-column-end: 6;
+	grid-row-start: 4;
+	grid-row-end: 5;
+
+	background-color: var(--bg);
+}
+.i_titre_postal_insc{
 	grid-column-start: 1;
-	grid-column-end: 3;
+	grid-column-end: 2;
 	grid-row-start: 5;
 	grid-row-end: 6;
 
 	background-color: var(--bg);
 }
-.i_champ_anniversaire{
+.i_champ_postal_insc{
 	grid-column-start: 1;
-	grid-column-end: 3;
+	grid-column-end: 2;
 	grid-row-start: 6;
 	grid-row-end: 7;
 
 	background-color: var(--bg);
 }
-.i_titre_telephone{
+.i_titre_ville_insc{
+	grid-column-start: 3;
+	grid-column-end: 6;
+	grid-row-start: 5;
+	grid-row-end: 6;
+
+	background-color: var(--bg);
+}
+.i_champ_ville_insc{
+	grid-column-start: 3;
+	grid-column-end: 6;
+	grid-row-start: 6;
+	grid-row-end: 7;
+
+	background-color: var(--bg);
+}
+.i_titre_anniversaire{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 7;
@@ -276,7 +308,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 	background-color: var(--bg);
 }
-.i_champ_telephone{
+.i_champ_anniversaire{
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 8;
@@ -284,91 +316,107 @@ input[type=text]:focus, input[type=password]:focus {
 
 	background-color: var(--bg);
 }
-.i_titre_mail{
+.i_titre_telephone{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 9;
 	grid-row-end: 10;
 
 	background-color: var(--bg);
 }
-.i_champ_mail{
+.i_champ_telephone{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 10;
 	grid-row-end: 11;
 
 	background-color: var(--bg);
 }
-.i_titre_sexe{
-	grid-column-start: 3;
-	grid-column-end: 4;
-	grid-row-start: 5;
-	grid-row-end: 6;
-
-	background-color: var(--bg);
-}
-.i_champ_sexe{
-	grid-column-start: 3;
-	grid-column-end: 4;
-	grid-row-start: 6;
-	grid-row-end: 7;
-
-	background-color: var(--bg);
-}
-.i_titre_mdp_insc{
+.i_titre_mail{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 11;
 	grid-row-end: 12;
 
 	background-color: var(--bg);
 }
-.i_champ_mdp_insc{
+.i_champ_mail{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 12;
 	grid-row-end: 13;
 
 	background-color: var(--bg);
 }
-.i_champ_newsletter{
+.i_titre_sexe{
+	grid-column-start: 4;
+	grid-column-end: 6;
+	grid-row-start: 7;
+	grid-row-end: 8;
+
+	background-color: var(--bg);
+}
+.i_champ_sexe{
+	grid-column-start: 4;
+	grid-column-end: 6;
+	grid-row-start: 8;
+	grid-row-end: 9;
+
+	background-color: var(--bg);
+}
+.i_titre_mdp_insc{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 13;
 	grid-row-end: 14;
 
 	background-color: var(--bg);
 }
-.i_champ_politique{
+.i_champ_mdp_insc{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 14;
 	grid-row-end: 15;
 
 	background-color: var(--bg);
 }
-.i_titre_captcha{
+.i_champ_newsletter{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 15;
 	grid-row-end: 16;
 
 	background-color: var(--bg);
 }
-.i_champ_captcha{
+.i_champ_politique{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 16;
 	grid-row-end: 17;
 
 	background-color: var(--bg);
 }
-.i_bouton_envoi_insc{
+.i_titre_captcha{
 	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 17;
 	grid-row-end: 18;
+
+	background-color: var(--bg);
+}
+.i_champ_captcha{
+	grid-column-start: 1;
+	grid-column-end: 6;
+	grid-row-start: 18;
+	grid-row-end: 19;
+
+	background-color: var(--bg);
+}
+.i_bouton_envoi_insc{
+	grid-column-start: 1;
+	grid-column-end: 6;
+	grid-row-start: 19;
+	grid-row-end: 20;
 	text-align:center;
 
 	background-color: var(--bg);
@@ -430,5 +478,10 @@ select:focus {
 #radio_homme {
 	padding: 5px 0px 3px 0px;
 	background-color: var(--bg);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
 
