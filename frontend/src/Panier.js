@@ -26,22 +26,35 @@ const Panier = () => {
     useEffect(() => {
         recuperer_utilisateur();
         recuperer_panier();
-        const intermediaire = [] ;
-        let min = 1080 ; //18h
-        let max = 1440 ; //00h
 
-        for (var i = min; i < max; i+=15) {
-            var minutes = i ;
-            var nbHour = parseInt(minutes / 60);
-            var nbminuteRestante = (minutes % 60);
-            if(nbminuteRestante === 0){   
-                intermediaire.push(({"h" : nbHour.toString(), "m" : "00"}));
+        var myInit = { method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+        };
+        fetch(`http://localhost:3001/api/hours`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            let liste_heures_prises = data.map(heure => heure.heure_reservee);
+            const intermediaire = [] ;
+            let min = 1080 ; //18h
+            let max = 1440 ; //00h
+            for (var i = min; i < max; i+=15) {
+                var minutes = i ;
+                var nbHour = parseInt(minutes / 60);
+                var nbminuteRestante = (minutes % 60);
+                let heure_finale ;
+                (nbminuteRestante === 0 ) ? heure_finale = "00" : heure_finale =  nbminuteRestante.toString();
+                if ( liste_heures_prises.indexOf(("heure : ", nbHour.toString() + ":" + heure_finale).toString()) == 0 ) {
+                    console.log("occupée");
+                }
+                else {   
+                    intermediaire.push(({"h" : nbHour.toString(), "m" : heure_finale}));
+                }
+
             }
-            else{
-                intermediaire.push(({"h" : nbHour.toString(), "m" : nbminuteRestante.toString()}));
-            }
-        }
-        setHeures(intermediaire);
+            setHeures(intermediaire);
+        })
 
         let total = 0 ;
         aliments.map(x => total+=x["quantite"]*x["prix_unite"]);
@@ -269,7 +282,7 @@ const Panier = () => {
 					<label for="moyen_reception">Moyen de réception</label><br />
 					<div className="c_reception">
 						<div className="i_place" id="radio_place">
-							<input type="radio" name="myradio1" value="femme" id="place" onClick={cacher_adresse} />
+							<input type="radio" name="myradio1" value="femme" id="place" onClick={cacher_adresse} checked />
 							<label for="place" className="label-info">A emporter</label>
 						</div>
 						<div className="i_livrer" id="radio_livrer">
@@ -289,7 +302,7 @@ const Panier = () => {
 							<label for="liquide" className="label-info">Liquide</label>
 						</div>
 						<div className="i_mistercash" id="radio_mistercash">
-							<input type="radio" name="myradio2" value="homme" id="mistercash" />
+							<input type="radio" name="myradio2" value="homme" id="mistercash" checked/>
 							<label for="mistercash" className="label-info">Mistercash</label>
 						</div>
 					</div>

@@ -104,7 +104,7 @@ html {
 .panier {
     display: grid;
     grid-template-columns: 10% 35% 5% 5% 35% 10%;
-    grid-template-rows: 8% 455px 4% 189px 8%;
+    grid-template-rows: 8% 455px 4% 189px 6%;
     grid-gap: 0px;
     padding: 5px;
 }
@@ -324,7 +324,7 @@ button.incrementeur {
 .i_titre_total {
 	grid-column-start: 1;
     grid-column-end: 3;
-	
+
     font-size: 25px;
 }
 
@@ -384,7 +384,7 @@ button.incrementeur {
 .c_boutons1 {
 	display: grid;
 	grid-template-columns: 13% 74% 13%;
-	grid-template-rows:32% 67%;
+	grid-template-rows:21% 79%;
 	grid-gap: 0px;
 	padding: 5px;
 	z-index:1;
@@ -428,7 +428,7 @@ button.incrementeur {
 .c_boutons2 {
 	display: grid;
 	grid-template-columns: 13% 74% 13%;
-	grid-template-rows: 32% 67%;
+	grid-template-rows: 21% 79%;
 	grid-gap: 0px;
 	padding: 5px;
 	z-index:1;
@@ -697,9 +697,9 @@ div > label {
 	outline:  none;
 }
 
-.choix_heure:checked {
+/*.choix_heure:checked {
 	background-color: red;
-}
+}*/
 
 
 div > label {
