@@ -17,10 +17,6 @@ app.listen(3001, () => {
 app.use(express.json())
 app.use(cors())  //to avoid CORS policy
 
-app.get('/', (req,res) => {
-  res.send("hello");
-})
-
 
 /*----- */
 
@@ -32,8 +28,7 @@ app.get('/api/users/:mail/:pwd', (req, res) => {
   const sqlInsert = "SELECT id from clients where mail = ? and pwd = ?";
   db.query(sqlInsert, [mail, pwd], (err, result) => {
     console.log(err);
-    console.log("result : ", result);
-    res.send(result) ;;
+    res.send(result) ;
   })
 })
 
