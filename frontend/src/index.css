@@ -192,7 +192,7 @@ nav img{
 	/* text-align: center; */
 	border-radius: 3px;
 	font-size: 22px;
-	padding: 5px 2px 0px 2px;
+	/*padding: 5px 2px 0px 2px;*/
 }
 .i_commande {
 	grid-column-start: 2;
@@ -215,6 +215,22 @@ nav img{
 	overflow: visible;
 }*/
 
+.c_sans_bouton {
+	display: grid;
+	grid-template-columns: 18% 27% 30% 23%;;
+	grid-template-rows: auto;
+	grid-gap: 4px;
+	background-color: #181616;
+	/*padding: 0px;*/
+	/*color : white;*/
+}
+.i_sans_bouton {
+	grid-column-start: 1;
+	grid-column-end: 5;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
 .i_heures {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -236,6 +252,8 @@ nav img{
 	grid-column-start: 2;
 	grid-column-end: 3;
 	text-align: left;
+	border-radius: 3px;
+	padding: 5px 2px 0px 2px;
 }
 
 .i_contacts {
@@ -248,6 +266,8 @@ nav img{
 	grid-column-start: 3;
 	grid-column-end: 4;
 	text-align: left;
+	border-radius: 3px;
+	padding: 5px 2px 0px 2px;
 }
 
 /*.i_adresses {
@@ -271,6 +291,8 @@ nav img{
 	grid-column-start: 4;
 	grid-column-end: 5;
 	text-align: right;
+	border-radius: 3px;
+	padding: 5px 2px 0px 2px;
 }
 
 /*.i_heures_prevues {
@@ -285,6 +307,8 @@ nav img{
 	grid-row-start: 1;
 	grid-row-end: 2;
 	text-align: center;
+	border-radius: 3px;
+	padding: 5px 2px 0px 2px;
 }
 .i_div_bouton {
 	grid-column-start: 5;
@@ -292,6 +316,7 @@ nav img{
     grid-row-start: 1;
     grid-row-end: 2;
 	text-align: center;
+	padding: 3px;
 }
 .i_bouton_suivant {
 	background-color: var(--bg_boutons);

@@ -3,7 +3,9 @@ import Axios from 'axios';
 
 const Staff = () => {
     
-    let compteur = 1 ;
+    let compteur_afaire = 1 ;
+    let compteur_encours = 1 ;
+    let compteur_envoye = 1 ;
 
     const [blogs, setBlogs] = useState(null);
     const [changement, setChangement] = useState(true);
@@ -12,7 +14,10 @@ const Staff = () => {
     let donnees ;
     
     useEffect(() => {
-        fetch('http://localhost:3001/api/orders')
+        var myInit = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
+        fetch('http://localhost:3001/api/orders', myInit)
         .then(res => {
             return res.json();
         })
@@ -38,11 +43,16 @@ const Staff = () => {
     }
 
     const supprimer_commandes = (idCommande) => {
-        console.log("idcom : ", idCommande);
-        Axios.delete('http://localhost:3001/api/orders', {
-            headers : {"commande" : idCommande}
-        }).then(() => {
-            console.log("Hello");
+        var myInit = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({"commande" : idCommande})
+        };
+
+        fetch('http://localhost:3001/api/orders', myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
             setChangement(!changement) ;
         })
     }
@@ -70,10 +80,10 @@ const Staff = () => {
             couleur_quitter = "var(--bg_ligne1)";
         }
         
-        let liste_aliments = blogs.filter(element => element.typeCommande === identifiant) ;
+        let liste_aliments = blogs.filter(element => element.id == identifiant)[0] ;
         
         let bg_bouton = couleur_quitter;
-        if (liste_aliments['adresse'] == "ici") {
+        if (liste_aliments.Lieu == "emporter") {
             bg_bouton = "var(--bg_bouton_surplace)";
         }
         
@@ -99,6 +109,8 @@ const Staff = () => {
             donnees = data ;
 
             let nbr_lignes = "";
+            let lieu ;
+            (informations.Lieu == "emporter") ? lieu = "sur place" : lieu = informations.address ;
             let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.id + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["nomProduit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
@@ -106,13 +118,12 @@ const Staff = () => {
                 nbr_lignes += "14% " ;
             }
             liste_finale += '</div> <div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.heure_passee + '</span></div> \
-            <div class="i_adresse_detail">Adresse :  <span class="info_client">' + informations.address + '</span></div></div>' ;
+            <div class="i_adresse_detail">Adresse :  <span class="info_client">' + lieu + '</span></div></div>' ;
             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
         })
     }
-    //() => envoi_etape1(elem.id)
 
     const elements_afaire = (elem) => {
         let taille = "12% ";
@@ -122,16 +133,18 @@ const Staff = () => {
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         let type_couleur, bg_bouton ;
-        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
-        compteur++ ;
-        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (compteur_afaire%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_afaire++ ;
+        (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "afaire")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
+                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+                </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCommande, "encours")}>OK</button>
                 </div> 
@@ -147,22 +160,23 @@ const Staff = () => {
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         let type_couleur, bg_bouton ;
-        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
-        compteur++ ;
-        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (compteur_encours%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_encours++ ;
+        (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "encours")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
+                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+                </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCommande, "envoye")}>OK</button>
                 </div> 
             </div>
         )
-
     }
 
     const elements_envoye = (elem) => {
@@ -173,16 +187,18 @@ const Staff = () => {
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         let type_couleur, bg_bouton ;
-        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
-        compteur++ ;
-        (elem.address == "ici") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (compteur_envoye%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_envoye++ ;
+        (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         return (
-            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)} onClick={() => load_panier(elem, "envoye")}>
-                <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
-                <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
-                <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
-                <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+            <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
+                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.firstname}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.phone}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.price}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.heure_reservee}</div>
+                </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
                     <button class="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCommande)}>OK</button>
                 </div> 

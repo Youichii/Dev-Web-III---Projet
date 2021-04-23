@@ -36,7 +36,7 @@ app.post('/api/insert', (req, res) => {
 
 app.get('/api/orders', (req, res) => {
     
-  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, CL.address, heure_reservee, sum(CO.quantite * PR.prix) as price \
+  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, Lieu, CL.address, heure_reservee, sum(CO.quantite * PR.prix) as price \
                     FROM encours AS AF \
                     JOIN reservation AS RE ON AF.idCommande = RE.idCommande \
                     JOIN clients AS CL ON RE.idClient = CL.id \
@@ -54,31 +54,34 @@ app.post('/api/orders', (req, res) => {
 
     const type = req.body.type
     const commande  = req.body.commande
-    console.log("type : ", type, " commande : ", commande);
-    console.log("body : ", req.body);
+    //console.log("type : ", type, " commande : ", commande);
+    //console.log("body : ", req.body);
     //console.log("req : ", req);
     
     const sqlInsert = "UPDATE encours SET typeCommande = ? where idCommande = ?;"
     db.query(sqlInsert, [type, commande], (err, result) => {
       console.log("erreur : ", err);
-      console.log("result : ", result);
+      //console.log("result : ", result);
       res.send(result) ;
     })
 })
 
 app.delete('/api/orders', (req, res) => {
 
-    const commande  = req.headers.commande 
+    const commande  = req.body.commande ;
+    //console.log("com : ", commande);
 
     const sqlInsert = "DELETE FROM `encours` where `IDcommande` = ?"
     db.query(sqlInsert, [commande], (err, result) => {
       console.log("erreur : ", err)
+      res.send(result) ;
     })
 })
 
 app.get('/api/panier/:idCommande', (req, res) => {
 
   const idCommande  = req.params.idCommande 
+  //console.log("idecom : ", idCommande);
   
   const sqlInsert = "SELECT C.idCommande, PRO.idProduit, nomProduit, quantite \
                   FROM `commandes` AS C \
@@ -86,6 +89,7 @@ app.get('/api/panier/:idCommande', (req, res) => {
                   WHERE C.idCommande = ?"
   db.query(sqlInsert, [idCommande], (err, result) => {
     console.log("erreur : ", err) ;
+    //console.log("res : ", result);
     res.send(result) ;
   })
 })
