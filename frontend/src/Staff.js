@@ -9,20 +9,17 @@ const Staff = () => {
     const [blogs, setBlogs] = useState(null);
     const [changement, setChangement] = useState(true);
 
-    let total_commandes = null;
-    let donnees ;
-    
     useEffect(() => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
+
         fetch('http://localhost:3001/api/orders', myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
             setBlogs(data);
-            console.log("data : ", data);
         })
 
     }, [changement]);
@@ -72,21 +69,11 @@ const Staff = () => {
 
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let couleur_quitter ;
-        if (couleur == "couleur_bg1") {
-            couleur_quitter = "var(--bg_ligne2)";
-        }
-        else {
-            couleur_quitter = "var(--bg_ligne1)";
-        }
-        
         let liste_aliments = blogs.filter(element => element.id == identifiant)[0] ;
-        
-        let bg_bouton = couleur_quitter;
-        if (liste_aliments.Lieu == "emporter") {
-            bg_bouton = "var(--bg_bouton_surplace)";
-        }
-        
+        let couleur_quitter, bg_bouton ;
+        (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
+        (liste_aliments.Lieu === "emporter") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
+ 
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_quitter;
@@ -99,15 +86,13 @@ const Staff = () => {
 
     const load_panier = (informations, identifiant) => {
         let identifiantCommande = informations.idCommande ; 
-        return fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
+        fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
         }).then(res => {
             return res.json();
         })
         .then(data => {
-            donnees = data ;
-
             let nbr_lignes = "";
             let info_commentaire, lieu ;
             let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.address + '</span></div> \
@@ -121,12 +106,10 @@ const Staff = () => {
             let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.id + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["nomProduit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
-                
                 nbr_lignes += "14% " ;
             }
             liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.heure_passee + '</span></div>' + lieu + '</div></div>';
                             
-            
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
         })
@@ -135,14 +118,13 @@ const Staff = () => {
     const elements_afaire = (elem) => {
         let taille = "12% ";
         let nbr_lignes_afaire = "12% " ;
-
-        blogs.filter(element => element.typeCommande === "afaire").map(x => nbr_lignes_afaire += taille) ;
-        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
-
         let type_couleur, bg_bouton ;
         (compteur_afaire%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_afaire++ ;
         (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        blogs.filter(element => element.typeCommande === "afaire").map(aliment => nbr_lignes_afaire += taille) ;
+        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
@@ -162,14 +144,13 @@ const Staff = () => {
     const elements_encours = (elem) => {
         let taille = "12% ";
         let  nbr_lignes_encours = "12% ";
-
-        blogs.filter(element => element.typeCommande === "encours").map(x => nbr_lignes_encours += taille) ;
-        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
-
         let type_couleur, bg_bouton ;
         (compteur_encours%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_encours++ ;
         (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        blogs.filter(element => element.typeCommande === "encours").map(aliment => nbr_lignes_encours += taille) ;
+        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
@@ -189,14 +170,13 @@ const Staff = () => {
     const elements_envoye = (elem) => {
         let taille = "12% ";
         let nbr_lignes_envoye = "12% " ;
-
-        blogs.filter(element => element.typeCommande === "envoye").map(x => nbr_lignes_envoye += taille) ;
-        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
-
         let type_couleur, bg_bouton ;
         (compteur_envoye%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_envoye++ ;
         (elem.Lieu == "emporter") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        blogs.filter(element => element.typeCommande === "envoye").map(aliment => nbr_lignes_envoye += taille) ;
+        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
             <div className="i_commande c_commande" id={elem.id} onMouseOver={() => nouveau_bg(elem.id)} onMouseLeave={() => ancien_bg(elem.id, type_couleur)}>
@@ -211,7 +191,6 @@ const Staff = () => {
                 </div> 
             </div>
         )
-
     }
 
     return (
