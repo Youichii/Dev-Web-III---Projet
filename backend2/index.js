@@ -51,9 +51,11 @@ app.post('/api/orders', (req, res) => {
 
     const commande  = req.body.commande ;
     const type = req.body.type; 
+    const commentaire = req.body.commentaire; 
+    console.log("comm : ", req.body.commentaire);
 
-    const sqlInsert = "INSERT INTO encours (IDcommande, typeCommande) VALUES (?, ?)"
-    db.query(sqlInsert, [commande, type], (err, result) => {
+    const sqlInsert = "INSERT INTO encours (IDcommande, typeCommande, commentaire) VALUES (?, ?, ?)"
+    db.query(sqlInsert, [commande, type, commentaire], (err, result) => {
       console.log("err : ", err);
       //console.log("result : ", result) ;
       res.send(result) ;
