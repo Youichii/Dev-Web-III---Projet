@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react" ;
-import Axios from 'axios';
 
 const Staff = () => {
     
@@ -23,6 +22,7 @@ const Staff = () => {
         })
         .then(data => {
             setBlogs(data);
+            console.log("data : ", data);
         })
 
     }, [changement]);
@@ -109,16 +109,23 @@ const Staff = () => {
             donnees = data ;
 
             let nbr_lignes = "";
-            let lieu ;
-            (informations.Lieu == "emporter") ? lieu = "sur place" : lieu = informations.address ;
+            let info_commentaire, lieu ;
+            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.address + '</span></div> \
+                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.numero + '</span></div> \
+                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.ville + '</span></div> \
+                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.postal + '</span>' ;
+
+            (informations.commentaire === " ") ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
+            (informations.Lieu == "emporter") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
+
             let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.id + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["nomProduit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
                 
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div> <div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.heure_passee + '</span></div> \
-            <div class="i_adresse_detail">Adresse :  <span class="info_client">' + lieu + '</span></div></div>' ;
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.heure_passee + '</span></div>' + lieu + '</div></div>';
+                            
             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;

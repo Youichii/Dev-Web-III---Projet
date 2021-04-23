@@ -36,7 +36,7 @@ app.post('/api/insert', (req, res) => {
 
 app.get('/api/orders', (req, res) => {
     
-  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, Lieu, CL.address, heure_reservee, sum(CO.quantite * PR.prix) as price \
+  const sqlInsert = "SELECT idEncours, typeCommande, AF.idCommande, heure_passee, id, CL.firstname, CL.phone, Lieu, CL.address, CL.numero, CL.postal, CL.ville, heure_reservee, commentaire, cast(sum(CO.quantite * PR.prix) AS DECIMAL(10, 1)) as price \
                     FROM encours AS AF \
                     JOIN reservation AS RE ON AF.idCommande = RE.idCommande \
                     JOIN clients AS CL ON RE.idClient = CL.id \
