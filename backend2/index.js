@@ -39,7 +39,7 @@ app.get('/api/users/:idClient', (req, res) => {
     const identifiant = req.params.idClient 
     //console.log("id : ", identifiant) ;
     
-    const sqlInsert = "SELECT `address` FROM `clients` where id = ?" ; 
+    const sqlInsert = "SELECT address, numero, postal, ville FROM `clients` where id = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);
       //console.log("result : ", result) ;

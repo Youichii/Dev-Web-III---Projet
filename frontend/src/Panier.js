@@ -13,8 +13,6 @@ const Panier = () => {
                                             {"id" : "I", "nom" : "clem", "quantite" : 9, "prix_unite" : 260}]);
 
                                             
-    const [client, setClient] = useState([{"adresse": "rue coucou tout le monde", "numero": 10, "ville": "Meux", "postal":1000}]) ;
-
     const [heures, setHeures] = useState([]);
 
     const [total, setTotal] = useState(0);
@@ -24,8 +22,10 @@ const Panier = () => {
     let identifiantClient = 2 ;
     let id_commande = 1000 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
+    const [donnees_adresse, setDonneesAdresse] =  useState(null);
 
     useEffect(() => {
+        recuperer_utilisateur();
         recuperer_panier();
         const intermediaire = [] ;
         let min = 1080 ; //18h
@@ -58,7 +58,6 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            console.log("data : ", data);
             setDonneesPanier(data);
         })
     }
@@ -73,6 +72,8 @@ const Panier = () => {
         })
         .then(data => {
             console.log("utilisateur");
+            setDonneesAdresse(data);
+            console.log("data : ", data);
         })
     }
 
@@ -154,7 +155,7 @@ const Panier = () => {
     }
 
     const afficher_adresse = () => {
-	    document.getElementById('zone_adresse').style.display = "inline" ; 
+	    document.getElementById('zone_adresse').style.display = "grid" ; 
     }
 
     const cacher_adresse = () => {
@@ -172,10 +173,6 @@ const Panier = () => {
         document.getElementById('i_ligne_avant_2').style.borderColor= "white";
         document.getElementById('i_numero_2').style.backgroundColor= "#A18C7B";
         document.getElementById('i_ligne_apres_2').style.borderColor= "white";
-    }
-    
-    const annuler_panier = () => {
-        console.log("annuler_panier");
     }
 
     const annuler_info = () => {
@@ -208,8 +205,6 @@ const Panier = () => {
             </div>
         )
     }
-
-
 
     return (
         <div className="panier">
@@ -296,11 +291,11 @@ const Panier = () => {
 				
                 <div class="i_apres_payement"></div>
                 
-                {client.map(info => (
+                {donnees_adresse && donnees_adresse.map(info => (
                     <div className="i_adresse c_adresse" id="zone_adresse">
                         <div className="i_adresse_livraison"> 
                             <label for="adresse_livraison">Adresse de livraison</label><br /> 
-                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.adresse} /> 
+                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.address} /> 
                         </div> 
                         <div className="i_numero_maison"> 
                             <label for="numero_maison">Numéro</label><br /> 
@@ -308,11 +303,11 @@ const Panier = () => {
                         </div> 
                         <div className="i_code_postal"> 
                             <label for="code_postal">Code postal</label><br /> 
-                            <input id="code_postal" name="num_postal" type="number" placeholder={info["postal"]} /> 
+                            <input id="code_postal" name="num_postal" type="number" placeholder={info.postal} /> 
                         </div> 
                         <div className="i_ville"> 
                             <label for="ville">Ville</label><br /> 
-                            <input id="ville" name="nom_ville" type="text" placeholder={info["ville"]} /> 
+                            <input id="ville" name="nom_ville" type="text" placeholder={info.ville} /> 
                         </div> 
                     </div>
                 ))}
@@ -333,10 +328,6 @@ const Panier = () => {
 					<input id="bouton_annuler2" name="bout_annuler2" type="button" value="Retour" onClick={annuler_info} />
 				</div>
 			</div>
-
-            <input name="bout_annuler2" type="button" value="recup uti" onClick={recuperer_utilisateur} />
-            <input name="bout_annule2" type="button" value="supp" onClick={supprimer_commande} />
-            <input name="bout_annulr2" type="button" value="panier" onClick={recuperer_panier} />
         </div>
     );
 }
