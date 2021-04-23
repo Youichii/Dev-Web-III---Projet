@@ -2,7 +2,7 @@ import {useState} from "react" ;
 
 const Panier = () => {
 
-    const [aliments, setAliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
+    const [aliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
                                             {"id" : "B", "nom" : "viande", "quantite" : 7, "prix_unite" : 8}, 
                                             {"id" : "C", "nom" : "clem", "quantite" : 9, "prix_unite" : 260}]);
 
@@ -17,7 +17,7 @@ const Panier = () => {
             var minutes = i ;
             var nbHour = parseInt(minutes / 60);
             var nbminuteRestante = (minutes % 60);
-            if(nbminuteRestante == 0){   
+            if(nbminuteRestante === 0){   
                 intermediaire.push(({"h" : nbHour.toString(), "m" : "00"}));
             }
             else{
@@ -73,7 +73,7 @@ const Panier = () => {
                                     <div id="heure_livraison">
                                         <select name="heures_reserv" id="heures_reserv">
                                             {heures.map(heure => (
-                                                <option value={heure.h, ":", heure.m}>{heure.h}{":"}{heure.m}</option>
+                                                <option value={heure.h}>{heure.h}</option>
                                             ))}
                                         </select>
                                     </div>

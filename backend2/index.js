@@ -24,15 +24,16 @@ app.get('/', (req,res) => {
 
 /*----- */
 
-app.get('/api/users', (req, res) => {
+app.get('/api/users/:mail/:pwd', (req, res) => {
 
-  const mail = req.body.mail 
-  const pwd = req.body.pwd  
+  const mail = req.params.mail ;
+  const pwd = req.params.pwd  ;
   
-  const sqlInsert = "SELECT id from clients where mail = ? and pwd = ?"
+  const sqlInsert = "SELECT id from clients where mail = ? and pwd = ?";
   db.query(sqlInsert, [mail, pwd], (err, result) => {
-    console.log(err)
-    console.log("result : ", result)
+    console.log(err);
+    console.log("result : ", result);
+    res.send(result) ;;
   })
 })
 

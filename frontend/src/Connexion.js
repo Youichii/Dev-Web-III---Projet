@@ -1,13 +1,22 @@
-import Axios from 'axios'
-
 const Connexion = () => {
 
 	const recuperer_client = () => {
-        Axios.get('http://localhost:3001/api/users', {
-            mail : document.getElementById("text_user").value,
-			pwd : document.getElementById("text_mdp").value,
-        }).then(() => {
-            console.log("Hello")
+		let mail = document.getElementById("text_user").value ;
+		let pwd = document.getElementById("text_mdp").value ;
+		var myInit = { method: 'GET',
+               headers: {'Content-Type': 'application/json'}
+        };
+        fetch(`http://localhost:3001/api/users/${mail}/${pwd}`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+			if (data.length === 0) {
+				console.log("data vide");
+			}
+			else {
+				console.log("data ok");
+			}
         })
     }
 
