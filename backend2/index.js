@@ -119,3 +119,18 @@ app.put('/api/orders/foods', (req, res) => {
       res.send(result) ;
     })
 })
+
+app.get('/api/hours', (req, res) => {
+
+    const sqlInsert = "SELECT heure_reservee  \
+                        FROM reservation \
+                        GROUP BY heure_reservee \
+                        HAVING COUNT(heure_reservee)  > 5";
+    db.query(sqlInsert, [], (err, result) => {
+      console.log("err : ", err);
+      console.log("result : ", result) ;
+      res.send(result) ;
+    })
+})
+
+
