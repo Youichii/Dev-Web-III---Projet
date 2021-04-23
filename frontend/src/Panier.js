@@ -15,9 +15,7 @@ const Panier = () => {
     const [heures, setHeures] = useState([]);
 
     const [total, setTotal] = useState(0);
-    //const [compteur, setCompteur] =  useState(1);
     let compteur = 1 ;
-    const [type_couleur, setTypeCouleur] =  useState("couleur_bg1");
     let identifiantClient = 2 ;
     let id_commande = 1000 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
