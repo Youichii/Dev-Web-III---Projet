@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react" ;
-import Axios from 'axios'
 
 const Panier = () => {
     const [aliments, setAliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
@@ -71,9 +70,7 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            console.log("utilisateur");
             setDonneesAdresse(data);
-            console.log("data : ", data);
         })
     }
 
@@ -129,10 +126,8 @@ const Panier = () => {
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({ idCommande : id_commande, idProduit : id_produit, quantite : nouvelle_qtite})
         };
-        if ((nouvelle_qtite > 100) || (nouvelle_qtite < 0)) {
-            (console.log("nop"));
-        }
-        else {
+
+        if ((nouvelle_qtite <= 100) && (nouvelle_qtite >= 0)) {
             fetch(`http://localhost:3001/api/orders/foods`, myInit)
             .then(res => {
                 return res.json();
@@ -141,6 +136,14 @@ const Panier = () => {
                 document.getElementById(String(id_commande) + String(id_produit)).value = nouvelle_qtite;
                 changer_prix(id_produit, String(id_commande) + String(id_produit));
             })
+            if (nouvelle_qtite === 0) {
+                console.log("passe bien ici");
+                document.getElementById(id_produit).style.display = "inline";
+            }
+            else if (nouvelle_qtite === 1) {
+                console.log("passe bien ici");
+                document.getElementById(id_produit).style.display = "none";
+            }
         }
     }
 
@@ -196,9 +199,10 @@ const Panier = () => {
         return (
             <div className='c_info_ligne i_info_ligne'> 
                 <div className={`i_nom_aliment ${type_couleur}`}>{element.nomProduit}</div> 
+                <div class="aliment_barre" id={element.idProduit}><hr /></div>
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
                     <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite,"moins")} >-</button> 
-                    <input id={`${element.idCommande}${element.idProduit}`} className='nombre_aliment' type='number' value={element.quantite} />
+                    <input id={`${element.idCommande}${element.idProduit}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
                     <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite, "plus")}>+</button>
                 </div> 
                 <div id={`${element.idCommande}${element.idProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{element.prix*element.quantite}{" €"}</div> 
@@ -230,7 +234,9 @@ const Panier = () => {
 				<div className="i_info_aliments c_info_aliments" id="info_aliments">
                     {donnees_panier && donnees_panier.map(affichage_aliments)}
 				</div>
+
                 <div className="c_cadre_total i_cadre_total">
+                <div className="i_titre_total">Total</div>
                     <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
                 </div>
 			</div>
@@ -249,9 +255,9 @@ const Panier = () => {
 				<div className="i_heure" id="elem_heure">
 					<label for="heure_livraison">Heure</label><br />
 					<div id="heure_livraison">
-                        <select name="heures_reserv" id="heures_reserv">
+                        <select className="decorated" name="heures_reserv" id="heures_reserv">
                             {heures.map(heure => (
-                                <option value={heure.h, ":", heure.m}>{heure.h}{":"}{heure.m}</option>
+                                <option class="choix_heure" value={`${heure.h}:${heure.m}`}>{heure.h}{":"}{heure.m}</option>
                             ))}
                         </select>
                     </div>								

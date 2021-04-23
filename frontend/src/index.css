@@ -90,6 +90,7 @@ nav img{
   --brun_fonce: #A18C7B;
   --blanc: #ffffff;
   --jaune_pale:#F7C27E;
+  --qtite_barree:white; /*à changer*/
 }
 /*var(--blue)*/
 html {
@@ -160,6 +161,7 @@ html {
 	grid-row-end: 3;
 }
 
+
 .c_titres_panier {
 	display: grid;
 	grid-template-columns: 1% 31.5% 32% 32% 1%;
@@ -208,6 +210,18 @@ html {
 	padding: 5px;
 }
 
+.aliment_barre {
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	z-index: 3;
+	display:none;
+}
+hr {
+	border-color: var(--qtite_barree);
+}
+
 .i_nom_aliment {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -233,7 +247,7 @@ html {
 	grid-gap: 0px;
 	padding: 5px;
 }
-.nombre_aliment {
+.nombre_aliment, #info_aliments input[type=text] {
 	grid-column-start: 3;
 	grid-column-end: 4;
 	width : 31px;
@@ -241,6 +255,12 @@ html {
 	height : 20px;
 	outline:none;
 	border: none;
+	background-color: white;
+    color: black;
+    font-size: 13.3px;
+	margin: 0px;
+	padding: 1px 2px 1px 2px;
+	font-family: Arial;
 }		
 .bouton_plus {
 	grid-column-start: 4;
@@ -271,6 +291,7 @@ button.incrementeur {
 	padding: 0px;
 	background-color: rgb(132, 152, 167);
 	color: white;
+	z-index: 4;
 }
 .i_info_ligne > div {
 	border-radius: 3px;
@@ -299,6 +320,12 @@ button.incrementeur {
     background-color: #F7C27E;
     border-radius: 5px;
     padding: 6px 0px 0px 0px;
+}
+.i_titre_total {
+	grid-column-start: 1;
+    grid-column-end: 3;
+	
+    font-size: 25px;
 }
 
 .i_heure {
@@ -669,6 +696,11 @@ div > label {
 	border-width: 2px;	
 	outline:  none;
 }
+
+.choix_heure:checked {
+	background-color: red;
+}
+
 
 div > label {
 	font-size:26px;
