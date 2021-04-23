@@ -21,54 +21,12 @@ const Panier = () => {
     //const [compteur, setCompteur] =  useState(1);
     let compteur = 1 ;
     const [type_couleur, setTypeCouleur] =  useState("couleur_bg1");
-
-
-    const recuperer_utilisateur = () => {
-        console.log("rentre");
-        Axios.get('http://localhost:3001/api/users', {
-            headers : {"identifiant" : "2"}
-        }).then((response) => {
-            console.log("reponse : ", response.data);
-        })
-    }
-
-    const ajouter_commande = () => {
-        Axios.post('http://localhost:3001/api/orders', {
-            commande : "1001",
-        }).then(() => {
-            console.log("Hello")
-        })
-    }
-
-    const supprimer_commande = () => {
-        Axios.delete('http://localhost:3001/api/orders', {
-            table : "afaire",
-            commande : "1001",
-        }).then(() => {
-            console.log("Hello")
-        })
-    }
-
-    const recuperer_panier = () => {
-        console.log("rentre panier");
-        Axios.get('http://localhost:3001/api/orders/users', {
-            headers : {"identifiantClient" : "2"}
-        }).then((response) => {
-            console.log("reponse : ", response.data);
-        })
-    }
-
-    const modifier_quantite = () => {
-        Axios.put('http://localhost:3001/api/orders/foods', {
-            idCommande : "1000",
-            idProduit : "3",
-            quantite : "4"
-        }).then((response) => {
-            console.log("response : ", response);
-        })
-    }
+    let identifiantClient = 2 ;
+    let id_commande = 1000 ;
+    const [donnees_panier, setDonneesPanier] =  useState(null);
 
     useEffect(() => {
+        recuperer_panier();
         const intermediaire = [] ;
         let min = 1080 ; //18h
         let max = 1440 ; //00h
@@ -77,7 +35,7 @@ const Panier = () => {
             var minutes = i ;
             var nbHour = parseInt(minutes / 60);
             var nbminuteRestante = (minutes % 60);
-            if(nbminuteRestante == 0){   
+            if(nbminuteRestante === 0){   
                 intermediaire.push(({"h" : nbHour.toString(), "m" : "00"}));
             }
             else{
@@ -91,32 +49,108 @@ const Panier = () => {
         setTotal(total) ;
     }, []);
 
-    const changer_prix = (id_prix) => {
-        let information ;
-        for (var i = 0; i < aliments.length; i++) {
-            if (aliments[i]["id"] == id_prix) {
-                information = aliments[i] ;
-                break ;
-            }
+    const recuperer_panier = () => {
+        var myInit = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
+        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log("data : ", data);
+            setDonneesPanier(data);
+        })
+    }
+
+    const recuperer_utilisateur = () => {
+        var myInit = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
+        fetch(`http://localhost:3001/api/users/${identifiantClient}`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log("utilisateur");
+        })
+    }
+
+    const ajouter_commande = () => {
+        let typeCommande ;
+        let commentaire_client = document.getElementById("commentaire").value;
+        (document.getElementsByName("myradio1")[0].checked == true) ? typeCommande= "emporter" : typeCommande = "livrer";
+        var myInit = { method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({commande : id_commande, type : typeCommande, commentaire : commentaire_client})
+        };
+        fetch(`http://localhost:3001/api/orders`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            supprimer_commande() ;
+        })
+    }
+
+    const supprimer_commande = () => {
+        var myInit = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({commande : id_commande})
+        };
+        fetch(`http://localhost:3001/api/orders`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log("supprimer ok");
+        })
+    }
+
+    const supprimer_panier = () => {
+        var myInit = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({commande : id_commande})
+        };
+        fetch(`http://localhost:3001/api/orders/del`, myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            supprimer_commande() ;
+        })
+    }
+
+    const modifier_quantite = (id_commande, id_produit, qtite, calcul) => {
+        let nouvelle_qtite ;
+        (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite + 1 ;
+        var myInit = { method: 'PUT',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({ idCommande : id_commande, idProduit : id_produit, quantite : nouvelle_qtite})
+        };
+        if ((nouvelle_qtite > 100) || (nouvelle_qtite < 0)) {
+            (console.log("nop"));
         }
+        else {
+            fetch(`http://localhost:3001/api/orders/foods`, myInit)
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                document.getElementById(String(id_commande) + String(id_produit)).value = nouvelle_qtite;
+                changer_prix(id_produit, String(id_commande) + String(id_produit));
+            })
+        }
+    }
+
+    const changer_prix = (id_produit, id_prix) => {
+        let information = donnees_panier.filter(element => element.idProduit == id_produit)[0];
         
-        document.getElementById(id_prix).innerHTML = document.getElementById(id_prix + "_input").value * information["prix_unite"] + " €";
-        information["quantite"] = Number(document.getElementById(id_prix + "_input").value);
+        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.prix + " €";
+        information.quantite = Number(document.getElementById(id_prix).value);
         let total = 0 ;
-        aliments.map(x => total+=x["quantite"]*x["prix_unite"]);
+        donnees_panier.map(aliment => total+=aliment.quantite*aliment.prix);
         setTotal(total) ;
-    }
-
-    const incrementer = (identifiant) => {
-        let valeur = Number(document.getElementById(identifiant + "_input").value)
-        document.getElementById(identifiant + "_input").value = valeur + 1;
-        changer_prix(identifiant);
-    }
-
-    const decrementer = (identifiant) => {
-        let valeur = Number(document.getElementById(identifiant + "_input").value)
-        document.getElementById(identifiant + "_input").value = valeur - 1;
-        changer_prix(identifiant);
     }
 
     const afficher_adresse = () => {
@@ -143,9 +177,7 @@ const Panier = () => {
     const annuler_panier = () => {
         console.log("annuler_panier");
     }
-    const valider_info = () => {
-        console.log("valider_info");
-    }
+
     const annuler_info = () => {
         document.getElementById('i_grise_etape2').style.display= "none";
         document.getElementById('i_grise_etape1').style.display= "inline";
@@ -161,18 +193,18 @@ const Panier = () => {
 
     const affichage_aliments = (element) => {
         let type_couleur ;
-        (compteur%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        (compteur%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
 
         return (
             <div className='c_info_ligne i_info_ligne'> 
-                <div className={`i_nom_aliment ${type_couleur}`}>{element.nom}</div> 
+                <div className={`i_nom_aliment ${type_couleur}`}>{element.nomProduit}</div> 
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
-                    <button className='bouton_moins incrementeur' onClick={() => decrementer(element.id)} >-</button> 
-                    <input id={`${element.id}_input`} className='nombre_aliment' type='number' value={element.quantite} onChange={() => changer_prix(element.id)} min='0' max='100' />
-                    <button className='bouton_plus incrementeur' onClick={() => incrementer(element.id)}>+</button>
+                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite,"moins")} >-</button> 
+                    <input id={`${element.idCommande}${element.idProduit}`} className='nombre_aliment' type='number' value={element.quantite} />
+                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite, "plus")}>+</button>
                 </div> 
-                <div id={element.id} className={`i_prix_aliment ${type_couleur}`}>{element.prix_unite*element.quantite}{" €"}</div> 
+                <div id={`${element.idCommande}${element.idProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{element.prix*element.quantite}{" €"}</div> 
             </div>
         )
     }
@@ -201,7 +233,7 @@ const Panier = () => {
 				</div>
 			
 				<div className="i_info_aliments c_info_aliments" id="info_aliments">
-                    {aliments.map(affichage_aliments)}
+                    {donnees_panier && donnees_panier.map(affichage_aliments)}
 				</div>
                 <div className="c_cadre_total i_cadre_total">
                     <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
@@ -214,7 +246,7 @@ const Panier = () => {
 				</div>
 				
 				<div className="i_bouton_annuler1" id="elem_bouton_annuler1">
-					<input id="bouton_annuler1" name="bout_annuler1" type="button" value="Annuler" onClick={annuler_panier} />
+					<input id="bouton_annuler1" name="bout_annuler1" type="button" value="Annuler" onClick={supprimer_panier} />
 				</div>
 			</div>
 
@@ -294,7 +326,7 @@ const Panier = () => {
 
 			<div className="i_boutons2 c_boutons2">
 				<div className="i_bouton_envoyer2" id="elem_bouton_envoyer2">
-					<input id="bouton_envoyer2" name="bout_envoyer2" type="button" value="Valider" onClick={valider_info} />
+					<input id="bouton_envoyer2" name="bout_envoyer2" type="button" value="Valider" onClick={() => ajouter_commande()} />
 				</div>
 				
 				<div className="i_bouton_annuler2" id="elem_bouton_annuler2">
@@ -303,11 +335,8 @@ const Panier = () => {
 			</div>
 
             <input name="bout_annuler2" type="button" value="recup uti" onClick={recuperer_utilisateur} />
-            <input name="bout_annuler" type="button" value="ajout" onClick={ajouter_commande} />
             <input name="bout_annule2" type="button" value="supp" onClick={supprimer_commande} />
             <input name="bout_annulr2" type="button" value="panier" onClick={recuperer_panier} />
-            <input name="bout_annuer2" type="button" value="quantite" onClick={modifier_quantite} />
-
         </div>
     );
 }
