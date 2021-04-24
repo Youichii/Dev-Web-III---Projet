@@ -109,8 +109,8 @@ nav img{
   .c_page {
 	display: grid;
 	grid-template-columns: 100% ;
-	grid-template-rows: 33% 33% 33%;
-	grid-gap: 45px;
+	grid-template-rows: 450px 450px 450px;
+	grid-gap: 45px; 
 	padding: 0px;
 }
 .i_cadre_attente {
@@ -159,7 +159,7 @@ nav img{
 	border-radius: 11px 11px 0px 0px;
 	padding: 13px;
 }
-.c_cadre_commandes {
+.c_cadre_commandes_afaire {
 	display: grid;
 	grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 4% 5%;
 	grid-template-rows: 0% 16% 150px 220px 10%;
@@ -168,6 +168,27 @@ nav img{
 	padding: 20px;
 	grid-row-gap: 0px; 
 }
+
+.c_cadre_commandes_encours {
+	display: grid;
+	grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 4% 5%;
+	grid-template-rows: 0% 16% 150px 220px 10%;
+	grid-gap: 5px;
+	background-color: black;
+	padding: 20px;
+	grid-row-gap: 0px; 
+}
+
+.c_cadre_commandes_envoye {
+	display: grid;
+	grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 4% 5%;
+	grid-template-rows: 0% 16% 150px 220px 10%;
+	grid-gap: 5px;
+	background-color: black;
+	padding: 20px;
+	grid-row-gap: 0px; 
+}
+
 .c_commandes {
 	display: grid;
 	grid-template-columns: 1% 98% 1%;
@@ -496,7 +517,7 @@ nav img{
 	line-height: 30px;
 	overflow-y: scroll;	
 	border-radius: 7px;
-	padding: 5px 11px 5px 13px;
+	padding: 5px 1px 5px 5px;
 }
 .info_client {
 	color : white ; 
@@ -560,7 +581,7 @@ nav img{
 }
 .file_attente {
 	grid-column-start: 2;
-	grid-column-end: 3;
+	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
 	color:white;
@@ -607,7 +628,7 @@ nav img{
 }
 .en_cours_preparation {
 	grid-column-start: 2;
-	grid-column-end: 3;
+	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
 	color:white;
@@ -654,7 +675,7 @@ nav img{
 }
 .en_cours_envoi {
 	grid-column-start: 2;
-	grid-column-end: 3;
+	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
 	color:white;
@@ -705,12 +726,18 @@ nav img{
 	.c_sans_bouton {grid-template-columns: 18% 27% 35% 18%;}
 	.c_commande {grid-gap: 3px;}
 }
-@media only screen and (max-width: 1340px) {
+@media only screen and (max-width: 1410px) {
 	.c_commande > div {font-size: 20px;}
 	.c_sans_bouton {grid-template-columns: 18% 27% 35% 17.8%;}
 	.c_commande {grid-gap: 3px;}
 
-	.c_cadre_commandes {grid-template-rows: 7% 16% 150px 220px 10%;
+	.c_cadre_commandes_afaire {grid-template-rows: 7% 16% 150px 205px 10%;
+		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
+		padding: 20px 20px 29px 20px;}
+	.c_cadre_commandes_encours {grid-template-rows: 7% 16% 150px 205px 10%;
+		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
+		padding: 20px 20px 29px 20px;}
+	.c_cadre_commandes_envoye {grid-template-rows: 7% 16% 150px 205px 10%;
 		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
 		padding: 20px 20px 29px 20px;}
 	.c_titres_commandes {grid-template-columns: 15.4% 23% 30% 20% 15%;}
@@ -729,7 +756,7 @@ nav img{
 		line-height: unset;}
 	.c_titre_fileattente {grid-template-rows: 1% 98% 1%;}
 	.c_titre_preparation {grid-template-rows: 1% 98% 1%;}
-	.c_titre_envoie {grid-template-rows: 1% 98% 1%;}
+	.c_titre_envoi {grid-template-rows: 1% 98% 1%;}
 	.en_cours_preparation {grid-column-start: 1;
 		color: white;
 		font-size: 22px;
@@ -760,26 +787,72 @@ nav img{
 }
 
 @media only screen and (max-width: 1060px) {
-	.c_cadre_commandes {grid-template-rows: 7% 16% 150px 171px 10% 26px 530px;
+	.c_cadre_commandes_afaire {grid-template-rows: 36px 64px 150px 171px 10% 26px;
+		grid-template-columns: 7% 28% 28% 28% 7%;}
+	.c_cadre_commandes_encours {grid-template-rows: 36px 64px 150px 171px 10% 26px;
+		grid-template-columns: 7% 28% 28% 28% 7%;}
+	.c_cadre_commandes_envoye {grid-template-rows: 36px 64px 150px 171px 10% 26px;
 		grid-template-columns: 7% 28% 28% 28% 7%;}
 	.details_commande {grid-row-start: 7;
 		grid-row-end: 8;
 		grid-column-start: 2;
-		grid-column-end: 5;}
+		grid-column-end: 5;
+		padding: unset;}
 	.i_titres_commandes {grid-column-start: 2;}	
 	.i_commandes_afaire {grid-column-start: 2;}	
 	.i_bout_cadre_afaire {grid-column-start: 2;
-	    grid-row-start: 6;
-    	grid-row-end: 7;}
+	    grid-row-start: 5;
+    	grid-row-end: 6;}
 	.i_commandes_encours {grid-column-start: 2;}	
 	.i_commandes_envoye {grid-column-start: 2;}	
 	.info_commande {height: 70%;}
+	.c_commandes{height: 100%;}
 }
 
-@media only screen and (max-width: 500px) {
-	.c_cadre_commandes{grid-template-rows: 7% 9% 150px 113px 10% 26px 530px;
+@media only screen and (max-width: 700px) {
+	.c_cadre_commandes_afaire{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
+		grid-template-columns: 4% 28% 31% 28% 4%;}
+	.c_cadre_commandes_encours{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
+		grid-template-columns: 4% 28% 31% 28% 4%;}
+	.c_cadre_commandes_envoye{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
 		grid-template-columns: 4% 28% 31% 28% 4%;}
 	.i_contacts { display:none;}
 	.i_contact { display:none;}
-	.c_commande > div {font-size: 16px;}
+	.c_commande > div {font-size: 14px;}
+	.i_titres_commandes {padding: 4px;}
+	.i_prix_commande {grid-column-start: 3;
+		grid-column-end: 4;}
+	.i_div_bouton {grid-column-start: 4;
+			grid-column-end: 5;}		
+	.i_sans_bouton {grid-column-end: 4;}
+	.c_sans_bouton {grid-template-columns: 27.5% 43% 27%;}
+	.c_commande {grid-template-columns: 21% 30% 26% 20%;}
+	.i_bouton_suivant {height: 19px;
+		width: 26px;
+		font-size: 14px;
+		padding: unset;}
+	.i_prix_titre {
+		grid-column-start: 3;
+		grid-column-end: 4;}
+	.c_titres_commandes {
+		grid-template-columns: 22.4% 32% 20% 23%;}
+	.c_titres_commandes > div {font-size: 17px;
+		padding: 4px 10px 0px 8px;}
+
+	.c_page {grid-template-rows: 320px 320px 320px;}
+	.i_titre_detail {font-size: 18px;}
+	.info_commande {font-size: 14px;}
+	.c_ligne_aliment {grid-template-columns: 2% 71% 22%;}
+	.c_info_commande {grid-template-columns:12% 40% 4% 7% 25% 6%;}
+	.i_commentaire_detail {grid-column-end: 7;
+		font-size: 12px;}
+	.i_titre_detail{grid-column-end: 7;}
+	.i_adresse_detail_postal {grid-column-start: 4;
+		grid-column-end: 7;}
+	.i_adresse_detail_ville {grid-column-end: 4;}
+}
+
+@media only screen and (max-width: 600px) {
+	.c_commande {grid-gap: 4px;}
+	.c_sans_bouton {grid-template-columns: 27.5% 43% 27%;}	
 }

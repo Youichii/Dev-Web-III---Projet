@@ -6,6 +6,14 @@ const Staff = () => {
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
 
+    let taille_afaire = "450px " ;
+    let taille_encours = "450px " ;
+    let taille_envoye = "450px " ;
+
+    let taille_petit_afaire = "320px ";
+    let taille_petit_encours = "320px ";
+    let taille_petit_envoye = "320px ";
+
     const [blogs, setBlogs] = useState(null);
     const [changement, setChangement] = useState(true);
 
@@ -88,15 +96,36 @@ const Staff = () => {
         let identifiantCommande = informations.idCommande ; 
 
         if (window.innerWidth <= 1060){
-            let cadre = "i_cadre_envoi" ;
+            let cadre, cadre_detail ;
             if (identifiant === "afaire"){
-                cadre = "i_cadre_attente" ;
+                cadre = "c_cadre_commandes_afaire" ;
+                if (taille_afaire != "1000px") {
+                    taille_afaire = "1000px " ;
+                    taille_petit_afaire = "700px ";
+                }
             }
             else if (identifiant === "encours"){
-                cadre = "i_cadre_preparation" ;
+                cadre = "c_cadre_commandes_encours" ;
+                if (taille_encours != "1000px") {
+                    taille_encours = "1000px " ;
+                    taille_petit_encours = "700px ";
+                }
             }
-            console.log(document.getElementsByClassName(cadre)[0]);
-            document.getElementsByClassName(cadre)[0].style.gridTemplateRows = "7% 16% 150px 113px 10% 26px 530px";
+            else if (identifiant === "envoye"){
+                cadre = "c_cadre_commandes_envoye" ;
+                if (taille_envoye != "1000px") {
+                    taille_envoye = "1000px " ;
+                    taille_petit_envoye = "700px ";
+                }
+            }
+            (window.innerWidth <= 700) ? cadre_detail = "36px 40px 128px 113px 27px 26px 430px" : cadre_detail = "36px 64px 150px 171px 10% 26px 530px" ;
+            document.getElementsByClassName(cadre)[0].style.gridTemplateRows = cadre_detail;
+            if (window.innerWidth <= 700) {
+                document.getElementsByClassName("c_page")[0].style.gridTemplateRows = taille_petit_afaire + taille_petit_encours + taille_petit_envoye;
+            }
+            else {
+                document.getElementsByClassName("c_page")[0].style.gridTemplateRows = taille_afaire + taille_encours + taille_envoye;
+            }
         }
         fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
@@ -208,7 +237,7 @@ const Staff = () => {
     return (
         <div className="staff c_page">
 
-            <div className="c_cadre_commandes i_cadre_attente">
+            <div className="c_cadre_commandes_afaire i_cadre_attente">
                 <div className="c_titre_fileattente i_titre_fileattente">
 					<div className="file_attente">File d'attente</div>
 					<div className="barre_haut_attente"></div>
@@ -229,7 +258,7 @@ const Staff = () => {
                 <div className="i_bout_cadre_afaire"></div>
             </div>
 
-            <div className="c_cadre_commandes i_cadre_preparation">
+            <div className="c_cadre_commandes_encours i_cadre_preparation">
                 <div className="c_titre_preparation i_titre_preparation">
 					<div className="en_cours_preparation">En cours de préparation</div>
 					<div className="barre_haut_preparation"></div>
@@ -249,7 +278,7 @@ const Staff = () => {
 				<div className="i_bout_cadre_afaire"></div>
             </div>
 
-            <div className="c_cadre_commandes i_cadre_envoi">
+            <div className="c_cadre_commandes_envoye i_cadre_envoi">
                 <div className="c_titre_envoi i_titre_envoi">
 					<div className="en_cours_envoi">En cours d'envoi</div>
 					<div className="barre_haut_envoi"></div>
