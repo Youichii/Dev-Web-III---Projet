@@ -96,14 +96,14 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 1245px 240px ;
+	grid-template-rows: 10% 1140px 240px ;
 	grid-gap: 2px;
 	padding: 5px;
 }
 .c_info_inscription {
 	display: grid;
 	grid-template-columns: 4% 8% 30% 8% 8% 30% 8% 4%;
-	grid-template-rows: 2% 6% 5% 6% 81%;
+	grid-template-rows: 2% 6% 5% 6% 74% 6%;
 	grid-gap: 0px;
 	padding: 5px;
 }
@@ -176,7 +176,7 @@ a:active {
 .c_champs_informations {
 	display: grid;
 	grid-template-columns: 25% 15% 20% 15% 25%;
-	grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 8% 4% 4% 3% 11% 5% 5%;
+	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 9% 4% 7% 3% 7% 4%;
 	grid-gap: 0px;
 	padding: 5px;
 	background-color: var(--bg);
@@ -413,10 +413,10 @@ input[type=text]:focus, input[type=password]:focus,  input[type=number]:focus {
 	background-color: var(--bg);
 }
 .i_bouton_envoi_insc{
-	grid-column-start: 1;
-	grid-column-end: 6;
-	grid-row-start: 19;
-	grid-row-end: 20;
+	grid-column-start: 2;
+	grid-column-end: 8;
+	grid-row-start: 6;
+	grid-row-end: 7;
 	text-align:center;
 
 	background-color: var(--bg);
@@ -426,7 +426,7 @@ input[type=text]:focus, input[type=password]:focus,  input[type=number]:focus {
 	background-color: var(--principale);
     border: none;
     color: white;
-    width: 300px;
+    width: 65%;
     height: 45px;
     font-size: 18px;
 	cursor: pointer;
@@ -450,7 +450,7 @@ select {
     border-width: 1px;
     background-color: var(--bg);
     border: 1px solid var(--bordure);
-    padding: 5px 10px 5px 10px;
+    padding: 5px 4px 5px 10px;
     color: white;
 	font-family: "Lucida Sans", sans-serif; /*DejaVu Sans Mono, monospace;*/
     font-size: 15px;
@@ -485,3 +485,66 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+@media only screen and (max-width: 1550px) {
+	.c_cadre_inscription {grid-template-columns: 25% 50% 25%;}
+}
+@media only screen and (max-width: 1400px) {
+	select {padding: 5px 0px 5px 2px;}
+}
+@media only screen and (max-width: 1200px) {
+	.c_cadre_inscription {grid-template-columns: 19% 62% 19%;}
+}
+@media only screen and (max-width: 970px) {
+	.c_cadre_inscription {grid-template-columns: 12% 76% 12%;}
+}
+@media only screen and (max-width: 800px) {
+	.c_cadre_inscription {grid-template-columns: 5% 90% 5%;
+						grid-template-rows: 10% 1126px 240px;}
+	.i_bouton_con {font-size: 21px;}
+	.i_bouton_insc {font-size: 21px;}
+	.c_info_inscription {grid-template-rows: 2% 6% 3% 6% 77% 6%;
+						grid-template-columns: 4% 2% 36% 8% 8% 30% 8% 4%;}
+	input[type=text], input[type=password], input[type=number] {height:35px;}
+	.selec_mois {width: 33%;}
+	.selec_jour {width: 24%;}
+	/*.pol {font-size: 13px;}*/
+	select {height: 51px;
+		padding: 5px 8px 5px 10px;}
+	
+	/*.i_bouton_envoi_insc {grid-row-start: 21;
+		grid-row-end: 22;}*/
+	.i_champ_captcha {grid-row-start: 20;
+			grid-row-end: 21;}
+	.i_titre_captcha {grid-row-start: 19;
+				grid-row-end: 20;}
+	.i_champ_politique {grid-row-start: 18;
+		grid-row-end: 19;}
+	.i_champ_newsletter {grid-row-start: 17;
+			grid-row-end: 18;}
+	.i_champ_mdp_insc{ grid-row-start: 16;
+	grid-row-end: 17;}
+	.i_titre_mdp_insc {grid-row-start: 15;
+		grid-row-end: 16;}
+	.i_champ_mail {grid-row-start: 14;
+			grid-row-end: 15;}
+	.i_titre_mail {grid-row-start: 13;
+				grid-row-end: 14;}
+	.i_champ_telephone {grid-row-start: 12;
+					grid-row-end: 13;}
+	.i_titre_telephone {grid-row-start: 11;
+						grid-row-end: 12;}
+	.c_champs_informations {grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 2% 7% 2.5% 7% 2.5% 7% 2.5% 7% 5% 7% 3% 6% 3%;}
+	.i_titre_sexe {grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 9;
+		grid-row-end: 10;}
+	.i_champ_sexe {grid-column-start: 1;
+			grid-column-end: 3;
+			grid-row-start: 10;
+			grid-row-end: 11;}
+	.i_champ_anniversaire {grid-column-start: 1;
+				grid-column-end: 6;}
+	#radio_femme {font-size: 15px;}
+	#radio_homme {font-size: 15px;}
+}
+  

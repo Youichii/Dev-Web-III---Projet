@@ -151,11 +151,13 @@ const Inscription = () => {
 					<div className="i_champ_captcha">
 						<input type="text" id="captcha_user" required />
 					</div>
-					
-					<div className="i_bouton_envoi_insc">
-						<input id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
-					</div>
+				
 				</div>
+
+				<div className="i_bouton_envoi_insc">
+						<input id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
+				</div>
+
 			</div>
         </div>
     );
