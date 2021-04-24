@@ -182,24 +182,24 @@ const Panier = () => {
         
         document.getElementById('i_ligne_avant_1').style.borderColor= "#414141";
         document.getElementById('i_numero_1').style.backgroundColor= "#414141";
-        document.getElementById('i_ligne_apres_1').style.borderColor= "#414141";
+        //document.getElementById('i_ligne_apres_1').style.borderColor= "#414141";
         
         document.getElementById('i_ligne_avant_2').style.borderColor= "white";
         document.getElementById('i_numero_2').style.backgroundColor= "#A18C7B";
-        document.getElementById('i_ligne_apres_2').style.borderColor= "white";
+        //document.getElementById('i_ligne_apres_2').style.borderColor= "white";
     }
 
     const annuler_info = () => {
         document.getElementById('i_grise_etape2').style.display= "none";
         document.getElementById('i_grise_etape1').style.display= "inline";
         
-        document.getElementById('i_ligne_apres_1').style.borderColor= "white";
+        //document.getElementById('i_ligne_apres_1').style.borderColor= "white";
         document.getElementById('i_numero_1').style.backgroundColor= "#A18C7B";
         document.getElementById('i_ligne_avant_1').style.borderColor= "white";
     
         document.getElementById('i_ligne_avant_2').style.borderColor= "#414141";
         document.getElementById('i_numero_2').style.backgroundColor= "#414141";
-        document.getElementById('i_ligne_apres_2').style.borderColor= "#414141";
+        //document.getElementById('i_ligne_apres_2').style.borderColor= "#414141";
     }
 
     const affichage_aliments = (element) => {
@@ -226,13 +226,14 @@ const Panier = () => {
             <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
 			<div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>
 
-            <div className="i_avancement c_avancement">
+            <div className="i_avancement1 c_avancement1">
 				<div id="i_ligne_avant_1"></div>
 				<div id="i_numero_1">1</div>
-				<div id="i_ligne_apres_1"></div>
-				<div id="i_ligne_avant_2"></div>
+			</div>
+
+            <div className="i_avancement2 c_avancement2">
+                <div id="i_ligne_avant_2"></div>
 				<div id="i_numero_2">2</div>
-				<div id="i_ligne_apres_2"></div>
 			</div>
 
             <div className="c_info_panier i_info_panier">
@@ -264,7 +265,7 @@ const Panier = () => {
 
             <div className="c_info_reception i_info_reception">
 				<div className="i_heure" id="elem_heure">
-					<label for="heure_livraison">Heure</label><br />
+					<label class="label_informations" for="heure_livraison">Heure</label><br />
 					<div id="heure_livraison">
                         <select className="decorated" name="heures_reserv" id="heures_reserv">
                             {heures.map(heure => (
@@ -277,7 +278,7 @@ const Panier = () => {
                 <div className="i_apres_heure"></div>
 
 				<div className="i_moy_reception">
-					<label for="moyen_reception">Moyen de réception</label><br />
+					<label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
 					<div className="c_reception">
 						<div className="i_place" id="radio_place">
 							<input type="radio" name="myradio1" value="femme" id="place" onClick={cacher_adresse} checked />
@@ -293,7 +294,7 @@ const Panier = () => {
                 <div className="i_apres_reception"></div>
 				
 				<div className="i_payement">
-					<label for="mode_payement">Mode de payement</label><br />
+					<label class="label_informations" for="mode_payement">Mode de payement</label><br />
 					<div className="i_mode_payement c_mode_payement">
 						<div class="i_liquide" id="radio_liquide">
 							<input type="radio" name="myradio2" value="femme" id="liquide" />
@@ -311,19 +312,19 @@ const Panier = () => {
                 {donnees_adresse && donnees_adresse.map(info => (
                     <div className="i_adresse c_adresse" id="zone_adresse">
                         <div className="i_adresse_livraison"> 
-                            <label for="adresse_livraison">Adresse de livraison</label><br /> 
+                            <label class="label_adresse" for="adresse_livraison">Adresse de livraison</label><br /> 
                             <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.address} /> 
                         </div> 
                         <div className="i_numero_maison"> 
-                            <label for="numero_maison">Numéro</label><br /> 
+                            <label class="label_adresse" for="numero_maison">Numéro</label><br /> 
                             <input id="numero_maison" name="num_maison" type="number" placeholder={info.numero} /> 
                         </div> 
                         <div className="i_code_postal"> 
-                            <label for="code_postal">Code postal</label><br /> 
+                            <label class="label_adresse" for="code_postal">Code postal</label><br /> 
                             <input id="code_postal" name="num_postal" type="number" placeholder={info.postal} /> 
                         </div> 
                         <div className="i_ville"> 
-                            <label for="ville">Ville</label><br /> 
+                            <label class="label_adresse" for="ville">Ville</label><br /> 
                             <input id="ville" name="nom_ville" type="text" placeholder={info.ville} /> 
                         </div> 
                     </div>
