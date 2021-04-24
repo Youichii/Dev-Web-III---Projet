@@ -273,7 +273,7 @@ a:active {
 	background-color: var(--principale);
     border: none;
     color: white;
-    width: 300px;
+    width: 79%;
     height: 45px;
     font-size: 18px;
 	cursor: pointer;
@@ -320,3 +320,42 @@ input {
 	font-size:15px;
 }
 
+@media only screen and (max-width: 1450px) {
+	.c_cadre {grid-template-columns: 26% 48% 26%;}
+}
+
+@media only screen and (max-width: 1150px) {
+	.c_cadre {grid-template-columns: 18% 64% 18%;}
+}
+@media only screen and (max-width: 850px) {
+	.c_cadre {grid-template-columns: 9% 82% 9%;}
+}
+@media only screen and (max-width: 710px) {
+	.c_cadre {grid-template-columns: 5% 90% 5%;}
+	.i_bouton_connexion {font-size: 21px;
+						padding: 17px 0px 0px 0px;}
+	.i_bouton_inscription {font-size: 21px;
+							padding: 17px 0px 0px 0px;}
+	.i_titre_connexion {font-size: 20px;}
+	.c_zones_info {grid-template-rows: 8% 21% 8% 20% 4% 23% 12%;
+					grid-template-columns: 1% 98% 1%;}
+	.i_info_connexion {height: 485px;}
+	.c_info_connexion {grid-template-rows: 4% 12% 6% 16% 15% 15% 15% 18%;}
+}
+@media only screen and (max-width:400px) {
+	.i_titre_connexion {font-size: 17px;}
+	.i_bouton_connexion {font-size: 18px;}
+	.i_bouton_inscription {font-size: 18px;}
+	.i_titre_adresse {font-size: 15px;}
+	.i_titre_mdp {font-size: 15px;}
+	#text_user {height: 39px;}
+	#text_mdp {height: 39px;}
+	#bouton_connexion_envoi {height: 39px;}
+	/*.c_zones_info {grid-template-rows: 7% 19% 7% 19% 3% 21% 14%;}*/
+	.i_info_connexion {height: 469px;}
+	.c_info_connexion {grid-template-columns: 4% 6% 32% 8% 8% 32% 6% 4%;}
+	.i_titre_connexion {grid-column-start: 2;
+						grid-column-end: 8;
+						font-size: 15px;}
+}
+  
