@@ -408,7 +408,7 @@ nav img{
 }
 .i_titre_detail {
 	grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 2;
 	background-color:var(--bg_details);
@@ -479,7 +479,7 @@ nav img{
 }
 .i_heure_detail {
 	grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 5;
     grid-row-start: 3;
     grid-row-end: 4;
 	background-color:var(--bg_details);
@@ -700,3 +700,86 @@ nav img{
 	background: var(--brun_fonce);/*#D57F0D; */
 }
 
+@media only screen and (max-width: 1970px) {
+	.c_commande > div {font-size: 20px;}
+	.c_sans_bouton {grid-template-columns: 18% 27% 35% 18%;}
+	.c_commande {grid-gap: 3px;}
+}
+@media only screen and (max-width: 1340px) {
+	.c_commande > div {font-size: 20px;}
+	.c_sans_bouton {grid-template-columns: 18% 27% 35% 17.8%;}
+	.c_commande {grid-gap: 3px;}
+
+	.c_cadre_commandes {grid-template-rows: 7% 16% 150px 220px 10%;
+		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
+		padding: 20px 20px 29px 20px;}
+	.c_titres_commandes {grid-template-columns: 15.4% 23% 30% 20% 15%;}
+	.i_titre_fileattente {grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-end: 5;}
+	.barre_haut_attente {display:none;}
+	.barre_bas_attente {display:none;}
+	.barre_haut_preparation {display:none;}
+	.barre_bas_preparation {display:none;}
+	.barre_haut_envoi {display:none;}
+	.barre_bas_envoi {display:none;}
+	.file_attente {grid-column-start: 1;
+		color: white;
+		font-size: 22px;
+		line-height: unset;}
+	.c_titre_fileattente {grid-template-rows: 1% 98% 1%;}
+	.c_titre_preparation {grid-template-rows: 1% 98% 1%;}
+	.c_titre_envoie {grid-template-rows: 1% 98% 1%;}
+	.en_cours_preparation {grid-column-start: 1;
+		color: white;
+		font-size: 22px;
+		line-height: unset;}
+	.en_cours_envoi {grid-column-start: 1;
+		color: white;
+		font-size: 22px;
+		line-height: unset;}
+	.i_titre_preparation {grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-end: 5;}
+	.i_titre_envoi {grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-end: 5;}
+	.i_titres_commandes {grid-column-start: 1;
+		grid-column-end: 5;}
+	.i_commandes_afaire {
+		grid-column-start: 1;
+		grid-column-end: 5;}
+	.i_bout_cadre_afaire {grid-column-start: 1;
+		grid-column-end: 5;}
+	.details_commande {grid-column-start: 5;
+		grid-column-end: 8;}
+	.i_commandes_encours {grid-column-start: 1;
+		grid-column-end: 5;}
+	.i_commandes_envoye {grid-column-start: 1;
+		grid-column-end: 5;}							
+}
+
+@media only screen and (max-width: 1060px) {
+	.c_cadre_commandes {grid-template-rows: 7% 16% 150px 171px 10% 26px 530px;
+		grid-template-columns: 7% 28% 28% 28% 7%;}
+	.details_commande {grid-row-start: 7;
+		grid-row-end: 8;
+		grid-column-start: 2;
+		grid-column-end: 5;}
+	.i_titres_commandes {grid-column-start: 2;}	
+	.i_commandes_afaire {grid-column-start: 2;}	
+	.i_bout_cadre_afaire {grid-column-start: 2;
+	    grid-row-start: 6;
+    	grid-row-end: 7;}
+	.i_commandes_encours {grid-column-start: 2;}	
+	.i_commandes_envoye {grid-column-start: 2;}	
+	.info_commande {height: 70%;}
+}
+
+@media only screen and (max-width: 500px) {
+	.c_cadre_commandes{grid-template-rows: 7% 9% 150px 113px 10% 26px 530px;
+		grid-template-columns: 4% 28% 31% 28% 4%;}
+	.i_contacts { display:none;}
+	.i_contact { display:none;}
+	.c_commande > div {font-size: 16px;}
+}

@@ -86,6 +86,18 @@ const Staff = () => {
 
     const load_panier = (informations, identifiant) => {
         let identifiantCommande = informations.idCommande ; 
+
+        if (window.innerWidth <= 1060){
+            let cadre = "i_cadre_envoi" ;
+            if (identifiant === "afaire"){
+                cadre = "i_cadre_attente" ;
+            }
+            else if (identifiant === "encours"){
+                cadre = "i_cadre_preparation" ;
+            }
+            console.log(document.getElementsByClassName(cadre)[0]);
+            document.getElementsByClassName(cadre)[0].style.gridTemplateRows = "7% 16% 150px 113px 10% 26px 530px";
+        }
         fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
