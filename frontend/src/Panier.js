@@ -1,23 +1,12 @@
 import {useEffect, useState} from "react" ;
 
 const Panier = () => {
-    const [aliments, setAliments] = useState([{"id" : "A", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
-                                            {"id" : "B", "nom" : "viande", "quantite" : 7, "prix_unite" : 8}, 
-                                            {"id" : "C", "nom" : "clem", "quantite" : 9, "prix_unite" : 260},
-                                            {"id" : "D", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
-                                            {"id" : "E", "nom" : "viande", "quantite" : 7, "prix_unite" : 8}, 
-                                            {"id" : "F", "nom" : "clem", "quantite" : 9, "prix_unite" : 260},
-                                            {"id" : "G", "nom" : "poulet", "quantite" : 2, "prix_unite" : 5}, 
-                                            {"id" : "H", "nom" : "viande", "quantite" : 7, "prix_unite" : 8}, 
-                                            {"id" : "I", "nom" : "clem", "quantite" : 9, "prix_unite" : 260}]);
-
-                                            
     const [heures, setHeures] = useState([]);
 
     const [total, setTotal] = useState(0);
     let compteur = 1 ;
     let identifiantClient = 2 ;
-    let id_commande = 1000 ;
+    let id_commande = 2 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
 
@@ -53,10 +42,6 @@ const Panier = () => {
             }
             setHeures(intermediaire);
         })
-
-        let total = 0 ;
-        aliments.map(x => total+=x["quantite"]*x["prix_unite"]);
-        setTotal(total) ;
     }, []);
 
     const recuperer_panier = () => {
@@ -69,6 +54,9 @@ const Panier = () => {
         })
         .then(data => {
             setDonneesPanier(data);
+            let total = 0 ;
+            data.map(x => total+=x["quantite"]*x["prix"]);
+            setTotal(total) ;
         })
     }
 
@@ -86,12 +74,27 @@ const Panier = () => {
     }
 
     const ajouter_commande = () => {
-        let typeCommande ;
-        let commentaire_client = document.getElementById("commentaire").value;
-        (document.getElementsByName("myradio1")[0].checked == true) ? typeCommande= "emporter" : typeCommande = "livrer";
+        let heure_selectionnee = document.getElementById('heures_reserv').value ;
+        let typeCommande, commentaire_client, rue, numero, postal, ville ;
+        (document.getElementById("commentaire").value == "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
+        (document.getElementsByName("myradio1")[0].checked == true) ? typeCommande= "EMP" : typeCommande = "LIV";
+
+        if (typeCommande == "EMP") {
+            rue = null ;
+            numero = null ;
+            postal = null ;
+            ville = null ;
+        }
+        else {
+            (document.getElementById('adresse_livraison').value == "") ? rue = document.getElementById('adresse_livraison').placeholder : rue = document.getElementById('adresse_livraison').value ;
+            (document.getElementById('numero_maison').value == "") ? numero = document.getElementById('numero_maison').placeholder : numero = document.getElementById('numero_maison').value ;
+            (document.getElementById('code_postal').value == "") ? postal = document.getElementById('code_postal').placeholder : postal = document.getElementById('code_postal').value ;
+            (document.getElementById('ville').value == "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
+        }
+        
         var myInit = { method: 'POST',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : id_commande, type : typeCommande, commentaire : commentaire_client})
+               body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
         fetch(`http://localhost:3001/api/orders`, myInit)
         .then(res => {
@@ -99,6 +102,7 @@ const Panier = () => {
         })
         .then(data => {
             supprimer_commande() ;
+            console.log("ok");
         })
     }
 
@@ -113,20 +117,6 @@ const Panier = () => {
         })
         .then(data => {
             console.log("supprimer ok");
-        })
-    }
-
-    const supprimer_panier = () => {
-        var myInit = { method: 'DELETE',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : id_commande})
-        };
-        fetch(`http://localhost:3001/api/orders/del`, myInit)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            supprimer_commande() ;
         })
     }
 
@@ -159,7 +149,7 @@ const Panier = () => {
     }
 
     const changer_prix = (id_produit, id_prix) => {
-        let information = donnees_panier.filter(element => element.idProduit == id_produit)[0];
+        let information = donnees_panier.filter(element => element.idProd == id_produit)[0];
         
         document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.prix + " €";
         information.quantite = Number(document.getElementById(id_prix).value);
@@ -209,14 +199,14 @@ const Panier = () => {
 
         return (
             <div className='c_info_ligne i_info_ligne'> 
-                <div className={`i_nom_aliment ${type_couleur}`}>{element.nomProduit}</div> 
-                <div class="aliment_barre" id={element.idProduit}><hr /></div>
+                <div className={`i_nom_aliment ${type_couleur}`}>{element.produit}</div> 
+                <div class="aliment_barre" id={element.idProd}><hr /></div>
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
-                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite,"moins")} >-</button> 
-                    <input id={`${element.idCommande}${element.idProduit}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
-                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCommande, element.idProduit, element.quantite, "plus")}>+</button>
+                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.idCom, element.idProd, element.quantite,"moins")} >-</button> 
+                    <input id={`${element.idCom}${element.idProd}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
+                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCom, element.idProd, element.quantite, "plus")}>+</button>
                 </div> 
-                <div id={`${element.idCommande}${element.idProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{element.prix*element.quantite}{" €"}</div> 
+                <div id={`${element.idCom}${element.idProd}total`} className={`i_prix_aliment ${type_couleur}`}>{element.prix*element.quantite}{" €"}</div> 
             </div>
         )
     }
@@ -259,7 +249,7 @@ const Panier = () => {
 				</div>
 				
 				<div className="i_bouton_annuler1" id="elem_bouton_annuler1">
-					<input id="bouton_annuler1" name="bout_annuler1" type="button" value="Annuler" onClick={supprimer_panier} />
+					<input id="bouton_annuler1" name="bout_annuler1" type="button" value="Annuler" onClick={supprimer_commande} />
 				</div>
 			</div>
 
@@ -313,7 +303,7 @@ const Panier = () => {
                     <div className="i_adresse c_adresse" id="zone_adresse">
                         <div className="i_adresse_livraison"> 
                             <label class="label_adresse" for="adresse_livraison">Adresse de livraison</label><br /> 
-                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.address} /> 
+                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.rue} /> 
                         </div> 
                         <div className="i_numero_maison"> 
                             <label class="label_adresse" for="numero_maison">Numéro</label><br /> 
