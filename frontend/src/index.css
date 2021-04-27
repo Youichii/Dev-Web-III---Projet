@@ -91,7 +91,7 @@ nav img{
 	--bg_ligne1: #414141;/*white;/*#414141 gris3*/
 	--bg_ligne2: #2A2A2A;/*#FFE5E5;/*#2A2A2A gris2*/
 	--bg_titres: #F7C27E;/*#FF3333;/*#F7C27E jaune*/
-	--bg_survol: #9DAEB5;
+	--bg_survol: #b1acaa; /*#d06334;orange /*#726673; /*#9DAEB5; bleu-gris*/
 	--texte_commande: white;
 	--bg_boutons: #F7C27E;/*#181616;*/
 	--bg_details: #4D4D4D;
@@ -711,14 +711,14 @@ nav img{
 	width: 6px; 
 }
 ::-webkit-scrollbar-thumb {/*couleur normale*/
-	background: #F7C27E; 
+	background: var(--bg_survol); /*#42434a; /* #F7C27E;*/ 
 	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover { 
-	background: #CCA78D;/*#F3A43B; */
+	background: #696969;/*#F3A43B; */
 }
 ::-webkit-scrollbar-thumb:active {
-	background: var(--brun_fonce);/*#D57F0D; */
+	background: var(--bg_ligne2);/*#D57F0D; */
 }
 
 @media only screen and (max-width: 1970px) {
