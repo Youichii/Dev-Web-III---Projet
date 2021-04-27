@@ -830,17 +830,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media only screen and (max-width: 1500px) {
 	.i_info_ligne > div {font-size : 15px}
-	#bouton_envoyer1 { width:110px}
-	#bouton_annulerr1 { width:110px}
-	#bouton_envoyer2 { width:110px}
-	#bouton_annulerr2 { width:110px}
+	#bouton_envoyer1 { width:99px}
+	#bouton_annuler1 { width:99px}
+	#bouton_envoyer2 { width:99px}
+	#bouton_annuler2 { width:99px}
+
 }
 
 @media only screen and (max-width: 1336px) {
-	#bouton_envoyer1 { font-size:18px}
-	#bouton_annuler1 { font-size:18px}
-	#bouton_envoyer2 { font-size:18px}
-	#bouton_annuler2 { font-size:18px}
+	#bouton_envoyer1 { font-size:18px;
+		width: 87px;}
+	#bouton_annuler1 { font-size:18px;
+		width: 87px;}
+	#bouton_envoyer2 { font-size:18px;
+		width: 87px;}
+	#bouton_annuler2 { font-size:18px;
+		width: 87px;}
 	.nombre_aliment, #info_aliments input[type=text] {font-size:11.3px}
 	div > label {font-size: 20px;}
 	.c_quantite_aliment {grid-template-columns: 25% 14% 21% 14% 25%;}
@@ -849,9 +854,6 @@ input[type=number]::-webkit-outer-spin-button {
 	.c_info_ligne {grid-template-columns: 53% 25% 21%;}	
 	.c_titres_panier {grid-template-columns: 1% 51% 24.2% 20% 1%;}
 	.c_cadre_total {grid-template-columns: 33% 45% 21.5%;}
-
-	#bouton_envoyer1 {
-		width: 101px;}
 }
 
 @media only screen and (max-width: 1166px) { /*920*/
@@ -896,5 +898,30 @@ input[type=number]::-webkit-outer-spin-button {
 	.c_boutons2 {grid-template-columns:20% 60% 20%;}
 	#i_grise_etape1 {display:none;}
 	#i_grise_etape2 {display:none;}
+
+
+	.titres {
+		font-size: 15px;}
+	.panier {grid-template-columns: 0% 100% 0%;}
+	.c_info_aliments {    padding: 5px 0px 5px 0px;}
+	.i_info_ligne > div {
+		font-size: 12px;}
+	.i_prix_total {grid-column-start: 2;
+		grid-row-start: 1;}
+	.i_titre_total {
+		grid-row-start: 1;
+		grid-column-end: 2;}
+	.c_cadre_total {
+		grid-template-columns: 50% 28% 21.5%;
+		}
+	.c_quantite_aliment {
+		grid-template-columns: 16% 21% 25% 21% 16%;}
+	.c_boutons1 {
+		grid-template-columns: 26% 47% 26%;
+		}
+	.c_reception {
+		grid-template-columns: 44% 54%;}
+	.c_mode_payement {
+		grid-template-columns: 44% 54%;}
 }
 
