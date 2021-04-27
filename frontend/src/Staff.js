@@ -7,15 +7,7 @@ const Staff = () => {
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
 
-    let taille_afaire = "450px " ;
-    let taille_encours = "450px " ;
-    let taille_envoye = "450px " ;
-
-    let taille_petit_afaire = "320px ";
-    let taille_petit_encours = "320px ";
-    let taille_petit_envoye = "320px ";
-
-    const [blogs, setBlogs] = useState(null);
+    const [donnees, setDonnees] = useState(null);
     const [changement, setChangement] = useState(true);
 
     useEffect(() => {
@@ -28,28 +20,10 @@ const Staff = () => {
             return res.json();
         })
         .then(data => {
-            setBlogs(data);
+            setDonnees(data);
         })
 
     }, [changement]);
-
-    /*function updateWidthAndHeight() {
-        if (window.innerWidth >= 1060){
-            document.getElementsByClassName("c_cadre_commandes_afaire")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
-            document.getElementsByClassName("c_cadre_commandes_encours")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
-            document.getElementsByClassName("c_cadre_commandes_envoye")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
-            document.getElementsByClassName("c_page")[0].style.gridTemplateRows = "495px 495px 495px";
-        }
-        else if (window.innerWidth < 1060){
-            document.getElementsByClassName("c_cadre_commandes_afaire")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
-            document.getElementsByClassName("c_cadre_commandes_encours")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
-            document.getElementsByClassName("c_cadre_commandes_envoye")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
-            document.getElementsByClassName("c_page")[0].style.gridTemplateRows = "1000px 1000px 1000px";
-        }
-    }
-    React.useEffect(() => {
-        window.addEventListener("resize", updateWidthAndHeight);
-    });*/
 
     const ajouter_commandes = (idCommande, type_commande) => {
         var myInit = { method: 'PUT',
@@ -96,7 +70,7 @@ const Staff = () => {
 
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let liste_aliments = blogs.filter(element => element.idClient == identifiant)[0] ;
+        let liste_aliments = donnees.filter(element => element.idClient == identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
         (liste_aliments.idMethode == "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
@@ -113,41 +87,6 @@ const Staff = () => {
 
     const load_panier = (informations, identifiant) => {
         let identifiantCommande = informations.idCom ; 
-        console.log("info : ", informations, " id : ", identifiant, " idcom : ", identifiantCommande);
-
-        /*if (window.innerWidth <= 1060){
-            let cadre, cadre_detail ;
-            if (identifiant === "afaire"){
-                cadre = "c_cadre_commandes_afaire" ;
-                if (taille_afaire != "1000px") {
-                    taille_afaire = "1000px " ;
-                    taille_petit_afaire = "700px ";
-                }
-            }
-            else if (identifiant === "encours"){
-                cadre = "c_cadre_commandes_encours" ;
-                if (taille_encours != "1000px") {
-                    taille_encours = "1000px " ;
-                    taille_petit_encours = "700px ";
-                }
-            }
-            else if (identifiant === "envoye"){
-                cadre = "c_cadre_commandes_envoye" ;
-                if (taille_envoye != "1000px") {
-                    taille_envoye = "1000px " ;
-                    taille_petit_envoye = "700px ";
-                }
-            }
-
-            (window.innerWidth <= 700) ? cadre_detail = "36px 40px 128px 113px 27px 26px 430px" : cadre_detail = "36px 64px 150px 171px 10% 26px 530px" ;
-            document.getElementsByClassName(cadre)[0].style.gridTemplateRows = cadre_detail;
-            if (window.innerWidth <= 700) {
-                document.getElementsByClassName("c_page")[0].style.gridTemplateRows = taille_petit_afaire + taille_petit_encours + taille_petit_envoye;
-            }
-            else {
-                document.getElementsByClassName("c_page")[0].style.gridTemplateRows = taille_afaire + taille_encours + taille_envoye;
-            }
-        }*/
         fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
@@ -171,7 +110,7 @@ const Staff = () => {
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom + '</span></div>' + lieu + '</div>';
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom.substring(14, 19) + " - " + informations.dateCom.substring(8, 10) + "/" + informations.dateCom.substring(5, 7) + "/" + informations.dateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
                             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
@@ -186,7 +125,7 @@ const Staff = () => {
         compteur_afaire++ ;
         (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        blogs.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
+        donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         return (
@@ -212,7 +151,7 @@ const Staff = () => {
         compteur_encours++ ;
         (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        blogs.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
+        donnees.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
@@ -238,7 +177,7 @@ const Staff = () => {
         compteur_envoye++ ;
         (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        blogs.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
+        donnees.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
@@ -273,7 +212,7 @@ const Staff = () => {
                 </div>
 
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                    {blogs && blogs.filter(element => element.idEtat === "AFA").map(elements_afaire)}
+                    {donnees && donnees.filter(element => element.idEtat === "AFA").map(elements_afaire)}
                 </div>
 
                 <div className="details_commande">
@@ -297,7 +236,7 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                    {blogs && blogs.filter(element => element.idEtat === "ENC").map(elements_encours)}
+                    {donnees && donnees.filter(element => element.idEtat === "ENC").map(elements_encours)}
                 </div>
 
                 <div className="details_commande">
@@ -321,13 +260,13 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                    {blogs && blogs.filter(element => element.idEtat === "ENV").map(elements_envoye)}
+                    {donnees && donnees.filter(element => element.idEtat === "ENV").map(elements_envoye)}
                 </div>
 
                 <div className="details_commande">
                     <div id="envoye" class='info_commande c_info_commande'></div>
                 </div>
-                
+
 				<div className="i_bout_cadre_afaire"></div>
             </div>
         </div>

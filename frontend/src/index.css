@@ -574,7 +574,7 @@ nav img{
 }
 .c_titre_fileattente {
 	display: grid;
-	grid-template-columns: 10% 52% 38%;
+	grid-template-columns: 3% 59% 38%;
     grid-template-rows: 36% 19% 45%;
 	grid-gap: 0px;
 	padding: 0px;
@@ -621,7 +621,7 @@ nav img{
 }
 .c_titre_preparation {
 	display: grid;
-	grid-template-columns: 10% 52% 38%;
+	grid-template-columns: 4% 58% 38%;
     grid-template-rows: 36% 19% 45%;
 	grid-gap: 0px;
 	padding: 0px;
@@ -633,7 +633,7 @@ nav img{
 	grid-row-end: 3;
 	color:white;
 	font-size: 37px;
-	line-height: 77px;
+	line-height: 50px;
 }
 .barre_haut_preparation {
 	grid-column-start: 3;
@@ -668,19 +668,19 @@ nav img{
 }
 .c_titre_envoi {
 	display: grid;
-	grid-template-columns: 10% 52% 38%;
+	grid-template-columns: 16% 46% 38%;
     grid-template-rows: 36% 19% 45%;
 	grid-gap: 0px;
 	padding: 0px;
 }
 .en_cours_envoi {
 	grid-column-start: 2;
-	grid-column-end: 4;
+	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 3;
 	color:white;
 	font-size: 37px;
-	line-height: 77px;
+	line-height: 50px;
 }
 .barre_haut_envoi {
 	grid-column-start: 3;
@@ -725,6 +725,10 @@ nav img{
 	.c_commande > div {font-size: 20px;}
 	.c_sans_bouton {grid-template-columns: 18% 27% 35% 18%;}
 	.c_commande {grid-gap: 3px;}
+	.c_cadre_commandes_afaire {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
+	.c_cadre_commandes_encours {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
+	.c_cadre_commandes_envoye {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
+	.c_info_commande {grid-template-columns: 12% 40% 9% 28% 6%;}
 }
 @media only screen and (max-width: 1410px) {
 	.c_commande > div {font-size: 20px;}
@@ -786,7 +790,7 @@ nav img{
 		grid-column-end: 5;}							
 }
 
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1100px) {
 	.c_cadre_commandes_afaire {grid-template-rows: 36px 64px 150px 171px 10% 26px;
 		grid-template-columns: 7% 28% 28% 28% 7%;}
 	.c_cadre_commandes_encours {grid-template-rows: 36px 64px 150px 171px 10% 26px;
