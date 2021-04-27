@@ -5,8 +5,8 @@ const Panier = () => {
 
     const [total, setTotal] = useState(0);
     let compteur = 1 ;
-    let identifiantClient = 2 ;
-    let id_commande = 2 ;
+    let identifiantClient = 7 ;
+    let id_commande = 1 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
 
@@ -22,23 +22,19 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            let liste_heures_prises = data.map(heure => heure.heure_reservee);
+            
             const intermediaire = [] ;
             let min = 1080 ; //18h
             let max = 1440 ; //00h
-            for (var i = min; i < max; i+=15) {
-                var minutes = i ;
+            for (var minutes = min; minutes < max; minutes+=15) {
                 var nbHour = parseInt(minutes / 60);
                 var nbminuteRestante = (minutes % 60);
                 let heure_finale ;
+
                 (nbminuteRestante === 0 ) ? heure_finale = "00" : heure_finale =  nbminuteRestante.toString();
-                if ( liste_heures_prises.indexOf(("heure : ", nbHour.toString() + ":" + heure_finale).toString()) == 0 ) {
-                    console.log("occupée");
-                }
-                else {   
+                if ( data.filter(elem => elem.hLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
                     intermediaire.push(({"h" : nbHour.toString(), "m" : heure_finale}));
                 }
-
             }
             setHeures(intermediaire);
         })
@@ -56,7 +52,13 @@ const Panier = () => {
             setDonneesPanier(data);
             let total = 0 ;
             data.map(x => total+=x["quantite"]*x["prix"]);
-            setTotal(total) ;
+            setTotal(total.toFixed(2)) ;
+            
+            let nbr_lignes = ""
+            for (let i = 0 ; i<data.length ; i++) {
+                nbr_lignes += "45px " ;
+            }
+            document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
         })
     }
 
@@ -206,7 +208,7 @@ const Panier = () => {
                     <input id={`${element.idCom}${element.idProd}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
                     <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCom, element.idProd, element.quantite, "plus")}>+</button>
                 </div> 
-                <div id={`${element.idCom}${element.idProd}total`} className={`i_prix_aliment ${type_couleur}`}>{element.prix*element.quantite}{" €"}</div> 
+                <div id={`${element.idCom}${element.idProd}total`} className={`i_prix_aliment ${type_couleur}`}>{(element.prix*element.quantite).toFixed(2)}{" €"}</div> 
             </div>
         )
     }
