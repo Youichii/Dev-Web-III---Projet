@@ -7,7 +7,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
-  database : 'nodemysql'
+  database : 'profilprive'
 })
 
 app.listen(3001, () => {
@@ -37,9 +37,8 @@ app.post('/api/users', (req, res) => {
     const mail = req.body.mail 
     const gender = req.body.gender 
     const pwd = req.body.pwd 
-    //console.log("name : ", name);
   
-    const sqlInsert = "INSERT INTO `clients`(`name`, `firstname`, `address`, `birthday`, `phone`, `mail`, `gender`, `pwd`, numero, postal, ville) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 10, 2030, 'Mons')"
+    const sqlInsert = "INSERT INTO `clients`(`nom`, `prenom`, `rue`, `anniversaire`, `gsm`, `mail`, `genre`, `mdp`, numero, postal, ville) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 10, 2030, 'Mons')"
     db.query(sqlInsert, [name, firstname, address, birthday, phone, mail, gender, pwd], (err, result) => {
       console.log(err) ;
       res.send(result);

@@ -32,7 +32,7 @@ const Inscription = () => {
 		var jour = document.getElementById('selection_jour').selectedIndex;
 		var mois = document.getElementById('selection_mois').selectedIndex;
 		var annee = document.getElementById('selection_annee').selectedIndex;
-		var date  = new Date(annee, mois, jour) ;
+		var date = annee + "-" + mois + "-" + jour ;
 
 		var myInit = { method: 'POST',
                headers: {'Content-Type': 'application/json'},
@@ -120,8 +120,8 @@ const Inscription = () => {
 					
 					<div className="i_titre_sexe pol">SEXE</div>
 					<div className="i_champ_sexe">
-                        <div id="radio_femme"><input type="radio" name="myradio" value="femme" id="sexef_user" /> FEMME</div>
-						<div id="radio_homme"><input type="radio" name="myradio" value="homme" id="sexeh_user" /> HOMME</div>
+                        <div id="radio_femme"><input type="radio" name="myradio" value="f" id="sexef_user" /> FEMME</div>
+						<div id="radio_homme"><input type="radio" name="myradio" value="h" id="sexeh_user" /> HOMME</div>
 					</div>
 				
 					<div className="i_titre_telephone pol">TELEPHONE</div>
