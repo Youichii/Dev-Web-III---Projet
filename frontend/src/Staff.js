@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react" ;
+import React from 'react'
 
 const Staff = () => {
     
@@ -32,10 +33,23 @@ const Staff = () => {
 
     }, [changement]);
 
-    useEffect(() => {
-        console.log("taille change");
-
-    }, [window.innerWidth]);
+    /*function updateWidthAndHeight() {
+        if (window.innerWidth >= 1060){
+            document.getElementsByClassName("c_cadre_commandes_afaire")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
+            document.getElementsByClassName("c_cadre_commandes_encours")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
+            document.getElementsByClassName("c_cadre_commandes_envoye")[0].style.gridTemplateRows = "7% 16% 140px 201px 10%";
+            document.getElementsByClassName("c_page")[0].style.gridTemplateRows = "495px 495px 495px";
+        }
+        else if (window.innerWidth < 1060){
+            document.getElementsByClassName("c_cadre_commandes_afaire")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
+            document.getElementsByClassName("c_cadre_commandes_encours")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
+            document.getElementsByClassName("c_cadre_commandes_envoye")[0].style.gridTemplateRows = "36px 64px 150px 171px 10% 26px 530px;";
+            document.getElementsByClassName("c_page")[0].style.gridTemplateRows = "1000px 1000px 1000px";
+        }
+    }
+    React.useEffect(() => {
+        window.addEventListener("resize", updateWidthAndHeight);
+    });*/
 
     const ajouter_commandes = (idCommande, type_commande) => {
         var myInit = { method: 'PUT',
@@ -101,7 +115,7 @@ const Staff = () => {
         let identifiantCommande = informations.idCom ; 
         console.log("info : ", informations, " id : ", identifiant, " idcom : ", identifiantCommande);
 
-        if (window.innerWidth <= 1060){
+        /*if (window.innerWidth <= 1060){
             let cadre, cadre_detail ;
             if (identifiant === "afaire"){
                 cadre = "c_cadre_commandes_afaire" ;
@@ -124,6 +138,7 @@ const Staff = () => {
                     taille_petit_envoye = "700px ";
                 }
             }
+
             (window.innerWidth <= 700) ? cadre_detail = "36px 40px 128px 113px 27px 26px 430px" : cadre_detail = "36px 64px 150px 171px 10% 26px 530px" ;
             document.getElementsByClassName(cadre)[0].style.gridTemplateRows = cadre_detail;
             if (window.innerWidth <= 700) {
@@ -132,7 +147,7 @@ const Staff = () => {
             else {
                 document.getElementsByClassName("c_page")[0].style.gridTemplateRows = taille_afaire + taille_encours + taille_envoye;
             }
-        }
+        }*/
         fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
@@ -151,12 +166,12 @@ const Staff = () => {
             (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
             (informations.idMethode == "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
-            let liste_finale = "<div class='info_commande c_info_commande'><div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom + '</span></div>' + lieu + '</div></div>';
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom + '</span></div>' + lieu + '</div>';
                             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
@@ -176,14 +191,14 @@ const Staff = () => {
 
         return (
             <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
                     <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
                     <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
                     <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
                     <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
                 </div> 
             </div>
         )
@@ -202,14 +217,14 @@ const Staff = () => {
 
         return (
             <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
                     <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
                     <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
                     <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
                     <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
                 </div> 
             </div>
         )
@@ -228,25 +243,21 @@ const Staff = () => {
 
         return (
             <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div class="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
                     <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
                     <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
                     <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
                     <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button class="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
                 </div> 
             </div>
         )
     }
 
-    const test = () => {
-        console.log("test") ;
-    }
-
     return (
-        <div className="staff c_page" onResize={test}>
+        <div className="staff c_page">
 
             <div className="c_cadre_commandes_afaire i_cadre_attente">
                 <div className="c_titre_fileattente i_titre_fileattente">
@@ -255,17 +266,20 @@ const Staff = () => {
 					<div className="barre_bas_attente"></div>
 				</div>
                 <div className="c_titres_commandes i_titres_commandes">
-                    <div class="i_heures">Heure</div>
-					<div class="i_noms">Nom</div>
-					<div class="i_contacts">Contact</div>
-					<div class="i_prix_titre">Prix</div>
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
 
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
                     {blogs && blogs.filter(element => element.idEtat === "AFA").map(elements_afaire)}
                 </div>
 
-                <div id="afaire" class="details_commande"></div>
+                <div className="details_commande">
+                    <div id="afaire" class='info_commande c_info_commande'></div>
+                </div>
+
                 <div className="i_bout_cadre_afaire"></div>
             </div>
 
@@ -277,15 +291,19 @@ const Staff = () => {
 				</div>
 
                 <div className="c_titres_commandes i_titres_commandes">
-                    <div class="i_heures">Heure</div>
-					<div class="i_noms">Nom</div>
-					<div class="i_contacts">Contact</div>
-					<div class="i_prix_titre">Prix</div>
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
                     {blogs && blogs.filter(element => element.idEtat === "ENC").map(elements_encours)}
                 </div>
-                <div id="encours" className="details_commande"></div>
+
+                <div className="details_commande">
+                    <div id="encours" class='info_commande c_info_commande'></div>
+                </div>
+
 				<div className="i_bout_cadre_afaire"></div>
             </div>
 
@@ -297,15 +315,19 @@ const Staff = () => {
 				</div>
 
                 <div className="c_titres_commandes i_titres_commandes">
-                    <div class="i_heures">Heure</div>
-					<div class="i_noms">Nom</div>
-					<div class="i_contacts">Contact</div>
-					<div class="i_prix_titre">Prix</div>
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
                     {blogs && blogs.filter(element => element.idEtat === "ENV").map(elements_envoye)}
                 </div>
-                <div id="envoye" className="details_commande"></div>
+
+                <div className="details_commande">
+                    <div id="envoye" class='info_commande c_info_commande'></div>
+                </div>
+                
 				<div className="i_bout_cadre_afaire"></div>
             </div>
         </div>

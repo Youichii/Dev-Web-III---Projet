@@ -109,7 +109,7 @@ nav img{
   .c_page {
 	display: grid;
 	grid-template-columns: 100% ;
-	grid-template-rows: 450px 450px 450px;
+	grid-template-rows: 495px 495px 495px;
 	grid-gap: 45px; 
 	padding: 0px;
 }
@@ -731,15 +731,15 @@ nav img{
 	.c_sans_bouton {grid-template-columns: 18% 27% 35% 17.8%;}
 	.c_commande {grid-gap: 3px;}
 
-	.c_cadre_commandes_afaire {grid-template-rows: 7% 16% 150px 205px 10%;
+	.c_cadre_commandes_afaire {grid-template-rows: 7% 16% 140px 201px 10%;
 		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 29px 20px;}
-	.c_cadre_commandes_encours {grid-template-rows: 7% 16% 150px 205px 10%;
+		padding: 20px 20px 0px 20px;}
+	.c_cadre_commandes_encours {grid-template-rows: 7% 16% 140px 201px 10%;
 		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 29px 20px;}
-	.c_cadre_commandes_envoye {grid-template-rows: 7% 16% 150px 205px 10%;
+		padding: 20px 20px 0px 20px;}
+	.c_cadre_commandes_envoye {grid-template-rows: 7% 16% 140px 201px 10%;
 		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 29px 20px;}
+		padding: 20px 20px 0px 20px;}
 	.c_titres_commandes {grid-template-columns: 15.4% 23% 30% 20% 15%;}
 	.i_titre_fileattente {grid-row-start: 1;
 		grid-row-end: 2;
@@ -805,16 +805,17 @@ nav img{
     	grid-row-end: 6;}
 	.i_commandes_encours {grid-column-start: 2;}	
 	.i_commandes_envoye {grid-column-start: 2;}	
-	.info_commande {height: 70%;}
+	.info_commande {height: 100%;}
 	.c_commandes{height: 100%;}
+	.c_page {grid-template-rows: 1000px 1000px 1000px;}
 }
 
 @media only screen and (max-width: 700px) {
-	.c_cadre_commandes_afaire{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
+	.c_cadre_commandes_afaire{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
 		grid-template-columns: 4% 28% 31% 28% 4%;}
-	.c_cadre_commandes_encours{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
+	.c_cadre_commandes_encours{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
 		grid-template-columns: 4% 28% 31% 28% 4%;}
-	.c_cadre_commandes_envoye{grid-template-rows: 36px 40px 128px 113px 10% 26px 1px;
+	.c_cadre_commandes_envoye{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
 		grid-template-columns: 4% 28% 31% 28% 4%;}
 	.i_contacts { display:none;}
 	.i_contact { display:none;}
@@ -839,7 +840,7 @@ nav img{
 	.c_titres_commandes > div {font-size: 17px;
 		padding: 4px 10px 0px 8px;}
 
-	.c_page {grid-template-rows: 320px 320px 320px;}
+	.c_page {grid-template-rows: 790px 790px 790px;}
 	.i_titre_detail {font-size: 18px;}
 	.info_commande {font-size: 14px;}
 	.c_ligne_aliment {grid-template-columns: 2% 71% 22%;}
