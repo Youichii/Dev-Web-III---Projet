@@ -73,7 +73,7 @@ app.get('/api/orders/users/:identifiantClient', (req, res) => {
     FROM commandes AS C  \
     JOIN menu AS ME ON C.idProd = ME.idProduit  \
     JOIN reservations AS RE ON C.idCom = RE.idCom \
-    WHERE idClient = 2";
+    WHERE idClient = ?";
     db.query(sqlInsert, [identifiantClient], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
@@ -97,7 +97,7 @@ app.get('/api/hours', (req, res) => {
     const sqlInsert = "SELECT hLivree \
     FROM reservations \
     GROUP BY hLivree  \
-    HAVING COUNT(hLivree)  > 5";
+    HAVING COUNT(hLivree)  > 0";
     db.query(sqlInsert, [], (err, result) => {
       console.log("err : ", err);
       console.log("result : ", result) ;
