@@ -195,6 +195,17 @@ const Staff = () => {
         )
     }
 
+    /*const [heure_courante, setHeureCourante] = useState("allo");
+    function RepeatMessage({ message }) {
+        useEffect(() => {
+          setInterval(() => {
+            setHeureCourante(new Date().toLocaleTimeString()) ;
+          }, 1000);
+        });
+        <RepeatMessage message="coucou" />
+        return <div className="message" style={{color:"white"}} >{heure_courante}</div>;
+    }*/
+
     return (
         <div className="staff c_page">
 
