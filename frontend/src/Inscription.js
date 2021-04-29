@@ -19,40 +19,102 @@ const Inscription = () => {
 		setListeAnnee(annee);
     }, []);
 
-	const inscrire = () => {
+	const verification_valeurs = () => {
+		if (document.getElementById("nom_user").value === "") { 
+			console.log("nom vide");
+		}
+		if (document.getElementById("prenom_user").value === "") { 
+			console.log("prenom vide");
+		}
+		if (document.getElementById("telephone_user").value === "") { 
+			console.log("téléphone vide");
+		}
+		if (document.getElementById("adresse_user").value === "") { 
+			console.log("adresse vide");
+		}
+		if (document.getElementById("numero_user").value === "") { 
+			console.log("numéro vide");
+		}
+		if (document.getElementById("postal_user").value === "") { 
+			console.log("code postal vide");
+		}
+		if (document.getElementById("ville_user").value === "") { 
+			console.log("ville vide");
+		}
+		if (document.getElementById("mail_user").value === "") { 
+			console.log("mail vide");
+		}
+		if (document.getElementById('selection_jour').selectedIndex === 0 || document.getElementById('selection_mois').selectedIndex === 0 || document.getElementById('selection_annee').selectedIndex === 0) { 
+			console.log("date vide");
+		}
 
 		var radios = document.getElementsByName('myradio');
-		var valeur;
+		let valeur ;
 		for(var i = 0; i < radios.length; i++){
 			if(radios[i].checked){
 			valeur = radios[i].value;
 			}
 		}
+		if (valeur === undefined) { 
+			console.log("sexe vide");
+		}
 
-		var jour = document.getElementById('selection_jour').selectedIndex;
-		var mois = document.getElementById('selection_mois').selectedIndex;
-		var annee = document.getElementById('selection_annee').selectedIndex;
-		var date = annee + "-" + mois + "-" + jour ;
+		var mdp = document.getElementById("mdp_user").value;
+		if (mdp === "") { 
+			console.log("mot de passe vide");
+		}
+		else if (mdp < 12 || mdp.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || mdp.split('').filter(lettre => lettre === lettre.toLowerCase()).length === 0) {
+			console.log("mot de passe pas assez fort");
+		}
 
-		var myInit = { method: 'POST',
-               headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({name : document.getElementById("nom_user").value,
-									firstname : document.getElementById("prenom_user").value,
-									address : document.getElementById("adresse_user").value,
-									birthday : date,
-									phone : document.getElementById("telephone_user").value,
-									mail : document.getElementById("mail_user").value,
-									gender : valeur,
-									pwd : document.getElementById("mdp_user").value})
-        };
+		if (!document.getElementById("politique_user").checked) {
+			console.log("il faut cocher");
+		}
+		return false ;
+	}
 
-        fetch('http://localhost:3001/api/users', myInit)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            console.log("Successful");
-        })
+	const inscrire = () => {
+
+		if (verification_valeurs()) {
+			var radios = document.getElementsByName('myradio');
+			var valeur;
+			for(var i = 0; i < radios.length; i++){
+				if(radios[i].checked){
+				valeur = radios[i].value;
+				}
+			}
+
+			var jour = document.getElementById('selection_jour').selectedIndex;
+			var mois = document.getElementById('selection_mois').selectedIndex;
+			var annee = document.getElementById('selection_annee').selectedIndex;
+			var date = annee + "-" + mois + "-" + jour ;
+
+			var myInit = { method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({name : document.getElementById("nom_user").value,
+										firstname : document.getElementById("prenom_user").value,
+										birthday : date,
+										phone : document.getElementById("telephone_user").value,
+										mail : document.getElementById("mail_user").value,
+										gender : valeur,
+										pwd : document.getElementById("mdp_user").value,
+										rue : document.getElementById("adresse_user").value,
+										numero : document.getElementById("numero_user").value,
+										postal : document.getElementById("postal_user").value,
+										ville : document.getElementById("ville_user").value})
+			};
+
+			fetch('http://localhost:3001/api/users', myInit)
+			.then(res => {
+				return res.json();
+			})
+			.then(data => {
+				console.log("Successful");
+			})
+		}
+		else {
+			console.log("non, toutes les informations ne sont pas correctes");
+		}
 
     }
 

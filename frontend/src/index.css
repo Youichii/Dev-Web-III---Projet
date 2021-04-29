@@ -485,6 +485,22 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+::-webkit-scrollbar {/*taille*/
+	width: 6px; 
+}
+::-webkit-scrollbar-thumb {/*couleur normale*/
+	background: #b1acaa; /*#42434a; /* #F7C27E;*/ 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;/*#F3A43B; */
+}
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;/*#D57F0D; */
+}
+
+
+
 @media only screen and (max-width: 1550px) {
 	.c_cadre_inscription {grid-template-columns: 25% 50% 25%;}
 }
