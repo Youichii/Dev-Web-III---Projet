@@ -36,12 +36,12 @@ app.post('/api/users', (req, res) => {
     const mail = req.body.mail ;
     const gender = req.body.gender ;
     const pwd = req.body.pwd ;
-    const rue = req.body.phoruene ;
+    const rue = req.body.rue ;
     const numero = req.body.numero ;
     const postal = req.body.postal ;
     const ville = req.body.ville ;
   
-    const sqlInsert = "INSERT INTO `clients`(`nom`, `prenom`, `rue`, `anniversaire`, `gsm`, `mail`, `genre`, `mdp`, numero, postal, ville) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    const sqlInsert = "INSERT INTO `clients`(`nom`, `prenom`, `rue`, `anniversaire`, `gsm`, `mail`, `genre`, `mdp`, `numero`, `postal`, `ville`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville], (err, result) => {
       console.log(err) ;
       res.send(result);
