@@ -12,7 +12,7 @@ import ProfilPrive from './ProfilPrive'
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Stat from './components/pages/Stat';
+import Stat from './components/Stat';
 
 function App() {
   return (

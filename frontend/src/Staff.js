@@ -71,10 +71,10 @@ const Staff = () => {
 
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let liste_aliments = donnees.filter(element => element.idClient == identifiant)[0] ;
+        let liste_aliments = donnees.filter(element => element.idClient === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
-        (liste_aliments.idMethode == "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
+        (liste_aliments.idMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
         
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
@@ -104,7 +104,7 @@ const Staff = () => {
                     <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.postal + '</span>' ;
 
             (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
-            (informations.idMethode == "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
+            (informations.idMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
             let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
@@ -122,9 +122,9 @@ const Staff = () => {
         let taille = "12% ";
         let nbr_lignes_afaire = "12% " ;
         let type_couleur, bg_bouton ;
-        (compteur_afaire%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        (compteur_afaire%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_afaire++ ;
-        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
@@ -148,9 +148,9 @@ const Staff = () => {
         let taille = "12% ";
         let  nbr_lignes_encours = "12% ";
         let type_couleur, bg_bouton ;
-        (compteur_encours%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        (compteur_encours%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_encours++ ;
-        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
@@ -174,9 +174,9 @@ const Staff = () => {
         let taille = "12% ";
         let nbr_lignes_envoye = "12% " ;
         let type_couleur, bg_bouton ;
-        (compteur_envoye%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        (compteur_envoye%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_envoye++ ;
-        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
