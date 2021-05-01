@@ -9,6 +9,8 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive'
 
+// import BannerPatron from "./BannerPatron.js";
+import Communaute from "./Communaute.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Stat from './components/pages/Stat';
 
@@ -42,6 +44,14 @@ function App() {
             <Route exact path="/stat" component={Stat} > 
               <Statistiques />
             </Route>
+
+            <Route exact path="/communaute"> 
+              <Communaute />
+            </Route>
+
+
+
+
 
             <Route exact path="/inscription"> 
               <Inscription />
