@@ -50,3 +50,16 @@ app.post('/api/users', (req, res) => {
       res.send(result);
     })
   }) 
+
+app.get('/api/users/:mail/:pwd', (req, res) => {
+
+  const mail = req.params.mail ;
+  const pwd = req.params.pwd  ;
+  
+  const sqlInsert = "SELECT idClient from clients where mail = ? and mdp = ?";
+  db.query(sqlInsert, [mail, pwd], (err, result) => {
+    console.log(err);
+    res.send(result) ;
+  })
+})
+
