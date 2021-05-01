@@ -91,6 +91,8 @@ nav img{
 :root {
 	--principale: #F7C27E ; /*#FB3F3F;*/
 	--survol_bouton : #fbe0bd;
+	--bordure : #a0b3b0;
+	--erreur : #ff5a5a;
 }
 
 * {
@@ -227,8 +229,8 @@ a:active {
 .i_titre_mdp {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	grid-row-start: 3;
-	grid-row-end: 4;
+	grid-row-start: 4;
+	grid-row-end: 5;
 	
 	color: #767676;
 	background-color: #181616;
@@ -237,8 +239,8 @@ a:active {
 .i_champ_mdp {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 5;
+	grid-row-start: 5;
+	grid-row-end: 6;
 
 	background-color: #181616;
 	/*padding: 0px 0px 35px 0px;*/
@@ -262,8 +264,8 @@ a:active {
 .i_bouton_envoi {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	grid-row-start: 6;
-	grid-row-end: 7;
+	grid-row-start: 8;
+	grid-row-end: 9;
 
 	text-align:center;
 	background-color: #181616;
@@ -285,8 +287,8 @@ a:active {
 .i_mdp_oubli {
 	grid-column-start: 2;
 	grid-column-end: 3;
-	grid-row-start: 7;
-	grid-row-end: 8;
+	grid-row-start: 9;
+	grid-row-end: 10;
 	
 	text-align:center;
 	/* padding: 30px 0px 0px 0px;*/
@@ -303,7 +305,7 @@ a:active {
 .c_zones_info {
 	display: grid;
 	grid-template-columns: 10% 80% 10%;
-	grid-template-rows: 8% 21% 8% 21% 4% 17% 19%;
+	grid-template-rows: 8% 11% 12% 8% 11% 12% 4% 17% 13%;
 	grid-gap: 2px;
 	padding: 0px;
 }
@@ -319,6 +321,17 @@ input {
 	font-family:DejaVu Sans Mono, monospace;
 	font-size:15px;
 }
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px #181616 inset;
+	-webkit-text-fill-color:white;
+}
+
+.message_erreur {
+	font-size: 12px;
+	color:var(--erreur);
+	background-color: #181616;
+}
+
 
 @media only screen and (max-width: 1450px) {
 	.c_cadre {grid-template-columns: 26% 48% 26%;}
