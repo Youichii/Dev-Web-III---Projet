@@ -2,7 +2,6 @@ import Header from './components/Header'
 import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import './profilPrive.css'
 
 
 

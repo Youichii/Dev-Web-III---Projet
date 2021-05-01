@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import './inscription.css' ;
+import React, {useState, useEffect} from 'react';
 
 const Inscription = () => {
 
