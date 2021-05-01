@@ -11,7 +11,7 @@ import ProfilPrive from './ProfilPrive'
 
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Stat from './components/pages/Stat';
 
 function App() {
@@ -21,31 +21,31 @@ function App() {
         <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/"> 
+            <Route exact path="/">
               <Accueil />
             </Route>
 
-            <Route exact path="/informations"> 
+            <Route exact path="/informations">
               <Informations />
             </Route>
 
-            <Route exact path="/staff"> 
+            <Route exact path="/staff">
               <Staff />
             </Route>
 
-            <Route exact path="/panier"> 
+            <Route exact path="/panier">
               <Panier />
             </Route>
 
-            <Route exact path="/connexion"> 
+            <Route exact path="/connexion">
               <Connexion />
             </Route>
 
-            <Route exact path="/stat" component={Stat} > 
+            <Route exact path="/stat" component={Stat} >
               <Stat />
             </Route>
 
-            <Route exact path="/communaute"> 
+            <Route exact path="/communaute">
               <Communaute />
             </Route>
 
@@ -53,11 +53,11 @@ function App() {
 
 
 
-            <Route exact path="/inscription"> 
+            <Route exact path="/inscription">
               <Inscription />
             </Route>
 
-            <Route exact path="/profil-prive"> 
+            <Route exact path="/profil-prive">
               <ProfilPrive />
             </Route>
 
