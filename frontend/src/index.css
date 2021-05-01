@@ -93,6 +93,8 @@ nav img{
 	--survol_bouton : #fbe0bd;
 	--bordure : #a0b3b0;
 	--erreur : #ff5a5a;
+	--bg : #181616;
+	--titres : #767676;
 }
 
 * {
@@ -131,7 +133,7 @@ body {
 	height : 650px ;
 	border : solid;
 	border-color : grey;
-	background-color:#181616;
+	background-color:var(--bg);
 }
 .i_bouton_connexion {
 	grid-column-start: 2;
@@ -188,7 +190,7 @@ a:active {
 	font-size:22px;
 	text-align:center;
 	color : #F1F7FD;
-	background-color: #181616;
+	background-color: var(--bg);
 }
 
 .i_titre_adresse {
@@ -197,8 +199,8 @@ a:active {
 	grid-row-start: 1;
 	grid-row-end: 2;
 	
-	color: #767676;
-	background-color: #181616;
+	color: var(--titres);
+	background-color: var(--bg);
 	/*padding: 0px 0px 15px 0px;*/
 }
 .i_champ_adresse {
@@ -208,15 +210,15 @@ a:active {
 	grid-row-end: 3;
 
 	/*padding: 0px 0px 15px 0px;*/
-	background-color: #181616;
+	background-color: var(--bg);
 }
 #text_user {
 	width: 100%;
     height: 45px;
 	border-radius: 0px/0px;
     border-width: 1px;	
-	background-color: #181616;
-    border: 1px solid #a0b3b0;
+	background-color: var(--bg);
+    border: 1px solid var(--bordure);
 	padding: 5px 10px 5px 10px;
 	color : white;	
 }
@@ -232,8 +234,8 @@ a:active {
 	grid-row-start: 4;
 	grid-row-end: 5;
 	
-	color: #767676;
-	background-color: #181616;
+	color: var(--titres);
+	background-color: var(--bg);
 	/*padding: 0px 0px 15px 0px;*/
 }
 .i_champ_mdp {
@@ -242,7 +244,7 @@ a:active {
 	grid-row-start: 5;
 	grid-row-end: 6;
 
-	background-color: #181616;
+	background-color: var(--bg);
 	/*padding: 0px 0px 35px 0px;*/
 }
 #text_mdp {
@@ -250,8 +252,8 @@ a:active {
     height: 45px;
 	border-radius: 0px/0px;
     border-width: 1px;
-	background-color: #181616;
-    border: 1px solid #a0b3b0;
+	background-color: var(--bg);
+    border: 1px solid var(--bordure);
 	padding: 5px 10px 5px 10px;
 	color : white;
 }
@@ -268,7 +270,7 @@ a:active {
 	grid-row-end: 9;
 
 	text-align:center;
-	background-color: #181616;
+	background-color: var(--bg);
 }
 
 #bouton_connexion_envoi {
@@ -291,14 +293,12 @@ a:active {
 	grid-row-end: 10;
 	
 	text-align:center;
-	/* padding: 30px 0px 0px 0px;*/
 	font-size: 13px;
 	color: #9e743d;
-	background-color: #181616;
+	background-color: var(--bg);
 }
 .i_mdp_oubli:hover {
 	color: #a6a6a6;
-	/*color:#FA0606;*/
 	cursor: pointer;
 }
 
@@ -314,7 +314,7 @@ a:active {
 	grid-column-end: 7;
 	grid-row-start: 5;
 	grid-row-end: 9;
-	background-color: #181616;
+	background-color: var(--bg);
 }
 
 input {
@@ -322,14 +322,14 @@ input {
 	font-size:15px;
 }
 input:-webkit-autofill {
-	-webkit-box-shadow: 0 0 0px 1000px #181616 inset;
+	-webkit-box-shadow: 0 0 0px 1000px var(--bg) inset;
 	-webkit-text-fill-color:white;
 }
 
 .message_erreur {
 	font-size: 12px;
 	color:var(--erreur);
-	background-color: #181616;
+	background-color: var(--bg);
 }
 
 
