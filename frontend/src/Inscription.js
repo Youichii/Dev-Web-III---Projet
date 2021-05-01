@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 const Inscription = () => {
 
+	require('./inscription.css')
 	const [liste_jours, setListeJours] = useState(null);
 	const [liste_mois, setListeMois] = useState(["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"]);
 	const [liste_annee, setListeAnnee] = useState(null);

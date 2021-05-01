@@ -2,7 +2,7 @@ import {useEffect, useState} from "react" ;
 import React from 'react'
 
 const Staff = () => {
-    
+    require('./staff.css')
     let compteur_afaire = 1 ;
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
