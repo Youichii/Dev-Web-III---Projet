@@ -3,7 +3,7 @@ const mailer = require("nodemailer");
 const { Hello } = require("./newsletter.js");
 const { Thanks } = require("./commandes.js");
 
-//lancement
+//lancement k
 
 const getEmailData = (to, name, promo, template) => {
     let data = null;
