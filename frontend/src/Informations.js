@@ -1,6 +1,7 @@
 import HalfDiv from './components/HalfDiv'
 import Header from './components/Header'
 import Contact from './components/Contact'
+import './informations.css'
 
 const Informations = () => {
     return (
