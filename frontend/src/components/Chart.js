@@ -1,6 +1,6 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
-import './Chart.css';
+import '../Chart.css';
 
 const data =['data_gender', 'data_age', 'data_oc']
 const data_gender = {

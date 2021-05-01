@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../App.css';
-import Chart from '../../../../Statistique/src/components/Chart'
+import '../index.css';
+import Chart from './Chart.js'
 
 export default function Stat() {
   return (
