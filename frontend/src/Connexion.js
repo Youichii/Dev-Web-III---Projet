@@ -1,4 +1,3 @@
-import "./connexion.css";
 const Connexion = () => {
 
 	const verification_valeurs = () => {

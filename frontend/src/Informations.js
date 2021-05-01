@@ -1,9 +1,11 @@
 import HalfDiv from './components/HalfDiv'
 import Header from './components/Header'
 import Contact from './components/Contact'
-import './informations.css'
+
 
 const Informations = () => {
+    require('./index.css')
+    require('./informations.css')
     return (
         <div className="Informations">
             <Header title={ "Nous contacter" } />

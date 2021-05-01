@@ -37,11 +37,11 @@ code {
 /* Barre de navigation */
 
 .Navbar {
-	display:grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 150px;
-    grid-gap: 2px;
-    padding: 0px 0px 0px 8px;
+  display:grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 150px;
+  grid-gap: 2px;
+  padding: 0px 0px 0px 8px;
 }
 nav ul{
   list-style-type: none;

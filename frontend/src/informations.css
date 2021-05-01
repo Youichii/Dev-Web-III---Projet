@@ -30,7 +30,7 @@ div .Informations {
 	height: 90%;
 	background-color: rgb(0, 0, 0);
 	margin: 1%;
-	min-width: 300px;
+	min-width: 380px;
 	display: inline-block;
 	position: flex;
 }
