@@ -23,7 +23,7 @@ const Inscription = () => {
 
 		if (document.getElementById("nom_user").value === "") { 
 			document.getElementById("nom_user").style.borderColor="var(--erreur)";
-			document.getElementById("erreur_nom").innerHTML = "Veuillez entrer votre nom";
+			document.getElementById("erreur_nom").innerHTML = "Votre nom";
 			compteur = false ;
 		}
 		else {
@@ -33,7 +33,7 @@ const Inscription = () => {
 
 		if (document.getElementById("prenom_user").value === "") { 
 			document.getElementById("prenom_user").style.borderColor="var(--erreur)";
-			document.getElementById("erreur_prenom").innerHTML = "Veuillez entrer votre prénom";
+			document.getElementById("erreur_prenom").innerHTML = "Votre prénom";
 			compteur = false ;
 		}
 		else {
@@ -70,7 +70,7 @@ const Inscription = () => {
 
 		if (document.getElementById("numero_user").value === "") { 
 			document.getElementById("numero_user").style.borderColor="var(--erreur)";
-			document.getElementById("erreur_numero").innerHTML = "Votre numéro de maison";
+			document.getElementById("erreur_numero").innerHTML = "Votre numéro";
 			compteur = false ;
 		}
 		else {
@@ -279,14 +279,14 @@ const Inscription = () => {
 								<option value={element}>{element}</option>
 							))}
 						</select>
-						<span className="message_erreur" id="erreur_anniversaire"></span>
+						<div className="message_erreur" id="erreur_anniversaire"></div>
 					</div>
 					
 					<div className="i_titre_sexe pol">SEXE</div>
 					<div className="i_champ_sexe">
                         <div id="radio_femme"><input type="radio" name="myradio" value="f" id="sexef_user" /> FEMME</div>
 						<div id="radio_homme"><input type="radio" name="myradio" value="h" id="sexeh_user" /> HOMME</div>
-						<span className="message_erreur" id="erreur_sexe"></span>
+						<div className="message_erreur" id="erreur_sexe"></div>
 					</div>
 				
 					<div className="i_titre_telephone pol">TELEPHONE</div>
