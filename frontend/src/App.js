@@ -6,6 +6,7 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
+import FormMail from './FormMail'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,11 @@ function App() {
             <Route exact path="/"> 
               <Accueil />
             </Route>
+
+            <Router exact path="/newsletter">
+              <FormMail/>
+            </Router>
+
 
             <Route exact path="/informations"> 
               <Informations />
