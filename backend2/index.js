@@ -40,9 +40,12 @@ app.post('/api/users', (req, res) => {
     const numero = req.body.numero ;
     const postal = req.body.postal ;
     const ville = req.body.ville ;
+    const neswletter = req.body.nwsletter ;
+
+    console.log("news : ", neswletter);
   
-    const sqlInsert = "INSERT INTO `clients`(`nom`, `prenom`, `rue`, `anniversaire`, `gsm`, `mail`, `genre`, `mdp`, `numero`, `postal`, `ville`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville], (err, result) => {
+    const sqlInsert = "INSERT INTO `clients`(`nom`, `prenom`, `rue`, `anniversaire`, `gsm`, `mail`, `genre`, `mdp`, `numero`, `postal`, `ville`, `newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
       console.log(err) ;
       res.send(result);
     })

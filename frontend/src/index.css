@@ -84,6 +84,7 @@ nav img{
 	--survol_bouton : #fbe0bd;
 	--bg: #181616;
 	--bordure : #a0b3b0;
+	--erreur : #ff5a5a;
 }
 /*var(--bordure)*/
 html {
@@ -96,7 +97,7 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 1140px 240px ;
+	grid-template-rows: 10% 1290px 240px ;
 	grid-gap: 2px;
 	padding: 5px;
 }
@@ -175,8 +176,8 @@ a:active {
 
 .c_champs_informations {
 	display: grid;
-	grid-template-columns: 25% 15% 20% 15% 25%;
-	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 9% 4% 7% 3% 7% 4%;
+	grid-template-columns: 31% 9% 20% 9% 31%;
+	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 10% 4% 8% 2.5% 8% 2%;
 	grid-gap: 0px;
 	padding: 5px;
 	background-color: var(--bg);
@@ -482,7 +483,11 @@ select:focus {
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+	-webkit-appearance: none;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px var(--bg) inset;
+	-webkit-text-fill-color:white;
 }
 
 ::-webkit-scrollbar {/*taille*/
@@ -497,6 +502,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ::-webkit-scrollbar-thumb:active {
 	background: #2A2A2A;/*#D57F0D; */
+}
+
+.message_erreur {
+	font-size: 12px;
+	color:var(--erreur);
 }
 
 

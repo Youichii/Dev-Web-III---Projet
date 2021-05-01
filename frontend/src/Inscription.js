@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
 
 const Inscription = () => {
 
@@ -23,40 +22,111 @@ const Inscription = () => {
 		let compteur = true ;
 
 		if (document.getElementById("nom_user").value === "") { 
-			console.log("nom vide");
+			document.getElementById("nom_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_nom").innerHTML = "Veuillez entrer votre nom";
 			compteur = false ;
 		}
+		else {
+			document.getElementById("nom_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_nom").innerHTML = "";
+		}
+
 		if (document.getElementById("prenom_user").value === "") { 
-			console.log("prenom vide");
+			document.getElementById("prenom_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_prenom").innerHTML = "Veuillez entrer votre prénom";
 			compteur = false ;
 		}
-		if (document.getElementById("telephone_user").value === "") { 
-			console.log("téléphone vide");
+		else {
+			document.getElementById("prenom_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_prenom").innerHTML = "";
+		}
+
+		var format_tel = /[+][3][2][4][0-9]{9}/ ;
+		var tel = document.getElementById("telephone_user").value ;
+		if (tel === "") { 
+			document.getElementById("telephone_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_telephone").innerHTML = "Veuillez entrer votre téléphone";
 			compteur = false ;
 		}
+		else if (tel.match(format_tel) === null || tel.match(format_tel)[0] !== tel.match(format_tel).input) {
+			document.getElementById("telephone_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_telephone").innerHTML = "Veuillez respecter le format (+324069525896 par exemple)";
+			compteur = false ;
+		}
+		else {
+			document.getElementById("telephone_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_telephone").innerHTML = "";
+		}
+
 		if (document.getElementById("adresse_user").value === "") { 
-			console.log("adresse vide");
+			document.getElementById("adresse_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_rue").innerHTML = "Votre rue";
 			compteur = false ;
 		}
+		else {
+			document.getElementById("adresse_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_rue").innerHTML = "";
+		}
+
 		if (document.getElementById("numero_user").value === "") { 
-			console.log("numéro vide");
+			document.getElementById("numero_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_numero").innerHTML = "Votre numéro de maison";
 			compteur = false ;
 		}
+		else {
+			document.getElementById("numero_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_numero").innerHTML = "";
+		}
+
 		if (document.getElementById("postal_user").value === "") { 
-			console.log("code postal vide");
+			document.getElementById("postal_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_postal").innerHTML = "Votre code postal";;
 			compteur = false ;
 		}
+		else {
+			document.getElementById("postal_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_postal").innerHTML = "";
+		}
+
 		if (document.getElementById("ville_user").value === "") { 
-			console.log("ville vide");
+			document.getElementById("ville_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_ville").innerHTML = "Votre ville";
 			compteur = false ;
 		}
-		if (document.getElementById("mail_user").value === "") { 
-			console.log("mail vide");
+		else {
+			document.getElementById("ville_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_ville").innerHTML = "";
+		}
+
+		var format_mail = /[@][a-z]+[.][a-z]+/i ;
+		var mail = document.getElementById("mail_user").value;
+		if (mail === "") { 
+			document.getElementById("mail_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_mail").innerHTML = "Veuillez entrer votre mail";
 			compteur = false ;
 		}
+		else if (mail.match(format_mail) === null || mail !== mail.substring(0, mail.match(format_mail).index) + mail.match(format_mail)[0]) {
+			document.getElementById("mail_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_mail").innerHTML = "Veuillez respecter le format mail";
+			compteur = false ;
+		}
+		else {
+			document.getElementById("mail_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_mail").innerHTML = "";
+		}
+
 		if (document.getElementById('selection_jour').selectedIndex === 0 || document.getElementById('selection_mois').selectedIndex === 0 || document.getElementById('selection_annee').selectedIndex === 0) { 
-			console.log("date vide");
+			document.getElementById("selection_jour").style.borderColor="var(--erreur)";
+			document.getElementById("selection_mois").style.borderColor="var(--erreur)";
+			document.getElementById("selection_annee").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_anniversaire").innerHTML = "Veuillez sélectionner votre date de naissance";
 			compteur = false ;
+		}
+		else {
+			document.getElementById("selection_jour").style.borderColor="var(--bordure)";
+			document.getElementById("selection_mois").style.borderColor="var(--bordure)";
+			document.getElementById("selection_annee").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_anniversaire").innerHTML = "";
 		}
 
 		var radios = document.getElementsByName('myradio');
@@ -67,20 +137,30 @@ const Inscription = () => {
 			}
 		}
 		if (valeur === undefined) { 
-			console.log("sexe vide");
+			document.getElementById("erreur_sexe").innerHTML = "Veuillez sélectionner votre sexe";
 			compteur = false ;
+		}
+		else {
+			document.getElementById("erreur_sexe").innerHTML = "";
 		}
 
 		var mdp = document.getElementById("mdp_user").value;
-		var format = /^[!@#$%^&*()_+\-=\[\]{};':"\|,.<>\/?]*$/;
+		var format_mdp = /^[!@#$%^&*()_+\-=\[\]{};':"\|,.<>\/?]*$/;
 		if (mdp === "") { 
-			console.log("mot de passe vide");
+			document.getElementById("mdp_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_mdp").innerHTML = "Veuillez entrer un mot de passe";
 			compteur = false ;
 		}
-		else if (mdp < 12 || mdp.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || mdp.split('').filter(lettre => lettre === lettre.toLowerCase()).length === 0 || mdp.split('').filter(lettre => !isNaN(lettre)).length === 0 || mdp.split('').filter(lettre => lettre.match(format)).length === 0) {
-			console.log("mot de passe pas assez fort");
+		else if (mdp < 12 || mdp.split('').filter(lettre => lettre === lettre.toUpperCase()).length === 0 || mdp.split('').filter(lettre => lettre === lettre.toLowerCase()).length === 0 || mdp.split('').filter(lettre => !isNaN(lettre)).length === 0 || mdp.split('').filter(lettre => lettre.match(format_mdp)).length === 0) {
+			document.getElementById("mdp_user").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_mdp").innerHTML = "Veuillez entrer un mot de passe plus sécurisé (12 caractères minimum, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial)";
 			compteur = false ;
 		}
+		else {
+			document.getElementById("mdp_user").style.borderColor="var(--bordure)";
+			document.getElementById("erreur_mdp").innerHTML = "";
+		}
+
 		return compteur ;
 	}
 
@@ -135,7 +215,7 @@ const Inscription = () => {
 
     return (
         <div className="inscription c_cadre_inscription">
-            <div id="cadre_inscription" class="i_info_inscription c_info_inscription">			
+            <div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 				<div className="i_bouton_con">CONNEXION</div>
 				<div className="i_bouton_insc">INSCRIPTION</div>
 				<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
@@ -143,77 +223,88 @@ const Inscription = () => {
 				<div className="c_champs_informations i_champs_informations">
 					<div className="i_titre_nom pol">NOM</div>
 					<div className="i_champ_nom">
-						<input type="text" id="nom_user" required maxlength="100" />
+						<input type="text" id="nom_user" required maxLength="100" /> 
+						<span className="message_erreur" id="erreur_nom"></span>
 					</div>
 					
 					<div className="i_titre_prenom pol">PRENOM</div>
 					<div className="i_champ_prenom">
-						<input type="text" id="prenom_user" required />
+						<input type="text" id="prenom_user" required /> 
+						<span className="message_erreur" id="erreur_prenom"></span>
 					</div>
 				
-					<div className="i_titre_adresse_insc pol">ADRESSE</div>
+					<div className="i_titre_adresse_insc pol">RUE</div>
 					<div className="i_champ_adresse_insc">
 						<input type="text" id="adresse_user" required />
+						<span className="message_erreur" id="erreur_rue"></span>
 					</div>
 
 					<div className="i_titre_numero_insc pol">NUMERO</div>
 					<div className="i_champ_numero_insc">
 						<input type="number" id="numero_user" required />
+						<span className="message_erreur" id="erreur_numero"></span>
 					</div>
 
 					<div className="i_titre_postal_insc pol">POSTAL</div>
 					<div className="i_champ_postal_insc">
 						<input type="number" id="postal_user" required />
+						<span className="message_erreur" id="erreur_postal"></span>
 					</div>
 
 					<div className="i_titre_ville_insc pol">VILLE</div>
 					<div className="i_champ_ville_insc">
 						<input type="text" id="ville_user" required />
+						<span className="message_erreur" id="erreur_ville"></span>
 					</div>
 				
 					<div className="i_titre_anniversaire pol">DATE DE NAISSANCE</div>
 					<div className="i_champ_anniversaire">
-                    <select id="selection_jour" className="selec_jour">
-							<option selected="selected" value="0">JJ</option>
+                    <select id="selection_jour" className="selec_jour" defaultValue="0">
+							<option value="0">JJ</option>
 							{liste_jours && liste_jours.map(element => (
 								<option value={element}>{element}</option>
 							))}
 						</select>
 
-						<select id="selection_mois" className="selec_mois">
-							<option selected="selected" value="0">Mois</option>
+						<select id="selection_mois" className="selec_mois" defaultValue="0">
+							<option value="0">Mois</option>
 							{liste_mois.map(element => (
 								<option value={element}>{element}</option>
 							))}
 						</select>
 						
-						<select id="selection_annee" className="selec_annee">
-							<option selected="selected" value="0">AAAA</option>
+						<select id="selection_annee" className="selec_annee" defaultValue="0">
+							<option value="0">AAAA</option>
 							{liste_annee && liste_annee.map(element => (
 								<option value={element}>{element}</option>
 							))}
 						</select>
+						<span className="message_erreur" id="erreur_anniversaire"></span>
 					</div>
 					
 					<div className="i_titre_sexe pol">SEXE</div>
 					<div className="i_champ_sexe">
                         <div id="radio_femme"><input type="radio" name="myradio" value="f" id="sexef_user" /> FEMME</div>
 						<div id="radio_homme"><input type="radio" name="myradio" value="h" id="sexeh_user" /> HOMME</div>
+						<span className="message_erreur" id="erreur_sexe"></span>
 					</div>
 				
 					<div className="i_titre_telephone pol">TELEPHONE</div>
 					<div className="i_champ_telephone">
 						<input type="text" id="telephone_user" required />
+						<span className="message_erreur" id="erreur_telephone"></span>
 					</div>
 				
 					<div className="i_titre_mail pol">ADRESSE E-MAIL</div>
 					<div className="i_champ_mail">
 						<input type="text" id="mail_user" required />
+						<span className="message_erreur" id="erreur_mail"></span>
 					</div>
 				
 					<div className="i_titre_mdp_insc pol">MOT DE PASSE</div>
 					<div className="i_champ_mdp_insc">
 						<input type="password" id="mdp_user" required />
+						<span className="message_erreur" id="erreur_mdp"></span>
 					</div>
 				
 					<div className="i_champ_newsletter">
