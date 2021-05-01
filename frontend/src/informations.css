@@ -1,0 +1,58 @@
+/*----------------------------------- INFORMATIONS -------------------------------------------------------- */
+
+
+div .Informations {
+	margin-top: 3%;
+	text-align: center;
+	color : rgb(194, 194, 194);
+	position: absolute;
+	top : 20%;
+	height: 100%;
+	width: 100%;
+	min-width: 30%;
+	min-height: 20%;
+	background-color: rgb(0, 0, 0);
+}
+
+.leftdiv {
+	width: 48%;
+	height: 90%;
+	background-color: white;
+	margin : 1%;
+	min-width: 300px;
+	display: inline-block;
+}
+
+.rightdiv {
+	text-align:left;
+	font-size:1.2em;
+	width: 48%;
+	height: 90%;
+	background-color: rgb(0, 0, 0);
+	margin: 1%;
+	min-width: 300px;
+	display: inline-block;
+	position: flex;
+}
+
+ul.Days {
+	text-align: left;
+	width: 25%;
+	height: 100%;
+	margin-bottom: 15%;
+	margin-top: 5%;
+	min-width: 150px ;
+	display: inline-block;
+
+}
+
+ul.Hours {
+	display: inline-block;
+	min-width: 150px;
+	text-align: left;
+	width: 25%;
+	height: 100%;
+	list-style-type: none;
+	margin-bottom: 15%;
+	margin-top: 5%;
+}
