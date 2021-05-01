@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import './communaute.css';
 
 const Communaute = () => {
     
