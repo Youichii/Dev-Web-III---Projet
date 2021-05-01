@@ -36,7 +36,6 @@ code {
 
 /* Barre de navigation */
 
-<<<<<<< HEAD
 .Navbar {
 	display:grid;
     grid-template-columns: 33% 33% 33%;
@@ -47,8 +46,6 @@ code {
 nav ul{
   list-style-type: none;
 }
-=======
->>>>>>> origin/Banner
 
 .navbar{ 
   background-color: black;
@@ -70,7 +67,6 @@ nav ul{
 .navbar a{
   display : block;
   color: white;
-<<<<<<< HEAD
   border-bottom: 2px solid transparent;
   padding: 10px 0px;
   color: orange;
@@ -89,14 +85,6 @@ nav img{
 
 
 /*-------------------------------------------------------STAFF---------------------------------------------------------------*/
-
-=======
-  /* padding: auto; */
-  text-decoration: none;
-  /* display: grid; */
-  margin-top:15%;
-  
-}
 
 .navbar a:hover{
   color : #dfb54f;
@@ -254,4 +242,3 @@ height: max-content;
   color:blueviolet;
 
 }
->>>>>>> origin/Banner
