@@ -72,6 +72,8 @@ app.get('/api/users/:idClient', (req, res) => {
     const sqlInsert = "SELECT rue, numero, postal, ville FROM `clients` where idClient = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);
+    })
+})
 
 app.get('/api/orders', (req, res) => {
     const sqlInsert = "SELECT RE.idEtat, RE.idCom, RE.idClient, CL.prenom, CL.gsm, RE.idEtat, RE.hLivree, RE.dateCom, RE.commentaire, RE.idMethode, RE.rue, RE.numero, RE.postal, RE.ville, cast(sum(CO.quantite * ME.prix) AS DECIMAL(10, 1)) as prix \
@@ -117,8 +119,7 @@ app.post('/api/orders', (req, res) => {
     })
 })
 
-app.delete('/api/orders', (req, res) => {
-    const commande  = req.body.commande 
+
     
 app.delete('/api/orders', (req, res) => {
     const commande  = req.body.commande ;
@@ -173,6 +174,8 @@ app.get('/api/hours', (req, res) => {
       console.log("result : ", result) ;
       res.send(result) ;
     })
+})
+
 app.get('/api/panier/:idCommande', (req, res) => {
   const idCommande  = req.params.idCommande 
 

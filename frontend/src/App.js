@@ -42,7 +42,7 @@ function App() {
             </Route>
 
             <Route exact path="/stat" component={Stat} > 
-              <Statistiques />
+              <Stat />
             </Route>
 
             <Route exact path="/communaute"> 
