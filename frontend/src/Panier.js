@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react" ;
+import "./panier.css";
 
 const Panier = () => {
     const [heures, setHeures] = useState([]);
