@@ -1,163 +1,285 @@
-import {useState} from "react" ;
+import {useEffect, useState} from "react" ;
+import React from 'react'
+import "./staff.css";
 
 const Staff = () => {
     
-    const [afaire, setAfaire] = useState([{"id" : "aaaaz", "heure_passee" : "18h06", "nom" : "Jean", "contact" : "0000000000", "adresse" : "Rue kiku ojizjroajzrkjkije", "commande" : ["poulet - 3", "viande - 4"], "prix" : 17, "heure_prevue" : "19h00"},
-    {"id" : "aaaaa", "heure_passee" : "06h25", "nom" : "Pierre", "contact" : "1111111111", "adresse" : "alkz", "commande" : ["poet"], "prix" : 96, "heure_prevue" : "07h00"},
-    {"id" : "aaaab", "heure_passee" : "07h25", "nom" : "Pirre", "contact" : "11111", "adresse" : "alkfghftz", "commande" : ["ulet"], "prix" : 967, "heure_prevue" : "07h01"},
-    {"id" : "aaaac", "heure_passee" : "08h25", "nom" : "Pire", "contact" : "1111111", "adresse" : "al654kz", "commande" : ["pout"], "prix" : 9, "heure_prevue" : "07h02"},
-    {"id" : "aaaad", "heure_passee" : "09h25", "nom" : "Pie", "contact" : "11111111", "adresse" : "alkazrrez", "commande" : ["polet"], "prix" : 6, "heure_prevue" : "07h03"},
-    {"id" : "aaaae", "heure_passee" : "21h36", "nom" : "Richard", "contact" : "222222222", "adresse" : "zraz", "commande" : ["poulet"], "prix" : 63.5, "heure_prevue" : "22h15"},
-    {"id" : "aaaaf", "heure_passee" : "19h45", "nom" : "Vincent", "contact" : "3333333333", "adresse" : "hrehyer", "commande" : ["olet"], "prix" : 452, "heure_prevue" : "20h30"},
-    {"id" : "aaaag", "heure_passee" : "19h27", "nom" : "Jeanne", "contact" : "4444444444", "adresse" : "gfbvc", "commande" : ["poule"], "prix" : 75.2, "heure_prevue" : "20h00"},
-    {"id" : "aaaah", "heure_passee" : "18h00", "nom" : "Marie", "contact" : "5555555555", "adresse" : "azaez", "commande" : ["pulet"], "prix" : 10, "heure_prevue" : "18h30"},
-    {"id" : "aaaai", "heure_passee" : "17h54", "nom" : "Clem", "contact" : "66666666666", "adresse" : "vpcvht", "commande" : ["poulet"], "prix" : 5, "heure_prevue" : "18h15"},
-    {"id" : "aaaaj", "heure_passee" : "14h06", "nom" : "Tom", "contact" : "77777777777", "adresse" : "tiutur", "commande" : ["oulet"], "prix" : 13, "heure_prevue" : "15h45"},
-    {"id" : "aaaak", "heure_passee" : "03h59", "nom" : "Louise", "contact" : "888888888", "adresse" : "hrturaz", "commande" : ["pou"], "prix" : 23.15, "heure_prevue" : "04h30"}]) ;
-    
-    const [encours, setEncours] = useState([]);
+    let compteur_afaire = 1 ;
+    let compteur_encours = 1 ;
+    let compteur_envoye = 1 ;
 
-    const [envoye, setEnvoye] = useState([]);
-    
-    const envoi_etape1 =(identifiant) => {
-        const newAfaire = afaire.filter(element => element.id !== identifiant);
-        const newEncours = encours.concat(afaire.filter(element => element.id === identifiant));
+    const [donnees, setDonnees] = useState(null);
+    const [changement, setChangement] = useState(true);
 
-        setAfaire(newAfaire) ;
-        setEncours(newEncours) ;
+    useEffect(() => {
+        var myInit = { method: 'GET',
+               headers: {'Content-Type': 'application/json'},
+        };
+
+        fetch('http://localhost:3001/api/orders', myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setDonnees(data);
+        })
+
+    }, [changement]);
+
+    const ajouter_commandes = (idCommande, type_commande) => {
+        var myInit = { method: 'PUT',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({commande : idCommande, type: type_commande})
+        };
+
+        fetch('http://localhost:3001/api/orders', myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setChangement(!changement) ;
+        })
     }
 
-    const envoi_etape2 =(identifiant) => {
-        const newEncours = encours.filter(element => element.id !== identifiant);
-        const newEnvoye = envoye.concat(encours.filter(element => element.id === identifiant));
+    const supprimer_commandes = (idCommande) => {
+        var myInit = { method: 'DELETE',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({"commande" : idCommande})
+        };
 
-        setEncours(newEncours) ;
-        setEnvoye(newEnvoye) ;
+        fetch('http://localhost:3001/api/orders', myInit)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setChangement(!changement) ;
+        })
     }
 
-    const envoi_etape3 =(identifiant) => {
-        const newEnvoye = envoye.filter(element => element.id !== identifiant);
-
-        setEnvoye(newEnvoye) ;
+    const nouveau_bg = (identifiant) => {
+        let ligne_info = document.getElementById(identifiant);
+        let couleur_survol = "var(--bg_survol)";
+        
+        ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_heure_prevue")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_div_bouton")[0].style.backgroundColor=couleur_survol;
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.backgroundColor="#4A4444";
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.color = "white";
     }
+
+    const ancien_bg = (identifiant, couleur) => {
+        let ligne_info = document.getElementById(identifiant);
+        let liste_aliments = donnees.filter(element => element.idClient == identifiant)[0] ;
+        let couleur_quitter, bg_bouton ;
+        (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
+        (liste_aliments.idMethode == "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
+        
+        ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_heure_prevue")[0].style.backgroundColor=couleur_quitter;
+        ligne_info.getElementsByClassName("i_div_bouton")[0].style.backgroundColor=bg_bouton;
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.backgroundColor="var(--bg_titres)";
+        ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.color = "black";
+    }
+
+
+    const load_panier = (informations, identifiant) => {
+        let identifiantCommande = informations.idCom ; 
+        fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json' }
+        }).then(res => {
+            return res.json();
+        })
+        .then(data => {
+            
+            let nbr_lignes = "";
+            let info_commentaire, lieu ;
+            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.rue + '</span></div> \
+                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.numero + '</span></div> \
+                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.ville + '</span></div> \
+                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.postal + '</span>' ;
+
+            (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
+            (informations.idMethode == "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
+
+            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            for (let i=0 ; i< data.length ; i++){
+                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
+                nbr_lignes += "14% " ;
+            }
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom.substring(14, 19) + " - " + informations.dateCom.substring(8, 10) + "/" + informations.dateCom.substring(5, 7) + "/" + informations.dateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
+                            
+            document.getElementById(identifiant).innerHTML = liste_finale;
+            document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
+        })
+    }
+
+    const elements_afaire = (elem) => {
+        let taille = "12% ";
+        let nbr_lignes_afaire = "12% " ;
+        let type_couleur, bg_bouton ;
+        (compteur_afaire%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_afaire++ ;
+        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
+        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
+
+        return (
+            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                </div>
+                <div className={`i_div_bouton ${bg_bouton}`}>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
+                </div> 
+            </div>
+        )
+    }
+
+    const elements_encours = (elem) => {
+        let taille = "12% ";
+        let  nbr_lignes_encours = "12% ";
+        let type_couleur, bg_bouton ;
+        (compteur_encours%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_encours++ ;
+        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        donnees.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
+        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
+
+        return (
+            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                </div>
+                <div className={`i_div_bouton ${bg_bouton}`}>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
+                </div> 
+            </div>
+        )
+    }
+
+    const elements_envoye = (elem) => {
+        let taille = "12% ";
+        let nbr_lignes_envoye = "12% " ;
+        let type_couleur, bg_bouton ;
+        (compteur_envoye%2 == 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
+        compteur_envoye++ ;
+        (elem.idMethode == "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+
+        donnees.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
+        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
+
+        return (
+            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
+                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                </div>
+                <div className={`i_div_bouton ${bg_bouton}`}>
+                    <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
+                </div> 
+            </div>
+        )
+    }
+
+    /*const [heure_courante, setHeureCourante] = useState("allo");
+    function RepeatMessage({ message }) {
+        useEffect(() => {
+          setInterval(() => {
+            setHeureCourante(new Date().toLocaleTimeString()) ;
+          }, 1000);
+        });
+        <RepeatMessage message="coucou" />
+        return <div className="message" style={{color:"white"}} >{heure_courante}</div>;
+    }*/
 
     return (
-        <div className="staff">
-            <div>
-                <table id="titre_colonne_afaire">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_afaire">
-                    {afaire.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape1(element.id)}>suivant</button></td>
-                            </tr>
-                        </table>
-                    ))}
+        <div className="staff c_page">
+
+            <div className="c_cadre_commandes_afaire i_cadre_attente">
+                <div className="c_titre_fileattente i_titre_fileattente">
+					<div className="file_attente">File d'attente</div>
+					<div className="barre_haut_attente"></div>
+					<div className="barre_bas_attente"></div>
+				</div>
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
+
+                <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
+                    {donnees && donnees.filter(element => element.idEtat === "AFA").map(elements_afaire)}
+                </div>
+
+                <div className="details_commande">
+                    <div id="afaire" class='info_commande c_info_commande'></div>
+                </div>
+
+                <div className="i_bout_cadre_afaire"></div>
             </div>
 
-            <div>
-                <table id="titre_colonne_encours">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_encours">
-                    {encours.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape2(element.id)}>suivant</button></td>
-                            </tr>
-                        </table>
-                    ))}
+            <div className="c_cadre_commandes_encours i_cadre_preparation">
+                <div className="c_titre_preparation i_titre_preparation">
+					<div className="en_cours_preparation">En cours de préparation</div>
+					<div className="barre_haut_preparation"></div>
+					<div className="barre_bas_preparation"></div>
+				</div>
+
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
+                <div className="i_commandes_encours c_commandes" id="cadre_encours">
+                    {donnees && donnees.filter(element => element.idEtat === "ENC").map(elements_encours)}
+                </div>
+
+                <div className="details_commande">
+                    <div id="encours" class='info_commande c_info_commande'></div>
+                </div>
+
+				<div className="i_bout_cadre_afaire"></div>
             </div>
 
-            <div>
-                <table id="titre_colonne_envoye">
-                    <tr>
-                        <td width="60px">Heure</td>
-                        <td width="90px">Nom</td>
-                        <td width="90px">Contact</td>
-                        <td width="180px">Adresse</td>
-                        <td width="80px">Commande</td>
-                        <td width="60px">Prix</td>
-                        <td width="140px">Heure <br /> prévue</td>
-                    </tr>
-                </table>
-                <div className="cadre" id="cadre_envoye">
-                    {envoye.map( element => (
-                        <table>
-                            <tr id={element.id}>
-                                <td width="72px">{element.heure_passee}</td>
-                                <td width="112px">{element.nom}</td>
-                                <td width="105px">{element.contact}</td>
-                                <td width="220px">{element.adresse}</td>
-                                <td width="115px">
-                                    <select width="95px">
-                                        <option>
-                                            {element.id}
-                                        </option>
-                                        {element.commande.map(nourriture => (
-                                            <option>{nourriture}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td width="80px">{element.prix}</td>
-                                <td width="72px">{element.heure_prevue}</td>
-                                <td><button onClick={() => envoi_etape3(element.id)}>suivant</button></td>
-                            </tr>
-                        </table>
-                    ))}
+            <div className="c_cadre_commandes_envoye i_cadre_envoi">
+                <div className="c_titre_envoi i_titre_envoi">
+					<div className="en_cours_envoi">En cours d'envoi</div>
+					<div className="barre_haut_envoi"></div>
+					<div className="barre_bas_envoi"></div>
+				</div>
+
+                <div className="c_titres_commandes i_titres_commandes">
+                    <div className="i_heures">Heure</div>
+					<div className="i_noms">Nom</div>
+					<div className="i_contacts">Contact</div>
+					<div className="i_prix_titre">Prix</div>
                 </div>
+                <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
+                    {donnees && donnees.filter(element => element.idEtat === "ENV").map(elements_envoye)}
+                </div>
+
+                <div className="details_commande">
+                    <div id="envoye" class='info_commande c_info_commande'></div>
+                </div>
+
+				<div className="i_bout_cadre_afaire"></div>
             </div>
         </div>
     );
