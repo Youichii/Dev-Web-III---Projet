@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react" ;
 import React from 'react'
+import "./staff.css";
 
 const Staff = () => {
     
