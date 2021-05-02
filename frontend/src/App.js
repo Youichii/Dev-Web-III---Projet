@@ -45,7 +45,7 @@ function App() {
               <Stat />
             </Route>
 
-            <Route exact path="/communaute">
+            <Route exact path="/Communaute">
               <Communaute />
             </Route>
 

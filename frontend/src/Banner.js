@@ -1,6 +1,7 @@
 import logo from "./img/logo_banner.jpg"
 
 const Banner = () => {
+    require('./banner.css')
     return(
         <nav className="navbar">                    
             <li><a href="/" >Accueil</a></li>
