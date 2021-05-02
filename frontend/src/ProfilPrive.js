@@ -29,11 +29,10 @@ const ProfilPrive = () => {
 
     return (
         <div onLoad={getClient} className="profilPrive">
-            <Header title= {"Your profile" } headerclass="profilheader"  />
+            <Header title= {"Votre profil" } headerclass="profilheader"  />
             
             <Picture /> 
-            <div className="privateinfo">
-                    
+            <div className="privateinfo">                    
                 <div className="gauche">
                     {clientInfosList.map((val) =>{
                         return (

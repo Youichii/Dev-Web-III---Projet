@@ -5,15 +5,8 @@ import Button from './Button'
 const Picture = ( { url, desc } ) => {
     return (
         <div className="profilepicture">
-            <div className="picture">
+            <div  className="picture">
                 <img src= { url } alt= { desc }></img>
-            </div>
-            <div className="picbutton">
-                <form action="/profil-prive">
-                    Changer d'avatar :
-                    <input className="btn" type="file" id="myFile" name="filename"></input>
-                    <input className="btn" type="submit"></input>
-                </form>
             </div>
         </div>
     )
