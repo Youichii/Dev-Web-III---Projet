@@ -1,4 +1,4 @@
-import logo from "./img/logo_banner.jpg"
+import logo from "./img/logo.jpg"
 
 const BannerPatron = () => {
     require('./banner.css')

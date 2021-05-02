@@ -1,6 +1,6 @@
 /*import { useState } from 'react'*/
 import React from 'react'
-import Navbar from './Navbar';
+import Navbar from './Banner';
 import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
