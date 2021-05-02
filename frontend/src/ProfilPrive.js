@@ -43,10 +43,12 @@ const ProfilPrive = () => {
                         </label>
                         );
                     })}
-                    <input type="text" name="Username" maxLength="10" placeholder="Changer le pseudo" onChange={(e) => {
-                        setUsername(e.target.value)
-                    }}/>
-                    <button onClick={submitUsername}>Modifier</button>
+                    <form> 
+                        <input type="text" name="Username" minLength="5" maxLength="10" placeholder="Changer le pseudo" onChange={(e) => {
+                            setUsername(e.target.value)
+                        }}/>
+                        <button onClick={submitUsername}>Modifier</button>
+                    </form>
                     {clientInfosList.map((val) =>{
                         return (
                             <p>
