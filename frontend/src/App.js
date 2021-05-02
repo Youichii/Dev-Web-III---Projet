@@ -8,6 +8,7 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive'
+import Home from './components/pages/Home'
 
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
@@ -60,6 +61,9 @@ function App() {
             <Route exact path="/profil-prive"> 
               <ProfilPrive />
             </Route>
+            <Route path ="/" exact component={Home}/>
+            <Route path = "/home" exact component={Home}/>
+      
 
           </Switch>
         </div>
