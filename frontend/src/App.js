@@ -1,6 +1,6 @@
 /*import { useState } from 'react'*/
 import React from 'react'
-import Navbar from './Navbar';
+import Navbar from './Banner';
 import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
@@ -45,7 +45,7 @@ function App() {
               <Stat />
             </Route>
 
-            <Route exact path="/communaute">
+            <Route exact path="/Communaute">
               <Communaute />
             </Route>
 
