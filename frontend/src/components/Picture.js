@@ -1,4 +1,3 @@
-import picture from '../img/profile.jpg'
 import Button from './Button'
 
 
@@ -6,15 +5,10 @@ const Picture = ( { url, desc } ) => {
     return (
         <div className="profilepicture">
             <div  className="picture">
-                <img src= { url } alt= { desc }></img>
+                <img src= "https://stickeramoi.com/15518-large_default/sticker-toilette-homme.jpg" alt="logo homme"></img>
             </div>
         </div>
     )
-}
-
-Picture.defaultProps = {
-    url : picture,
-    desc : "cat picture",
 }
 
 export default Picture
