@@ -311,6 +311,191 @@ app.get('/api/hours', (req, res) => {
     })
 })
 
+// requête GET dans la table communaute pour importer tout le contenu de la communauté 
+app.get('/users', (req, res) =>{
+  db.query('select * FROM communaute ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// requête GET dans la table commentaire pour importer tous les commentaires sur la communauté
+app.get('/comments', (req, res) =>{
+    db.query('select * FROM commentaire ', (err, result) => {
+      if(err) throw err ;
+      res.send(result);
+    })
+})
+
+
+// requête PUT pour UPDATE le satus d'un client
+app.put('/status', (req, res) =>{
+    const Status = req.body.Status
+    const Couleur  = req.body.Couleur 
+    const Identifiant= req.body.Identifiant
+    
+  
+    const sqlInsert = " UPDATE communaute SET Couleur = ? , Status = ? WHERE Identifiant = ?;" 
+  
+    db.query(sqlInsert, [Couleur,Status, Identifiant], (err, result) => {
+      if(err) throw err; 
+      res.send(result); 
+    })
+})
+
+// requête POST pour écrire les commentaires du patron dans la base de donnée 
+app.post('/comment', (req, res) =>{
+    const IdUtilisateur = req.body.IdUtilisateur
+    const Commentaire  = req.body.Commentaire
+    const IdCommentaire  = req.body.IdCommentaire 
+
+    const sqlInsert = " INSERT INTO `commentaire` (`IdUtilisateur`, `Commentaire`, `IdCommentaire`) VALUES (?, ?, ?);"
+  
+    db.query(sqlInsert, [IdUtilisateur, Commentaire, IdCommentaire], (err, result) => {
+      if(err) throw err;  
+      res.send(result); 
+    })
+})
+
+// requête DELETE pour supprimer un commentaire de la table commentaire 
+app.delete('/commentaire', (req, res) => {
+    const IdCommentaire  = req.body.IdCommentaire ;
+
+    const sqlInsert = "DELETE FROM `commentaire` WHERE `IdCommentaire` = ?"
+
+    db.query(sqlInsert, [IdCommentaire], (err, result) => {
+        if(err) throw err;  
+        res.send(result) ;
+    })
+    
+})
+
+    
+// Requête GET pour trier le contenu de la communauté sur base de la ville 
+app.get('/usersville/:ville', (req, res) =>{
+   
+    const Ville = req.params.ville
+   
+    const sqlInsert = "SELECT * FROM `communaute` WHERE `Ville` = ?"
+
+    db.query(sqlInsert,[Ville],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+
+app.get('/usersstatus/:status', (req, res) =>{
+   
+    const Status = req.params.status
+
+    const sqlInsert = "SELECT * FROM `communaute` WHERE `Status` = ?"
+
+    db.query(sqlInsert,[Status],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+
+app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{
+   
+    const Status = req.params.valueStatus
+    const Ville = req.params.valueVille
+    const Nom = req.params.valueNom
+    
+    const sqlInsert = " SELECT * FROM `communaute` WHERE `Status` = ? && `Ville` = ? && `Nom` = ? "
+   
+    db.query(sqlInsert,[Status, Ville, Nom],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+app.get('/usersnom/:nom', (req,res) =>{
+
+    const Nom = req.params.valueNom
+ 
+    const sqlInsert = "SELECT * FROM `communaute` WHERE `Nom` = ?"
+
+    db.query(sqlInsert,[Nom],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+
+ 
+
+
+// requête GET dans la table menu pour importer tout le contenu du menu 
+app.get('/menu', (req, res) =>{
+  db.query('select * FROM menu ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// requête GET dans la table categories pour importer toutes les catégories de menu. 
+app.get('/categories', (req, res) =>{
+  db.query('select NomCat FROM categories ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// // requête POST pour exporter la commande du client 
+// app.post('/orders', (req, res) =>{
+//   const id_comm = req.body.id_comm
+//   const id_client = req.body.id_client 
+//   const contenu = req.body.contenu
+
+//   const sqlInsert = "INSERT INTO repartition VALUES (IdComm = ?,IdClient = ?, Methode = ?, Date = ?, HLivraison = ?, Etat = ?, CommClient = ?, AdresseComplete = ?)"
+
+//   db.query(sqlInsert, [id_comm, id_client, 'coucou', 'caca','pip' ,'Temporaire', contenu, ''], (err, result) => {
+//     if(err) throw err; 
+//     res.send(result); 
+//   })
+// })
+
+
+// POST qui envoie les article dans le panier temporaire
+app.post('/intermediateBasket', (req, res) => {
+  const IdComm = req.body.IdComm
+  const Article = req.body.Article
+  const Quantite = req.body.Quantite
+
+
+  const sqlInsert = "INSERT INTO `sauvegarde` (`id_commande`, `article`, `quantite`) VALUE (?, ?, ?); "
+  db.query(sqlInsert, [IdComm, Article, Quantite], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
+})
+
+
+// PUT qui change la quantite d'un produit dans la DB 
+app.put('/changingquantity', (req, res) =>{
+  const IdComm = req.body.IdComm
+  const Article = req.body.Article
+  const Quantite = req.body.Quantite
+  
+  const sqlInsert = " UPDATE `sauvegarde` SET `quantite` = ? WHERE `id_commande` = ? && `article` = ? ;" 
+
+  db.query(sqlInsert, [Quantite, IdComm, Article], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
+})
+
+//GET les infos de la commande en cours
+app.get('/loadingBasket', (req, res) =>{
+  db.query('select * FROM sauvegarde ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
 
 
  

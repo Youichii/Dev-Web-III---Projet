@@ -1,11 +1,7 @@
 import {useEffect, useState} from 'react';
 import React from 'react';
 
-
-
-
 const Carte = () => {
-    require("./carte.css")
     const [tableau_panier, setTableau]= useState([]) 
     const [titres, setTitres] = useState(null)
     const [paniers, setPanier] = useState(null)
@@ -18,6 +14,7 @@ const Carte = () => {
 
         
     useEffect(()=>{
+        console.log("coucou")
 
         var remplirCategorie = {method: 'GET', 
             headers:{'Content-type':'application/json'}

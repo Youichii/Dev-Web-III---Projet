@@ -7,7 +7,8 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
-import ProfilPrive from './ProfilPrive'
+import ProfilPrive from './ProfilPrive';
+
 
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
@@ -51,9 +52,9 @@ function App() {
               <Communaute />
             </Route>
 
-
-
-
+            <Route exact path="/Carte">
+              <Communaute />
+            </Route>
 
             <Route exact path="/inscription">
               <Inscription />
@@ -63,7 +64,7 @@ function App() {
               <ProfilPrive />
             </Route>
 
-            <Route exact path="/menu"> 
+            <Route exact path="/Menu"> 
               <Menu />
             </Route>
           </Switch>
