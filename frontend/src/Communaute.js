@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
 const Communaute = () => {
-    
+    require("./communaute.css")
     let [utilisateurs, setUtilisateurs] = useState(null)
     let[commentaires, setCommentaires] = useState(null)
     let [bis, setBis] = useState(null)
