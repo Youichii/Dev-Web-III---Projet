@@ -1,7 +1,9 @@
 /*import { useState } from 'react'*/
 import React from 'react'
 import Navbar from './Banner';
-import Accueil from './Accueil';
+import Accueil from './components/Accueil';
+import Navbar from './Navbar';
+//import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
@@ -9,6 +11,8 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 
+import ProfilPrive from './ProfilPrive'
+import Home from './components/pages/Home'
 
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
@@ -57,12 +61,16 @@ function App() {
             </Route>
 
             <Route exact path="/inscription">
+            <Route exact path="/inscription"> 
               <Inscription />
             </Route>
 
             <Route exact path="/profil-prive">
               <ProfilPrive />
             </Route>
+            <Route path ="/" exact component={Home}/>
+            <Route path = "/home" exact component={Home}/>
+      
 
             <Route exact path="/Menu"> 
               <Menu />
