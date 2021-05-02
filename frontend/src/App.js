@@ -11,6 +11,8 @@ import ProfilPrive from './ProfilPrive'
 
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
+import Menu from "./Menu.js";
+// import Banner from "./Banner.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Stat from './components/Stat';
 
@@ -57,10 +59,16 @@ function App() {
               <Inscription />
             </Route>
 
+<<<<<<< HEAD
             <Route exact path="/profil-prive">
               <ProfilPrive />
             </Route>
 
+=======
+            <Route exact path="/menu"> 
+              <Menu />
+            </Route>
+>>>>>>> CarteRestaurant
           </Switch>
         </div>
       </div>

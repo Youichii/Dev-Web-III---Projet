@@ -135,3 +135,12 @@ app.get('/usersnom/:nom', (req,res) =>{
 
 
  
+app.use(express.json())
+app.use(cors())  
+
+app.get('/menu', (req, res) =>{
+  db.query('select * FROM menu ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
