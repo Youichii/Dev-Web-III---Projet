@@ -1,128 +1,162 @@
 import {useEffect, useState} from 'react';
-// import Axios from 'axios';
 import React from 'react';
 
 
 
+
 const Carte = () => {
-
-    var tableau_panier = []
-    
-
-    
-    const titres = ["Poulet", "Poisson", "Salade", "Végétarien", "Soft", "Alcool", "Menu Découverte"]; 
-
+    require("./carte.css")
+    const [tableau_panier, setTableau]= useState([]) 
+    const [titres, setTitres] = useState(null)
+    const [paniers, setPanier] = useState(null)
     const [contenu, setContenu]= useState(null)
 
+    let id_comm = "p2000"
+    let id_client = "Pouspous2000"
+    let contenu_panier = 0
 
-   
 
-    function panier (id) {
         
-
-        let qtt = document.getElementById(id+"compteur").value
-        let compteur = 0 
-    
-
-        if(qtt === 0){
-          
-        }
-        if(tableau_panier.length === 0){
-            contenu.filter(item => id === item.id).map(itemid => 
-                tableau_panier.push({
-                    id : id,
-                    article: itemid.article,
-                    quantite: qtt,
-                    prix : itemid.prix
-                })
-            )
-  
-        }
-        else{
-            tableau_panier.filter(filtre_id => id === filtre_id.id).map(basket =>
-                    compteur += 1
-                )
-            if (compteur === 1){
-                tableau_panier.filter(filtre_id => id === filtre_id.id).map(basket =>
-                    basket.quantite = qtt
-                )
-            }
-            else {
-                contenu.filter(item => id === item.id).map(itemid => 
-                    tableau_panier.push({
-                        id : id,
-                        article: itemid.article,
-                        quantite: qtt,
-                        prix : itemid.prix
-                    })
-                )
-            }          
-        }
-            
-    }
-
-    const Afficher_commande =() => {
-        let prix_total = 0 
-       
-        let display = document.getElementById("afficherCacher").style.display
-        if(display === 'none'){
-            document.getElementById("afficherCacher").style.display = 'block'
-            document.getElementById("afficherCacher").innerHTML = ""
-        }
-        else{
-            document.getElementById("afficherCacher").style.display = 'none'
-        }
-        let carte = tableau_panier 
-        console.log(carte)
-        document.getElementById("afficherCacher").innerHTML=""
-        tableau_panier.filter(tp => tp.quantite !== "0" ).map(tp=>( 
-
-            document.getElementById("afficherCacher").innerHTML += "Article : " + tp.article + "<br>" + 
-                                                                   "Quantitée: " + tp.quantite + "<br>" +
-                                                                    "Prix : " + (tp.prix*tp.quantite).toFixed(2) + "<br>"
-
-                                        
-        )
-        )
-        
-        tableau_panier.filter(tp => tp.quantite !== "0" ).map(tp=>( 
-            // document.getElementsByClassName("prix_total").innerHTML += tp.quantite*tp.prix
-            prix_total += tp.quantite*tp.prix 
-            
-        ))
-        console.log(prix_total)
-        
-                        
-    }
-    
     useEffect(()=>{
 
-        fetch('http://localhost:3001/menu')
+        var remplirCategorie = {method: 'GET', 
+            headers:{'Content-type':'application/json'}
+        }
+        fetch('http://localhost:3001/categories', remplirCategorie)
+        .then(response=>{ 
+            return response.json()
+        })
+        .then(json =>{ 
+            setTitres(json)
+        })
+        
+
+        var remplirMenu = {method: 'GET', 
+            headers: {'Content-type':'application/json'}
+        }; 
+        fetch('http://localhost:3001/menu', remplirMenu)
             .then(response=>{ 
                 return response.json()
             })
             .then(json =>{ 
                 setContenu(json)
-                
+            }) 
+           
+        
+        var panier = {method: 'GET', 
+        headers: {'Content-type':'application/json'}
+        }; 
+        fetch('http://localhost:3001/loadingBasket', panier)
+            .then(response=>{ 
+                return response.json()
             })
-            
-            
-        })
-        
-            
-            
-        
-   
-    
-    
+            .then(json =>{ 
+                setPanier(json)
+            }) 
+    }, [])
 
+
+
+        
+    function panier(article) {
+    
+        // récupère la quanité indiqué sur la page. 
+        let qtt = document.getElementById(article+"compteur").value
+              
+        //  si il n'y a rien dans la table, on y mets d'office l'article
+        if(contenu_panier === 0){
+            
+            var remplirPanier = { method:'POST', 
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({  IdComm : id_comm, 
+                                    Article : article,
+                                    Quantite : qtt
+                                })  
+
+            }
+            fetch('http://localhost:3001/intermediateBasket', remplirPanier)
+            .then(res => {
+                return res.json();
+            })
+        
+            contenu_panier +=1
+        }
+
+        else{
+            
+            let panier_inter = []
+
+            // on verifie que l'article n'est pas déjà dans la table 
+            paniers.filter(panier => panier.id_commande === id_comm && panier.article === article).map(changerqtt => panier_inter.push(changerqtt))
+            
+            // si il n'y est pas, on peut mettre 
+            if(panier_inter.length === 0 ){
+                console.log("coucou")
+                var changerquantite = { method:'PUT', 
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({  IdComm : id_comm, 
+                                        Article : article,
+                                        Quantite : qtt
+                                    }) 
+                }
+                fetch('http://localhost:3001/changingquantity',changerquantite)
+                .then(res => {
+                    return res.json();
+                }) 
+            }
+            else{
+               
+                var remplirPanier = { method:'POST', 
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({  IdComm : id_comm, 
+                                        Article : article,
+                                        Quantite : qtt
+                                    })  
+                }
+                fetch('http://localhost:3001/intermediateBasket', remplirPanier)
+                .then(res => {
+                    return res.json();
+                })
+    
+            }
+        }
+    }
+        
+
+
+        
+
+
+    
+    function payer() {
+        console.log("coucou")
+        var myInit = { method:'POST', 
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({  IdComm : id_comm, 
+                                    IdClient : id_client,
+                                    Methode : null,
+                                    Date : null,
+                                    HLivraison : null,
+                                    Etat:"Temporaire",
+                                    CommClient: contenu,
+                                    AdresseComplete:null
+            })
+        }
+        fetch('http://localhost:3001/orders', myInit)
+            .then(res => {
+                return res.json();
+            })
+    }
+    
+        
     return(
+        <div>
         <div id = 'bordPrincipal'>
-            {titres.map(titre => (
+            {titres&&titres.map(titre => (
                 <fieldset className="cadre">
                     <details>
-                        <summary className="titre" key = {titre}> {titre} </summary>
-                        {contenu && contenu.filter(contenus => contenus.Catégorie === titre).map(contenu_filtre => (
+                        <summary className="titre" key = {titre.NomCat}> {titre.NomCat} </summary>
+                        {contenu && contenu.filter(contenus => contenus.Catégorie === titre.NomCat).map(contenu_filtre => (
                             <div> 
                                 <div className="haut">
                                 <span className="contenu">{contenu_filtre.Produit}</span>
@@ -130,8 +164,8 @@ const Carte = () => {
                                 
                                 </div>
                                 <div className="bas">  
-                                <span className="description">{contenu_filtre.Commentaire}</span>  
-                                <span><input id= {contenu_filtre.id+ "compteur"} className="valeur" type ="number"  step="1" min="0" defaultValue="0" onChange= {()=>panier(contenu_filtre.id)} ></input></span>
+                                <span className="description">{contenu_filtre.Description}</span>  
+                                <span><input id= {contenu_filtre.Produit+ "compteur"} className="valeur" type ="number"  step="1" min="0" defaultValue="0" onChange= {()=>panier(contenu_filtre.Produit)} ></input></span>
                                 </div>
                             </div>
                         ))}
@@ -140,11 +174,17 @@ const Carte = () => {
                 </fieldset>
             ))}
             
-            <button id="voir" onClick={Afficher_commande} className = "boutton">Voir ma commande</button> 
-            
-            
-            
+               
         </div>
+        
+        <span className="symbolpanier">Panier   &#128722;
+        <div id="panier">Vous n'avez pas d'articles pour le moment
+        <div id="article"></div>
+        <div id="total"></div>
+        </div>
+        </span>
+        <a href="/" className="symbolpayer" onClick={payer}>Payer &#128184;</a>
+    </div>
     );
 };
 
