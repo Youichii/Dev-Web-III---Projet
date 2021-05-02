@@ -1,11 +1,11 @@
 import React from 'react';
-import'../App.css';
+
 import img1 from '../images/img1.jpeg'
 import img2 from '../images/img2.jpeg'
 import img3 from '../images/img3.jpeg'
 import img4 from '../images/img4.jpeg'
 
-import './HeroSection.css';
+import './Accueil.css';
 
 function Accueil() {
     return (

@@ -1,7 +1,7 @@
 /*import { useState } from 'react'*/
 import React from 'react'
 import Navbar from './Navbar';
-import Accueil from './Accueil';
+//import Accueil from './Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
@@ -49,9 +49,6 @@ function App() {
             <Route exact path="/communaute"> 
               <Communaute />
             </Route>
-
-
-
 
 
             <Route exact path="/inscription"> 
