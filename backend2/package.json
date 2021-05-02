@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node backend2/index.js",
     "backend": "nodemon backend2/index.js",
-    "frontend": "npm run front --prefix frontend ",
-    "dev": "concurrently \"npm run backend\"  \"npm run start --prefix frontend\""
+    "frontend": "npm run front --prefix frontend/src ",
+    "dev": "concurrently \"npm run backend\"  \"npm run start --prefix frontend/src\""
   },
   "author": "",
   "license": "ISC",
