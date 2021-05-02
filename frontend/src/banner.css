@@ -9,7 +9,7 @@
     display: grid;
     width:100%;
     text-align: center;
-    font-size: 80%;
+    font-size: calc(1em + 1vw);
 
 }
 .navbar li{
