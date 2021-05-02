@@ -70,10 +70,10 @@ const Staff = () => {
 
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let liste_aliments = donnees.filter(element => element.idClient === identifiant)[0] ;
+        let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
-        (liste_aliments.idMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
+        (liste_aliments.IdMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
         
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
@@ -86,7 +86,7 @@ const Staff = () => {
 
 
     const load_panier = (informations, identifiant) => {
-        let identifiantCommande = informations.idCom ; 
+        let identifiantCommande = informations.IdCommande ; 
         fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
@@ -97,20 +97,20 @@ const Staff = () => {
             
             let nbr_lignes = "";
             let info_commentaire, lieu ;
-            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.rue + '</span></div> \
-                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.numero + '</span></div> \
-                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.ville + '</span></div> \
-                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.postal + '</span>' ;
+            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.Rue + '</span></div> \
+                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.Numero + '</span></div> \
+                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.Ville + '</span></div> \
+                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.Zip + '</span>' ;
 
-            (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
-            (informations.idMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
+            (informations.Commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.Commentaire ;
+            (informations.IdMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
-            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommande + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom.substring(14, 19) + " - " + informations.dateCom.substring(8, 10) + "/" + informations.dateCom.substring(5, 7) + "/" + informations.dateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCom.substring(14, 19) + " - " + informations.DateCom.substring(8, 10) + "/" + informations.DateCom.substring(5, 7) + "/" + informations.DateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
                             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
@@ -123,21 +123,21 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_afaire%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_afaire++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
+        donnees.filter(element => element.IdEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+            <div className="i_commande c_commande" id={elem.IdClient} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)}>
                 <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                    <div className={`i_nom ${type_couleur}`}>{elem.Prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.Gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.Prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.HLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.IdCommande, "ENC")}>OK</button>
                 </div> 
             </div>
         )
@@ -149,21 +149,21 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_encours%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_encours++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
+        donnees.filter(element => element.IdEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+            <div className="i_commande c_commande" id={elem.IdClient} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)}>
                 <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                    <div className={`i_nom ${type_couleur}`}>{elem.Prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.Gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.Prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.HLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.IdCommande, "ENV")}>OK</button>
                 </div> 
             </div>
         )
@@ -175,21 +175,21 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_envoye%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_envoye++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
+        donnees.filter(element => element.IdEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
+            <div className="i_commande c_commande" id={elem.IdClient} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)}>
                 <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
+                    <div className={`i_nom ${type_couleur}`}>{elem.Prenom}</div> 
+                    <div className={`i_contact ${type_couleur}`}>{elem.Gsm}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{elem.Prix}</div> 
+                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.HLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
+                    <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.IdCommande)}>OK</button>
                 </div> 
             </div>
         )
@@ -223,7 +223,7 @@ const Staff = () => {
                 </div>
 
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                    {donnees && donnees.filter(element => element.idEtat === "AFA").map(elements_afaire)}
+                    {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elements_afaire)}
                 </div>
 
                 <div className="details_commande">
@@ -247,7 +247,7 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                    {donnees && donnees.filter(element => element.idEtat === "ENC").map(elements_encours)}
+                    {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elements_encours)}
                 </div>
 
                 <div className="details_commande">
@@ -271,7 +271,7 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                    {donnees && donnees.filter(element => element.idEtat === "ENV").map(elements_envoye)}
+                    {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elements_envoye)}
                 </div>
 
                 <div className="details_commande">
