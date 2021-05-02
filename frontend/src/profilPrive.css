@@ -60,6 +60,7 @@ div.privateinfo{
 }
 
 div.gauche {
+	background-color: black;
 	border-radius: 5px;
 	width: 60%;
 	height: auto;

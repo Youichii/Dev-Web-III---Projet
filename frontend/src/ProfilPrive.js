@@ -6,6 +6,7 @@ import Axios from 'axios'
 
 
 const ProfilPrive = () => {
+    require('./profilPrive.css')
     const [username, setUsername] = useState('');
     const clientName = "3";
     const [clientInfosList, setClientInfosList] = useState([]);
