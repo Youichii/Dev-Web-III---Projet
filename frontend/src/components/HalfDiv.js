@@ -1,6 +1,7 @@
-const HalfDiv = ({divpos, link}) => {  
+const HalfDiv = ({divpos, link, title}) => {  
     return (
-        <div className={ divpos }>   
+       
+        <div className={ divpos }> 
             {link}             
         </div>
     )
