@@ -22,18 +22,50 @@ app.get('/api/get/:clientName', (req,res) => {
   const sqlGet = "SELECT * FROM `client` WHERE `ClientID` = ?"
   db.query(sqlGet, name ,(err, result) => {
     res.send(result)
-    console.log(result)
+  })
+})
+
+app.put('/api/mail', (req, res) => {  
+  const clientName = req.body.clientName
+  const mail = req.body.mail
+  console.log(mail)
+  const sqlInsert = "UPDATE `client` SET `Mail` = ? WHERE `client`.`ClientID` = ?;"
+  db.query(sqlInsert, [mail, clientName], (err, result) => {
+    if(err){
+      res.send(err)
+    }
+  })
+})
+
+app.put('/api/phone', (req, res) => {  
+  const clientName = req.body.clientName
+  const phone= req.body.phone
+  const sqlInsert = "UPDATE `client` SET `Phone` = ? WHERE `client`.`ClientID` = ?;"
+  db.query(sqlInsert, [phone, clientName], (err, result) => {
+    if(err){
+      res.send(err)
+    }
   })
 })
 
 app.put('/api/put', (req, res) => {  
   const username = req.body.username
   const clientName = req.body.clientName  //to take the variable from the html page
-  console.log(username, clientName)
   const sqlInsert = "UPDATE `client` SET `Username` = ? WHERE `client`.`ClientID` = ?;"
   db.query(sqlInsert, [username, clientName], (err, result) => {
+  })
+})
+
+app.put('/api/adress', (req, res) => {
+  const clientName = req.body.clientName  
+  const street = req.body.street
+  const number = req.body.number 
+  const zipCode = req.body.zipCode
+  const city = req.body.city
+  console.log(clientName, street, number, zipCode, city)
+  const sqlInsert = "UPDATE `client` SET `Street` = ?, `Number` = ?, `Zip` = ?, `City` = ? WHERE `client`.`ClientID` = ?;"
+  db.query(sqlInsert, [street, number, zipCode, city, clientName], (err, result) => {
     console.log(err)
-    console.log(result)
   })
 })
 
