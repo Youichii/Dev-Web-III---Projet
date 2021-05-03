@@ -5,7 +5,7 @@ const Picture = ( { url, desc } ) => {
     return (
         <div className="profilepicture">
             <div  className="picture">
-                <img src= "https://stickeramoi.com/15518-large_default/sticker-toilette-homme.jpg" alt="logo homme"></img>
+                <img src= 'https://images.creativemarket.com/0.1.0/ps/6716324/580/387/m2/fpnw/wm0/logo-file-40-.jpg?1563763079&s=f60e3be158acc07526fe13b3862e6751' alt="logo"></img>
             </div>
         </div>
     )
