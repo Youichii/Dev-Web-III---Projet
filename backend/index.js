@@ -430,6 +430,7 @@ app.get('/usersnom/:nom', (req,res) =>{
 
 // requête GET dans la table menu pour importer tout le contenu du menu 
 app.get('/menu', (req, res) =>{
+  
   db.query('select * FROM menu ', (err, result) => {
     if(err) throw err ;
     res.send(result);
