@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Banner';
+import Banner from './Banner';
 import Accueil from './components/Accueil';
 import Informations from './Informations';
 import Staff from './Staff';
@@ -8,6 +8,7 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 import Home from './components/pages/Home'
+import Home from './components/Home'
 import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -17,7 +18,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Banner />
         <div className="content">
           <Switch>
             <Route exact path="/">
@@ -59,9 +60,9 @@ function App() {
             <Route exact path="/profil-prive">
               <ProfilPrive />
             </Route>
+
             <Route path ="/" exact component={Home}/>
             <Route path = "/home" exact component={Home}/>
-      
 
             <Route exact path="/Menu"> 
               <Menu />
