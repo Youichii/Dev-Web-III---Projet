@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react" ;
 import BoutonPanier from './components/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande';
-import RadioCommande from './components/RadioCommande';
+import BoutonRadio from './components/BoutonRadio';
 
 const Panier = () => {
     require('./panier.css')
@@ -267,8 +267,8 @@ const Panier = () => {
 				<div className="i_moy_reception">
 					<label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
 					<div className="c_reception">
-                        <RadioCommande className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
-                        <RadioCommande className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
+                        <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
+                        <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
 					</div>
 				</div>
 
@@ -277,8 +277,8 @@ const Panier = () => {
 				<div className="i_payement">
 					<label class="label_informations" for="mode_payement">Mode de payement</label><br />
 					<div className="i_mode_payement c_mode_payement">
-                        <RadioCommande className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
-                        <RadioCommande className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
+                        <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
+                        <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
 					</div>
 				</div>
 				

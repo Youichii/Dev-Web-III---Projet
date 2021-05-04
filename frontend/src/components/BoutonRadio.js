@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const RadioCommande = ({ className_div, id_div, name, value, form, text, checked, onClick }) => {
+const BoutonRadio = ({ className_div, id_div, name, value, form, text, checked, onClick }) => {
     return (
         <div className={className_div} id={id_div}>
             <input type="radio" name={name} value={value} id={form} checked={checked} onClick={onClick} />
@@ -10,11 +10,11 @@ const RadioCommande = ({ className_div, id_div, name, value, form, text, checked
 
 }
 
-/*RadioCommande.defaultProps = {
+/*BoutonRadio.defaultProps = {
     checked: 'no'
 }*/
 
-RadioCommande.propTypes = {
+BoutonRadio.propTypes = {
     className : PropTypes.string,
     id_div : PropTypes.string,
     id_elem : PropTypes.string,
@@ -23,4 +23,4 @@ RadioCommande.propTypes = {
     onClick : PropTypes.func,
 }
 
-export default RadioCommande
+export default BoutonRadio

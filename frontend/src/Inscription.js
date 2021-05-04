@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import InputInformations from './components/InputInformations';
-import RadioCommande from './components/RadioCommande';
+import BoutonRadio from './components/BoutonRadio';
 
 const Inscription = () => {
 
@@ -269,8 +269,8 @@ const Inscription = () => {
 					
 					<div className="i_titre_sexe pol">SEXE</div>
 					<div className="i_champ_sexe">
-						<RadioCommande id_div="radio_femme" name="myradio" value="f" form="sexef_user" text=" FEMME" checked="yes" />
-						<RadioCommande id_div="radio_homme" name="myradio" value="h" form="sexeh_user" text=" HOMME" />
+						<BoutonRadio id_div="radio_femme" name="myradio" value="f" form="sexef_user" text=" FEMME" checked="yes" />
+						<BoutonRadio id_div="radio_homme" name="myradio" value="h" form="sexeh_user" text=" HOMME" />
 						<div className="message_erreur" id="erreur_sexe"></div>
 					</div>
 				
