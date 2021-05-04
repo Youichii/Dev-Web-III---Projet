@@ -4,7 +4,7 @@ import img2 from '../images/img2.jpeg'
 import img3 from '../images/img3.jpeg'
 import img4 from '../images/img4.jpeg'
 
-import './HeroSection.css';
+import './Home.css';
 
 function Home() {
     return (
