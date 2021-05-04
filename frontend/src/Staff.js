@@ -130,7 +130,7 @@ const Staff = () => {
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} type_actuel="afaire" type_suivant="ENC" onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
         )
     
     }
@@ -147,7 +147,7 @@ const Staff = () => {
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
-             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} type_actuel="encours" type_suivant="ENV" onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENV")}  />
+             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENV")}  />
         )
     }
 
@@ -163,7 +163,7 @@ const Staff = () => {
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} type_actuel="envoye" type_suivant="ENV" onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "envoye")} onClick_ok={() => supprimer_commandes(elem.IdCommande)}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "envoye")} onClick_ok={() => supprimer_commandes(elem.IdCommande)}  />
         )
     }
 
