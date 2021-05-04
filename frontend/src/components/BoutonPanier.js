@@ -24,3 +24,4 @@ BoutonPanier.propTypes = {
 }
 
 export default BoutonPanier
+
