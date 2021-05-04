@@ -8,11 +8,11 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
-import Home from './components/Home'
+import Home from './Home'
 import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Stat from './components/Stat';
+import Chart from './components/Chart';
 
 function App() {
   return (
@@ -41,8 +41,8 @@ function App() {
               <Connexion />
             </Route>
 
-            <Route exact path="/stat" component={Stat} >
-              <Stat />
+            <Route exact path="/stat" component={Chart} >
+              <Chart />
             </Route>
 
             <Route exact path="/Communaute">
