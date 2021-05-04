@@ -1,80 +1,156 @@
+*{
+box-sizing: border-box
+}
+
 .hero-container{
-   
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    object-fit: contain;
-    background-color: black;
+
+height: 100%;
+width: 100%;
+display:flex;
+flex-direction: column;
+align-items: center;
+object-fit: contain;
+background-color: black;
 }
 
 div ul{
-    list-style-type: none;
+list-style-type: none;
 }
 
 .hero-img{
-    width: 300px;
-    height: 200px;
-    border: none;
-    margin: 50px 60px; 
-    padding: 10px;
-    position: relative;
+width: 300px;
+height: 200px;
+border: none;
+margin: 50px 60px; 
+padding: 10px;
+position: relative;
 }
 
 
 .defilement-img img{
-    width: 700px;
-    height: 500px;
-    margin: 10px;
-    opacity: 0.9;
+width: 700px;
+height: 500px;
+margin: 10px;
+opacity: 0.9;
 
 }
 
 .defilement-img{
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    position: absolute;
-    top:0;
-    padding:0;
-    
+list-style-type: none;
+display: flex;
+margin: 0;
+position: absolute;
+top:0;
+padding:0;
+
 }
 
 @keyframes slide{
 
-    10%{left:0px;}
-    35%{left:0px;}
-    45%{left:-100%;}
-    55%{left: -100%;}
-    65%{left: -150%;}
-    75%{left:-150%;}
-    85%{left:-200%;}
-    95%{left: -200%;}
+10%{left:0px;}
+35%{left:0px;}
+45%{left:-100%;}
+55%{left: -100%;}
+65%{left: -150%;}
+75%{left:-150%;}
+85%{left:-200%;}
+95%{left: -200%;}
 
 }
 .defilement-img{
-    animation: slide 5s  linear infinite;
+animation: slide 5s  linear infinite;
 }
 
 .commentaire{
-    position: absolute;
-    background-color: white;
-    opacity: 0.4;
-    border-radius: 5%;
-    width: 1500;
-    height: auto;
-    margin-top: 300px;
-    margin-left: 0px;
-    text-align: left;
-    position: relative;
-    
+position: absolute;
+background-color: white;
+opacity: 0.4;
+border-radius: 5%;
+width: 1500;
+height: auto;
+margin-top: 300px;
+margin-left: 0px;
+text-align: left;
+position: relative;
+
 
 }
 .avis-clients p h1 h2{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
-    position: relative;
-    color: white;
-    
+font-family: 'Courier New', Courier, monospace;
+font-size: 20px;
+position: relative;
+color: white;
+
 }
+
+
+@media screen and (min-width:300px) {
+.hero-container{
+    width: 400px;
+    height: 400px;
+}
+.defilement-img img{
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+    opacity: 0.9;
+
+}
+.commentaire{
+    font-size: 17px;
+}
+
+}
+
+@media only screen and (min-width:400px){
+.hero-container{
+    width: 600px;
+    height: 600px ;
+    }
+.defilement-img img{
+    width: 350px;
+    height: 150px;
+    margin: 10px;
+    opacity: 0.9;
+}
+.commentaire{
+    font-size: 20px;
+}
+}
+
+@media only screen and (min-width:600px){
+.hero-container{
+    width: 800px;
+    height: 800px;
+    }
+.defilement-img img{
+    width: 550px;
+    height: 390px;
+    margin: 10px;
+    opacity: 0.9;
+}
+.commentaire{
+    font-size: 29px;
+}
+}
+
+
+@media only screen and (min-width:800px){
+.hero-container{
+    width: 1000px;
+    height: 1200px;
+    }
+.defilement-img img{
+    width: 750px;
+    height: 590px;
+    margin: 10px;
+    opacity: 0.9;
+
+
+}
+
+.commentaire{
+    font-size: 30px;
+}
+}
+
