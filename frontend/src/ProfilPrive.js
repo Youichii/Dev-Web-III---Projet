@@ -1,7 +1,9 @@
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
+import Button from './components/Button/Button'
+import Input from './components/Input/Input'
 
 
 const ProfilPrive = () => {
@@ -82,11 +84,9 @@ const ProfilPrive = () => {
                         </label>
                         );
                     })}
-                    <form> 
-                        <input type="text" name="Username" required minLength="5" maxLength="10" placeholder="Changer le pseudo" onChange={(e) => {
-                            setUsername(e.target.value)
-                        }}/>
-                        <button onClick={submitUsername}>Modifier</button>
+                    <form onSubmit={submitUsername}> 
+                        <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setUsername}/>
+                        <Button />
                     </form>
                     {clientInfosList.map((val) =>{
                         return (
@@ -104,20 +104,12 @@ const ProfilPrive = () => {
                              </p>
                              );
                     })}
-                    <form>
-                        <input  type="text" name="Street" maxLength="50" placeholder="Rue" required minLength="1" onChange={(e) => {
-                            setStreet(e.target.value)
-                         }}/><br/>
-                        <input type="text" name="Number" maxLength="10" placeholder="Numéro" required minLength="1" onChange={(e) => {
-                            setNumber(e.target.value)
-                         }}/><br/>
-                        <input type="text" name="Zip" maxLength="6" placeholder="Code Postal" required minLength="1" onChange={(e) => {
-                            setZip(e.target.value)
-                         }}/><br/>
-                        <input type="text" name="City" maxLength="40" placeholder="Ville" required minLength="1"  onChange={(e) => {
-                            setCity(e.target.value)
-                         }}/><br/>
-                        <button onClick={submitAdress}>Modifier</button>
+                    <form onSubmit={submitAdress}>
+                        <Input name="Street" max="50" placeholder="Rue" setFunc={setStreet}/><br/>
+                        <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumber}/><br/>
+                        <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
+                        <Input name="City" max="40" placeholder="Ville" setFunc={setCity}/><br/>
+                        <Button />
                     </form>
                     {clientInfosList.map((val) =>{
                         return (
@@ -126,11 +118,9 @@ const ProfilPrive = () => {
                             </p>
                             );  
                     })} 
-                    <form>
-                        <input type="text" name="Phone" maxLength="20" placeholder="Changer le numéro de téléphone" onChange={(e) => {
-                            setPhone(e.target.value)
-                         }}/><br/>
-                        <button onClick={ submitPhone }>Modifier</button>
+                    <form onSubmit={submitPhone}>
+                        <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setPhone}/><br/>
+                        <Button/>
                     </form>
                     {clientInfosList.map((val) =>{
                         return (
@@ -139,12 +129,10 @@ const ProfilPrive = () => {
                             </p>
                             );  
                     })}
-                    
-                        <input type="text" name="Mail" maxLength="50" placeholder="Changer l'adresse mail" onChange={(e) => {
-                                setMail(e.target.value)
-                            }}/><br/>
-                        <button onClick= { submitMail }>Modifier</button>
-                    
+                    <form onSubmit={submitMail}>
+                        <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
+                        <Button />
+                    </form>
                 </div>
             </div>            
         </div>

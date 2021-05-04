@@ -18,7 +18,7 @@ it("render button text correctly", () => {
 })
 
 it("render button color correctly", () => {
-    const {getByTestId} = render(<Button color="green" text='Hello' onClick={()=> {console.log("hello")}} ></Button>);
+    const {getByTestId} = render(<Button color="green" text='Hello' ></Button>);
     expect(getByTestId('button')).toHaveStyle("backgroundColor : green")
 })
 
@@ -31,3 +31,4 @@ it("matches snapshot 2", () => {
     const tree = renderer.create(<Button text="Hello" color="blue"></Button>).toJSON(); //convert to a virtualDOM object
     expect(tree).toMatchSnapshot();
 }) // creating a 2nd snapshot
+

@@ -1,5 +1,5 @@
-import HalfDiv from './components/HalfDiv'
-import Header from './components/Header'
+import HalfDiv from './components/HalfDiv/HalfDiv'
+import Header from './components/Header/Header'
 import Contact from './components/Contact'
 
 
