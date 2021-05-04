@@ -22,7 +22,7 @@ DetailCommande.defaultProps = {
 }
 
 DetailCommande.propTypes = {
-    informations : PropTypes.array,
+    informations : PropTypes.object,
     type_couleur : PropTypes.string,
     bg_bouton : PropTypes.string,
     type_actuel : PropTypes.string,
