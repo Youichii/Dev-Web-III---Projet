@@ -2,7 +2,12 @@ import Hours from '../Hours';
 
 it("testing API Hours", async function () {
     const response = new Hours();
-    var data = await response.api();
+    var reponse = await response.api();
+    var data = reponse.data ;
 
-    expect(data).toEqual([]);
+    //Vérification Status
+    expect(reponse.status).toEqual(200);
+
+    //Vérification type contenu
+    expect(typeof data).toEqual("array");
 })

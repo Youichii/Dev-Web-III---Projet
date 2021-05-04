@@ -6,5 +6,5 @@ it("testing API get", async function () {
     var data = await response.api()
 
 
-    expect(data[0].ClientID).toEqual(3)
+    expect(data[0].IdClient).toEqual(3)
 })
