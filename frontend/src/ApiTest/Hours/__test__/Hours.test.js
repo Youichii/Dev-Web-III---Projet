@@ -1,4 +1,4 @@
-import Hours from '../PanierTest';
+import Hours from '../Hours';
 
 it("testing API Hours", async function () {
     const response = new Hours();
