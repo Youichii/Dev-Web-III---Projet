@@ -1,4 +1,4 @@
-import InputInformations from './components/InputInformations';
+import InputInformations from './components/InputInformations/InputInformations';
 
 const Connexion = () => {
 	require('./connexion.css')

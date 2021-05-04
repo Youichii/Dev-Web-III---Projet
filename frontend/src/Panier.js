@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react" ;
-import BoutonPanier from './components/BoutonPanier';
+import BoutonPanier from './components/BoutonPanier/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio/BoutonRadio';
 

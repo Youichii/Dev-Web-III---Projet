@@ -1,7 +1,7 @@
 const HalfDiv = ({divpos, link, title}) => {  
     return (
        
-        <div className={ divpos }> 
+        <div data-testid="halfdiv" className={ divpos }> 
             {link}             
         </div>
     )
