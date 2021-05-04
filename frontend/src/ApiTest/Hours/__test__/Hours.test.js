@@ -9,5 +9,5 @@ it("testing API Hours", async function () {
     expect(reponse.status).toEqual(200);
 
     //Vérification type contenu
-    expect(typeof data).toEqual("array");
+    expect(typeof data).toEqual("object");
 })
