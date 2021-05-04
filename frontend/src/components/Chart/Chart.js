@@ -1,5 +1,6 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
 const data =['data_gender', 'data_age', 'data_oc']
 const data_gender = {
@@ -48,9 +49,9 @@ const data_age ={
   
 }
 
-function App() {
+const Chart=(data) => {
   return (
-    <div className="chart">
+    <div data-testid="chart" className="chart">
       <div className="chart-gender">
         <h2>Genre</h2>
         <Doughnut 
@@ -122,5 +123,8 @@ function App() {
     </div>
     
   );
+  Chart.PropTypes={
+    data: PropTypes.string
+  }
 }
-export default App;
+export default Chart;
