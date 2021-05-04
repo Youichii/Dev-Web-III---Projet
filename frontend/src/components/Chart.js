@@ -1,6 +1,6 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
-import '../Chart.css';
+
 
 const data =['data_gender', 'data_age', 'data_oc']
 const data_gender = {
@@ -49,7 +49,7 @@ const data_age ={
   
 }
 
-function App() {
+function Chart() {
   return (
     <div className="chart">
       <div className="chart-gender">
@@ -124,4 +124,4 @@ function App() {
     
   );
 }
-export default App;
+export default Chart;
