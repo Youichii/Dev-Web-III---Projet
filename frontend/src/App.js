@@ -12,7 +12,7 @@ import Home from './components/Home'
 import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Stat from './components/Stat';
+import Stat from './Stat';
 
 function App() {
   return (
