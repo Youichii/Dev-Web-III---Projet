@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
-const RadioCommande = ({ className_div, id_div, name, value, id_input, form, text, checked, onClick }) => {
+const RadioCommande = ({ className_div, id_div, name, value, form, text, checked, onClick }) => {
     return (
         <div className={className_div} id={id_div}>
-            <input type="radio" name={name} value={value} id={id_input} checked={checked} onClick={onClick} />
+            <input type="radio" name={name} value={value} id={form} checked={checked} onClick={onClick} />
             <label for={form} className="label-info">{text}</label>
         </div>
     )

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const DetailCommande = ({ informations,type_couleur,bg_bouton, onMouseOver, onMouseLeave, onClick_panier, onClick_ok }) => {
+const DetailCommande = ({ informations, type_couleur, bg_bouton, onMouseOver, onMouseLeave, onClick_panier, onClick_ok }) => {
     return (
         <div className="i_commande c_commande" id={informations.IdClient} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
                 <div className="c_sans_bouton i_sans_bouton" onClick={onClick_panier}>

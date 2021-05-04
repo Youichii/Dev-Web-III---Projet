@@ -267,8 +267,8 @@ const Panier = () => {
 				<div className="i_moy_reception">
 					<label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
 					<div className="c_reception">
-                        <RadioCommande className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" id_input="place" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
-                        <RadioCommande className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" id_input="livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
+                        <RadioCommande className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
+                        <RadioCommande className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
 					</div>
 				</div>
 
@@ -277,8 +277,8 @@ const Panier = () => {
 				<div className="i_payement">
 					<label class="label_informations" for="mode_payement">Mode de payement</label><br />
 					<div className="i_mode_payement c_mode_payement">
-                        <RadioCommande className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" id_input="liquide" form="liquide" text="Liquide"/>
-                        <RadioCommande className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" id_input="mistercash" form="mistercash" text="Mistercash" checked="yes"/>
+                        <RadioCommande className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
+                        <RadioCommande className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
 					</div>
 				</div>
 				
