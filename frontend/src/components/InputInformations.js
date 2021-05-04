@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const InfoInscription = ({ className_div, type, id_input, maxLenght, className_span, id_span }) => {
+const InputInformations = ({ className_div, type, id_input, maxLenght, className_span, id_span }) => {
     return (
         <div className={className_div}>
             <input type={type} id={id_input} required maxLength={maxLenght} /> 
@@ -10,13 +10,13 @@ const InfoInscription = ({ className_div, type, id_input, maxLenght, className_s
 
 }
 
-InfoInscription.defaultProps = {
+InputInformations.defaultProps = {
     type: 'text'
 }
 
-InfoInscription.propTypes = {
+InputInformations.propTypes = {
     informations : PropTypes.string,
     type_couleur : PropTypes.string
 }
 
-export default InfoInscription
+export default InputInformations
