@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Creates snapeshot with same default props 1`] = `
+<div
+  className="divleft"
+  data-testid="halfdiv"
+>
+  &lt;div&gt;&lt;/div&gt;
+</div>
+`;
+
+exports[`matches snapshot 1 to see default props 1`] = `
+<div
+  className="divleft"
+  data-testid="halfdiv"
+>
+  &lt;div&gt;&lt;/div&gt;
+</div>
+`;

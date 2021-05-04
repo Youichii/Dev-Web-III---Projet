@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import InputInformations from './components/InputInformations';
-import BoutonRadio from './components/BoutonRadio';
+import InputInformations from './components/InputInformations/InputInformations';
+import BoutonRadio from './components/BoutonRadio/BoutonRadio';
 
 const Inscription = () => {
 
