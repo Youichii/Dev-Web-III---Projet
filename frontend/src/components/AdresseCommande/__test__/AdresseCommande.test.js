@@ -20,14 +20,14 @@ it("renders without crashing", () => {
 it("render button color correctly", () => {
     const {getByTestId} = render(<AdresseCommande color="green" text='Hello' onClick={()=> {console.log("hello")}} ></AdresseCommande>);
     expect(getByTestId('button')).toHaveStyle("backgroundColor : green")
-})
+})*/
 
 it("matches snapshot 1", () => {
-    const tree = renderer.create(<AdresseCommande text="save" color="blue"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
-    expect(tree).toMatchSnapshot(); //create folder __snapshot__
-}) // to update a Snapshot if it failed press -u in the terminal
+    const tree = renderer.create(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du paradis"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
+    expect(tree).toMatchSnapshot(); 
+}) 
 
 it("matches snapshot 2", () => {
-    const tree = renderer.create(<AdresseCommande text="Hello" color="blue"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
+    const tree = renderer.create(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du paradis"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
     expect(tree).toMatchSnapshot();
-}) // creating a 2nd snapshot*/
+}) 

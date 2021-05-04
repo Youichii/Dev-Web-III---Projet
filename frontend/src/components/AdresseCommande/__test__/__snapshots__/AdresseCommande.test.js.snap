@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<div
+  className="i_adresse_livraison"
+>
+  <label
+    className="label_adresse"
+  >
+    Adresse de livraison
+  </label>
+  <br />
+  <input
+    id="adresse_livraison"
+    name="add_livraison"
+    placeholder="Rue du paradis"
+    type="text"
+  />
+</div>
+`;
+
+exports[`matches snapshot 2 1`] = `
+<div
+  className="i_adresse_livraison"
+>
+  <label
+    className="label_adresse"
+  >
+    Adresse de livraison
+  </label>
+  <br />
+  <input
+    id="adresse_livraison"
+    name="add_livraison"
+    placeholder="Rue du paradis"
+    type="text"
+  />
+</div>
+`;
