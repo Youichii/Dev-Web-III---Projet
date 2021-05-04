@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react" ;
 import BoutonPanier from './components/BoutonPanier';
-import AdresseCommande from './components/AdresseCommande';
-import BoutonRadio from './components/BoutonRadio';
+import AdresseCommande from './components/AdresseCommande/AdresseCommande';
+import BoutonRadio from './components/BoutonRadio/BoutonRadio';
 
 const Panier = () => {
     require('./panier.css')

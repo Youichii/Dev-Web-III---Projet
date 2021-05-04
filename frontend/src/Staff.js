@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react" ;
 import React from 'react';
-import DetailCommande from './components/DetailCommande';
+import DetailCommande from './components/DetailCommande/DetailCommande';
 
 const Staff = () => {
     require('./staff.css')

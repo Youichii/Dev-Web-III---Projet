@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const AdresseCommande = ({ className_div, className_label, form, Text, id, name, type, placeholder }) => {
     return (
         <div className={className_div}> 
-            <label className="label_adresse" for={form}>{Text}</label><br /> 
+            <label className="label_adresse" htmlFor={form}>{Text}</label><br /> 
             <input id={id} name={name} type={type} placeholder={placeholder} /> 
         </div>
     )

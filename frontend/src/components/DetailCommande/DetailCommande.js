@@ -17,10 +17,9 @@ const DetailCommande = ({ informations, type_couleur, bg_bouton, onMouseOver, on
 
 }
 
-/*DetailCommande.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
+DetailCommande.defaultProps = {
+    informations: {IdClient:"idTest", Prenom:"Test", Gsm:"+324000000000", Prix:"100", HLivree:"18:00"}
+}
 
 DetailCommande.propTypes = {
     informations : PropTypes.string,

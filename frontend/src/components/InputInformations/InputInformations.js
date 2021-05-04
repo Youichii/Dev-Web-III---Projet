@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const InputInformations = ({ className_div, type, id_input, maxLenght, className_span, id_span }) => {
+const InputInformations = ({ className_div, type, id_input, maxLenght, id_span }) => {
     return (
         <div className={className_div}>
             <input type={type} id={id_input} required maxLength={maxLenght} /> 
