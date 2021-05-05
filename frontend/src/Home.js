@@ -1,13 +1,12 @@
 import React from 'react';
+import img1 from '../src/images/img1.jpeg'
+import img2 from '../src/images/img2.jpeg'
+import img3 from '../src/images/img3.jpeg'
+import img4 from '../src/images/img4.jpeg'
 
-import img1 from '../images/img1.jpeg'
-import img2 from '../images/img2.jpeg'
-import img3 from '../images/img3.jpeg'
-import img4 from '../images/img4.jpeg'
+import './Home.css';
 
-import './Accueil.css';
-
-function Accueil() {
+function Home() {
     return (
         <div className="hero-container">
             <div className="hero-img">
@@ -24,6 +23,7 @@ function Accueil() {
             <div className="commentaire">
                 <ul className="avis-clients">
                     <h1>Avis</h1>
+                    <p>coucouco</p>
      
                 </ul>
             </div>
@@ -32,4 +32,4 @@ function Accueil() {
     )
 }
 
-export default Accueil
+export default Home

@@ -8,12 +8,11 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive'
-import Home from './components/pages/Home'
-
+import Home from './Home'
 // import BannerPatron from "./BannerPatron.js";
 import Communaute from "./Communaute.js"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Stat from './components/pages/Stat';
+import Stat from './Stat';
 
 function App() {
   return (
@@ -22,9 +21,6 @@ function App() {
         <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/"> 
-              <Accueil />
-            </Route>
 
             <Route exact path="/informations"> 
               <Informations />
@@ -42,8 +38,8 @@ function App() {
               <Connexion />
             </Route>
 
-            <Route exact path="/stat" component={Stat} > 
-              <Statistiques />
+            <Route exact path="/stat"> 
+              <Stat />
             </Route>
 
             <Route exact path="/communaute"> 
