@@ -23,7 +23,7 @@ it("render text correctly BoutonRadio", () => {
 
 it("render checked correctly BoutonRadio", () => {
     const {getByTestId} = render(<BoutonRadio checked="yes"></BoutonRadio>);
-    expect(getByTestId('input_bouton_radio')).toHaveProperty('checked', false);
+    expect(getByTestId('input_bouton_radio')).toHaveProperty('checked', true);
 })
 
 it("matches snapshot 1 BoutonRadio", () => {
