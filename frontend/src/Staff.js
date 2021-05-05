@@ -71,7 +71,7 @@ const Staff = () => {
 
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let liste_aliments = donnees.filter(element => element.idClient === identifiant)[0] ;
+        let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
         (liste_aliments.idMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
@@ -128,7 +128,6 @@ const Staff = () => {
 
         donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
-
         return (
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
         )
