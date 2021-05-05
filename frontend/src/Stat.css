@@ -1,0 +1,14 @@
+.container-stat{
+    position: absolute;
+    height: 100%;
+    width: 1000%;
+    min-width: 500px;
+
+}
+
+div.container-stat h1{
+    color: withe;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 40px;
+}

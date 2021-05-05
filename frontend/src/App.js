@@ -7,7 +7,7 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Stat from './components/pages/Stat';
+import Stat from './Stat';
 
 function App() {
   return (
@@ -36,8 +36,8 @@ function App() {
               <Connexion />
             </Route>
 
-            <Route exact path="/stat" component={Stat} > 
-              <Statistiques />
+            <Route exact path="/stat" > 
+              <Stat/>
             </Route>
 
             <Route exact path="/inscription"> 

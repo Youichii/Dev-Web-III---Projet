@@ -599,3 +599,24 @@ html {
 	height : 50px;
 	width : 140px;
 }
+
+/*-----------------------------------------------Accueil------------------------*/
+.container-stat{
+    height: 100%;
+    width: 100%;
+	display: inline;
+}
+
+div.container-stat h1{
+	color: white;
+	font-family: 'Courier New', Courier, monospace;
+	font-style: normal;
+	font-size: medium;
+	margin: 50px;
+	position: absolute
+	
+}
+
+.graph{
+	margin: 20px;
+}
