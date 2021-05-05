@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 InputInformation 1`] = `
+<div
+  className="i_champ_adresse"
+>
+  <input
+    data-testid="id_input_info"
+    id="text_user"
+    maxLength="100"
+    required={true}
+    type="text"
+  />
+  <span
+    className="message_erreur"
+    id="erreur_mail"
+  />
+</div>
+`;
+
+exports[`matches snapshot 2 InputInformation 1`] = `
+<div
+  className="i_champ_adresse"
+>
+  <input
+    data-testid="id_input_info"
+    id="text_user"
+    maxLength="100"
+    required={true}
+    type="text"
+  />
+  <span
+    className="message_erreur"
+    id="erreur_mail"
+  />
+</div>
+`;
