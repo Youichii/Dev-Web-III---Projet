@@ -2,11 +2,10 @@ import PropTypes from 'prop-types'
 
 const BoutonPanier = ({ className, id_div, id_elem, name, value, onClick }) => {
     return (
-        <div className={className} id={id_div}>
-            <input id={id_elem} name={name} type="button" value={value} onClick={onClick} />
+        <div data-testid="div_bouton_panier" className={className} id={id_div}>
+            <input data-testid="input_bouton_panier" id={id_elem} name={name} type="button" value={value} onClick={onClick} />
         </div>
     )
-
 }
 
 /*BoutonPanier.defaultProps = {

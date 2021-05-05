@@ -5,29 +5,28 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import renderer  from "react-test-renderer";
 
-//npm test to start all tests
 afterEach(cleanup);
-it("renders without crashing", () => {
+it("renders without crashing AdresseCommande", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<AdresseCommande></AdresseCommande>, div)
+    ReactDOM.render(<AdresseCommande></AdresseCommande>, div);
 })
 
-/*it("render button text correctly", () => {
-    const {getByTestId} = render(<AdresseCommande color="green" text='Hello' onClick={()=> {console.log("hello")}} ></AdresseCommande>);
-    expect(getByTestId('button')).toHaveTextContent("Hello")
+it("render text correctly AdresseCommande", () => {
+    const {getByTestId} = render(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du Paradis"></AdresseCommande>);
+    expect(getByTestId('adresse_commande')).toHaveTextContent("Adresse de livraison");
 })
 
-it("render button color correctly", () => {
+/*it("render color correctly AdresseCommande", () => {
     const {getByTestId} = render(<AdresseCommande color="green" text='Hello' onClick={()=> {console.log("hello")}} ></AdresseCommande>);
-    expect(getByTestId('button')).toHaveStyle("backgroundColor : green")
+    expect(getByTestId('adresse_commande')).toHaveStyle("backgroundColor : black")
 })*/
 
-it("matches snapshot 1", () => {
+it("matches snapshot 1 AdresseCommande", () => {
     const tree = renderer.create(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du paradis"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
     expect(tree).toMatchSnapshot(); 
 }) 
 
-it("matches snapshot 2", () => {
+it("matches snapshot 2 AdresseCommande", () => {
     const tree = renderer.create(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du paradis"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
     expect(tree).toMatchSnapshot();
 }) 

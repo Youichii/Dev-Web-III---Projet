@@ -5,29 +5,33 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import renderer  from "react-test-renderer";
 
-//npm test to start all tests
 afterEach(cleanup);
-it("renders without crashing", () => {
+it("renders without crashing BoutonRadio", () => {
     const div = document.createElement("div");
     ReactDOM.render(<BoutonRadio></BoutonRadio>, div)
 })
 
-/*it("render button text correctly", () => {
-    const {getByTestId} = render(<BoutonRadio color="green" text='Hello' onClick={()=> {console.log("hello")}} ></BoutonRadio>);
-    expect(getByTestId('button')).toHaveTextContent("Hello")
+it("render value correctly BoutonRadio", () => {
+    const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
+    expect(getByTestId('input_bouton_radio')).toHaveAttribute('value', 'homme');
 })
 
-it("render button color correctly", () => {
-    const {getByTestId} = render(<BoutonRadio color="green" text='Hello' onClick={()=> {console.log("hello")}} ></BoutonRadio>);
-    expect(getByTestId('button')).toHaveStyle("backgroundColor : green")
+it("render text correctly BoutonRadio", () => {
+    const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
+    expect(getByTestId('label_bouton_radio')).toHaveTextContent("Mistercash");
 })
 
-it("matches snapshot 1", () => {
-    const tree = renderer.create(<BoutonRadio text="save" color="blue"></BoutonRadio>).toJSON(); //convert to a virtualDOM object
-    expect(tree).toMatchSnapshot(); //create folder __snapshot__
-}) // to update a Snapshot if it failed press -u in the terminal
+it("render checked correctly BoutonRadio", () => {
+    const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
+    expect(getByTestId('input_bouton_radio')).toHaveAttribute('checked', 'yes');
+})
 
-it("matches snapshot 2", () => {
-    const tree = renderer.create(<BoutonRadio text="Hello" color="blue"></BoutonRadio>).toJSON(); //convert to a virtualDOM object
+it("matches snapshot 1 BoutonRadio", () => {
+    const tree = renderer.create(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>).toJSON(); 
     expect(tree).toMatchSnapshot();
-}) // creating a 2nd snapshot*/
+})
+
+it("matches snapshot 2 BoutonRadio", () => {
+    const tree = renderer.create(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>).toJSON(); 
+    expect(tree).toMatchSnapshot();
+}) 
