@@ -8,7 +8,6 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 import Home from './components/pages/Home'
-import Home from './components/Home'
 import Home from './Home'
 import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
