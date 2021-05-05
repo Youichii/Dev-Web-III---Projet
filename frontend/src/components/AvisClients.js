@@ -3,20 +3,26 @@ import React from 'react';
     const AvisClients = (props) =>{
         const {dataAvis} = props;
         return (
-            <div className="avis">
+            <div onLoad ={AfficherAvis} className="commentaires">
+                <h1>Avis de nos clients</h1>
                 {dataAvis.map((val)=>{
                     return(
-                        <div>
-                            <h2>nom:{val.idClients}</h2> 
+                        <>
+                            <h2>{val.idClients}</h2>
                             <p>{val.Avis}</p>
-                        </div>
+                            
+                        </>
                     )
                 })}
-
+                
             </div>
+            
+            
+       
             
         )
     
-    }    
+    }  
+    ReactDOM.render(AvisClients, document.getElementById('root'));  
 
 export default AvisClients;
