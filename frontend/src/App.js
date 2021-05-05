@@ -14,6 +14,7 @@ import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
+import Historique from './Historique';
 
 function App() {
   return (
@@ -71,6 +72,10 @@ function App() {
 
             <Route exact path="/Menu"> 
               <Menu />
+            </Route>
+            
+            <Route exact path="/Historique"> 
+              <Historique/>
             </Route>
 
           </Switch>
