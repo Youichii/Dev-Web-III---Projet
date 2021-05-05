@@ -11,27 +11,22 @@ it("renders without crashing BoutonRadio", () => {
     ReactDOM.render(<BoutonRadio></BoutonRadio>, div)
 })
 
-it("render value correctly BoutonRadio", () => {
+it("get correctly value = 'homme' BoutonRadio", () => {
     const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
     expect(getByTestId('input_bouton_radio')).toHaveAttribute('value', 'homme');
 })
 
 it("render text correctly BoutonRadio", () => {
-    const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
+    const {getByTestId} = render(<BoutonRadio text="Mistercash" ></BoutonRadio>);
     expect(getByTestId('label_bouton_radio')).toHaveTextContent("Mistercash");
 })
 
 it("render checked correctly BoutonRadio", () => {
-    const {getByTestId} = render(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>);
-    expect(getByTestId('input_bouton_radio')).toHaveAttribute('checked', 'yes');
+    const {getByTestId} = render(<BoutonRadio></BoutonRadio>);
+    expect(getByTestId('input_bouton_radio')).toHaveProperty('defaultChecked', true);
 })
 
 it("matches snapshot 1 BoutonRadio", () => {
-    const tree = renderer.create(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>).toJSON(); 
+    const tree = renderer.create((<BoutonRadio></BoutonRadio>)).toJSON(); 
     expect(tree).toMatchSnapshot();
 })
-
-it("matches snapshot 2 BoutonRadio", () => {
-    const tree = renderer.create(<BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"></BoutonRadio>).toJSON(); 
-    expect(tree).toMatchSnapshot();
-}) 

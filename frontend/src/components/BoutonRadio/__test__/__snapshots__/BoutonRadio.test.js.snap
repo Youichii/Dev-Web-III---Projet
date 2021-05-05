@@ -2,50 +2,17 @@
 
 exports[`matches snapshot 1 BoutonRadio 1`] = `
 <div
-  className="i_mistercash"
   data-testid="div_bouton_radio"
-  id="radio_mistercash"
 >
   <input
-    checked="yes"
     data-testid="input_bouton_radio"
-    id="mistercash"
-    name="myradio2"
+    defaultChecked={true}
     readOnly={true}
     type="radio"
-    value="homme"
   />
   <label
     className="label-info"
     data-testid="label_bouton_radio"
-    htmlFor="mistercash"
-  >
-    Mistercash
-  </label>
-</div>
-`;
-
-exports[`matches snapshot 2 BoutonRadio 1`] = `
-<div
-  className="i_mistercash"
-  data-testid="div_bouton_radio"
-  id="radio_mistercash"
->
-  <input
-    checked="yes"
-    data-testid="input_bouton_radio"
-    id="mistercash"
-    name="myradio2"
-    readOnly={true}
-    type="radio"
-    value="homme"
   />
-  <label
-    className="label-info"
-    data-testid="label_bouton_radio"
-    htmlFor="mistercash"
-  >
-    Mistercash
-  </label>
 </div>
 `;
