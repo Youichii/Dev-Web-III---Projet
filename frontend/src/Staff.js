@@ -130,17 +130,6 @@ const Staff = () => {
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "afaire")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
-                </div>
-                <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
-                </div> 
-            </div>
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
         )
     }
@@ -157,17 +146,7 @@ const Staff = () => {
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "encours")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
-                </div>
-                <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
-                </div> 
-            </div>
+
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENV")}  />
         )
     }
@@ -184,17 +163,6 @@ const Staff = () => {
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
-            <div className="i_commande c_commande" id={elem.idClient} onMouseOver={() => nouveau_bg(elem.idClient)} onMouseLeave={() => ancien_bg(elem.idClient, type_couleur)}>
-                <div className="c_sans_bouton i_sans_bouton" onClick={() => load_panier(elem, "envoye")}>
-                    <div className={`i_nom ${type_couleur}`}>{elem.prenom}</div> 
-                    <div className={`i_contact ${type_couleur}`}>{elem.gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{elem.prix}</div> 
-                    <div className={`i_heure_prevue ${type_couleur}`}>{elem.hLivree}</div>
-                </div>
-                <div className={`i_div_bouton ${bg_bouton}`}>
-                    <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
-                </div> 
-            </div>
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "envoye")} onClick_ok={() => supprimer_commandes(elem.IdCommande)}  />
         )
     }
@@ -216,7 +184,7 @@ const Staff = () => {
                 </div>
 
                 <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                    {donnees && donnees.filter(element => element.idEtat === "AFA").map(elements_afaire)}
+                    {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elements_afaire)}
                 </div>
 
                 <div className="details_commande">
@@ -240,7 +208,7 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                    {donnees && donnees.filter(element => element.idEtat === "ENC").map(elements_encours)}
+                    {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elements_encours)}
                 </div>
 
                 <div className="details_commande">
@@ -264,7 +232,7 @@ const Staff = () => {
 					<div className="i_prix_titre">Prix</div>
                 </div>
                 <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                    {donnees && donnees.filter(element => element.idEtat === "ENV").map(elements_envoye)}
+                    {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elements_envoye)}
                 </div>
 
                 <div className="details_commande">
