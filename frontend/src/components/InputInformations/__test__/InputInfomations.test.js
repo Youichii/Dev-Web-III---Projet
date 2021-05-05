@@ -16,6 +16,11 @@ it("render id input correctly InputInformation", () => {
     expect(getByTestId('id_input_info')).toHaveAttribute('id', "text_user");
 })
 
+it("render id input correctly InputInformation", () => {
+    const {getByTestId} = render(<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"></InputInformations>);
+    expect(getByTestId('id_input_info')).toHaveAttribute('type', "text");
+})
+
 it("matches snapshot 1 InputInformation", () => {
     const tree = renderer.create(<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"></InputInformations>).toJSON();
     expect(tree).toMatchSnapshot(); 
