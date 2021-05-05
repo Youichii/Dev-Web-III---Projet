@@ -81,12 +81,13 @@ div.commentaires h1{
 div.commentaires h2{
     color: white;
     font-style: italic;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 div.commentaires p {
     color: white;
-    font-size: 12px;
+    font-size: 17px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 
