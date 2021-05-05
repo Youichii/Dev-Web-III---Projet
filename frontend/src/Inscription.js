@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import InputInformations from './components/InputInformations';
+import BoutonRadio from './components/BoutonRadio';
 
 const Inscription = () => {
 
@@ -223,40 +225,22 @@ const Inscription = () => {
 				
 				<div className="c_champs_informations i_champs_informations">
 					<div className="i_titre_nom pol">NOM</div>
-					<div className="i_champ_nom">
-						<input type="text" id="nom_user" required maxLength="100" /> 
-						<span className="message_erreur" id="erreur_nom"></span>
-					</div>
-					
+					<InputInformations className_div="i_champ_nom" id_input="nom_user" id_span="erreur_nom" maxLenght="100"/>
+
 					<div className="i_titre_prenom pol">PRENOM</div>
-					<div className="i_champ_prenom">
-						<input type="text" id="prenom_user" required /> 
-						<span className="message_erreur" id="erreur_prenom"></span>
-					</div>
+					<InputInformations className_div="i_champ_prenom" id_input="prenom_user" id_span="erreur_prenom" maxLenght="100"/>
 				
 					<div className="i_titre_adresse_insc pol">RUE</div>
-					<div className="i_champ_adresse_insc">
-						<input type="text" id="adresse_user" required />
-						<span className="message_erreur" id="erreur_rue"></span>
-					</div>
+					<InputInformations className_div="i_champ_adresse_insc" id_input="adresse_user" id_span="erreur_rue" maxLenght="100"/>
 
 					<div className="i_titre_numero_insc pol">NUMERO</div>
-					<div className="i_champ_numero_insc">
-						<input type="number" id="numero_user" required />
-						<span className="message_erreur" id="erreur_numero"></span>
-					</div>
+					<InputInformations className_div="i_champ_numero_insc" type="number" id_input="numero_user" id_span="erreur_numero" maxLenght="100"/>
 
 					<div className="i_titre_postal_insc pol">POSTAL</div>
-					<div className="i_champ_postal_insc">
-						<input type="number" id="postal_user" required />
-						<span className="message_erreur" id="erreur_postal"></span>
-					</div>
+					<InputInformations className_div="i_champ_postal_insc" type="number" id_input="postal_user" id_span="erreur_postal" maxLenght="100"/>
 
 					<div className="i_titre_ville_insc pol">VILLE</div>
-					<div className="i_champ_ville_insc">
-						<input type="text" id="ville_user" required />
-						<span className="message_erreur" id="erreur_ville"></span>
-					</div>
+					<InputInformations className_div="i_champ_ville_insc" id_input="ville_user" id_span="erreur_ville" maxLenght="100"/>
 				
 					<div className="i_titre_anniversaire pol">DATE DE NAISSANCE</div>
 					<div className="i_champ_anniversaire">
@@ -285,35 +269,26 @@ const Inscription = () => {
 					
 					<div className="i_titre_sexe pol">SEXE</div>
 					<div className="i_champ_sexe">
-                        <div id="radio_femme"><input type="radio" name="myradio" value="f" id="sexef_user" /> FEMME</div>
-						<div id="radio_homme"><input type="radio" name="myradio" value="h" id="sexeh_user" /> HOMME</div>
+						<BoutonRadio id_div="radio_femme" name="myradio" value="f" form="sexef_user" text=" FEMME" checked="yes" />
+						<BoutonRadio id_div="radio_homme" name="myradio" value="h" form="sexeh_user" text=" HOMME" />
 						<div className="message_erreur" id="erreur_sexe"></div>
 					</div>
 				
 					<div className="i_titre_telephone pol">TELEPHONE</div>
-					<div className="i_champ_telephone">
-						<input type="text" id="telephone_user" required />
-						<span className="message_erreur" id="erreur_telephone"></span>
-					</div>
+					<InputInformations className_div="i_champ_telephone" id_input="telephone_user" id_span="erreur_telephone" maxLenght="100"/>
 				
 					<div className="i_titre_mail pol">ADRESSE E-MAIL</div>
-					<div className="i_champ_mail">
-						<input type="text" id="mail_user" required />
-						<span className="message_erreur" id="erreur_mail"></span>
-					</div>
+					<InputInformations className_div="i_champ_mail" id_input="mail_user" id_span="erreur_mail" maxLenght="100"/>
 				
 					<div className="i_titre_mdp_insc pol">MOT DE PASSE</div>
-					<div className="i_champ_mdp_insc">
-						<input type="password" id="mdp_user" required />
-						<span className="message_erreur" id="erreur_mdp"></span>
-					</div>
+					<InputInformations className_div="i_champ_mdp_insc" type="password" id_input="mdp_user" id_span="erreur_mdp" maxLenght="100"/>
 				
 					<div className="i_champ_newsletter">
-						<input type="checkbox" id="newsletter_user" required /><span className="pol">Je souhaite m'abonner à la newsletter</span>
+						<input type="checkbox" id="newsletter_user" required /><span className="pol"> Je souhaite m'abonner à la newsletter</span>
 					</div>
 				
 					<div className="i_champ_politique">
-						<input type="checkbox" id="politique_user" required /><span className="pol">J'accepte les termes et conditions & politique de confidentialité</span>
+						<input type="checkbox" id="politique_user" required /><span className="pol"> J'accepte les termes et conditions & politique de confidentialité</span>
 					</div>
 				
 					<div className="i_titre_captcha pol">CAPTCHA</div>

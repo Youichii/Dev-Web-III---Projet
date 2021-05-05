@@ -1,5 +1,11 @@
 {
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "react-confirm-alert": "^2.7.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "react-test-renderer": "^17.0.2"
   }
 }

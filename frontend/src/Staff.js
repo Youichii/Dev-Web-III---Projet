@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react" ;
-import React from 'react'
+import React from 'react' ;
+import DetailCommande from './components/DetailCommande';
 
 const Staff = () => {
     require('./staff.css')
@@ -140,6 +141,7 @@ const Staff = () => {
                     <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENC")}>OK</button>
                 </div> 
             </div>
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
         )
     }
 
@@ -166,6 +168,7 @@ const Staff = () => {
                     <button className="i_bouton_suivant" onClick={() => ajouter_commandes(elem.idCom, "ENV")}>OK</button>
                 </div> 
             </div>
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENV")}  />
         )
     }
 
@@ -192,19 +195,9 @@ const Staff = () => {
                     <button className="i_bouton_suivant" onClick={() => supprimer_commandes(elem.idCom)}>OK</button>
                 </div> 
             </div>
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "envoye")} onClick_ok={() => supprimer_commandes(elem.IdCommande)}  />
         )
     }
-
-    /*const [heure_courante, setHeureCourante] = useState("allo");
-    function RepeatMessage({ message }) {
-        useEffect(() => {
-          setInterval(() => {
-            setHeureCourante(new Date().toLocaleTimeString()) ;
-          }, 1000);
-        });
-        <RepeatMessage message="coucou" />
-        return <div className="message" style={{color:"white"}} >{heure_courante}</div>;
-    }*/
 
     return (
         <div className="staff c_page">

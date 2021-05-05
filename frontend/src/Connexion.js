@@ -1,3 +1,5 @@
+import InputInformations from './components/InputInformations';
+
 const Connexion = () => {
 	require('./connexion.css')
 
@@ -59,16 +61,10 @@ const Connexion = () => {
 
                 <div className="i_zones_info c_zones_info">
 					<div className="i_titre_adresse">ADRESSE E-MAIL</div>
-					<div className="i_champ_adresse">
-						<input id="text_user" type="text" required maxLength="100" />
-						<span className="message_erreur" id="erreur_mail"></span>
-					</div>
+					<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"/>
 
 					<div className="i_titre_mdp">MOT DE PASSE</div>
-					<div className="i_champ_mdp">
-						<input id="text_mdp" type="password" required maxLength="100" />
-						<span className="message_erreur" id="erreur_mdp"></span>
-					</div>
+					<InputInformations className_div="i_champ_mdp" id_input="text_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
 					
 					<div className="i_bouton_envoi">
 						<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />

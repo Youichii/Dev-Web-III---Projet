@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
+import { confirmAlert } from 'react-confirm-alert'
 
 
 
@@ -10,9 +11,14 @@ const ProfilPrive = () => {
     const [username, setUsername] = useState('');
     const clientName = "3";
     const [clientInfosList, setClientInfosList] = useState([]);
+    const [street, setStreet] = useState('');
+    const [zipCode, setZip] = useState('');
+    const [city, setCity] = useState('');
+    const [number, setNumber] = useState('');
+    const [mail, setMail] = useState('');
+    const [phone, setPhone] = useState('')
 
     const submitUsername = () => {
-        console.log(username)
         Axios.put('http://localhost:3001/api/put', {
             username : username,
             clientName : clientName,
@@ -20,9 +26,45 @@ const ProfilPrive = () => {
             console.log("Hello")
         })
     }
+    
     const getClient = () => {
         Axios.get(`http://localhost:3001/api/get/${clientName}`).then((response)=> {
             setClientInfosList(response.data)
+        })
+    }
+
+    const submitAdress = () => {
+        Axios.put('http://localhost:3001/api/adress', {
+            clientName : clientName,
+            street : street,
+            number : number,
+            zipCode : zipCode,
+            city : city,
+
+        }).then(() => {
+            console.log("Hello")
+        })
+    }
+
+    const submitPhone = () => {
+        Axios.put('http://localhost:3001/api/phone', {
+            clientName : clientName,
+            phone : phone
+        }).then ((response) => {
+            if (response){
+                window.alert("Ce numéro de téléphone existe déjà !")
+            }
+        })
+    }
+
+    const submitMail = () => {
+        Axios.put('http://localhost:3001/api/mail', {
+            clientName : clientName,
+            mail : mail
+        }).then ((response) => {
+            if (response){
+                window.alert("Cette adresse mail existe déjà !")
+            }
         })
     }
     
@@ -30,8 +72,7 @@ const ProfilPrive = () => {
     return (
         <div onLoad={getClient} className="profilPrive">
             <Header title= {"Votre profil" } headerclass="profilheader"  />
-            
-            <Picture /> 
+            <Picture />
             <div className="privateinfo">                    
                 <div className="gauche">
                     {clientInfosList.map((val) =>{
@@ -44,7 +85,7 @@ const ProfilPrive = () => {
                         );
                     })}
                     <form> 
-                        <input type="text" name="Username" minLength="5" maxLength="10" placeholder="Changer le pseudo" onChange={(e) => {
+                        <input type="text" name="Username" required minLength="5" maxLength="10" placeholder="Changer le pseudo" onChange={(e) => {
                             setUsername(e.target.value)
                         }}/>
                         <button onClick={submitUsername}>Modifier</button>
@@ -65,20 +106,46 @@ const ProfilPrive = () => {
                              </p>
                              );
                     })}
-                    <input type="text" name="Street" maxLength="50" placeholder="Rue"  /><br/>
-                    <input type="text" name="Number" maxLength="10" placeholder="Numéro"  /><br/>
-                    <input type="text" name="Zip" maxLength="6" placeholder="Code Postal" /><br/>
-                    <input type="text" name="City" maxLength="40" placeholder="Ville"  /><br/>
-                    <button >Modifier</button>
-                    <p>0495757504</p>
-                    <input type="text" name="Phone" maxLength="20" placeholder="Changer le numéro de téléphone" />
-                    <button >Modifier</button>
-                    <p>baurelien@hotmail.com</p>
-                    <input type="text" name="Mail" maxLength="50" placeholder="Changer l'adresse mail" /><br />
-                    <input type="text" name="Test" maxLength="10" placeholder="Changer username test" onChange= {(e) => {
-                        setUsername(e.target.value)
-                    }}/><br />
-                    <button onClick={submitUsername}>Username</button>
+                    <form>
+                        <input  type="text" name="Street" maxLength="50" placeholder="Rue" required minLength="1" onChange={(e) => {
+                            setStreet(e.target.value)
+                         }}/><br/>
+                        <input type="text" name="Number" maxLength="10" placeholder="Numéro" required minLength="1" onChange={(e) => {
+                            setNumber(e.target.value)
+                         }}/><br/>
+                        <input type="text" name="Zip" maxLength="6" placeholder="Code Postal" required minLength="1" onChange={(e) => {
+                            setZip(e.target.value)
+                         }}/><br/>
+                        <input type="text" name="City" maxLength="40" placeholder="Ville" required minLength="1"  onChange={(e) => {
+                            setCity(e.target.value)
+                         }}/><br/>
+                        <button onClick={submitAdress}>Modifier</button>
+                    </form>
+                    {clientInfosList.map((val) =>{
+                        return (
+                            <p>
+                                    {val.Phone}
+                            </p>
+                            );  
+                    })} 
+                    <form>
+                        <input type="text" name="Phone" maxLength="20" placeholder="Changer le numéro de téléphone" onChange={(e) => {
+                            setPhone(e.target.value)
+                         }}/><br/>
+                        <button onClick={ submitPhone }>Modifier</button>
+                    </form>
+                    {clientInfosList.map((val) =>{
+                        return (
+                            <p>
+                                    {val.Mail}
+                            </p>
+                            );  
+                    })}
+                    
+                        <input type="text" name="Mail" maxLength="50" placeholder="Changer l'adresse mail" onChange={(e) => {
+                                setMail(e.target.value)
+                            }}/><br/>
+                        <button onClick= { submitMail }>Modifier</button>
                     
                 </div>
             </div>            

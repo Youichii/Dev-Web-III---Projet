@@ -1,4 +1,7 @@
 import {useEffect, useState} from "react" ;
+import BoutonPanier from './components/BoutonPanier';
+import AdresseCommande from './components/AdresseCommande';
+import BoutonRadio from './components/BoutonRadio';
 
 const Panier = () => {
     require('./panier.css')
@@ -175,24 +178,20 @@ const Panier = () => {
         
         document.getElementById('i_ligne_avant_1').style.borderColor= "#414141";
         document.getElementById('i_numero_1').style.backgroundColor= "#414141";
-        //document.getElementById('i_ligne_apres_1').style.borderColor= "#414141";
         
         document.getElementById('i_ligne_avant_2').style.borderColor= "white";
         document.getElementById('i_numero_2').style.backgroundColor= "#A18C7B";
-        //document.getElementById('i_ligne_apres_2').style.borderColor= "white";
     }
 
     const annuler_info = () => {
         document.getElementById('i_grise_etape2').style.display= "none";
         document.getElementById('i_grise_etape1').style.display= "inline";
         
-        //document.getElementById('i_ligne_apres_1').style.borderColor= "white";
         document.getElementById('i_numero_1').style.backgroundColor= "#A18C7B";
         document.getElementById('i_ligne_avant_1').style.borderColor= "white";
     
         document.getElementById('i_ligne_avant_2').style.borderColor= "#414141";
         document.getElementById('i_numero_2').style.backgroundColor= "#414141";
-        //document.getElementById('i_ligne_apres_2').style.borderColor= "#414141";
     }
 
     const affichage_aliments = (element) => {
@@ -247,13 +246,8 @@ const Panier = () => {
 			</div>
 
             <div className="i_boutons1 c_boutons1">
-				<div className="i_bouton_envoyer1" id="elem_bouton_envoyer1">
-					<input id="bouton_envoyer1" name="bout_envoyer1" type="button" value="Suivant" onClick={valider_panier} />
-				</div>
-				
-				<div className="i_bouton_annuler1" id="elem_bouton_annuler1">
-					<input id="bouton_annuler1" name="bout_annuler1" type="button" value="Annuler" onClick={supprimer_commande} />
-				</div>
+                <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={valider_panier} />
+                <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimer_commande} />
 			</div>
 
             <div className="c_info_reception i_info_reception">
@@ -273,14 +267,8 @@ const Panier = () => {
 				<div className="i_moy_reception">
 					<label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
 					<div className="c_reception">
-						<div className="i_place" id="radio_place">
-							<input type="radio" name="myradio1" value="femme" id="place" onClick={cacher_adresse} checked />
-							<label for="place" className="label-info">A emporter</label>
-						</div>
-						<div className="i_livrer" id="radio_livrer">
-							<input type="radio" name="myradio1" value="homme" id="livrer" onClick={afficher_adresse}/>
-							<label for="livrer" className="label-info">A livrer</label>
-						</div>
+                        <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
+                        <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
 					</div>
 				</div>
 
@@ -289,14 +277,8 @@ const Panier = () => {
 				<div className="i_payement">
 					<label class="label_informations" for="mode_payement">Mode de payement</label><br />
 					<div className="i_mode_payement c_mode_payement">
-						<div class="i_liquide" id="radio_liquide">
-							<input type="radio" name="myradio2" value="femme" id="liquide" />
-							<label for="liquide" className="label-info">Liquide</label>
-						</div>
-						<div className="i_mistercash" id="radio_mistercash">
-							<input type="radio" name="myradio2" value="homme" id="mistercash" checked/>
-							<label for="mistercash" className="label-info">Mistercash</label>
-						</div>
+                        <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
+                        <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
 					</div>
 				</div>
 				
@@ -320,6 +302,10 @@ const Panier = () => {
                             <label class="label_adresse" for="ville">Ville</label><br /> 
                             <input id="ville" name="nom_ville" type="text" placeholder={info.ville} /> 
                         </div> 
+                        <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
+                        <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
+                        <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip}/>
+                        <AdresseCommande className_div="i_ville" fom="ville" Text="Ville" id="ville" name="nom_ville" type="text" placeholder={info.Ville}/>
                     </div>
                 ))}
 				
@@ -331,13 +317,8 @@ const Panier = () => {
 			</div>
 
 			<div className="i_boutons2 c_boutons2">
-				<div className="i_bouton_envoyer2" id="elem_bouton_envoyer2">
-					<input id="bouton_envoyer2" name="bout_envoyer2" type="button" value="Valider" onClick={() => ajouter_commande()} />
-				</div>
-				
-				<div className="i_bouton_annuler2" id="elem_bouton_annuler2">
-					<input id="bouton_annuler2" name="bout_annuler2" type="button" value="Retour" onClick={annuler_info} />
-				</div>
+                <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouter_commande} />
+                <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annuler_info} />
 			</div>
         </div>
     );
