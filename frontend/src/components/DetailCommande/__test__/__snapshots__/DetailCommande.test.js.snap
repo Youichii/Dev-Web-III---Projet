@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 DetailCommande 1`] = `
+<div
+  className="i_commande c_commande"
+  data-testid="div_detail_commande"
+  id={7}
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+>
+  <div
+    className="c_sans_bouton i_sans_bouton"
+    onClick={[Function]}
+  >
+    <div
+      className="i_nom couleur_bg1"
+    >
+      Marie
+    </div>
+    <div
+      className="i_contact couleur_bg1"
+    >
+      +32468571325
+    </div>
+    <div
+      className="i_prix_commande couleur_bg1"
+    >
+      409.3
+    </div>
+    <div
+      className="i_heure_prevue couleur_bg1"
+    >
+      18:00
+    </div>
+  </div>
+  <div
+    className="i_div_bouton var(--bg_ligne1)"
+  >
+    <button
+      className="i_bouton_suivant"
+      onClick={[Function]}
+    >
+      OK
+    </button>
+  </div>
+</div>
+`;
+
+exports[`matches snapshot 2 DetailCommande 1`] = `
+<div
+  className="i_commande c_commande"
+  data-testid="div_detail_commande"
+  id={7}
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+>
+  <div
+    className="c_sans_bouton i_sans_bouton"
+    onClick={[Function]}
+  >
+    <div
+      className="i_nom couleur_bg1"
+    >
+      Marie
+    </div>
+    <div
+      className="i_contact couleur_bg1"
+    >
+      +32468571325
+    </div>
+    <div
+      className="i_prix_commande couleur_bg1"
+    >
+      409.3
+    </div>
+    <div
+      className="i_heure_prevue couleur_bg1"
+    >
+      18:00
+    </div>
+  </div>
+  <div
+    className="i_div_bouton var(--bg_ligne1)"
+  >
+    <button
+      className="i_bouton_suivant"
+      onClick={[Function]}
+    >
+      OK
+    </button>
+  </div>
+</div>
+`;

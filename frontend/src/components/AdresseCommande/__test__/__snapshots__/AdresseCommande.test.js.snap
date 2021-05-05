@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1 1`] = `
+exports[`matches snapshot 1 AdresseCommande 1`] = `
 <div
   className="i_adresse_livraison"
+  data-testid="adresse_commande"
 >
   <label
     className="label_adresse"
@@ -19,9 +20,10 @@ exports[`matches snapshot 1 1`] = `
 </div>
 `;
 
-exports[`matches snapshot 2 1`] = `
+exports[`matches snapshot 2 AdresseCommande 1`] = `
 <div
   className="i_adresse_livraison"
+  data-testid="adresse_commande"
 >
   <label
     className="label_adresse"
