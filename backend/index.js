@@ -36,3 +36,11 @@ app.put('/api/put', (req, res) => {
     console.log(result)
   })
 })
+
+app.get('/api/avis', (req, res)=>{
+  const sqlGet="SELECT Avis, idClients from Avis";
+  db.query(sqlGet, (err, result)=>{
+    res.send(result)
+    console.log(result)
+  })
+})
