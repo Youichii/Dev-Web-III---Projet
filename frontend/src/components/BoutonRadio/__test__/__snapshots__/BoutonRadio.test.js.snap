@@ -5,7 +5,6 @@ exports[`matches snapshot 1 BoutonRadio 1`] = `
   data-testid="div_bouton_radio"
 >
   <input
-    checked="yes"
     data-testid="input_bouton_radio"
     readOnly={true}
     type="radio"

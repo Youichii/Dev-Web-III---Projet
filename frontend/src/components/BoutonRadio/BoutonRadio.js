@@ -14,7 +14,6 @@ const BoutonRadio = ({ className_div, id_div, name, value, form, text, isChecked
 }*/
 
 BoutonRadio.defaultProps = {
-    isChecked : "yes"
 }
 
 BoutonRadio.propTypes = {
