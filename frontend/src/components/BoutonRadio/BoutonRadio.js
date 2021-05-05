@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const BoutonRadio = ({ className_div, id_div, name, value, form, text, isChecked, onClick }) => {
     return (
         <div data-testid="div_bouton_radio" className={className_div} id={id_div}>
-            <input data-testid="input_bouton_radio" type="radio" name={name} value={value} id={form} defaultChecked onClick={onClick} readOnly/>
+            <input data-testid="input_bouton_radio" type="radio" name={name} value={value} id={form} checked={isChecked} onClick={onClick} readOnly/>
             <label data-testid="label_bouton_radio" htmlFor={form} className="label-info">{text}</label>
         </div>
     )
@@ -14,7 +14,7 @@ const BoutonRadio = ({ className_div, id_div, name, value, form, text, isChecked
 }*/
 
 BoutonRadio.defaultProps = {
-    isChecked : "checked"
+    isChecked : "yes"
 }
 
 BoutonRadio.propTypes = {
