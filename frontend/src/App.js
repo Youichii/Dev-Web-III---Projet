@@ -54,8 +54,13 @@ function App() {
             <Route exact path="/profil-prive"> 
               <ProfilPrive />
             </Route>
-            <Route path ="/" exact component={Home}/>
-            <Route path = "/home" exact component={Home}/>
+            <Route exact path ="/">
+              <Home/>
+            </Route>
+
+            <Route exact path = "/home">
+              <Home/>
+            </Route>
       
 
           </Switch>
