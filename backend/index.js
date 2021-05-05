@@ -71,118 +71,6 @@ app.put('/api/adress', (req, res) => {
 
 
 
-// requête GET dans la table communaute pour importer tout le contenu de la communauté 
-app.get('/users', (req, res) =>{
-  db.query('select * FROM communaute ', (err, result) => {
-    if(err) throw err ;
-    res.send(result);
-  })
-})
-
-// requête GET dans la table commentaire pour importer tous les commentaires sur la communauté
-app.get('/comments', (req, res) =>{
-    db.query('select * FROM commentaire ', (err, result) => {
-      if(err) throw err ;
-      res.send(result);
-    })
-})
-
-
-// requête PUT pour UPDATE le satus d'un client
-app.put('/status', (req, res) =>{
-    const Status = req.body.Status
-    const Couleur  = req.body.Couleur 
-    const Identifiant= req.body.Identifiant
-    
-  
-    const sqlInsert = " UPDATE communaute SET Couleur = ? , Status = ? WHERE Identifiant = ?;" 
-  
-    db.query(sqlInsert, [Couleur,Status, Identifiant], (err, result) => {
-      if(err) throw err; 
-      res.send(result); 
-    })
-})
-
-// requête POST pour écrire les commentaires du patron dans la base de donnée 
-app.post('/comment', (req, res) =>{
-    const IdUtilisateur = req.body.IdUtilisateur
-    const Commentaire  = req.body.Commentaire
-    const IdCommentaire  = req.body.IdCommentaire 
-
-    const sqlInsert = " INSERT INTO `commentaire` (`IdUtilisateur`, `Commentaire`, `IdCommentaire`) VALUES (?, ?, ?);"
-  
-    db.query(sqlInsert, [IdUtilisateur, Commentaire, IdCommentaire], (err, result) => {
-      if(err) throw err;  
-      res.send(result); 
-    })
-})
-
-// requête DELETE pour supprimer un commentaire de la table commentaire 
-app.delete('/commentaire', (req, res) => {
-    const IdCommentaire  = req.body.IdCommentaire ;
-
-    const sqlInsert = "DELETE FROM `commentaire` WHERE `IdCommentaire` = ?"
-
-    db.query(sqlInsert, [IdCommentaire], (err, result) => {
-        if(err) throw err;  
-        res.send(result) ;
-    })
-    
-})
-
-    
-// Requête GET pour trier le contenu de la communauté sur base de la ville 
-app.get('/usersville/:ville', (req, res) =>{
-   
-    const Ville = req.params.ville
-   
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Ville` = ?"
-
-    db.query(sqlInsert,[Ville],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
-})
-
-
-app.get('/usersstatus/:status', (req, res) =>{
-   
-    const Status = req.params.status
-
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Status` = ?"
-
-    db.query(sqlInsert,[Status],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
-})
-
-
-app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{
-   
-    const Status = req.params.valueStatus
-    const Ville = req.params.valueVille
-    const Nom = req.params.valueNom
-    
-    const sqlInsert = " SELECT * FROM `communaute` WHERE `Status` = ? && `Ville` = ? && `Nom` = ? "
-   
-    db.query(sqlInsert,[Status, Ville, Nom],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
-})
-
-app.get('/usersnom/:nom', (req,res) =>{
-
-    const Nom = req.params.valueNom
- 
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Nom` = ?"
-
-    db.query(sqlInsert,[Nom],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
-})
 
 //Connexion
 app.get('/api/users/:mail/:pwd', (req, res) => {
@@ -343,73 +231,74 @@ app.get('/api/hours', (req, res) => {
     })
 })
 
+// ------------- Code Cécile--------------------------------------------------------------------------------------------------
+
+// Code de la page Communauté ------------------------------------------------------------------------------------------------
 
 // requête GET dans la table communaute pour importer tout le contenu de la communauté 
 app.get('/users', (req, res) =>{
-  db.query('select * FROM communaute ', (err, result) => {
+  db.query('select * FROM clients ', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
 
 // requête GET dans la table commentaire pour importer tous les commentaires sur la communauté
-app.get('/comments', (req, res) =>{
-    db.query('select * FROM commentaire ', (err, result) => {
+app.get('/comment', (req, res) =>{
+    db.query('select * FROM `commentaires`', (err, result) => {
       if(err) throw err ;
       res.send(result);
     })
+})
+
+// requête POST pour écrire les commentaires du patron dans la base de donnée 
+app.post('/comment', (req, res) =>{
+  const IdClient  = req.body.IdClient
+  const Commentaire  = req.body.Commentaire
+
+  const sqlInsert = " INSERT INTO `commentaires` (`IdClient`, `Commentaire`) VALUES (?, ?);"
+
+  db.query(sqlInsert, [IdClient, Commentaire], (err, result) => {
+    if(err) throw err;  
+    res.send(result); 
+  })
+})
+
+// requête DELETE pour supprimer un commentaire de la table commentaire 
+app.delete('/comment', (req, res) => {
+  const Commentaire  = req.body.Commentaire ;
+  const IdClient = req.body.IdClient
+
+  const sqlInsert = "DELETE FROM `commentaires` WHERE `Commentaire` = ? && `IdClient`=?"
+
+  db.query(sqlInsert, [Commentaire, IdClient], (err, result) => {
+      if(err) throw err;  
+      res.send(result) ;
+  })
+  
 })
 
 
 // requête PUT pour UPDATE le satus d'un client
 app.put('/status', (req, res) =>{
     const Status = req.body.Status
-    const Couleur  = req.body.Couleur 
-    const Identifiant= req.body.Identifiant
+    const IdClient= req.body.IdClient
     
   
-    const sqlInsert = " UPDATE communaute SET Couleur = ? , Status = ? WHERE Identifiant = ?;" 
+    const sqlInsert = " UPDATE clients SET `Status`= ? WHERE IdClient = ?;" 
   
-    db.query(sqlInsert, [Couleur,Status, Identifiant], (err, result) => {
+    db.query(sqlInsert, [Status, IdClient], (err, result) => {
       if(err) throw err; 
       res.send(result); 
     })
 })
 
-// requête POST pour écrire les commentaires du patron dans la base de donnée 
-app.post('/comment', (req, res) =>{
-    const IdUtilisateur = req.body.IdUtilisateur
-    const Commentaire  = req.body.Commentaire
-    const IdCommentaire  = req.body.IdCommentaire 
-
-    const sqlInsert = " INSERT INTO `commentaire` (`IdUtilisateur`, `Commentaire`, `IdCommentaire`) VALUES (?, ?, ?);"
-  
-    db.query(sqlInsert, [IdUtilisateur, Commentaire, IdCommentaire], (err, result) => {
-      if(err) throw err;  
-      res.send(result); 
-    })
-})
-
-// requête DELETE pour supprimer un commentaire de la table commentaire 
-app.delete('/commentaire', (req, res) => {
-    const IdCommentaire  = req.body.IdCommentaire ;
-
-    const sqlInsert = "DELETE FROM `commentaire` WHERE `IdCommentaire` = ?"
-
-    db.query(sqlInsert, [IdCommentaire], (err, result) => {
-        if(err) throw err;  
-        res.send(result) ;
-    })
-    
-})
-
-    
 // Requête GET pour trier le contenu de la communauté sur base de la ville 
 app.get('/usersville/:ville', (req, res) =>{
    
     const Ville = req.params.ville
    
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Ville` = ?"
+    const sqlInsert = "SELECT * FROM `clients` WHERE `Ville` = ?"
 
     db.query(sqlInsert,[Ville],(err, result) => {
         if(err) throw err ;
@@ -417,12 +306,12 @@ app.get('/usersville/:ville', (req, res) =>{
     })
 })
 
-
+// Requête GET pour trier le contenu de la communauté sur base du status
 app.get('/usersstatus/:status', (req, res) =>{
    
     const Status = req.params.status
 
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Status` = ?"
+    const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
 
     db.query(sqlInsert,[Status],(err, result) => {
         if(err) throw err ;
@@ -430,14 +319,72 @@ app.get('/usersstatus/:status', (req, res) =>{
     })
 })
 
+// Requête GET pour trier le contenu de la communauté sur base du nom
+app.get('/usersnom/:nom', (req,res) =>{
 
-app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{
+  const Nom = req.params.nom
+
+  const sqlInsert = "SELECT * FROM `clients` WHERE `Nom` = ?"
+
+  db.query(sqlInsert,[Nom],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+// Requête GET pour trier le contenu de la communauté sur base de la ville et du status 
+app.get('/userstrie1/:ville/:status', (req, res) =>{
+   
+  const Status = req.params.valueStatus
+  const Ville = req.params.valueVille
+   
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ?  "
+ 
+  db.query(sqlInsert,[Status, Ville],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+// Requête GET pour trier le contenu de la communauté sur base du status et du nom 
+app.get('/userstrie1/:status/:nom', (req, res) =>{
+   
+  const Status = req.params.valueStatus
+  const Nom = req.params.valueNom
+  
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Nom` = ? "
+ 
+  db.query(sqlInsert,[Status, Nom],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+// Requête GET pour trier le contenu de la communauté sur base de la ville et du nom 
+app.get('/userstrie1/:ville/:nom', (req, res) =>{
+   
+  const Ville = req.params.valueVille
+  const Nom = req.params.valueNom
+  
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Ville` = ? && `Nom` = ? "
+ 
+  db.query(sqlInsert,[Ville, Nom],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+// Requête GET pour trier le contenu de la communauté sur base de la ville, du nom et du status 
+app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{ 
    
     const Status = req.params.valueStatus
     const Ville = req.params.valueVille
     const Nom = req.params.valueNom
     
-    const sqlInsert = " SELECT * FROM `communaute` WHERE `Status` = ? && `Ville` = ? && `Nom` = ? "
+    const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ? && `Nom` = ? "
    
     db.query(sqlInsert,[Status, Ville, Nom],(err, result) => {
         if(err) throw err ;
@@ -445,20 +392,9 @@ app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{
     })
 })
 
-app.get('/usersnom/:nom', (req,res) =>{
-
-    const Nom = req.params.valueNom
- 
-    const sqlInsert = "SELECT * FROM `communaute` WHERE `Nom` = ?"
-
-    db.query(sqlInsert,[Nom],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
-})
 
 
- 
+// Code pour la carte Menu  --------------------------------------------------------------------------------------------------
 
 
 // requête GET dans la table menu pour importer tout le contenu du menu 
@@ -471,21 +407,34 @@ app.get('/menu', (req, res) =>{
 
 // requête GET dans la table categories pour importer toutes les catégories de menu. 
 app.get('/categories', (req, res) =>{
-  db.query('select NomCat FROM categories ', (err, result) => {
+  db.query('select NomCategorie FROM categories ', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
 
-// // requête POST pour exporter la commande du client 
-// app.post('/orders', (req, res) =>{
-//   const id_comm = req.body.id_comm
-//   const id_client = req.body.id_client 
-//   const contenu = req.body.contenu
+//GET les infos de la commande en cours
+app.get('/loadingBasket/:IdCommande', (req, res) =>{
 
-//   const sqlInsert = "INSERT INTO repartition VALUES (IdComm = ?,IdClient = ?, Methode = ?, Date = ?, HLivraison = ?, Etat = ?, CommClient = ?, AdresseComplete = ?)"
+  const IdCommande = req.params.id_comm
 
-//   db.query(sqlInsert, [id_comm, id_client, 'coucou', 'caca','pip' ,'Temporaire', contenu, ''], (err, result) => {
+  const sqlInsert = 'select * FROM commandes WHERE `IdCommande` = ?'
+  db.query(sqlInsert,[IdCommande], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// POST pour exporter la commande du client 
+// app.post('/orders', (req, res) =>{ 
+//   const Ville = null 
+//   const Zip = null
+//   const Numero = null 
+  
+
+//   const sqlInsert = "INSERT INTO reservations (`IdCommande` = ?,`IdClient` = ?, `IdEtat` = ?, `IdMethode`= ?, `DateCommande`= ?, `HLivree`= ?, `Commentaire`= ?, `Rue`= ?, `Numero`= ?, `Zip`= ?, `Ville`= ?) VALUES (?,?,?,?,?,?,?)  "
+
+//   db.query(sqlInsert, [IdCommande, IdClient, IdEtat, IdMethode, DateCommande, HLivree, Commentaire, Rue, Ville, Zip, Numero], (err, result) => {
 //     if(err) throw err; 
 //     res.send(result); 
 //   })
@@ -494,13 +443,14 @@ app.get('/categories', (req, res) =>{
 
 // POST qui envoie les article dans le panier temporaire
 app.post('/intermediateBasket', (req, res) => {
-  const IdComm = req.body.IdComm
-  const Article = req.body.Article
+  console.log("ajouter un nouvel article")
+  const IdCommande = req.body.IdCommande
+  const IdProduit = req.body.IdProduit
   const Quantite = req.body.Quantite
 
 
-  const sqlInsert = "INSERT INTO `sauvegarde` (`id_commande`, `article`, `quantite`) VALUE (?, ?, ?); "
-  db.query(sqlInsert, [IdComm, Article, Quantite], (err, result) => {
+  const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
+  db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
     if(err) throw err; 
     res.send(result); 
   })
@@ -509,26 +459,42 @@ app.post('/intermediateBasket', (req, res) => {
 
 // PUT qui change la quantite d'un produit dans la DB 
 app.put('/changingquantity', (req, res) =>{
-  const IdComm = req.body.IdComm
-  const Article = req.body.Article
+  console.log("changer la quantite")
+  const IdCommande = req.body.IdCommande
+  const IdProduit = req.body.IdProduit
   const Quantite = req.body.Quantite
   
-  const sqlInsert = " UPDATE `sauvegarde` SET `quantite` = ? WHERE `id_commande` = ? && `article` = ? ;" 
+  const sqlInsert = " UPDATE `commandes` SET `Quantite` = ? WHERE `IdCommande` = ? && `IdProduit` = ? ;" 
 
-  db.query(sqlInsert, [Quantite, IdComm, Article], (err, result) => {
+  db.query(sqlInsert, [Quantite, IdCommande, IdProduit], (err, result) => {
     if(err) throw err; 
     res.send(result); 
   })
 })
 
-//GET les infos de la commande en cours
-app.get('/loadingBasket', (req, res) =>{
-  db.query('select * FROM sauvegarde ', (err, result) => {
+
+// Page Historique -------------------------------------------------------------------------------------------------------
+
+//GET les infos des commandes terminé
+
+app.get('/historical', (req, res) =>{
+
+  const IdCommande = req.params.id_comm
+
+  const sqlInsert = 'select * FROM reservations WHERE `idEtat` = "H"'
+  db.query(sqlInsert,[IdCommande], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
 
+app.get('/historical', (req, res) =>{
 
+  const IdCommande = req.params.id_comm
 
- 
+  const sqlInsert = 'select DateCommande FROM reservations WHERE `idEtat` = "H"'
+  db.query(sqlInsert,[IdCommande], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})

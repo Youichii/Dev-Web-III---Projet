@@ -110,7 +110,7 @@
 	grid-gap: 0px;
 	/*grid-row-gap : 0px;
 	grid-column-gap: 5px;*/
-	height: 375px;
+	height: 360px;
 	background-color: var(--bg_cadres);
 }
 .c_commande {

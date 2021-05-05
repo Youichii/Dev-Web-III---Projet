@@ -1,4 +1,3 @@
-/*import { useState } from 'react'*/
 import React from 'react'
 import Banner from './Banner';
 import Accueil from './components/Accueil';
@@ -8,11 +7,14 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
+import Home from './components/pages/Home'
+import Home from './components/Home'
 import Home from './Home'
 import Communaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
+import Historique from './Historique';
 
 function App() {
   return (
@@ -71,6 +73,11 @@ function App() {
             <Route exact path="/Menu"> 
               <Menu />
             </Route>
+            
+            <Route exact path="/Historique"> 
+              <Historique/>
+            </Route>
+
           </Switch>
         </div>
       </div>

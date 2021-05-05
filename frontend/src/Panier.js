@@ -36,7 +36,7 @@ const Panier = () => {
                 let heure_finale ;
 
                 (nbminuteRestante === 0 ) ? heure_finale = "00" : heure_finale =  nbminuteRestante.toString();
-                if ( data.filter(elem => elem.HLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
+                if ( data.filter(elem => elem.hLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
                     intermediaire.push(({"h" : nbHour.toString(), "m" : heure_finale}));
                 }
             }
@@ -45,7 +45,6 @@ const Panier = () => {
     }, []);
 
     const recuperer_panier = () => {
-        console.log("oui");
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
@@ -55,9 +54,8 @@ const Panier = () => {
         })
         .then(data => {
             setDonneesPanier(data);
-            console.log(data);
             let total = 0 ;
-            data.map(x => total+=x["Quantite"]*x["Prix"]);
+            data.map(x => total+=x["quantite"]*x["prix"]);
             setTotal(total.toFixed(2)) ;
             
             let nbr_lignes = ""
@@ -157,12 +155,12 @@ const Panier = () => {
     }
 
     const changer_prix = (id_produit, id_prix) => {
-        let information = donnees_panier.filter(element => element.IdProduit == id_produit)[0];
+        let information = donnees_panier.filter(element => element.idProd == id_produit)[0];
         
-        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.Prix + " €";
-        information.Quantite = Number(document.getElementById(id_prix).value);
+        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.prix + " €";
+        information.quantite = Number(document.getElementById(id_prix).value);
         let total = 0 ;
-        donnees_panier.map(aliment => total+=aliment.Quantite*aliment.Prix);
+        donnees_panier.map(aliment => total+=aliment.quantite*aliment.prix);
         setTotal(total) ;
     }
 
@@ -203,14 +201,14 @@ const Panier = () => {
 
         return (
             <div className='c_info_ligne i_info_ligne'> 
-                <div className={`i_nom_aliment ${type_couleur}`}>{element.Produit}</div> 
-                <div class="aliment_barre" id={element.IdProduit}><hr /></div>
+                <div className={`i_nom_aliment ${type_couleur}`}>{element.produit}</div> 
+                <div class="aliment_barre" id={element.idProd}><hr /></div>
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
-                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.IdCommande, element.IdProduit, element.Quantite,"moins")} >-</button> 
-                    <input id={`${element.IdCommande}${element.IdProduit}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
-                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.IdCommande, element.IdProduit, element.Quantite, "plus")}>+</button>
+                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.idCom, element.idProd, element.quantite,"moins")} >-</button> 
+                    <input id={`${element.idCom}${element.idProd}`} className='nombre_aliment' type='number' value={element.quantite} readonly="readonly" />
+                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.idCom, element.idProd, element.quantite, "plus")}>+</button>
                 </div> 
-                <div id={`${element.IdCommande}${element.IdProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{(element.Prix*element.Quantite).toFixed(2)}{" €"}</div> 
+                <div id={`${element.idCom}${element.idProd}total`} className={`i_prix_aliment ${type_couleur}`}>{(element.prix*element.quantite).toFixed(2)}{" €"}</div> 
             </div>
         )
     }
@@ -288,6 +286,22 @@ const Panier = () => {
                 
                 {donnees_adresse && donnees_adresse.map(info => (
                     <div className="i_adresse c_adresse" id="zone_adresse">
+                        <div className="i_adresse_livraison"> 
+                            <label class="label_adresse" for="adresse_livraison">Adresse de livraison</label><br /> 
+                            <input id="adresse_livraison" name="add_livraison" type="text" placeholder={info.rue} /> 
+                        </div> 
+                        <div className="i_numero_maison"> 
+                            <label class="label_adresse" for="numero_maison">Numéro</label><br /> 
+                            <input id="numero_maison" name="num_maison" type="number" placeholder={info.numero} /> 
+                        </div> 
+                        <div className="i_code_postal"> 
+                            <label class="label_adresse" for="code_postal">Code postal</label><br /> 
+                            <input id="code_postal" name="num_postal" type="number" placeholder={info.postal} /> 
+                        </div> 
+                        <div className="i_ville"> 
+                            <label class="label_adresse" for="ville">Ville</label><br /> 
+                            <input id="ville" name="nom_ville" type="text" placeholder={info.ville} /> 
+                        </div> 
                         <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
                         <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
                         <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip}/>
