@@ -7,6 +7,8 @@ function FormEmail (){
         message:""
     });
 
+    //tient compte des changement du champ
+
     function handleChange(e){
         setEmailer((prevState)=>({
             ...prevState,
