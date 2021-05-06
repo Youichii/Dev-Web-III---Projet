@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations';
+import Axios from "axios";
 
 const Connexion = () => {
-	require('./connexion.css')
+	require('./connexion.css');
+
+	const [loginStatus, setLoginStatus] = useState("");
 
 	const verification_valeurs = () => {
 		let compteur = true ;
@@ -29,8 +33,54 @@ const Connexion = () => {
 		return compteur ;
 	}
 
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/deco`).then((response) => {
+			console.log("res supprimer client : ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+			
+		});
+	}
+	Axios.defaults.withCredentials = true;
 	const recuperer_client = () => {
 
+		let mail = document.getElementById("text_user").value ;
+		Axios.post(`http://localhost:3001/auth/${mail}`).then((response) => {
+			console.log("res recuperer client : ", response) ; 
+			if (response.data.message) {
+				setLoginStatus(response.data.message);
+			} else {
+				setLoginStatus(response.data[0].username);
+			}
+		});
+
+		/*let mail = document.getElementById("text_user").value ;
+		let pwd = document.getElementById("text_mdp").value ;
+		var myInit = { method: 'post',
+			headers: {'Content-Type': 'application/json'}, 
+			mode: 'no-cors',
+			withCredentials: true
+		};
+		fetch(`http://localhost:3001/auth/${mail}`, myInit)
+		.then(res => {
+			return res.json();
+			console.log("ouiii");
+			console.log("res : ", res) ; 
+			//return res;
+			if (res.data.message){
+				setLoginStatus(res.data.message);
+			}
+			else {
+				setLoginStatus(res.data[0].username);
+			}
+		})
+		.then(data => {
+			console.log("data : ", data);
+		})*/
+
+
+
+		/*
 		if (verification_valeurs()) {
 			let mail = document.getElementById("text_user").value ;
 			let pwd = document.getElementById("text_mdp").value ;
@@ -49,8 +99,17 @@ const Connexion = () => {
 					document.getElementById("erreur_connexion").innerHTML = "";
 				}
 			})
-		}
+		}*/
     }
+
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/login").then((response) => {
+			console.log("response clem : ", response);
+			if (response.data.loggedIn == true) {
+				setLoginStatus(response.data.user[0].username);
+			}
+		});
+	}, []);
 
     return (
         <div className="connexion c_cadre">
@@ -70,9 +129,12 @@ const Connexion = () => {
 						<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
 						<br></br><span className="message_erreur" id="erreur_connexion"></span>
 					</div>
+					<div><h1 className="kk">{loginStatus}</h1></div>
+					<input id="bouton_connexion_envoi" type="button" value="DECONNEXION" onClick={deconnexion} />
 				</div>
-            </div>		
+            </div>	
         </div>
+		
     );
 }
 

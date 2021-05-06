@@ -1,9 +1,15 @@
-const express = require('express')
-const app = express()
-const mysql = require('mysql')
-const cors = require('cors')
+const express = require('express');
+const app = express();
+const mysql = require('mysql');
+const cors = require('cors');
 
-const db = mysql.createPool({
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var path = require('path');
+
+//mysql.createPool
+const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
@@ -15,7 +21,11 @@ app.listen(3001, () => {
 })
 
 app.use(express.json())
-app.use(cors())  //to avoid CORS policy
+app.use(cors({
+  origin:["http://localhost:3000"],
+  methods:["GET", "POST", "PUT", "DELETE"],
+  credentials:true
+}))  //to avoid CORS policy
 
 app.get('/api/get/:clientName', (req,res) => {
   const name = req.params.clientName
@@ -73,6 +83,96 @@ app.put('/api/adress', (req, res) => {
 
 
 //Connexion
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(session({
+  key:"userId",
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: false,
+  cookie: { expires: new Date(Date.now() + 1800000) }
+}));
+//cookie: { secure: false, expires: 60*60*24 }
+
+//app.use(bodyParser.urlencoded({extended : true}));
+//app.use(bodyParser.json());
+app.post('/auth/:mail', function(request, response) {
+	var username = request.params.mail;
+  console.log("avant : ", request.session.loggedin);
+	//var password = request.params.pwd;
+	if (username) {
+		db.query('SELECT * FROM clients WHERE Mail = ? ', [username], function(error, results, fields) {
+			if (results.length > 0) {
+        console.log("bon username");
+				/*request.session.loggedin = true;
+        request.session.username = username;
+
+        console.log("le met bien a true : ", request.session.loggedin);
+        console.log("session complete : ", request.session);
+        request.session.save();
+        request.session.connected = true;
+				//response.redirect('/homme');
+        
+        //response.set('Set-Cookie', 'coco=coco_text'); 
+        const oneDayToSeconds = 24 * 60 * 60*1000;
+        response.cookie('userId', 'mouwa', { maxAge: 1000000000});
+        response.cookie('coco', 'perroquet');
+        response.send(results);*/
+
+        request.session.user = results ;
+        console.log(request.session.user);
+        response.send(results);
+			} 
+      else {
+        console.log("mauvais username");
+
+				response.send({result:'ko', msg:'Incorrect Username and/or Password!'});
+			}			
+			response.end();
+		});
+	} 
+  else {
+    console.log("vide username");
+		response.send({result:'ko', msg:'Please enter Username and Password!'});
+		response.end();
+	}
+});
+
+app.get('/login', function(request, response){
+  //console.log("request login : ", request);
+  //console.log("session login : ", request.session);
+  //console.log("user login : ", request.session.user);
+  if (request.session.user){
+    response.send({loggedIn:true, user:request.session.user});
+  }
+  else {
+    response.send({loggedIn:false});
+  }
+});
+
+
+
+/*app.get('/homme', function(request, response) {
+  console.log("bienvenue home");
+  console.log("sess : ", request.session.loggedin, " ", request.session.username) ;
+  console.log("session complete apres : ", request.session);
+	if (request.session.loggedin) {
+		response.send('Welcome back, ' + request.session.username + '!');
+	} 
+  else {
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});*/
+
+app.get('/deco', function(request, response) {
+  console.log("deconnexion");
+  //request.session = null;
+  request.session.destroy();
+  response.send({loggedIn:false});
+});
+
 app.get('/api/users/:mail/:pwd', (req, res) => {
 
   const mail = req.params.mail ;
