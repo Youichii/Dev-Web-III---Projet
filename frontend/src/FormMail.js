@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import './FormEmail.css'
+import './FormMail.css'
 
 function FormEmail (){
 
