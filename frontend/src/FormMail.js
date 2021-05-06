@@ -1,81 +1,58 @@
-import './FormMail.css';
-import axios from 'axios'
-import React, {useState} from 'react'
+import {useState} from 'react';
+import './FormEmail.css'
 
-const FormMail=()=> {
+function FormEmail (){
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [promo, setPromo] = useState('')
-  
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (e.target.id === "name"){
-      setName(e.target.value)
-    } else if(e.target.id === "email"){
-      setEmail(e.target.value)
-    } else{
-      setPromo(e.target.value)
-    }
-    
-  }
+    const [emailer, setEmailer] = useState({
+        message:""
+    });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const dataToSubmit = {
-      name,
-      email,
-      promo
+    function handleChange(e){
+        setEmailer((prevState)=>({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
     }
 
-    axios.post("api/sendMail", dataToSubmit)
-  }
+    const SubmitEmail = async(e) =>{
+        e.preventDefault();
+        console.log({emailer});
+        const response = await fetch ("http://localhost:3000/envoye",{
+            method: "POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({emailer}),
+        })
+        .then((res)=> res.json())
+        .then (()=>{
+            setEmailer({
+                message:""
+            });
+        });
+    };
 
 
+    return(
+        <div className="email-container">
+            <div className="formulaire-email">
 
-  return (
+                <form className="champ-formulaire" onSubmit={SubmitEmail}>
+                    <legend>Creer une newsletter</legend>
+                    <textarea 
+                        placeholder="Message"
+                        onChange = {handleChange}
+                        name="message"
+                        value={emailer.message}
+                    />
+                    <button className="btn-email">Envoyer email</button>
+                </form>
 
-    <div className="container">
+            </div>
+ 
 
-        <form onSubmit={handleSubmit}>
-          <div className="singleItem">
-            <input  
-            id="name" 
-            placeholder="name" 
-            value ={name} 
-            onChange={handleClick}/>
-          </div>
-
-          <div className="singleItem">
-            <input  
-            id="email" 
-            placeholder="Email" 
-            value ={email} 
-            onChange={handleClick}/>
-          </div>
-
-          <div className="textArea singleItem">
-            <textarea
-            id="promo"
-            cols="30" 
-            rows="5" 
-            placeholder="Promo" 
-            value ={promo} 
-            onChange={handleClick}/>
-          </div>
-
-          
-
-          <div className="btn">
-            <button onClick={handleSubmit}> Send email</button>
-          </div>
-          
-        </form>
-
-      
-    </div>
-  );
+        </div>
+    );
 }
 
-export default FormMail;
+export default FormEmail;
