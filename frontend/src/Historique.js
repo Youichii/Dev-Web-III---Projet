@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 
 const Historique = () => {
@@ -25,6 +25,14 @@ const Historique = () => {
 			}
 		});
 	}, []);
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
     useEffect(()=>{
 
@@ -57,7 +65,7 @@ const Historique = () => {
 
     return(
         <div>
-            {loginStatus ? <Banner /> : <BannerPatron />}
+            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             {historique&&historique.map(histo =>  
                 setDate.push(histo.DateCommande) 
             )}

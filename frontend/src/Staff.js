@@ -4,7 +4,7 @@ import DetailCommande from './components/DetailCommande';
 
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Staff = () => {
     require('./staff.css')
@@ -31,6 +31,14 @@ const Staff = () => {
 			}
 		});
 	}, []);
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
     useEffect(() => {
         var myInit = { method: 'GET',
@@ -189,7 +197,7 @@ const Staff = () => {
 
     return (
         <div>
-			{loginStatus ? <Banner /> : <BannerPatron />}
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div className="staff c_page">
 
                 <div className="c_cadre_commandes_afaire i_cadre_attente">

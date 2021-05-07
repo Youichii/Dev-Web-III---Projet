@@ -4,7 +4,7 @@ import AdresseCommande from './components/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Panier = () => {
     require('./panier.css');
@@ -34,6 +34,14 @@ const Panier = () => {
 			}
 		});
 	}, []);
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
     useEffect(() => {
         recuperer_utilisateur();
@@ -236,7 +244,7 @@ const Panier = () => {
 
     return (
         <div>
-			{loginStatus ? <Banner /> : <BannerPatron />}
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div className="panier">
                 <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
                 <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>

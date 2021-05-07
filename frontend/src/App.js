@@ -1,5 +1,4 @@
 import React from 'react'
-import Banner from './Banner';
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';

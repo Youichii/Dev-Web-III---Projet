@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Connexion = () => {
@@ -28,6 +27,14 @@ const Connexion = () => {
 			}
 		});
 	}, []);
+
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	} 
 
 	const verification_valeurs = () => {
 		let compteur = true ;
@@ -78,40 +85,33 @@ const Connexion = () => {
 		}
     }
 
-	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
-		});
-	}
-		return (
-			<div>
-				{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
-				<div className="connexion c_cadre">
-					<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
-						<div className="i_bouton_connexion">CONNEXION</div>
-						<div className="i_bouton_inscription">INSCRIPTION</div>
-						<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
+	return (
+		<div>
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+			<div className="connexion c_cadre">
+				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
+					<div className="i_bouton_connexion">CONNEXION</div>
+					<div className="i_bouton_inscription">INSCRIPTION</div>
+					<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
 
-						<div className="i_zones_info c_zones_info">
-							<div className="i_titre_adresse">ADRESSE E-MAIL</div>
-							<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"/>
+					<div className="i_zones_info c_zones_info">
+						<div className="i_titre_adresse">ADRESSE E-MAIL</div>
+						<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"/>
 
-							<div className="i_titre_mdp">MOT DE PASSE</div>
-							<InputInformations className_div="i_champ_mdp" id_input="text_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
-							
-							<div className="i_bouton_envoi">
-								<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
-								<br></br><span className="message_erreur" id="erreur_connexion"></span>
-							</div>
-							<input id="bouton_connexion_envoi" type="button" value="DECONNEXION" onClick={deconnexion} />
+						<div className="i_titre_mdp">MOT DE PASSE</div>
+						<InputInformations className_div="i_champ_mdp" id_input="text_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
+						
+						<div className="i_bouton_envoi">
+							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
+							<br></br><span className="message_erreur" id="erreur_connexion"></span>
 						</div>
-					</div>	
-				</div>
+						<input id="bouton_connexion_envoi" type="button" value="DECONNEXION" onClick={deconnexion} />
+					</div>
+				</div>	
 			</div>
-			
-		);
+		</div>
+		
+	);
 }
 
 export default Connexion;

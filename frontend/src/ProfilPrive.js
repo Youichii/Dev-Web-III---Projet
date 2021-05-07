@@ -5,7 +5,7 @@ import Axios from 'axios'
 import { confirmAlert } from 'react-confirm-alert'
 
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const ProfilPrive = () => {
     require('./profilPrive.css')
@@ -35,6 +35,14 @@ const ProfilPrive = () => {
 			}
 		});
 	}, []);
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
     const submitUsername = () => {
         Axios.put('http://localhost:3001/api/put', {
@@ -89,7 +97,7 @@ const ProfilPrive = () => {
 
     return (
         <div>
-			{loginStatus ? <Banner /> : <BannerPatron />}
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div onLoad={getClient} className="profilPrive">
                 <Header title= {"Votre profil" } headerclass="profilheader"  />
                 <Picture />

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Communaute = () => {
     require("./communaute.css")
@@ -29,7 +29,14 @@ const Communaute = () => {
 			}
 		});
 	}, []); 
-    
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}    
 
     useEffect(()=>{
 
@@ -318,7 +325,7 @@ const Communaute = () => {
     return(
 
         <div>
-            {loginStatus ? <Banner /> : <BannerPatron />}
+            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <fieldset id = "recherche">
 
                 <select id="selectVille" onChange={()=>Trie()}>

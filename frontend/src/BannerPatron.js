@@ -1,7 +1,7 @@
 import logo from "./img/logo.jpg"
 
 const BannerPatron = () => {
-    require('./banner.css')
+    require('./bannerPP.css')
     return(
         <nav className="navbar">                    
             <li><a href="/" >Statistiques</a></li>

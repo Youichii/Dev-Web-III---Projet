@@ -7,8 +7,7 @@ import img4 from '../src/images/img4.jpeg'
 import { useEffect, useState } from 'react';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
-
+import BannerConnect from './components/BannerConnect.js';
 
 function Home() {
     require('./Home.css');
@@ -29,9 +28,17 @@ function Home() {
 		});
 	}, []);
 
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
+
     return (
         <div>
-			{loginStatus ? <Banner /> : <BannerPatron />}
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div className="hero-container">
                 <div className="hero-img">
                     <ul className="defilement-img">

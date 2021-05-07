@@ -3,7 +3,7 @@ import InputInformations from './components/InputInformations';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from 'axios';
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Inscription = () => {
 
@@ -28,6 +28,14 @@ const Inscription = () => {
 			}
 		});
 	}, []);
+
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
 	useEffect(() => {
 		let jour = [], annee = [] ;
@@ -238,7 +246,7 @@ const Inscription = () => {
 
     return (
 		<div>
-			{loginStatus ? <Banner /> : <BannerPatron />}
+			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
 			<div className="inscription c_cadre_inscription">
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 					<div className="i_bouton_con">CONNEXION</div>

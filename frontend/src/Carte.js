@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Carte = () => {
     Axios.defaults.withCredentials = true;
@@ -35,6 +35,13 @@ const Carte = () => {
 		});
 	}, []);
 
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
         
     useEffect(()=>{
         let id_comm = 200
@@ -148,7 +155,7 @@ const Carte = () => {
         
     return(
         <div>
-            {loginStatus ? <Banner /> : <BannerPatron />}
+            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div id = 'bordPrincipal'>
                 {titres&&titres.map(titre => (
                     <fieldset className="cadre">

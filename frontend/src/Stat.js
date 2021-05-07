@@ -7,15 +7,15 @@ import Chart from './components/Chart';
 
 import Axios from "axios";
 import Banner from './Banner.js';
-import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 export default function Stat() {
-  Axios.defaults.withCredentials = true;
+  	Axios.defaults.withCredentials = true;
 
-  const [loginStatus, setLoginStatus] = useState(false);
+  	const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
 
-  useEffect(()=> {
+ 	useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
@@ -27,10 +27,18 @@ export default function Stat() {
 		});
 	}, []);
 
-  //a mettre qqpart jsp où 
-  /*<div>
-	  {loginStatus ? <Banner /> : <BannerPatron />}
-  </div>*/
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
+
+	//a mettre qqpart jsp où 
+	/*<div>
+		{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+	</div>*/
   return (
     <>
         <Chart />
