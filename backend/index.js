@@ -96,15 +96,14 @@ app.use(session({
 
 app.get('/auth/:mail/:pwd', function(request, response) {
 	var username = request.params.mail;
-  //console.log("pwd : ", request.params.pwd);
   //console.log("avant : ", request.session.loggedin);
 	var password = request.params.pwd;
-	if (username) {
-		db.query('SELECT * FROM clients WHERE Mail = ? and Mdp = ?', [username, password], function(error, results, fields) {
+	if (username && password) {
+		db.query('SELECT IdClient FROM clients WHERE Mail = ? and Mdp = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
         console.log("bon username");
         request.session.user = results ;
-        //console.log(request.session.user);
+        //console.log("user : ", request.session.user);
         response.send(results);
 			} 
       else {
@@ -149,21 +148,6 @@ app.get('/api/users/:mail/:pwd', (req, res) => {
     res.send(result) ;
   })
 })
-
-//à supprimer
-/*app.get('/test/:mail/:pwd', (req, res) => {
-  console.log("Bien trouvé");
-  const mail = req.params.mail ;
-  const pwd = req.params.pwd  ;
-
-  console.log("mail : ", mail, " pwd : ", pwd);
-  
-  const sqlInsert = "SELECT IdClient from clients where Mail = ? and Mdp = ?";
-  db.query(sqlInsert, [mail, pwd], (err, result) => {
-    console.log(err);
-    res.send(result) ;
-  })
-})*/
 
 app.post('/api/users', (req, res) => {
 

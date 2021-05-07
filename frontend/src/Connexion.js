@@ -4,8 +4,19 @@ import Axios from "axios";
 
 const Connexion = () => {
 	require('./connexion.css');
+	Axios.defaults.withCredentials = true;
 
 	const [loginStatus, setLoginStatus] = useState("");
+
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/login").then((response) => {
+			console.log("vérifier tjrs connecté : ", response);
+			if (response.data.loggedIn == true) {
+				setLoginStatus(response.data.user[0].IdClient);
+				console.log("rechargement : ", response.data.user[0].IdClient);
+			}
+		});
+	}, []);
 
 	const verification_valeurs = () => {
 		let compteur = true ;
@@ -33,6 +44,27 @@ const Connexion = () => {
 		return compteur ;
 	}
 
+	const recuperer_client = () => {
+
+		if (verification_valeurs()) {
+			let mail = document.getElementById("text_user").value ;
+			let pwd = document.getElementById("text_mdp").value ;
+			Axios.get(`http://localhost:3001/auth/${mail}/${pwd}`).then((response) => {
+				console.log("connexion : ", response) ; 
+				if (response.data.message) {
+					setLoginStatus(response.data.message);
+					console.log("message erreur : ", response.data.message);
+					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail et/ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
+				} else {
+					setLoginStatus(response.data[0].username);
+					console.log("daata : ", response.data[0].IdClient);
+					console.log("connexion réussie : ", response.data[0].IdClient);
+					document.getElementById("erreur_connexion").innerHTML = "";
+				}
+			});
+		}
+    }
+
 	const deconnexion = () => {
 		Axios.get(`http://localhost:3001/deco`).then((response) => {
 			console.log("deconnexion: ", response) ; 
@@ -40,67 +72,6 @@ const Connexion = () => {
 			console.log("deconnecté");
 		});
 	}
-
-	Axios.defaults.withCredentials = true;
-	const recuperer_client = () => {
-
-		let mail = document.getElementById("text_user").value ;
-		let pwd = document.getElementById("text_mdp").value ;
-		Axios.get(`http://localhost:3001/auth/${mail}/${pwd}`).then((response) => {
-			console.log("connexion : ", response) ; 
-			if (response.data.message) {
-				setLoginStatus(response.data.message);
-			} else {
-				setLoginStatus(response.data[0].username);
-			}
-		});
-
-		/*
-		if (verification_valeurs()) {
-			let mail = document.getElementById("text_user").value ;
-			let pwd = document.getElementById("text_mdp").value ;
-			var myInit = { method: 'GET',
-				headers: {'Content-Type': 'application/json'}
-			};
-			fetch(`http://localhost:3001/api/users/${mail}/${pwd}`, myInit)
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				if (data.length === 0) {
-					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
-				}
-				else {
-					document.getElementById("erreur_connexion").innerHTML = "";
-				}
-			})
-		}*/
-    }
-
-	useEffect(()=> {
-		Axios.get("http://localhost:3001/login").then((response) => {
-			console.log("vérifier tjrs connecté : ", response);
-			if (response.data.loggedIn == true) {
-				setLoginStatus(response.data.user[0].username);
-			}
-		});
-	}, []);
-
-	/*useEffect(()=> {
-		let mail = "c.c@gmail.com" ;
-		let pwd = "123" ;
-		Axios.get(`http://localhost:3001/test/${mail}/${pwd}`).then((response) => {
-			console.log("response clem axio : ", response);
-		});
-
-		var myInit = { method: 'GET',
-			headers: {'Content-Type': 'application/json'}
-		};
-		fetch(`http://localhost:3001/test/${mail}/${pwd}`, myInit)
-		.then(res => {
-			return res.json();
-		})
-	})*/
 
     return (
         <div className="connexion c_cadre">
