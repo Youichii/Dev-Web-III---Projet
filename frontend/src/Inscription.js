@@ -235,17 +235,23 @@ const Inscription = () => {
 				return res.json();
 			})
 			.then(data => {
-				let mail_valide = document.getElementById("mail_user").value ;
-				let mdp_valide = document.getElementById("mdp_user").value;
-				Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
-				if (response.data.message) {
-					setLoginStatus(false);
-					setUsername(10000000000);
-				} else {
-					setLoginStatus(true);
-					setUsername(response.data[0].IdClient);
+				if (data.message === false) {
+					document.getElementById("erreur_inscription").innerHTML = "Cette adresse mail existe déjà ! Essayez-en une autre";
 				}
-			});
+				else {
+					document.getElementById("erreur_inscription").innerHTML = "";
+					let mail_valide = document.getElementById("mail_user").value ;
+					let mdp_valide = document.getElementById("mdp_user").value;
+					Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
+					if (response.data.message) {
+						setLoginStatus(false);
+						setUsername(10000000000);
+					} else {
+						setLoginStatus(true);
+						setUsername(response.data[0].IdClient);
+					}
+					});
+				}
 			})
 		}
     }
@@ -331,7 +337,8 @@ const Inscription = () => {
 						<div className="i_champ_captcha">
 							<input type="text" id="captcha_user" required />
 						</div>
-					
+
+						<div className="message_erreur" id="erreur_inscription"></div>
 					</div>
 
 					<div className="i_bouton_envoi_insc">

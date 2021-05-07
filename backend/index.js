@@ -151,25 +151,33 @@ app.get('/api/deconnexion', function(request, response) {
 
 app.post('/api/users', (req, res) => {
 
-    const name = req.body.name ;
-    const firstname = req.body.firstname ;
-    const birthday = req.body.birthday ;
-    const phone = req.body.phone ;
-    const mail = req.body.mail ;
-    const gender = req.body.gender ;
-    const pwd = req.body.pwd ;
-    const rue = req.body.rue ;
-    const numero = req.body.numero ;
-    const postal = req.body.postal ;
-    const ville = req.body.ville ;
-    const neswletter = req.body.nwsletter ;
-  
-    const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
-      console.log(err) ;
-      res.send(result);
-    })
-  }) 
+  const name = req.body.name ;
+  const firstname = req.body.firstname ;
+  const birthday = req.body.birthday ;
+  const phone = req.body.phone ;
+  const mail = req.body.mail ;
+  const gender = req.body.gender ;
+  const pwd = req.body.pwd ;
+  const rue = req.body.rue ;
+  const numero = req.body.numero ;
+  const postal = req.body.postal ;
+  const ville = req.body.ville ;
+  const neswletter = req.body.nwsletter ;
+
+  const sqlVerif = "select IdClient from clients where Mail = ?";
+  db.query(sqlVerif, [mail], (err, result) => {
+    if (result.length > 0) {
+      res.send({message:false});
+    }
+    else {
+      const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
+        console.log(err) ;
+        res.send(result);
+      });
+    }
+  });
+}) 
   
   
  app.get('/api/orders', (req, res) => {
