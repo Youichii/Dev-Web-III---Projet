@@ -13,7 +13,7 @@ const Connexion = () => {
 	useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			console.log("vérifier tjrs connecté : ", response);
-			if (response.data.loggedIn == true) {
+			if (response.data.loggedIn === true) {
 				setLoginStatus(response.data.user[0].IdClient);
 				console.log("rechargement : ", response.data.user[0].IdClient);
 			}

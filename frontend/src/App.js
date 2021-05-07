@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Banner/>
+        
         <div className="content">
           <Switch>
             <Route exact path="/">
