@@ -6,7 +6,7 @@ import Staff from './Staff';
 import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
-import FormMail from './FormMail'
+import FormMail from './test_FormMail/FormMail'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
