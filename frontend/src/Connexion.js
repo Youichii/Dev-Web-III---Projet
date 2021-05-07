@@ -105,7 +105,6 @@ const Connexion = () => {
 							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
 							<br></br><span className="message_erreur" id="erreur_connexion"></span>
 						</div>
-						<input id="bouton_connexion_envoi" type="button" value="DECONNEXION" onClick={deconnexion} />
 					</div>
 				</div>	
 			</div>
