@@ -2,14 +2,35 @@ import {useEffect, useState} from "react" ;
 import React from 'react' ;
 import DetailCommande from './components/DetailCommande';
 
+import Axios from "axios";
+import Banner from './Banner.js';
+import BannerPatron from './BannerPatron.js';
+
 const Staff = () => {
     require('./staff.css')
+    Axios.defaults.withCredentials = true;
+
     let compteur_afaire = 1 ;
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
 
     const [donnees, setDonnees] = useState(null);
     const [changement, setChangement] = useState(true);
+
+    const [loginStatus, setLoginStatus] = useState(false);
+	const [username, setUsername] = useState("");
+
+    useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
+			if (response.data.loggedIn === true) {
+				setLoginStatus(true);
+				setUsername(response.data.user[0].IdClient);
+			}
+			else {
+				setLoginStatus(false);
+			}
+		});
+	}, []);
 
     useEffect(() => {
         var myInit = { method: 'GET',
@@ -167,78 +188,81 @@ const Staff = () => {
     }
 
     return (
-        <div className="staff c_page">
+        <div>
+			{loginStatus ? <Banner /> : <BannerPatron />}
+            <div className="staff c_page">
 
-            <div className="c_cadre_commandes_afaire i_cadre_attente">
-                <div className="c_titre_fileattente i_titre_fileattente">
-					<div className="file_attente">File d'attente</div>
-					<div className="barre_haut_attente"></div>
-					<div className="barre_bas_attente"></div>
-				</div>
-                <div className="c_titres_commandes i_titres_commandes">
-                    <div className="i_heures">Heure</div>
-					<div className="i_noms">Nom</div>
-					<div className="i_contacts">Contact</div>
-					<div className="i_prix_titre">Prix</div>
+                <div className="c_cadre_commandes_afaire i_cadre_attente">
+                    <div className="c_titre_fileattente i_titre_fileattente">
+                        <div className="file_attente">File d'attente</div>
+                        <div className="barre_haut_attente"></div>
+                        <div className="barre_bas_attente"></div>
+                    </div>
+                    <div className="c_titres_commandes i_titres_commandes">
+                        <div className="i_heures">Heure</div>
+                        <div className="i_noms">Nom</div>
+                        <div className="i_contacts">Contact</div>
+                        <div className="i_prix_titre">Prix</div>
+                    </div>
+
+                    <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
+                        {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elements_afaire)}
+                    </div>
+
+                    <div className="details_commande">
+                        <div id="afaire" class='info_commande c_info_commande'></div>
+                    </div>
+
+                    <div className="i_bout_cadre_afaire"></div>
                 </div>
 
-                <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                    {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elements_afaire)}
+                <div className="c_cadre_commandes_encours i_cadre_preparation">
+                    <div className="c_titre_preparation i_titre_preparation">
+                        <div className="en_cours_preparation">En cours de préparation</div>
+                        <div className="barre_haut_preparation"></div>
+                        <div className="barre_bas_preparation"></div>
+                    </div>
+
+                    <div className="c_titres_commandes i_titres_commandes">
+                        <div className="i_heures">Heure</div>
+                        <div className="i_noms">Nom</div>
+                        <div className="i_contacts">Contact</div>
+                        <div className="i_prix_titre">Prix</div>
+                    </div>
+                    <div className="i_commandes_encours c_commandes" id="cadre_encours">
+                        {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elements_encours)}
+                    </div>
+
+                    <div className="details_commande">
+                        <div id="encours" class='info_commande c_info_commande'></div>
+                    </div>
+
+                    <div className="i_bout_cadre_afaire"></div>
                 </div>
 
-                <div className="details_commande">
-                    <div id="afaire" class='info_commande c_info_commande'></div>
+                <div className="c_cadre_commandes_envoye i_cadre_envoi">
+                    <div className="c_titre_envoi i_titre_envoi">
+                        <div className="en_cours_envoi">En cours d'envoi</div>
+                        <div className="barre_haut_envoi"></div>
+                        <div className="barre_bas_envoi"></div>
+                    </div>
+
+                    <div className="c_titres_commandes i_titres_commandes">
+                        <div className="i_heures">Heure</div>
+                        <div className="i_noms">Nom</div>
+                        <div className="i_contacts">Contact</div>
+                        <div className="i_prix_titre">Prix</div>
+                    </div>
+                    <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
+                        {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elements_envoye)}
+                    </div>
+
+                    <div className="details_commande">
+                        <div id="envoye" class='info_commande c_info_commande'></div>
+                    </div>
+
+                    <div className="i_bout_cadre_afaire"></div>
                 </div>
-
-                <div className="i_bout_cadre_afaire"></div>
-            </div>
-
-            <div className="c_cadre_commandes_encours i_cadre_preparation">
-                <div className="c_titre_preparation i_titre_preparation">
-					<div className="en_cours_preparation">En cours de préparation</div>
-					<div className="barre_haut_preparation"></div>
-					<div className="barre_bas_preparation"></div>
-				</div>
-
-                <div className="c_titres_commandes i_titres_commandes">
-                    <div className="i_heures">Heure</div>
-					<div className="i_noms">Nom</div>
-					<div className="i_contacts">Contact</div>
-					<div className="i_prix_titre">Prix</div>
-                </div>
-                <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                    {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elements_encours)}
-                </div>
-
-                <div className="details_commande">
-                    <div id="encours" class='info_commande c_info_commande'></div>
-                </div>
-
-				<div className="i_bout_cadre_afaire"></div>
-            </div>
-
-            <div className="c_cadre_commandes_envoye i_cadre_envoi">
-                <div className="c_titre_envoi i_titre_envoi">
-					<div className="en_cours_envoi">En cours d'envoi</div>
-					<div className="barre_haut_envoi"></div>
-					<div className="barre_bas_envoi"></div>
-				</div>
-
-                <div className="c_titres_commandes i_titres_commandes">
-                    <div className="i_heures">Heure</div>
-					<div className="i_noms">Nom</div>
-					<div className="i_contacts">Contact</div>
-					<div className="i_prix_titre">Prix</div>
-                </div>
-                <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                    {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elements_envoye)}
-                </div>
-
-                <div className="details_commande">
-                    <div id="envoye" class='info_commande c_info_commande'></div>
-                </div>
-
-				<div className="i_bout_cadre_afaire"></div>
             </div>
         </div>
     );

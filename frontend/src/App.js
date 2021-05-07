@@ -52,10 +52,6 @@ function App() {
               <Communaute />
             </Route>
 
-            <Route exact path="/Carte">
-              <Communaute />
-            </Route>
-
             <Route exact path="/inscription"> 
               <Inscription />
             </Route>
