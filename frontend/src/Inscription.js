@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import InputInformations from './components/InputInformations';
 import BoutonRadio from './components/BoutonRadio';
+import Axios from 'axios'
 
 const Inscription = () => {
 
@@ -8,6 +9,20 @@ const Inscription = () => {
 	const [liste_jours, setListeJours] = useState(null);
 	const [liste_mois, setListeMois] = useState(["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"]);
 	const [liste_annee, setListeAnnee] = useState(null);
+
+	Axios.defaults.withCredentials = true;
+
+	const [loginStatus, setLoginStatus] = useState("");
+
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
+			console.log("vérifier tjrs connecté : ", response);
+			if (response.data.loggedIn === true) {
+				setLoginStatus(response.data.user[0].IdClient);
+				console.log("rechargement : ", response.data.user[0].IdClient);
+			}
+		});
+	}, []);
 
 	useEffect(() => {
 		let jour = [], annee = [] ;

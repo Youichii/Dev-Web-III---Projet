@@ -18,7 +18,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
         <div className="content">
           <Switch>
             <Route exact path="/">
