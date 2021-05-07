@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import './FormMail.css'
+import '../FormMail.css'
 
 function FormEmail (){
 
@@ -39,9 +39,11 @@ function FormEmail (){
         <div className="email-container">
             <div className="formulaire-email">
 
-                <form className="champ-formulaire" onSubmit={SubmitEmail}>
+                <form  data-testid = "mailform" className="champ-formulaire" onSubmit={SubmitEmail}>
                     <legend>Creer une newsletter</legend>
+                    <label htmlFor="text-promo">La nouvelle promo: </label>
                     <textarea 
+                        id="text-promo"
                         placeholder="Message"
                         onChange = {handleChange}
                         name="message"
