@@ -94,7 +94,7 @@ app.use(session({
   cookie: { expires: new Date(Date.now() + 1800000) }
 }));
 
-app.get('/auth/:mail/:pwd', function(request, response) {
+app.get('/api/users/:mail/:pwd', function(request, response) {
 	var username = request.params.mail;
   //console.log("avant : ", request.session.loggedin);
 	var password = request.params.pwd;
@@ -120,7 +120,7 @@ app.get('/auth/:mail/:pwd', function(request, response) {
 	}
 });
 
-app.get('/login', function(request, response){
+app.get('/api/connexion', function(request, response){
   if (request.session.user){
     response.send({loggedIn:true, user:request.session.user});
   }
@@ -129,7 +129,7 @@ app.get('/login', function(request, response){
   }
 });
 
-app.get('/deco', function(request, response) {
+app.get('/api/deconnexion', function(request, response) {
   console.log("deconnexion");
   request.session.destroy();
   response.send({loggedIn:false});
@@ -137,7 +137,7 @@ app.get('/deco', function(request, response) {
 
 
 //Connexion
-app.get('/api/users/:mail/:pwd', (req, res) => {
+/*app.get('/api/users/:mail/:pwd', (req, res) => {
 
   const mail = req.params.mail ;
   const pwd = req.params.pwd  ;
@@ -147,7 +147,7 @@ app.get('/api/users/:mail/:pwd', (req, res) => {
     console.log(err);
     res.send(result) ;
   })
-})
+})*/
 
 app.post('/api/users', (req, res) => {
 

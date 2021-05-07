@@ -7,9 +7,11 @@ const Connexion = () => {
 	Axios.defaults.withCredentials = true;
 
 	const [loginStatus, setLoginStatus] = useState("");
+	let mail_valide = "vide";
+	let mdp_valide = "vide";
 
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/login").then((response) => {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			console.log("vérifier tjrs connecté : ", response);
 			if (response.data.loggedIn == true) {
 				setLoginStatus(response.data.user[0].IdClient);
@@ -21,8 +23,10 @@ const Connexion = () => {
 	const verification_valeurs = () => {
 		let compteur = true ;
 		document.getElementById("erreur_connexion").innerHTML = "";
+		let mail = document.getElementById("text_user").value ;
+		let pwd = document.getElementById("text_mdp").value ;
 
-		if (document.getElementById("text_user").value === "") { 
+		if (mail === "") { 
 			document.getElementById("text_user").style.borderColor="var(--erreur)";
 			document.getElementById("erreur_mail").innerHTML = "Veuillez entrer votre adresse";
 			compteur = false ;
@@ -30,9 +34,10 @@ const Connexion = () => {
 		else {
 			document.getElementById("text_user").style.borderColor="var(--bordure)";
 			document.getElementById("erreur_mail").innerHTML = "";
+			mail_valide = mail ;
 		}
 
-		if (document.getElementById("text_mdp").value === "") { 
+		if (pwd === "") { 
 			document.getElementById("text_mdp").style.borderColor="var(--erreur)";
 			document.getElementById("erreur_mdp").innerHTML = "Veuillez entrer votre mot de passe";
 			compteur = false ;
@@ -40,16 +45,14 @@ const Connexion = () => {
 		else {
 			document.getElementById("text_mdp").style.borderColor="var(--bordure)";
 			document.getElementById("erreur_mdp").innerHTML = "";
+			mdp_valide = pwd ; 
 		}
 		return compteur ;
 	}
 
 	const recuperer_client = () => {
-
 		if (verification_valeurs()) {
-			let mail = document.getElementById("text_user").value ;
-			let pwd = document.getElementById("text_mdp").value ;
-			Axios.get(`http://localhost:3001/auth/${mail}/${pwd}`).then((response) => {
+			Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
 				console.log("connexion : ", response) ; 
 				if (response.data.message) {
 					setLoginStatus(response.data.message);
@@ -66,7 +69,7 @@ const Connexion = () => {
     }
 
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/deco`).then((response) => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
 			console.log("deconnexion: ", response) ; 
 			setLoginStatus(false);
 			console.log("deconnecté");
