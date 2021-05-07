@@ -3,13 +3,14 @@ import InputInformations from './components/InputInformations';
 import Axios from "axios";
 import Banner from './Banner.js';
 import BannerPatron from './BannerPatron.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Connexion = () => {
 	require('./connexion.css');
 	Axios.defaults.withCredentials = true;
 
 	const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
+	const [username, setUsername] = useState(10000000000);
 	let mail_valide = "vide";
 	let mdp_valide = "vide";
 
@@ -64,13 +65,12 @@ const Connexion = () => {
 				console.log("connexion : ", response) ; 
 				if (response.data.message) {
 					setLoginStatus(false);
-					setUsername(response.data.message);
-					console.log("message erreur : ", response.data.message);
+					setUsername(10000000000);
+					//console.log("message erreur : ", response.data.message);
 					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail et/ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
 				} else {
 					setLoginStatus(true);
-					setUsername(response.data[0].username);
-					console.log("daata : ", response.data[0].IdClient);
+					setUsername(response.data[0].IdClient);
 					console.log("connexion réussie : ", response.data[0].IdClient);
 					document.getElementById("erreur_connexion").innerHTML = "";
 				}
@@ -87,7 +87,7 @@ const Connexion = () => {
 	}
 		return (
 			<div>
-				{loginStatus ? <Banner /> : <BannerPatron />}
+				{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
 				<div className="connexion c_cadre">
 					<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 						<div className="i_bouton_connexion">CONNEXION</div>
