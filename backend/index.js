@@ -163,8 +163,6 @@ app.post('/api/users', (req, res) => {
     const postal = req.body.postal ;
     const ville = req.body.ville ;
     const neswletter = req.body.nwsletter ;
-
-    console.log("news : ", neswletter);
   
     const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {

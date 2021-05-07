@@ -235,13 +235,19 @@ const Inscription = () => {
 				return res.json();
 			})
 			.then(data => {
-				console.log("Successful");
+				let mail_valide = document.getElementById("mail_user").value ;
+				let mdp_valide = document.getElementById("mdp_user").value;
+				Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
+				if (response.data.message) {
+					setLoginStatus(false);
+					setUsername(10000000000);
+				} else {
+					setLoginStatus(true);
+					setUsername(response.data[0].IdClient);
+				}
+			});
 			})
 		}
-		else {
-			console.log("non, toutes les informations ne sont pas correctes");
-		}
-
     }
 
     return (
@@ -251,7 +257,7 @@ const Inscription = () => {
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 					<div className="i_bouton_con">CONNEXION</div>
 					<div className="i_bouton_insc">INSCRIPTION</div>
-					<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
+					<div className="i_titre_connexion">INSCRIPTION AVEC UNE ADRESSE E-MAIL</div>
 					
 					<div className="c_champs_informations i_champs_informations">
 						<div className="i_titre_nom pol">NOM</div>
