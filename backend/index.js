@@ -88,7 +88,7 @@ app.put('/api/adress', (req, res) => {
 
 // requête GET dans la table communaute pour importer tout le contenu de la communauté 
 app.get('/users', (req, res) =>{
-  db.query('select * FROM communaute ', (err, result) => {
+  db.query('select * FROM clients ', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
@@ -562,16 +562,27 @@ app.get('/categories', (req, res) =>{
 //   })
 // })
 
+app.post('/api/orders', (req, rest)=> {
+  const IdCommande = req.body.IdCommande
+  const IdClient = req.body.IdClient
+
+  const sqlInsert = 'INSERT INTO reservations (IdClient, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
 
 // POST qui envoie les article dans le panier temporaire
-app.post('/intermediateBasket', (req, res) => {
-  const IdComm = req.body.IdComm
-  const Article = req.body.Article
+app.post('/api/intermediateBasket', (req, res) => {
+  console.log("ajouter un nouvel article")
+  const IdCommande = req.body.IdCommande
+  const IdProduit = req.body.IdProduit
   const Quantite = req.body.Quantite
 
-
-  const sqlInsert = "INSERT INTO `sauvegarde` (`id_commande`, `article`, `quantite`) VALUE (?, ?, ?); "
-  db.query(sqlInsert, [IdComm, Article, Quantite], (err, result) => {
+  const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
+  db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
     if(err) throw err; 
     res.send(result); 
   })
@@ -771,4 +782,34 @@ app.get('/apitest/hours', (req, res) => {
       res.send(result) ;
     })
 })
+
+app.get('/apitest/users', (req, res) =>{
+  db_test.query('select * FROM clients ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
  
+app.post('/apitest/orders', (req, rest)=> {
+  const IdClient = req.body.IdClient;
+
+  const sqlInsert = 'INSERT INTO reservations (IdClient, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// POST qui envoie les article dans le panier temporaire
+app.post('/apitest/intermediateBasket', (req, res) => {
+  console.log("ajouter un nouvel article")
+  const IdCommande = req.body.IdCommande;
+  const IdProduit = req.body.IdProduit;
+  const Quantite = req.body.Quantite;
+
+  const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
+  db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
+})
