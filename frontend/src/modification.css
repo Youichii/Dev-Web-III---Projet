@@ -16,7 +16,7 @@ div.dd-wraper {
 div.dd-header {
     margin: 2%;
     padding: 0%;
-    width: 10%;
+    width: 5%;
     text-align: center;
     display: inline-block;
     
@@ -32,29 +32,38 @@ ul.listCoord {
 }
 
 img.toggleImg {
-    width: 25%;
+    width: 70%;
 }
 
-img:hover {
+div.dd-header_action:hover {
     cursor: pointer;
 }
 
 button {
     background-color: darkgoldenrod;
-    width: 10%;
+    width: 8%;
     display: inline-block;
+    border-radius: 100px;
 }
 
 input {
     width :30%;
+    border-radius: 5px;
+    
 }
 
 input, button {
     font-size: calc(0.1em + 1vw);
-    margin : 3%;
+    margin : 1%;
+    opacity: 0.9;
+    
 }
 
 form {
     width: 100%;
     display: inline-block;
+}
+
+li {
+    margin-top: 1%;
 }

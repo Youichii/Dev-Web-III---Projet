@@ -17,6 +17,9 @@ app.listen(3001, () => {
 app.use(express.json())
 app.use(cors())  //to avoid CORS policy
 
+
+//Profil Privé
+
 app.get('/api/client/:clientName', (req,res) => {
   const name = req.params.clientName
   const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
@@ -70,6 +73,19 @@ app.put('/api/adress', (req, res) => {
 })
 
 
+//Modification des informations
+
+app.get('/api/horaires', (req,res) => {
+  const sqlGet = "SELECT * FROM `horaires`"
+  db.query(sqlGet,(err, result) => {
+    res.send(result)
+  })
+})
+
+app.put('/api/horaires', (req,res) => {
+  const lundi = req.body.Lundi
+  console.log("ici " + lundi)
+})
 
 
 //Connexion

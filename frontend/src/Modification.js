@@ -1,70 +1,162 @@
 import React, { useState } from 'react'
 import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
+import Axios from 'axios'
+import Input from './components/Input/Input'
 
 const Modification = () => {
     require('./modification.css')
-    const [lundi, setLundi] = useState("")
+    const [Lundi, setLundi] = useState("")
+    const [Mardi, setMardi] = useState("")
+    const [Mercredi, setMercredi] = useState("")
+    const [Jeudi, setJeudi] = useState("")
+    const [Vendredi, setVendredi] = useState("")
+    const [Samedi, setSamedi] = useState("")
+    const [Dimanche, setDimanche] = useState("")
+    const [horairesList, setHorairesList] = useState([]);
+
+    const getHoraires = () => {
+        Axios.get(`http://localhost:3001/api/horaires`).then((response)=> {
+            setHorairesList(response.data)
+        })
+    }
+
+    const submitDay = () => {
+        Axios.put('http://localhost:3001/api/horaires', {
+            Lundi : Lundi,
+            Mardi : Mardi,
+            Mercredi : Mercredi,
+            Jeudi : Jeudi,
+            Vendredi : Vendredi,
+            Samedi : Samedi,
+            Dimanche : Dimanche,
+            }).then(() => {
+                console.log("hello")
+            })
+    }
+
     return (
-        <div>
+        <div onLoad={getHoraires}>
             <Dropdown title= "Horaires" 
                 content={
                     <ul className="listHoraires">
                             <li>
-                                Lundi : 
-                                        
-                                        <form onSubmit={setLundi}>
-                                            <input type="texte" placeholder="heures"/>
-                                            <Button onClick={setLundi}>Modifier</Button>
-                                        </form>
+                                <u>Lundi :</u>  
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Lundi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                        
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
+                                    <Button/>
+                                </form>
                             </li>
+
                             <li>
-                                Mardi : 
-                                        
-                                        <form onSubmit={setLundi}>
-                                            <input type="texte" placeholder="heures"/>
-                                            <Button onClick={setLundi}>Modifier</Button>
-                                        </form>
+                                <u>Mardi :</u> 
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Mardi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                        
+                                <form onSubmit={submitDay}>
+                                <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
+                                    <Button/>
+                                </form>
                             </li>
+
                             <li>
-                                Mercredi :  
+                               <u>Mercredi</u>  
+                               {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Mercredi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
+                                    <Button/>
+                                </form>
+                            </li>
+
+                            <li>
+                                <u>Jeudi :</u> 
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Jeudi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                        
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
+                                    <Button/>
+                                </form>
+                            </li>
+
+                            <li>
+                                <u>Vendredi :</u> 
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Vendredi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                            
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
+                                    <Button/>
+                                </form>
+                            </li>
+
+                            <li>
+                                <u>Samedi :</u> 
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Samedi}
+                                        </p>
+                                    );
+                                    })
+                                }
+                
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
+                                    <Button/>
+                                </form>
+                            </li>
+
+                            <li>
+                                <u>Dimanche :</u>  
+                                {horairesList.map((val) => {
+                                    return (
+                                        <p>
+                                            {val.Dimanche}
+                                        </p>
+                                    );
+                                    })
+                                }
                                 
-                                            <form onSubmit={setLundi}>
-                                                <input type="texte" placeholder="heures"/>
-                                                <Button onClick={setLundi}>Modifier</Button>
-                                            </form>
-                            </li>
-                            <li>
-                                Jeudi : 
-                                        
-                                        <form onSubmit={setLundi}>
-                                            <input type="texte" placeholder="heures"/>
-                                            <Button onClick={setLundi}>Modifier</Button>
-                                        </form>
-                            </li>
-                            <li>
-                                Vendredi : 
-                                            
-                                            <form onSubmit={setLundi}>
-                                                <input type="texte" placeholder="heures"/>
-                                                <Button onClick={setLundi}>Modifier</Button>
-                                            </form>
-                            </li>
-                            <li>
-                                Samedi :    
-                                
-                                            <form onSubmit={setLundi}>
-                                                <input type="texte" placeholder="heures"/>
-                                                <Button onClick={setLundi}>Modifier</Button>
-                                            </form>
-                            </li>
-                            <li>
-                                Dimanche :  
-                                
-                                            <form onSubmit={setLundi}>
-                                                <input type="texte" placeholder="heures"/>
-                                                <Button onClick={setLundi}>Modifier</Button>
-                                            </form>
+                                <form onSubmit={submitDay}>
+                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
+                                    <Button/>
+                                </form>
                             </li>
                     </ul>
                 }
