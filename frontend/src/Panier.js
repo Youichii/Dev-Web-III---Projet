@@ -47,6 +47,7 @@ const Panier = () => {
     const recuperer_panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({"type" : "PAN"})
         };
         fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, myInit)
         .then(res => {
@@ -105,7 +106,7 @@ const Panier = () => {
             (document.getElementById('ville').value == "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
         }
         
-        var myInit = { method: 'POST',
+        var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };

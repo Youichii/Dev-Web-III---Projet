@@ -302,7 +302,7 @@ app.post('/api/users', (req, res) => {
     })
 })
 
-app.put('/api/orders', (req, res) => {
+app.put('/api/orders/states', (req, res) => {
     const type = req.body.type
     const commande  = req.body.commande
     
@@ -328,7 +328,7 @@ app.delete('/api/orders', (req, res) => {
     })
 })
 
-app.get('/api/panier/:idCommande', (req, res) => {
+/*app.get('/api/panier/:idCommande', (req, res) => {
   const idCommande  = req.params.idCommande ;
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
@@ -339,7 +339,7 @@ app.get('/api/panier/:idCommande', (req, res) => {
     console.log("erreur : ", err) ;
     res.send(result) ;
   })
-})
+})*/
 
 //avant : /api/users/:idClient
 ///api/users/:idClient/address
@@ -354,7 +354,7 @@ app.get('/api/users/:idClient', (req, res) => {
     })
 })
 
-app.post('/api/orders', (req, res) => {
+app.put('/api/orders', (req, res) => {
     const commande  = req.body.commande ;
     const methode  = req.body.methode ;
     const commentaire  = req.body.commentaire ;
@@ -376,13 +376,14 @@ app.post('/api/orders', (req, res) => {
 
 app.get('/api/orders/users/:identifiantClient', (req, res) => { 
     const identifiantClient = req.params.identifiantClient ;
+    const type = req.body.type ;
 
     const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
     JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ? AND IdEtat = 'PAN'";
-    db.query(sqlInsert, [identifiantClient], (err, result) => {
+    WHERE IdClient = ? AND IdEtat = ?";
+    db.query(sqlInsert, [identifiantClient, type], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
     })
@@ -659,7 +660,7 @@ app.post('/apitest/users', (req, res) => {
     })
 })
 
-app.put('/apitest/orders', (req, res) => {
+app.put('/apitest/orders/states', (req, res) => {
     const type = req.body.type
     const commande  = req.body.commande
     
@@ -685,7 +686,7 @@ app.delete('/apitest/orders', (req, res) => {
     })
 })
 
-app.get('/apitest/panier/:idCommande', (req, res) => {
+/*app.get('/apitest/panier/:idCommande', (req, res) => {
   const idCommande  = req.params.idCommande 
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
@@ -696,7 +697,7 @@ app.get('/apitest/panier/:idCommande', (req, res) => {
     console.log("erreur : ", err) ;
     res.send(result) ;
   })
-})
+})*/
 
 app.get('/apitest/users/:idClient', (req, res) => {
     const identifiant = req.params.idClient 
@@ -708,7 +709,7 @@ app.get('/apitest/users/:idClient', (req, res) => {
     })
 })
 
-app.post('/apitest/orders', (req, res) => {
+app.put('/apitest/orders', (req, res) => {
     const commande  = req.body.commande ;
     const methode  = req.body.methode ;
     const commentaire  = req.body.commentaire ;
@@ -732,6 +733,7 @@ app.post('/apitest/orders', (req, res) => {
 app.get('/apitest/orders/users/:identifiantClient', (req, res) => { 
     const identifiantClient = req.params.identifiantClient ;
 
+    console.log("id : ", identifiantClient);
     const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
