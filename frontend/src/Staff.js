@@ -116,8 +116,10 @@ const Staff = () => {
 
 
     const load_panier = (informations, identifiant) => {
-        let identifiantCommande = informations.idCom ; 
-        fetch(`http://localhost:3001/api/panier/${identifiantCommande}`, {
+        //let identifiantCommande = informations.IdCommande ; 
+        //http://localhost:3001/api/panier/${identifiantCommande}
+        let identifiantClient = informations.IdClient ;
+        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
         }).then(res => {
@@ -127,20 +129,20 @@ const Staff = () => {
             
             let nbr_lignes = "";
             let info_commentaire, lieu ;
-            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.rue + '</span></div> \
-                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.numero + '</span></div> \
-                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.ville + '</span></div> \
-                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.postal + '</span>' ;
+            let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.Rue + '</span></div> \
+                    <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.Numero + '</span></div> \
+                    <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.Ville + '</span></div> \
+                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.Postal + '</span>' ;
 
-            (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.commentaire ;
-            (informations.idMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
+            (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.Commentaire ;
+            (informations.IdMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
-            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.idCom + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommade + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< data.length ; i++){
-                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["quantite"] + "</div></div>";
+                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["Produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["Quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.dateCom.substring(14, 19) + " - " + informations.dateCom.substring(8, 10) + "/" + informations.dateCom.substring(5, 7) + "/" + informations.dateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCom.substring(14, 19) + " - " + informations.DateCom.substring(8, 10) + "/" + informations.DateCom.substring(5, 7) + "/" + informations.DateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
                             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
@@ -153,9 +155,9 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_afaire%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_afaire++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
+        donnees.filter(element => element.IdEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
         return (
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
@@ -168,9 +170,9 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_encours%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_encours++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
+        donnees.filter(element => element.IdEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
         document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
 
         return (
@@ -185,9 +187,9 @@ const Staff = () => {
         let type_couleur, bg_bouton ;
         (compteur_envoye%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_envoye++ ;
-        (elem.idMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
+        (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
-        donnees.filter(element => element.idEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
+        donnees.filter(element => element.IdEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (

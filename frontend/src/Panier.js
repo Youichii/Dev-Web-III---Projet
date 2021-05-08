@@ -55,7 +55,6 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            
             const intermediaire = [] ;
             let min = 1080 ; //18h
             let max = 1440 ; //00h
@@ -65,7 +64,7 @@ const Panier = () => {
                 let heure_finale ;
 
                 (nbminuteRestante === 0 ) ? heure_finale = "00" : heure_finale =  nbminuteRestante.toString();
-                if ( data.filter(elem => elem.hLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
+                if ( data.filter(elem => elem.HLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
                     intermediaire.push(({"h" : nbHour.toString(), "m" : heure_finale}));
                 }
             }
