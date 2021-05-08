@@ -63,6 +63,7 @@ const Panier = () => {
             for (let i = 0 ; i<data.length ; i++) {
                 nbr_lignes += "45px " ;
             }
+            console.log("classe : ", document.getElementsByClassName("c_info_aliments"));
             document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
         })
     }
@@ -71,11 +72,16 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
+        //avant : http://localhost:3001/api/users/${identifiantClient}
+        //http://localhost:3001/api/users/${identifiantClient}/address
+
+        //http://localhost:3000/yelp?term=food&location=austin
         fetch(`http://localhost:3001/api/users/${identifiantClient}`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
+            console.log("datapanier : ", data);
             setDonneesAdresse(data);
         })
     }

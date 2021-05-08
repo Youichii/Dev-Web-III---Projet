@@ -1,0 +1,141 @@
+/* Barre de navigation */
+
+:root {
+	--survol_bouton : #dfb54f;
+}
+
+.navbar{ 
+    background-color: black;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 20% 20% 15% 20% 20%;
+    grid-template-rows: 100%;
+    display: grid;
+    width:auto;
+    text-align: center;
+    font-size: calc(0.5em + 1vw);
+
+}
+.navbar li{
+    height: fit-content;
+}
+
+.navbar a{
+    display : block;
+    color: white;
+    text-decoration: none;
+    margin-top:15%;
+
+}
+
+.navbar a:hover{
+    color : var(--survol_bouton);
+    text-decoration-color: var(--survol_bouton);
+    border-bottom: solid 1px var(--survol_bouton);
+    cursor:default;
+}
+
+
+  
+#menu dl, dt, dd, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+li:hover{
+    cursor:pointer;
+}
+
+
+
+.banniere_visiteur {
+    display: grid;
+	grid-template-columns: 18% 18% 18% 18% 18% 10%;
+	grid-template-rows: 50% 39% 10%;
+	grid-gap: 2px;
+	padding: 5px;
+}
+.accueil_bv {
+    grid-column-start: 1;
+	grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    /*padding: 38px 0px 0px 0px;*/
+}
+.informations_bv {
+    grid-column-start: 2;
+	grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+#img{
+    height: auto;
+    width: 80%;
+} 
+.logo_bv {
+    grid-column-start: 3;
+	grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.menu_bv {
+    grid-column-start: 4;
+	grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.panier_bv {
+    grid-column-start: 5;
+	grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.test_bv {
+    grid-column-start: 3;
+	grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.insta_bv {
+    grid-column-start: 1;
+	grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+#instagram {
+    width: 70%;
+}
+
+.fb_bv {
+    grid-column-start: 2;
+	grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+#facebook {
+    width: 70%;
+}
+
+.twi_bv {
+    grid-column-start: 3;
+	grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+#twitter {
+    width: 70%;
+}
+
+.reseaux_sociaux {
+    grid-column-start: 1;
+	grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    display:grid;
+    grid-template-columns:  18% 18% 18% 43%;
+	grid-template-rows: 20% 48% 26%;
+	grid-gap: 2px;
+	padding: 5px;
+}
