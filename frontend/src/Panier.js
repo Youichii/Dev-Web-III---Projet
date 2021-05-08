@@ -14,20 +14,24 @@ const Panier = () => {
 
     const [total, setTotal] = useState(0);
     let compteur = 1 ;
-    let identifiantClient = 7 ;
-    let id_commande = 1 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
 
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
-
+    let utilisateur = 100000000000;
+    let id_commande =  100000000000;
 
     useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
 				setUsername(response.data.user[0].IdClient);
+                console.log("id : ", response.data.user[0].IdClient);
+                utilisateur = response.data.user[0].IdClient;
+
+                recuperer_utilisateur();
+                recuperer_panier();
 			}
 			else {
 				setLoginStatus(false);
@@ -44,8 +48,7 @@ const Panier = () => {
 	}
 
     useEffect(() => {
-        recuperer_utilisateur();
-        recuperer_panier();
+        
 
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
@@ -76,12 +79,13 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, myInit)
+        fetch(`http://localhost:3001/api/orders/users/${utilisateur}`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
             setDonneesPanier(data);
+            id_commande = data[0].IdCommande;
             let total = 0 ;
             data.map(x => total+=x["Quantite"]*x["Prix"]);
             setTotal(total.toFixed(2)) ;
@@ -98,7 +102,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/users/${identifiantClient}`, myInit)
+        fetch(`http://localhost:3001/api/users/${utilisateur}`, myInit)
         .then(res => {
             return res.json();
         })
@@ -136,7 +140,6 @@ const Panier = () => {
         })
         .then(data => {
             supprimer_commande() ;
-            console.log("ok");
         })
     }
 
@@ -172,11 +175,9 @@ const Panier = () => {
                 changer_prix(id_produit, String(id_commande) + String(id_produit));
             })
             if (nouvelle_qtite === 0) {
-                console.log("passe bien ici");
                 document.getElementById(id_produit).style.display = "inline";
             }
             else if (nouvelle_qtite === 1) {
-                console.log("passe bien ici");
                 document.getElementById(id_produit).style.display = "none";
             }
         }
