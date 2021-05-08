@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.get('/api/users', (req, res)=>{
     
-    const sqlGet = "SELECT Prenom, Mail  FROM Clients";
+    const sqlGet = "SELECT  Mail  FROM Clients";
     db.query(sqlGet, (err, result)=>{
         res.send(result);
         console.log(result)
@@ -59,7 +59,7 @@ transporter.verify((err, success)=>{
 app.post("/envoye", function (req, res){
     let mailOptions ={
         from: "nozak001@gmail.com",
-        to: "nozak001@gmail.com",
+        to: "nozak001@gmail.co",
         subject: "test mail",
         text:`${req.body.emailer.message}`
     };

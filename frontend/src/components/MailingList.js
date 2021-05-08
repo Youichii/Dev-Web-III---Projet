@@ -17,17 +17,15 @@ function MailingList() {
   const getMailList = ()=>{
     Axios.get('http://localhost:3000/api/users')
     .then((response)=>{
-        setMailList(response.data)
+
+      setMailList(response.data)
   
     });
 
   }
     return (
         <div>
-          <h1>Hello</h1>
-            {mailList.map((val)=>{
-                return (<h1>Name: {val.Prenom} | email: {val.Mail}</h1>);
-            })}
+            {mailList.map((val)=>val.Mail)}
         </div>
     )
 
