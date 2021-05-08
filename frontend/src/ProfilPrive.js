@@ -9,7 +9,7 @@ import Input from './components/Input/Input'
 const ProfilPrive = () => {
     require('./profilPrive.css')
     const [username, setUsername] = useState('');
-    const clientName = "3";
+    const clientName = "1";
     const [clientInfosList, setClientInfosList] = useState([]);
     const [street, setStreet] = useState('');
     const [zipCode, setZip] = useState('');
@@ -19,7 +19,7 @@ const ProfilPrive = () => {
     const [phone, setPhone] = useState('')
 
     const submitUsername = () => {
-        Axios.put('http://localhost:3001/api/put', {
+        Axios.put('http://localhost:3001/api/username', {
             username : username,
             clientName : clientName,
         }).then(() => {
@@ -28,7 +28,7 @@ const ProfilPrive = () => {
     }
     
     const getClient = () => {
-        Axios.get(`http://localhost:3001/api/get/${clientName}`).then((response)=> {
+        Axios.get(`http://localhost:3001/api/client/${clientName}`).then((response)=> {
             setClientInfosList(response.data)
         })
     }
@@ -63,6 +63,7 @@ const ProfilPrive = () => {
             mail : mail
         }).then ((response) => {
             if (response){
+                console.log(response)
                 window.alert("Cette adresse mail existe déjà !")
             }
         })
@@ -79,7 +80,7 @@ const ProfilPrive = () => {
                         return (
                         <label>
                             <h1>
-                                {val.Username}
+                                {val.Pseudo}
                             </h1>
                         </label>
                         );
@@ -91,16 +92,16 @@ const ProfilPrive = () => {
                     {clientInfosList.map((val) =>{
                         return (
                             <p>
-                                    {val.LastName} | {val.FirstName}
+                                    {val.Nom} | {val.Prenom}
                                 <br />
-                                14 janvier 1997
+                                {val.Anniversaire}
                             </p>
                             );  
                     })}                   
                     {clientInfosList.map((val) => {
                         return (
-                            <p>{val.Street} {val.Number}<br />
-                             {val.Zip} {val.City}
+                            <p>{val.Rue} {val.Numero}, <br />
+                             {val.Zip} {val.Ville}
                              </p>
                              );
                     })}
@@ -114,7 +115,7 @@ const ProfilPrive = () => {
                     {clientInfosList.map((val) =>{
                         return (
                             <p>
-                                    {val.Phone}
+                                    {val.Gsm}
                             </p>
                             );  
                     })} 
