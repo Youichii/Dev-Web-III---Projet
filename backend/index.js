@@ -33,9 +33,9 @@ app.use(cors({
   credentials:true
 }))  //to avoid CORS policy
 
-app.get('/api/get/:clientName', (req,res) => {
+app.get('/api/client/:clientName', (req,res) => {
   const name = req.params.clientName
-  const sqlGet = "SELECT * FROM `client` WHERE `ClientID` = ?"
+  const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, name ,(err, result) => {
     res.send(result)
   })
@@ -45,7 +45,7 @@ app.put('/api/mail', (req, res) => {
   const clientName = req.body.clientName
   const mail = req.body.mail
   console.log(mail)
-  const sqlInsert = "UPDATE `client` SET `Mail` = ? WHERE `client`.`ClientID` = ?;"
+  const sqlInsert = "UPDATE `clients` SET `Mail` = ? WHERE `clients`.`IdClient` = ?;"
   db.query(sqlInsert, [mail, clientName], (err, result) => {
     if(err){
       res.send(err)
@@ -56,7 +56,7 @@ app.put('/api/mail', (req, res) => {
 app.put('/api/phone', (req, res) => {  
   const clientName = req.body.clientName
   const phone= req.body.phone
-  const sqlInsert = "UPDATE `client` SET `Phone` = ? WHERE `client`.`ClientID` = ?;"
+  const sqlInsert = "UPDATE `clients` SET `Gsm` = ? WHERE `clients`.`IdClient` = ?;"
   db.query(sqlInsert, [phone, clientName], (err, result) => {
     if(err){
       res.send(err)
@@ -64,10 +64,10 @@ app.put('/api/phone', (req, res) => {
   })
 })
 
-app.put('/api/put', (req, res) => {  
+app.put('/api/username', (req, res) => {  
   const username = req.body.username
   const clientName = req.body.clientName  //to take the variable from the html page
-  const sqlInsert = "UPDATE `client` SET `Username` = ? WHERE `client`.`ClientID` = ?;"
+  const sqlInsert = "UPDATE `clients` SET `Pseudo` = ? WHERE `clients`.`IdClient` = ?;"
   db.query(sqlInsert, [username, clientName], (err, result) => {
   })
 })
@@ -79,9 +79,8 @@ app.put('/api/adress', (req, res) => {
   const zipCode = req.body.zipCode
   const city = req.body.city
   console.log(clientName, street, number, zipCode, city)
-  const sqlInsert = "UPDATE `client` SET `Street` = ?, `Number` = ?, `Zip` = ?, `City` = ? WHERE `client`.`ClientID` = ?;"
+  const sqlInsert = "UPDATE `clients` SET `Rue` = ?, `Numero` = ?, `Zip` = ?, `Ville` = ? WHERE `clients`.`IdClient` = ?;"
   db.query(sqlInsert, [street, number, zipCode, city, clientName], (err, result) => {
-    console.log(err)
   })
 })
 
