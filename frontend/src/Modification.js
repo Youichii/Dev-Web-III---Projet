@@ -6,13 +6,13 @@ import Input from './components/Input/Input'
 
 const Modification = () => {
     require('./modification.css')
-    const [Lundi, setLundi] = useState("")
-    const [Mardi, setMardi] = useState("")
-    const [Mercredi, setMercredi] = useState("")
-    const [Jeudi, setJeudi] = useState("")
-    const [Vendredi, setVendredi] = useState("")
-    const [Samedi, setSamedi] = useState("")
-    const [Dimanche, setDimanche] = useState("")
+    const [Lundi, setLundi] = useState(null)
+    const [Mardi, setMardi] = useState(null)
+    const [Mercredi, setMercredi] = useState(null)
+    const [Jeudi, setJeudi] = useState(null)
+    const [Vendredi, setVendredi] = useState(null)
+    const [Samedi, setSamedi] = useState(null)
+    const [Dimanche, setDimanche] = useState(null)
     const [horairesList, setHorairesList] = useState([]);
 
     const getHoraires = () => {
@@ -52,7 +52,7 @@ const Modification = () => {
                                 }
                         
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
                                     <Button/>
                                 </form>
                             </li>
@@ -69,7 +69,7 @@ const Modification = () => {
                                 }
                         
                                 <form onSubmit={submitDay}>
-                                <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
+                                <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
                                     <Button/>
                                 </form>
                             </li>
@@ -86,7 +86,7 @@ const Modification = () => {
                                 }
                 
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
                                     <Button/>
                                 </form>
                             </li>
@@ -103,7 +103,7 @@ const Modification = () => {
                                 }
                         
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
                                     <Button/>
                                 </form>
                             </li>
@@ -120,7 +120,7 @@ const Modification = () => {
                                 }
                             
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
                                     <Button/>
                                 </form>
                             </li>
@@ -137,13 +137,13 @@ const Modification = () => {
                                 }
                 
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
                                     <Button/>
                                 </form>
                             </li>
 
                             <li>
-                                <u>Dimanche :</u>  
+                                <u>Dimanche & jours féries :</u>  
                                 {horairesList.map((val) => {
                                     return (
                                         <p>
@@ -154,7 +154,7 @@ const Modification = () => {
                                 }
                                 
                                 <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="20" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
                                     <Button/>
                                 </form>
                             </li>

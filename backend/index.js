@@ -84,7 +84,20 @@ app.get('/api/horaires', (req,res) => {
 
 app.put('/api/horaires', (req,res) => {
   const lundi = req.body.Lundi
-  console.log("ici " + lundi)
+  const mardi = req.body.Mardi
+  const mercredi = req.body.Mercredi
+  const jeudi = req.body.Jeudi
+  const vendredi = req.body.Vendredi
+  const samedi = req.body.Samedi
+  const dimanche = req.body.Dimanche
+  console.log("dimanche = "  + dimanche)
+  console.log("Lundi = " + lundi)
+  const sqlGet = "UPDATE `horaires` SET `Lundi` = COALESCE(?, `Lundi`), `Mardi` = COALESCE(?, `Mardi`), `Mercredi` = COALESCE(?,`Mercredi`), `Jeudi` = COALESCE(?, `Jeudi`), `Vendredi` = COALESCE(?, `Vendredi`), `Samedi` = COALESCE(?, `Samedi`), `Dimanche`= COALESCE(?, `Dimanche`) WHERE `horaires`.`IdHoraire` = 1;"
+  db.query(sqlGet, [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche], (err, result) => {
+    console.log("res =" + result)
+    console.log("err =" + err)
+  })
+  
 })
 
 
