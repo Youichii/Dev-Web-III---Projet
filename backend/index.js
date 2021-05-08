@@ -27,6 +27,22 @@ app.get('/api/users', (req, res)=>{
     });
 });
 
+app.get('/api/age-stat', (req, res)=>{
+    const sqlSelect = "SELECT Genre, COUNT (*) FROM Clients group by Genre";
+    db.query(sqlSelect, (err, result)=>{
+        res.send(result);
+        console.log(result)
+    });
+});
+
+app.get('/api/localisation-stat', (req, res)=>{
+    const sqlSelect = "SELECT Ville, COUNT (*) FROM Clients group by Ville";
+    db.query(sqlSelect, (err, result)=>{
+        res.send(result);
+        console.log(result)
+    });
+});
+
 app.listen(3000, ()=>{
     console.log('go to localhost:3000/users')
 });
