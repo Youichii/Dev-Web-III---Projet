@@ -381,7 +381,7 @@ app.get('/api/orders/users/:identifiantClient', (req, res) => {
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
     JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ?";
+    WHERE IdClient = ? AND IdEtat = 'PAN'";
     db.query(sqlInsert, [identifiantClient], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
@@ -736,7 +736,7 @@ app.get('/apitest/orders/users/:identifiantClient', (req, res) => {
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
     JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ?";
+    WHERE IdClient = ? AND IdEtat = 'PAN'";
     db_test.query(sqlInsert, [identifiantClient], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
