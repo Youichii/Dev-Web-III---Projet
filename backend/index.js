@@ -574,7 +574,7 @@ app.post('/api/orders', (req, rest)=> {
   const IdCommande = req.body.IdCommande
   const IdClient = req.body.IdClient
 
-  const sqlInsert = 'INSERT INTO reservations (IdClient, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  const sqlInsert = 'INSERT INTO reservations (IdClient, IdMethode, DateCom, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
   db.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -630,7 +630,7 @@ app.get('/loadingBasket', (req, res) =>{
 /*API test*/
 
 //Connexion
-app.get('/apitest/users/:mail/:pwd', (req, res) => {
+app.get('/apitest/connect-users/:mail/:pwd', (req, res) => {
 
   const mail = req.params.mail ;
   const pwd = req.params.pwd  ;
@@ -644,88 +644,74 @@ app.get('/apitest/users/:mail/:pwd', (req, res) => {
 
 app.post('/apitest/users', (req, res) => {
 
-    const name = req.body.name ;
-    const firstname = req.body.firstname ;
-    const birthday = req.body.birthday ;
-    const phone = req.body.phone ;
-    const mail = req.body.mail ;
-    const gender = req.body.gender ;
-    const pwd = req.body.pwd ;
-    const rue = req.body.rue ;
-    const numero = req.body.numero ;
-    const postal = req.body.postal ;
-    const ville = req.body.ville ;
-    const neswletter = req.body.nwsletter ;
+  const name = req.body.name ;
+  const firstname = req.body.firstname ;
+  const birthday = req.body.birthday ;
+  const phone = req.body.phone ;
+  const mail = req.body.mail ;
+  const gender = req.body.gender ;
+  const pwd = req.body.pwd ;
+  const rue = req.body.rue ;
+  const numero = req.body.numero ;
+  const postal = req.body.postal ;
+  const ville = req.body.ville ;
+  const neswletter = req.body.nwsletter ;
 
-    console.log("news : ", neswletter);
-  
-    const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db_test.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
-      console.log(err) ;
-      res.send(result);
-    })
-  }) 
+  console.log("news : ", neswletter);
+
+  const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  db_test.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
+    console.log(err) ;
+    res.send(result);
+  })
+}) 
   
  app.get('/apitest/orders', (req, res) => {
-    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
-    FROM reservations AS RE  \
-    JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
-    JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
-    JOIN menu AS ME ON CO.IdProduit = ME.IdProduit \
-    GROUP BY RE.IdCommande" ;
-    db_test.query(sqlInsert, [], (err, result) => {
-      console.log("erreur : ", err);
-      res.send(result) ;
-    })
+  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
+  FROM reservations AS RE  \
+  JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
+  JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
+  JOIN menu AS ME ON CO.IdProduit = ME.IdProduit \
+  GROUP BY RE.IdCommande" ;
+  db_test.query(sqlInsert, [], (err, result) => {
+    console.log("erreur : ", err);
+    res.send(result) ;
+  })
 })
 
 app.put('/apitest/orders/states', (req, res) => {
-    const type = req.body.type
-    const commande  = req.body.commande
-    
-    const sqlInsert = 'UPDATE reservations SET IdEtat = ? where IdCommande = ?';
-    db_test.query(sqlInsert, [type, commande], (err, result) => {
-      console.log("erreur : ", err);
-      res.send(result) ;
-    })
+  const type = req.body.type
+  const commande  = req.body.commande
+  
+  const sqlInsert = 'UPDATE reservations SET IdEtat = ? where IdCommande = ?';
+  db_test.query(sqlInsert, [type, commande], (err, result) => {
+    console.log("erreur : ", err);
+    res.send(result) ;
+  })
 })
 
 app.delete('/apitest/orders', (req, res) => {
-    const commande  = req.body.commande ;
+  const commande  = req.body.commande ;
 
-    const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
-    db_test.query(sqlInsert1, [commande], (err, result) => {
-      console.log("erreur : ", err)
-      //res.send(result) ;
-    })
-    const sqlInsert2 = "DELETE FROM `reservations` where `IdCommande` = ?;";
-    db_test.query(sqlInsert2, [commande], (err, result) => {
-      console.log("erreur : ", err)
-      res.send(result) ;
-    })
-})
-
-/*app.get('/apitest/panier/:idCommande', (req, res) => {
-  const idCommande  = req.params.idCommande 
-
-  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
-  FROM `commandes` AS C  \
-  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit   \
-  WHERE C.IdCommande = ?";
-  db_test.query(sqlInsert, [idCommande], (err, result) => {
-    console.log("erreur : ", err) ;
+  const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
+  db_test.query(sqlInsert1, [commande], (err, result) => {
+    console.log("erreur : ", err)
+  })
+  const sqlInsert2 = "DELETE FROM `reservations` where `IdCommande` = ?;";
+  db_test.query(sqlInsert2, [commande], (err, result) => {
+    console.log("erreur : ", err)
     res.send(result) ;
   })
-})*/
+})
 
-app.get('/apitest/users/:idClient', (req, res) => {
-    const identifiant = req.params.idClient 
-    
-    const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
-    db_test.query(sqlInsert, [identifiant], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
+app.get('/apitest/users/:idClient/address', (req, res) => {
+  const identifiant = req.params.idClient 
+  
+  const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+  db_test.query(sqlInsert, [identifiant], (err, result) => {
+    console.log("err : ", err);
+    res.send(result) ;
+  })
 })
 
 app.put('/apitest/orders', (req, res) => {
@@ -749,75 +735,76 @@ app.put('/apitest/orders', (req, res) => {
     })
 })
 
-app.get('/apitest/orders/users/:identifiantClient', (req, res) => { 
-    const identifiantClient = req.params.identifiantClient ;
+app.get('/apitest/orders/users/:identifiantCommande', (req, res) => { 
+  const identifiantCommande = req.params.identifiantCommande ;
 
-    console.log("id : ", identifiantClient);
-    const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
-    FROM commandes AS C  \
-    JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
-    JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ? AND IdEtat = 'PAN'";
-    db_test.query(sqlInsert, [identifiantClient], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
-
+  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
+  FROM commandes AS C  \
+  JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
+  JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
+  WHERE C.IdCommande = ? ";
+  db_test.query(sqlInsert, [identifiantCommande], (err, result) => {
+    console.log("err : ", err);
+    res.send(result) ;
+  })
 })
 
-app.put('/apitest/orders/foods', (req, res) => {
-    const idCommande = req.body.idCommande;
-    const idProduit = req.body.idProduit;  
-    const quantite = req.body.quantite;
-    console.log("elem : ", idCommande, idProduit, quantite);
+app.put('/apitest/orders/:idCommande/foods/:idProduit', (req, res) => {
+  const idCommande = req.params.idCommande;
+  const idProduit = req.params.idProduit;  
+  const quantite = req.body.quantite;
 
-    const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
-    db_test.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
-      console.log("err : ", err);
-      console.log("resl :" , result.changedRows);
-      res.send(result) ;
-    })
+  const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
+  db_test.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
+    console.log("err : ", err);
+    console.log("resl :" , result.changedRows);
+    res.send(result) ;
+  })
 })
 
 app.get('/apitest/hours', (req, res) => {
-    const sqlInsert = "SELECT HLivree \
-    FROM reservations \
-    GROUP BY HLivree  \
-    HAVING COUNT(HLivree)  > 5";
-    db_test.query(sqlInsert, [], (err, result) => {
-      console.log("err : ", err);
-      console.log("result : ", result) ;
-      res.send(result) ;
-    })
+  const sqlInsert = "SELECT HLivree \
+  FROM reservations \
+  GROUP BY HLivree  \
+  HAVING COUNT(HLivree)  > 5";
+  db_test.query(sqlInsert, [], (err, result) => {
+    console.log("err : ", err);
+    console.log("result : ", result) ;
+    res.send(result) ;
+  })
 })
 
 app.get('/apitest/users', (req, res) =>{
   db_test.query('select * FROM clients ', (err, result) => {
-    if(err) throw err ;
+    console.log("err : ", err);
     res.send(result);
   })
 })
  
-app.post('/apitest/orders', (req, rest)=> {
+app.post('/apitest/orders', (req, res)=> {
   const IdClient = req.body.IdClient;
+  const IdCommande = req.body.IdCommande;
 
-  const sqlInsert = 'INSERT INTO reservations (IdClient, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
-  db.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
-    if(err) throw err ;
+  const sqlInsert = 'INSERT INTO reservations (IdCommande, IdClient, IdMethode, DateCom, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (8,?,?,?,?,?,?,?,?,?,?)'
+  db_test.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
+    console.log("err : ", err);
     res.send(result);
   })
 })
 
-// POST qui envoie les article dans le panier temporaire
 app.post('/apitest/intermediateBasket', (req, res) => {
   console.log("ajouter un nouvel article")
   const IdCommande = req.body.IdCommande;
   const IdProduit = req.body.IdProduit;
   const Quantite = req.body.Quantite;
 
-  const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
-  db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
-    if(err) throw err; 
-    res.send(result); 
-  })
+  let commandeMax ;
+  db_test.query("SELECT MAX(IdCommande) as max FROM reservations",[], (err, resultmax) => {
+    commandeMax = resultmax[0].max ;
+    const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
+    db_test.query(sqlInsert, [commandeMax, IdProduit, Quantite], (err, result) => {
+      console.log("err : ", err);
+      res.send(result); 
+    })
+  });
 })
