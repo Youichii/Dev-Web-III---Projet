@@ -3,14 +3,19 @@ const app = express()
 const mysql = require('mysql')
 const cors = require('cors')
 
-const db = mysql.createPool({
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var path = require('path');
+
+const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
   database : 'profilprive'
 })
 
-const db_test= mysql.createPool({
+const db_test= mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
@@ -22,7 +27,11 @@ app.listen(3001, () => {
 })
 
 app.use(express.json())
-app.use(cors())  //to avoid CORS policy
+app.use(cors({
+  origin:["http://localhost:3000"],
+  methods:["GET", "POST", "PUT", "DELETE"],
+  credentials:true
+}))  //to avoid CORS policy
 
 app.get('/api/get/:clientName', (req,res) => {
   const name = req.params.clientName
@@ -191,9 +200,61 @@ app.get('/usersnom/:nom', (req,res) =>{
     })
 })
 
-//Connexion
-app.get('/api/users/:mail/:pwd', (req, res) => {
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended:true}));
 
+app.use(session({
+  key:"userId",
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: false,
+  cookie: { expires: new Date(Date.now() + 1800000) }
+}));
+
+app.get('/api/users/:mail/:pwd', function(request, response) {
+	var username = request.params.mail;
+  //console.log("avant : ", request.session.loggedin);
+	var password = request.params.pwd;
+	if (username && password) {
+		db.query('SELECT IdClient FROM clients WHERE Mail = ? and Mdp = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+        console.log("bon username");
+        request.session.user = results ;
+        //console.log("user : ", request.session.user);
+        response.send(results);
+			} 
+      else {
+        console.log("mauvais username");
+				response.send({message:'ko', msg:'Incorrect Username and/or Password!'});
+			}			
+			response.end();
+		});
+	} 
+  else {
+    console.log("vide username");
+		response.send({message:'ko', msg:'Please enter Username and Password!'});
+		response.end();
+	}
+});
+
+app.get('/api/connexion', function(request, response){
+  if (request.session.user){
+    response.send({loggedIn:true, user:request.session.user});
+  }
+  else {
+    response.send({loggedIn:false});
+  }
+});
+
+app.get('/api/deconnexion', function(request, response) {
+  console.log("deconnexion");
+  request.session.destroy();
+  response.send({loggedIn:false});
+});
+
+
+//Connexion
+/*app.get('/api/users/:mail/:pwd', (req, res) => {
   const mail = req.params.mail ;
   const pwd = req.params.pwd  ;
   
@@ -202,7 +263,7 @@ app.get('/api/users/:mail/:pwd', (req, res) => {
     console.log(err);
     res.send(result) ;
   })
-})
+})*/
 
 app.post('/api/users', (req, res) => {
 
