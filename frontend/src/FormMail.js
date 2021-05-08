@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import '../FormMail.css'
+import './FormMail.css'
 
 function FormEmail (){
 
@@ -10,6 +10,7 @@ function FormEmail (){
     //tient compte des changement du champ
 
     function handleChange(e){
+        e.preventDefault();
         setEmailer((prevState)=>({
             ...prevState,
             [e.target.name]: e.target.value,
@@ -19,7 +20,7 @@ function FormEmail (){
     const SubmitEmail = async(e) =>{
         e.preventDefault();
         console.log({emailer});
-        const response = await fetch ("http://localhost:3000/envoye",{
+        const response = await fetch ("http://localhost:3000/mail-promo",{
             method: "POST",
             headers:{
                 "Content-type": "application/json"
@@ -39,14 +40,13 @@ function FormEmail (){
         <div className="email-container">
             <div className="formulaire-email">
 
-                <form  data-testid = "mailform" className="champ-formulaire" onSubmit={SubmitEmail}>
+                <form className="champ-formulaire" onSubmit={SubmitEmail}>
                     <legend>Creer une newsletter</legend>
-                    <label htmlFor="text-promo">La nouvelle promo: </label>
                     <textarea 
-                        data-testid = "promo-msg"
-                        id="text-promo"
+                        cols="3"
+                        rows="5"
                         placeholder="Message"
-                        onChange = {handleChange}
+                        onChange ={handleChange}
                         name="message"
                         value={emailer.message}
                     />
