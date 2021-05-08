@@ -4,8 +4,7 @@ import './FormMail.css'
  function FormEmail (){
 
      const [emailer, setEmailer] = useState({
-         message:"",
-         mail:""
+         message:""
      });
 
      //tient compte des changement du champ
