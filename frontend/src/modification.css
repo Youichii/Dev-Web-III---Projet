@@ -1,0 +1,29 @@
+div.dd-wraper {
+     font-size: calc(0.2em + 1vw);
+     text-align: center;
+     margin: 1%;
+     padding : 1%;
+     font-weight: 800;
+     border : 1px solid black;
+}
+
+div.dd-header {
+    margin: 2%;
+    padding: 0%;
+    width: 10%;
+    text-align: center;
+    display: inline-block;
+}
+
+ul.listHoraires {
+    text-align: left;
+}
+
+img.toggleImg {
+    width: 25%;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
