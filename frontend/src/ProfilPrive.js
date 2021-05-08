@@ -3,7 +3,7 @@ import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import Button from './components/Button/Button'
-import Input from './components/Input'
+import Input from './components/Input/Input'
 
 
 const ProfilPrive = () => {
