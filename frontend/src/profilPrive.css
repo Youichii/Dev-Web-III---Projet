@@ -6,11 +6,9 @@
 
 div.profilPrive {
 	text-decoration: underline;
-	margin-top: 3%;
 	left: 1%;
 	color : rgb(255, 255, 255);
 	position: absolute;
-	top : 20%;
 	height: 100%;
 	width: 100%;
 	min-width: 300px;
@@ -30,28 +28,13 @@ div.picture img {
 	min-width: 150px;
 	max-width: 20%;
 	border-radius: 50%;	
-	margin-top : 2%;
+	margin-bottom : 2%;
 	border: 3px solid rgb(56, 56, 56);
-}
-
-div.profilepicture {
 	background-image: url("./img/poulet.jpg");
 }
 
 
-input.btn{
-	background-color: rgb(102, 102, 102);
-	border-radius: 50px;
-	width: fit-content;
-	min-height: 20px;
-	font-size: calc(0.3em + 1vw);
-	font-weight: 800;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-	margin-top: 1%;
-	width: 20%;
-	opacity: 0.9;
-	margin-bottom: 1%;
-}
+
 
 div.privateinfo{
 	width: 100%;
@@ -88,9 +71,10 @@ input{
 button {
 	height: fit-content;
 	width: fit-content;
-	color: white;
-	font-size: calc(0.5em + 1vw);
+	color: rgb(252, 252, 252);
+	font-size: calc(0.2em + 1vw);
 	margin: 5%;
+	border-radius: 100px;
 }
 
 div.gauche p {

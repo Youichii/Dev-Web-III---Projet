@@ -92,9 +92,8 @@ const ProfilPrive = () => {
                     {clientInfosList.map((val) =>{
                         return (
                             <p>
-                                    {val.Nom} | {val.Prenom}
-                                <br />
-                                {val.Anniversaire}
+                                {val.Nom} | {val.Prenom}<br />
+                                {(val.Anniversaire).slice(0,10)}
                             </p>
                             );  
                     })}                   
