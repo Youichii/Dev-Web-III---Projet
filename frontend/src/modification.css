@@ -1,10 +1,16 @@
+html {
+    background-color: black;
+}
+
 div.dd-wraper {
-     font-size: calc(0.2em + 1vw);
-     text-align: center;
-     margin: 1%;
-     padding : 1%;
-     font-weight: 800;
-     border : 1px solid black;
+    font-size: calc(0.2em + 1vw);
+    text-align: center;
+    margin: 1%;
+    padding : 1%;
+    font-weight: 800;
+    border : 1px solid black;
+    background-image: url("./img/poulet.jpg");
+    background-size: cover;
 }
 
 div.dd-header {
@@ -13,9 +19,15 @@ div.dd-header {
     width: 10%;
     text-align: center;
     display: inline-block;
+    
 }
 
 ul.listHoraires {
+    text-align: left;
+    padding-inline-start: 1%;
+}
+
+ul.listCoord {
     text-align: left;
 }
 
@@ -27,3 +39,22 @@ img:hover {
     cursor: pointer;
 }
 
+button {
+    background-color: darkgoldenrod;
+    width: 10%;
+    display: inline-block;
+}
+
+input {
+    width :30%;
+}
+
+input, button {
+    font-size: calc(0.1em + 1vw);
+    margin : 3%;
+}
+
+form {
+    width: 100%;
+    display: inline-block;
+}

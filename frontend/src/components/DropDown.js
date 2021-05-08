@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Dropdown( {title}){
+function Dropdown( {title, content}){
     const [open, setOpen] = useState(false)   ;   
     const toggle = () => setOpen(!open);
 
@@ -16,20 +16,12 @@ function Dropdown( {title}){
                     onClick={() => toggle(!open)}
                 >
                     <div className="dd-header_action">
-                        <img className="toggleImg" src={open ? 'https://tse3.mm.bing.net/th?id=OIP.0LQjBUCrGzqcZWNMpzIDVAHaHa&pid=Api' : 'https://cdn0.iconfinder.com/data/icons/user-interface-150/24/List_menu_toggle-512.png'} alt="btnToggle" />            
+                        <img className="toggleImg" src={open ? 'http://cdn.onlinewebfonts.com/svg/download_267727.png' : 'https://cdn0.iconfinder.com/data/icons/user-interface-150/24/List_menu_toggle-512.png'} alt="btnToggle" />            
                     </div>    
                     
                 </div>
                 {open && (
-                    <ul className="listHoraires">
-                        <li>Lundi : </li>
-                        <li>Mardi : </li>
-                        <li>Mercredi : </li>
-                        <li>Jeudi : </li>
-                        <li>Vendredi : </li>
-                        <li>Samedi : </li>
-                        <li>Dimanche : </li>
-                    </ul>
+                    content
                 )}
             </div>
         </div>
