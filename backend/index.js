@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -235,7 +236,7 @@ app.delete('/api/orders', (req, res) => {
 app.get('/api/users/:idClient/address', (req, res) => {
     const identifiant = req.params.idClient 
     
-    const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+    const sqlInsert = "SELECT Mail, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
@@ -264,7 +265,6 @@ app.put('/api/orders', (req, res) => {
 
 app.get('/api/orders/users/:identifiantCommande', (req, res) => { 
     const identifiantCommande = req.params.identifiantCommande ;
-    console.log("idcom", identifiantCommande);
     const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
@@ -272,7 +272,6 @@ app.get('/api/orders/users/:identifiantCommande', (req, res) => {
     WHERE C.IdCommande = ?";
     db.query(sqlInsert, [identifiantCommande], (err, result) => {
       console.log("err : ", err);
-      console.log("res :", result);
       res.send(result) ;
     })
 
@@ -582,3 +581,67 @@ app.get('/historical', (req, res) =>{
     res.send(result);
   })
 })
+
+
+//Envoi d'un mail pour valider la commande du panier
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth:{
+      user: "nozak001@gmail.com",
+      pass:"hellodev0"
+  }
+});
+
+transporter.verify((err, success)=>{
+  err ? console.log (err) : console.log(`Pret à envoyer des mail: ${success}`);
+});
+
+app.post("/envoye", function (req, res){
+  let mailOptions ={
+      from: "nozak001@gmail.com",
+      to: "nozak001@gmail.com",
+      subject: "test mail",
+      text:`${req.body.emailer.message}`
+  };
+  transporter.sendMail(mailOptions, function (err, data){
+      if (err) {
+          res.json({
+              status:"fail"
+          });
+      }else {
+          console.log ("Email envoyé avec succes !");
+          res.json ({status: "Email envoyé"});
+      }
+  }); 
+});
+
+app.post("/api/valider_commande", function (req, res){
+  let detail_commande = "";
+  let data = req.body.commande;
+  for (let i=0 ; i<data.length; i++){
+    detail_commande+= "\t- " + data[i].Produit + "\n\t\t\tquantité : \t\tx" + data[i].Quantite + "\n\t\ttotal : \t\t\t€" + data[i].Prix + "\n\n" ;
+  }
+  detail_commande += "\n\n\tTOTAL : 4€"
+
+  let texte_validation = `Bonjour ${req.body.prenom} ! Votre commande a bien été reçue.\nVoici un récapitulatif : \n\n` + detail_commande + ` \
+                \n\tHeure où la commande est prête : ${req.body.heure} \n\nNous faisons au plus vite pour vous satisfaire !  \n\n\L'équipe ChickNFish`;
+  console.log("mail : ", req.body.mail);
+  let mailOptions ={
+      from: "nozak001@gmail.com",
+      to: req.body.mail,
+      subject: "test mail",
+      text:`${texte_validation}`
+  };
+
+  transporter.sendMail(mailOptions, function (err, data){
+      if (err) {
+          res.json({status:"fail"});
+          res.send({status:"fail"});
+      }
+      else {
+          console.log ("Email envoyé avec succes !");
+          res.json ({status: "Email envoyé"});
+          res.send({status:"success"});
+      }
+  }); 
+});
