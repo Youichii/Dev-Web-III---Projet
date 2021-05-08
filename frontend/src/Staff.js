@@ -61,7 +61,7 @@ const Staff = () => {
                body: JSON.stringify({commande : idCommande, type: type_commande})
         };
 
-        fetch('http://localhost:3001/api/orders', myInit)
+        fetch('http://localhost:3001/api/orders/states', myInit)
         .then(res => {
             return res.json();
         })
@@ -116,10 +116,8 @@ const Staff = () => {
 
 
     const load_panier = (informations, identifiant) => {
-        //let identifiantCommande = informations.IdCommande ; 
-        //http://localhost:3001/api/panier/${identifiantCommande}
-        let identifiantClient = informations.IdClient ;
-        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, {
+        let identifiantCommande = informations.IdClient ;
+        fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
         }).then(res => {

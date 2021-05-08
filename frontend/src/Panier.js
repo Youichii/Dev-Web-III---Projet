@@ -27,7 +27,6 @@ const Panier = () => {
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
 				setUsername(response.data.user[0].IdClient);
-                console.log("id : ", response.data.user[0].IdClient);
                 utilisateur = response.data.user[0].IdClient;
 
                 recuperer_utilisateur();
@@ -48,8 +47,6 @@ const Panier = () => {
 	}
 
     useEffect(() => {
-        
-
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
@@ -76,25 +73,35 @@ const Panier = () => {
     }, []);
 
     const recuperer_panier = () => {
-        var myInit = { method: 'GET',
+        var info = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/orders/users/${utilisateur}`, myInit)
+        fetch(`http://localhost:3001/api/user/${utilisateur}/order`, info)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            setDonneesPanier(data);
             id_commande = data[0].IdCommande;
-            let total = 0 ;
-            data.map(x => total+=x["Quantite"]*x["Prix"]);
-            setTotal(total.toFixed(2)) ;
-            
-            let nbr_lignes = ""
-            for (let i = 0 ; i<data.length ; i++) {
-                nbr_lignes += "45px " ;
-            }
-            document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
+            var myInit = { method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+            };
+            fetch(`http://localhost:3001/api/orders/users/${id_commande}`, myInit)
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setDonneesPanier(data);
+                id_commande = data[0].IdCommande;
+                let total = 0 ;
+                data.map(x => total+=x["Quantite"]*x["Prix"]);
+                setTotal(total.toFixed(2)) ;
+                
+                let nbr_lignes = ""
+                for (let i = 0 ; i<data.length ; i++) {
+                    nbr_lignes += "45px " ;
+                }
+                document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
+            })
         })
     }
 
@@ -102,7 +109,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/users/${utilisateur}`, myInit)
+        fetch(`http://localhost:3001/api/users/${utilisateur}/address`, myInit)
         .then(res => {
             return res.json();
         })
@@ -130,7 +137,7 @@ const Panier = () => {
             (document.getElementById('ville').value == "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
         }
         
-        var myInit = { method: 'POST',
+        var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
@@ -139,7 +146,8 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            supprimer_commande() ;
+            //supprimer_commande() ;
+            console.log("ok");
         })
     }
 
@@ -162,11 +170,11 @@ const Panier = () => {
         (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite + 1 ;
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({ idCommande : id_commande, idProduit : id_produit, quantite : nouvelle_qtite})
+               body: JSON.stringify({quantite : nouvelle_qtite})
         };
 
         if ((nouvelle_qtite <= 100) && (nouvelle_qtite >= 0)) {
-            fetch(`http://localhost:3001/api/orders/foods`, myInit)
+            fetch(`http://localhost:3001/api/orders/${id_commande}/foods/${id_produit}`, myInit)
             .then(res => {
                 return res.json();
             })

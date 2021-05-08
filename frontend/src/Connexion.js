@@ -68,7 +68,7 @@ const Connexion = () => {
 
 	const recuperer_client = () => {
 		if (verification_valeurs()) {
-			Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
+			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((response) => {
 				console.log("connexion : ", response) ; 
 				if (response.data.message) {
 					setLoginStatus(false);

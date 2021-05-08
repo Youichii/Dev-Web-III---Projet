@@ -94,7 +94,7 @@ app.use(session({
   cookie: { expires: new Date(Date.now() + 1800000) }
 }));
 
-app.get('/api/users/:mail/:pwd', function(request, response) {
+app.get('/api/connect-users/:mail/:pwd', function(request, response) {
 	var username = request.params.mail;
   //console.log("avant : ", request.session.loggedin);
 	var password = request.params.pwd;
@@ -193,9 +193,9 @@ app.post('/api/users', (req, res) => {
     })
 })
 
-app.put('/api/orders', (req, res) => {
-    const type = req.body.type
-    const commande  = req.body.commande
+app.put('/api/orders/states', (req, res) => {
+    const type = req.body.type;
+    const commande  = req.body.commande;
     
     const sqlInsert = 'UPDATE reservations SET IdEtat = ? where IdCommande = ?';
     db.query(sqlInsert, [type, commande], (err, result) => {
@@ -232,7 +232,7 @@ app.delete('/api/orders', (req, res) => {
   })
 })*/
 
-app.get('/api/users/:idClient', (req, res) => {
+app.get('/api/users/:idClient/address', (req, res) => {
     const identifiant = req.params.idClient 
     
     const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
@@ -242,7 +242,7 @@ app.get('/api/users/:idClient', (req, res) => {
     })
 })
 
-app.post('/api/orders', (req, res) => {
+app.put('/api/orders', (req, res) => {
     const commande  = req.body.commande ;
     const methode  = req.body.methode ;
     const commentaire  = req.body.commentaire ;
@@ -262,25 +262,39 @@ app.post('/api/orders', (req, res) => {
     })
 })
 
-app.get('/api/orders/users/:identifiantClient', (req, res) => { 
-    const identifiantClient = req.params.identifiantClient ;
-
+app.get('/api/orders/users/:identifiantCommande', (req, res) => { 
+    const identifiantCommande = req.params.identifiantCommande ;
+    console.log("idcom", identifiantCommande);
     const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
     JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ? AND IdEtat = 'PAN'";
-    db.query(sqlInsert, [identifiantClient], (err, result) => {
+    WHERE C.IdCommande = ?";
+    db.query(sqlInsert, [identifiantCommande], (err, result) => {
       console.log("err : ", err);
+      console.log("res :", result);
       res.send(result) ;
     })
 
 })
 
-app.put('/api/orders/foods', (req, res) => {
-    const idCommande = req.body.idCommande
-    const idProduit = req.body.idProduit    
-    const quantite = req.body.quantite  
+app.get('/api/user/:utilisateur/order', (req, res) => { 
+  const identifiantClient = req.params.utilisateur ;
+
+  const sqlInsert = "select IdCommande \
+  FROM reservations \
+  WHERE IdClient=? AND IdEtat = 'PAN'";
+  db.query(sqlInsert, [identifiantClient], (err, result) => {
+    console.log("err : ", err);
+    res.send(result) ;
+  })
+
+})
+
+app.put('/api/orders/:idCommande/foods/:idProduit', (req, res) => {
+    const idCommande = req.params.idCommande;
+    const idProduit = req.params.idProduit ; 
+    const quantite = req.body.quantite;
 
     const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
     db.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
