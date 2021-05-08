@@ -34,3 +34,5 @@ const BannerConnect = ({onClick, client}) => {
 BannerConnect.propTypes = {
     onClick : PropTypes.func
 }
+
+export default BannerConnect; 

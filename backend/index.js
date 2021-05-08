@@ -330,7 +330,7 @@ app.delete('/api/orders', (req, res) => {
 })
 
 app.get('/api/panier/:idCommande', (req, res) => {
-  const idCommande  = req.params.idCommande 
+  const idCommande  = req.params.idCommande ;
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
   FROM `commandes` AS C  \
@@ -342,9 +342,12 @@ app.get('/api/panier/:idCommande', (req, res) => {
   })
 })
 
+//avant : /api/users/:idClient
+///api/users/:idClient/address
 app.get('/api/users/:idClient', (req, res) => {
-    const identifiant = req.params.idClient 
-    
+    const identifiant = req.params.idClient ;
+
+    console.log("req : ", req);
     const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);

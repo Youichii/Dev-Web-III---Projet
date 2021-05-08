@@ -1,6 +1,6 @@
   
 import { useEffect, useState } from 'react';
-import InputInformations from './components/InputInformations';
+import InputInformations from './components/InputInformations/InputInformations';
 import Axios from "axios";
 import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
