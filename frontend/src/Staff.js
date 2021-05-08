@@ -88,15 +88,11 @@ const Staff = () => {
 
     const load_panier = (informations, identifiant) => {
         let identifiantCommande = informations.IdCommande ; 
-        let identifiantClient = informations.IdClient ;
         console.log("info : ", informations);
-        //avant : http://localhost:3001/api/panier/${identifiantCommande}
-        // /api/orders/users/${identifiantClient}`
-        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, {
+        fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
             method: 'GET',
-            headers: {'Content-Type': 'application/json' },
-            body: JSON.stringify({"type" : informations.IdEtat})
-        }).then(res => {
+            headers: {'Content-Type': 'application/json' }
+            }).then(res => {
             return res.json();
         })
         .then(data => {

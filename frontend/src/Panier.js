@@ -47,15 +47,14 @@ const Panier = () => {
     const recuperer_panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({"type" : "PAN"})
         };
-        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, myInit)
+        fetch(`http://localhost:3001/api/orders/users/${id_commande}`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
             setDonneesPanier(data);
-            console.log(data);
+            console.log("data : ", data);
             let total = 0 ;
             data.map(x => total+=x["Quantite"]*x["Prix"]);
             setTotal(total.toFixed(2)) ;
@@ -73,16 +72,11 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        //avant : http://localhost:3001/api/users/${identifiantClient}
-        //http://localhost:3001/api/users/${identifiantClient}/address
-
-        //http://localhost:3000/yelp?term=food&location=austin
-        fetch(`http://localhost:3001/api/users/${identifiantClient}`, myInit)
+        fetch(`http://localhost:3001/api/users/${identifiantClient}/address`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            console.log("datapanier : ", data);
             setDonneesAdresse(data);
         })
     }
@@ -138,11 +132,11 @@ const Panier = () => {
         (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite + 1 ;
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({ idCommande : id_commande, idProduit : id_produit, quantite : nouvelle_qtite})
+               body: JSON.stringify({ quantite : nouvelle_qtite})
         };
 
         if ((nouvelle_qtite <= 100) && (nouvelle_qtite >= 0)) {
-            fetch(`http://localhost:3001/api/orders/foods`, myInit)
+            fetch(`http://localhost:3001/api/orders/${id_commande}/foods/${id_produit}`, myInit)
             .then(res => {
                 return res.json();
             })

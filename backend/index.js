@@ -210,7 +210,8 @@ app.use(session({
   cookie: { expires: new Date(Date.now() + 1800000) }
 }));
 
-app.get('/api/users/:mail/:pwd', function(request, response) {
+app.get('/api/connect-users/:mail/:pwd', function(request, response) {
+  console.log("get /api/connect-users/:mail/:pwd");
 	var username = request.params.mail;
   //console.log("avant : ", request.session.loggedin);
 	var password = request.params.pwd;
@@ -237,6 +238,7 @@ app.get('/api/users/:mail/:pwd', function(request, response) {
 });
 
 app.get('/api/connexion', function(request, response){
+  console.log("get /api/connexion");
   if (request.session.user){
     response.send({loggedIn:true, user:request.session.user});
   }
@@ -265,7 +267,7 @@ app.get('/api/deconnexion', function(request, response) {
 })*/
 
 app.post('/api/users', (req, res) => {
-
+    console.log("post /api/users");
     const name = req.body.name ;
     const firstname = req.body.firstname ;
     const birthday = req.body.birthday ;
@@ -290,6 +292,7 @@ app.post('/api/users', (req, res) => {
   
   
  app.get('/api/orders', (req, res) => {
+  console.log("get /api/orders");
     const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
     FROM reservations AS RE  \
     JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
@@ -303,6 +306,7 @@ app.post('/api/users', (req, res) => {
 })
 
 app.put('/api/orders/states', (req, res) => {
+  console.log("put /api/orders/states");
     const type = req.body.type
     const commande  = req.body.commande
     
@@ -314,6 +318,7 @@ app.put('/api/orders/states', (req, res) => {
 })
 
 app.delete('/api/orders', (req, res) => {
+  console.log("delete /api/orders");
     const commande  = req.body.commande ;
 
     const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
@@ -341,12 +346,11 @@ app.delete('/api/orders', (req, res) => {
   })
 })*/
 
-//avant : /api/users/:idClient
-///api/users/:idClient/address
-app.get('/api/users/:idClient', (req, res) => {
-    const identifiant = req.params.idClient ;
 
-    console.log("req : ", req);
+app.get('/api/users/:idClient/address', (req, res) => {
+    const identifiant = req.params.idClient ;
+    console.log("get /api/users/:idClient");
+
     const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);
@@ -355,6 +359,7 @@ app.get('/api/users/:idClient', (req, res) => {
 })
 
 app.put('/api/orders', (req, res) => {
+  console.log("put /api/orders");
     const commande  = req.body.commande ;
     const methode  = req.body.methode ;
     const commentaire  = req.body.commentaire ;
@@ -374,26 +379,27 @@ app.put('/api/orders', (req, res) => {
     })
 })
 
-app.get('/api/orders/users/:identifiantClient', (req, res) => { 
-    const identifiantClient = req.params.identifiantClient ;
-    const type = req.body.type ;
+app.get('/api/orders/users/:identifiantCommande', (req, res) => { 
+  console.log("get /api/orders/users/:identifiantCommande");
+    const identifiantCommande = req.params.identifiantCommande ;
 
     const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
     FROM commandes AS C  \
     JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
     JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ? AND IdEtat = ?";
-    db.query(sqlInsert, [identifiantClient, type], (err, result) => {
+    WHERE C.IdCommande = ?";
+    db.query(sqlInsert, [identifiantCommande], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
     })
 
 })
 
-app.put('/api/orders/foods', (req, res) => {
-    const idCommande = req.body.idCommande
-    const idProduit = req.body.idProduit    
-    const quantite = req.body.quantite  
+app.put('/api/orders/:idCommande/foods/:idProduit', (req, res) => {
+  console.log("put /api/orders/foods");
+    const idCommande = req.params.idCommande;
+    const idProduit = req.params.idProduit; 
+    const quantite = req.body.quantite;  
 
     const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
     db.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
@@ -403,6 +409,7 @@ app.put('/api/orders/foods', (req, res) => {
 })
 
 app.get('/api/hours', (req, res) => {
+  console.log("get /api/hours");
     const sqlInsert = "SELECT HLivree \
     FROM reservations \
     GROUP BY HLivree  \
@@ -413,6 +420,7 @@ app.get('/api/hours', (req, res) => {
       res.send(result) ;
     })
 })
+
 
 
 // requête GET dans la table communaute pour importer tout le contenu de la communauté 
