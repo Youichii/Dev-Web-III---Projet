@@ -36,12 +36,20 @@ app.get('/api/genre-stat', (req, res)=>{
 });
 
 app.get('/api/localisation-stat', (req, res)=>{
-    const sqlSelect = "SELECT Ville, COUNT (*)  FROM Clients group by Ville";
+    const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
     db.query(sqlSelect, (err, result)=>{
         res.send(result);
         console.log(result)
     });
 });
+
+app.get('/api/age-stat', (req, res)=>{
+    const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+    db.query(sqlSelect,(err, result)=>{
+        res.send(result);
+        console.log(result)
+    })
+})
 
 app.listen(3000, ()=>{
     console.log('go to localhost:3000/users')

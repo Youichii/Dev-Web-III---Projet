@@ -10,6 +10,35 @@ function App() {
   const [ville, setVille] = useState([]);
   const [age, setAge] = useState([]);
 
+
+// recupératin données des villes
+
+  useEffect(()=>{
+    VilleStat()
+  }, [])
+
+  const VilleStat=()=>{
+    Axios.get("http://localhost:3000/api/localisation-stat")
+    .then((response)=>{
+      setVille(response.data)
+      
+    })
+
+  }
+
+  const donneeVille = ville.map((val)=>{
+    return val.Ville
+  })
+  console.log(donneeVille)
+
+  const VilleCount = ville.map((val)=>{
+    return val.nombre
+  })
+
+  console.log(VilleCount)
+
+// recupération des données des genres
+
   useEffect(()=>{
     GenreStat()
   }, [])
@@ -35,8 +64,70 @@ function App() {
 
   console.log(genreCount)
 
+// recupération des ages
 
-  const data =['data_gender', 'data_age', 'data_oc']
+useEffect(()=>{
+  AgeStat()
+}, [])
+
+const AgeStat=()=>{
+  Axios.get("http://localhost:3000/api/age-stat")
+  .then((response)=>{
+    setAge(response.data)
+    
+  })
+
+}
+
+const donneeAge = age.map((val)=>{
+  return val.AgeClient;
+  
+});
+console.log(donneeAge)
+
+let rangeAge = {"<18":0, "18-30": 0, "30-50":0, ">50":0};
+console.log(rangeAge['18-30'])
+
+//let count = 0
+
+
+for (let i in donneeAge){
+  
+  console.log(donneeAge[i])
+  if(donneeAge[i] < 18){
+    //count = count+1
+    rangeAge['<18']+= 1
+    console.log(rangeAge['<18'])
+    
+  }else if (18< donneeAge[i] < 30) {
+    //count = count +1 
+    rangeAge['18-30'] += 1
+    console.log(rangeAge['18-30'])
+    
+  }else if (30< donneeAge[i] < 50){
+    //count = count +1 
+    rangeAge['30-50'] += 1
+    console.log(rangeAge['30-50'])
+  }
+  else{
+    //count = count +1 
+    rangeAge['>50'] += 1
+    console.log(rangeAge['>50'])
+  }
+  
+  console.log(rangeAge)
+
+
+}
+let ageLabels = Object.keys(rangeAge);
+let ageData = Object.keys(rangeAge).map((key)=>rangeAge[key]);
+console.log(rangeAge)
+console.log(ageLabels)
+console.log(ageData)
+
+
+
+  const data =['data_gender', 'data_age', 'data_loc']
   const data_gender = {
       labels:donneeGenre,
       datasets:[{
@@ -54,15 +145,10 @@ function App() {
       }]
     }
   const data_age ={
-      labels:['18-25', '25-40', '40-55', '+55'],
+      labels: ageLabels,
       datasets:[{
         label:'Age',
-        data:[
-          40,
-          37,
-          23,
-          5
-        ],
+        data:ageData,
         //backgroundColor:'green',
         backgroundColor:[
           'rgba(255, 99, 132, 0.6)',
@@ -79,6 +165,28 @@ function App() {
       
     
   }
+
+  const data_loc ={
+    labels:donneeVille,
+    datasets:[{
+      label:'Localité',
+      data: VilleCount,
+      //backgroundColor:'green',
+      backgroundColor:[
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'yellow',
+        'green'
+      ],
+      borderWidth:1,
+      borderColor:'#777',
+      hoverBorderWidth:3,
+      hoverBorderColor:'#000'
+    }]
+
+    
+  
+}
 
 
     return (
@@ -124,6 +232,41 @@ function App() {
               title:{
                 display:true,
                 text:'Age des clients',
+                fontSize:25,
+                
+              },
+      
+              legend:{
+                display:true,
+                position:'right',
+                labels:{
+                fontColor:'withe'
+                }
+              },
+              layout:{
+                padding:{
+                  left:0,
+                  right:500,
+                  bottom:0,
+                  top:0
+                }
+              },
+              tooltips:{
+                enabled:true
+              }
+            }}
+
+            />
+        </div>
+
+        <div className="chart-loc">
+          <h2>AGE</h2>
+          <Doughnut 
+            data={data_loc}
+            options={{
+              title:{
+                display:true,
+                text:'localite',
                 fontSize:25,
                 
               },
