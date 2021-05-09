@@ -45,7 +45,7 @@ button {
     font-size: calc(0.5em + 1vw);
     font-weight: 700;
     text-shadow: 2px white;
-    margin-left: 10%;
+    margin-left: 2%;
     margin-top: 2%;
 }
 
@@ -74,4 +74,28 @@ div.horaires {
 
 div.content {
     margin-top: 5%;
+}
+
+div.dd-wraper-2 {
+    font-size: calc(0.2em + 1vw);
+    margin: 1%;
+    padding : 1%;
+    font-weight: 800;
+    border : 1px solid black;
+    background-image: url("./img/poulet.jpg");
+    background-size: cover;
+    border-radius: 100px;
+}
+
+div.dd-wraper-2 h2 {
+    text-align: center;
+}
+
+div.dd-wraper-2 p {
+    margin-left: 1%;
+    margin-bottom: 0%;
+}
+
+div.dd-wraper-2 button {
+    display: inline-block;
 }

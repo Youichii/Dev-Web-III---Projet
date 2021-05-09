@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Input = ( { type, name, min, max, placeholder, setFunc, pattern, title} ) => {
-    return (<input pattern={pattern} title={title} type={type} name={name} minLength={min} maxLength={max} placeholder={placeholder} onChange={(e) => {
+    return (<input pattern={pattern} required title={title} type={type} name={name} minLength={min} maxLength={max} placeholder={placeholder} onChange={(e) => {
                                 setFunc(e.target.value)
                             }}/>
     )

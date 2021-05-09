@@ -75,14 +75,14 @@ app.put('/api/adress', (req, res) => {
 
 //Modification des informations
 
-app.get('/api/horaires', (req,res) => {
+app.get('/api/coord/horaires', (req,res) => {
   const sqlGet = "SELECT * FROM `horaires`"
   db.query(sqlGet,(err, result) => {
     res.send(result)
   })
 })
 
-app.put('/api/horaires', (req,res) => {
+app.put('/api/coord/horaires', (req,res) => {
   const lundi = req.body.Lundi
   const mardi = req.body.Mardi
   const mercredi = req.body.Mercredi
@@ -90,14 +90,43 @@ app.put('/api/horaires', (req,res) => {
   const vendredi = req.body.Vendredi
   const samedi = req.body.Samedi
   const dimanche = req.body.Dimanche
-  console.log("dimanche = "  + dimanche)
-  console.log("Lundi = " + lundi)
   const sqlGet = "UPDATE `horaires` SET `Lundi` = COALESCE(?, `Lundi`), `Mardi` = COALESCE(?, `Mardi`), `Mercredi` = COALESCE(?,`Mercredi`), `Jeudi` = COALESCE(?, `Jeudi`), `Vendredi` = COALESCE(?, `Vendredi`), `Samedi` = COALESCE(?, `Samedi`), `Dimanche`= COALESCE(?, `Dimanche`) WHERE `horaires`.`IdHoraire` = 1;"
   db.query(sqlGet, [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche], (err, result) => {
-    console.log("res =" + result)
-    console.log("err =" + err)
   })
   
+})
+
+app.put('/api/coord/mail', (req,res) => {
+  const mailRest = req.body.mailRest
+  const sqlGet = "UPDATE `coordonnees` SET `Mail` = ? WHERE `coordonnees`.`IdRest` = 1;"
+  db.query(sqlGet, mailRest, (err,result) => {
+    console.log(err)
+  })
+})
+
+app.put('/api/coord/tel', (req, res) => {
+  const telRest = req.body.telRest
+  const sqlGet = "UPDATE `coordonnees` SET `Gsm` = ? WHERE `coordonnees`.`IdRest` = 1;"
+  db.query(sqlGet, telRest, (err,result) => {
+  })
+})
+
+app.put('/api/coord/map', (req, res) => {
+  const mapRest = req.body.mapRest
+  const sqlGet = "UPDATE `coordonnees` SET `Map` = ? WHERE `coordonnees`.`IdRest` = 1;"
+  db.query(sqlGet, mapRest, (err,result) => {
+  })
+})
+
+app.put('/api/coord/address', (req, res) => {
+  const streetRest = req.body.streetRest
+  const numberRest = req.body.numberRest
+  const zipCodeRest = req.body.zipCodeRest
+  const cityRest = req.body.cityRest
+  const sqlGet = "UPDATE `coordonnees` SET `Rue` = ?, `Numero` = ?, `Zip` = ?, `Ville` = ? WHERE `coordonnees`.`IdRest` = 1;"
+  db.query(sqlGet, [streetRest, numberRest, zipCodeRest, cityRest], (err, result) => {
+
+  })
 })
 
 // Informations

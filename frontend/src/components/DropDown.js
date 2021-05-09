@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-function Dropdown( {title, content}){
+function Dropdown( {title, content, className}){
     const [open, setOpen] = useState(false)   ;   
     const toggle = () => setOpen(!open);
 
     return(
-        <div className="dd-wraper">
+        <div className={className}>
             <h2>{title}</h2>
             <div className="horaires">
                 <div 
