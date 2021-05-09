@@ -27,8 +27,8 @@ app.get('/api/users', (req, res)=>{
     });
 });
 
-app.get('/api/age-stat', (req, res)=>{
-    const sqlSelect = "SELECT Genre, COUNT (*) FROM Clients group by Genre";
+app.get('/api/genre-stat', (req, res)=>{
+    const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
     db.query(sqlSelect, (err, result)=>{
         res.send(result);
         console.log(result)
@@ -36,7 +36,7 @@ app.get('/api/age-stat', (req, res)=>{
 });
 
 app.get('/api/localisation-stat', (req, res)=>{
-    const sqlSelect = "SELECT Ville, COUNT (*) FROM Clients group by Ville";
+    const sqlSelect = "SELECT Ville, COUNT (*)  FROM Clients group by Ville";
     db.query(sqlSelect, (err, result)=>{
         res.send(result);
         console.log(result)
