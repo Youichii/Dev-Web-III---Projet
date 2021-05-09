@@ -15,11 +15,9 @@ div.dd-wraper {
 }
 
 div.dd-header {
-    margin: 2%;
+    margin-left: 45%;
     padding: 0%;
     width: 5%;
-    text-align: center;
-    display: inline-block;
     
 }
 
@@ -42,18 +40,18 @@ div.dd-header_action:hover {
 
 button {
     background-color: darkgoldenrod;
-    width: 8%;
     display: inline-block;
     border-radius: 100px;
+    font-size: calc(0.5em + 1vw);
+    font-weight: 700;
+    text-shadow: 2px white;
+    margin-left: 10%;
+    margin-top: 2%;
 }
 
 input {
     width :30%;
     border-radius: 5px;
-    
-}
-
-input, button {
     font-size: calc(0.1em + 1vw);
     margin : 1%;
     opacity: 0.9;
@@ -67,4 +65,13 @@ form {
 
 li {
     margin-top: 1%;
+}
+
+div.horaires {
+    margin-bottom: 10%;
+    padding-left: 5%;
+}
+
+div.content {
+    margin-top: 5%;
 }
