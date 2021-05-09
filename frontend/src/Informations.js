@@ -11,7 +11,7 @@ const Informations = () => {
     const [coordonneesList, setCoordonneesList] = useState([])
 
     const getHoraires = () => {
-         Axios.get('http://localhost:3001/api/horaires').then((response) => {
+         Axios.get('http://localhost:3001/api/coord/horaires').then((response) => {
             setHorairesList(response.data)
         })
     }
