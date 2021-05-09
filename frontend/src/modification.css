@@ -11,6 +11,7 @@ div.dd-wraper {
     border : 1px solid black;
     background-image: url("./img/poulet.jpg");
     background-size: cover;
+    border-radius: 100px;
 }
 
 div.dd-header {

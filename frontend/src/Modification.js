@@ -40,128 +40,127 @@ const Modification = () => {
             <Dropdown title= "Horaires" 
                 content={
                     <ul className="listHoraires">
-                            <li>
-                                <u>Lundi :</u>  
-                                {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Lundi}
-                                        </p>
-                                    );
-                                    })
-                                }
-                        
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
-                                    <Button/>
-                                </form>
-                            </li>
-
-                            <li>
-                                <u>Mardi :</u> 
-                                {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Mardi}
-                                        </p>
-                                    );
-                                    })
-                                }
-                        
-                                <form onSubmit={submitDay}>
-                                <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
-                                    <Button/>
-                                </form>
-                            </li>
-
-                            <li>
-                               <u>Mercredi</u>  
-                               {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Mercredi}
-                                        </p>
-                                    );
-                                    })
-                                }
-                
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
-                                    <Button/>
-                                </form>
-                            </li>
-
-                            <li>
-                                <u>Jeudi :</u> 
-                                {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Jeudi}
-                                        </p>
-                                    );
-                                    })
-                                }
-                        
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
-                                    <Button/>
-                                </form>
-                            </li>
-
-                            <li>
-                                <u>Vendredi :</u> 
-                                {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Vendredi}
-                                        </p>
-                                    );
-                                    })
-                                }
+                            <form onSubmit={submitDay}>
+                                <li>
+                                    <u>Lundi :</u>  
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Lundi}
+                                            </p>
+                                        );
+                                        })
+                                    }
                             
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
-                                    <Button/>
-                                </form>
-                            </li>
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
+                                        
+                                </li>
 
-                            <li>
-                                <u>Samedi :</u> 
-                                {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Samedi}
-                                        </p>
-                                    );
-                                    })
-                                }
-                
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
-                                    <Button/>
-                                </form>
-                            </li>
+                                <li>
+                                    <u>Mardi :</u> 
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Mardi}
+                                            </p>
+                                        );
+                                        })
+                                    }
+                            
+                                    
+                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
+                                        
+                                </li>
 
-                            <li>
-                                <u>Dimanche & jours féries :</u>  
+                                <li>
+                                <u>Mercredi</u>  
                                 {horairesList.map((val) => {
-                                    return (
-                                        <p>
-                                            {val.Dimanche}
-                                        </p>
-                                    );
-                                    })
-                                }
+                                        return (
+                                            <p>
+                                                {val.Mercredi}
+                                            </p>
+                                        );
+                                        })
+                                    }
+                    
+                                    
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
+                                        
+                                </li>
+
+                                <li>
+                                    <u>Jeudi :</u> 
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Jeudi}
+                                            </p>
+                                        );
+                                        })
+                                    }
+                            
+                                    
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
+                                        
+                                </li>
+
+                                <li>
+                                    <u>Vendredi :</u> 
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Vendredi}
+                                            </p>
+                                        );
+                                        })
+                                    }
                                 
-                                <form onSubmit={submitDay}>
-                                    <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
-                                    <Button/>
-                                </form>
-                            </li>
+                                    
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
+                                        
+                                </li>
+
+                                <li>
+                                    <u>Samedi :</u> 
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Samedi}
+                                            </p>
+                                        );
+                                        })
+                                    }
+                    
+                                   
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
+                                        
+                                    
+                                </li>
+
+                                <li>
+                                    <u>Dimanche & jours féries :</u>  
+                                    {horairesList.map((val) => {
+                                        return (
+                                            <p>
+                                                {val.Dimanche}
+                                            </p>
+                                        );
+                                        })
+                                    }
+                                    
+                                    
+                                        <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
+                                        
+                                    
+                                </li>
+                                <Button/>
+                            </form>
                     </ul>
                 }
             />
-            <Dropdown title="Coordonnées" />
+            <Dropdown title="Coordonnées" content={
+                <div>COUCOU</div>
+            } />
         </div>
     )    
 }

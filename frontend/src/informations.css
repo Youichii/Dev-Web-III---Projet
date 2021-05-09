@@ -4,11 +4,14 @@
 	background-color: black;
 }
 
+h1 {
+	font-size: calc(1em + 1vw);
+}
+
 div .Informations {
-	margin-top: 3%;
+	margin-top: 1%;
 	text-align: center;
 	color : rgb(194, 194, 194);
-	position: absolute;
 	top : 20%;
 	height: 100%;
 	width: 100%;
@@ -17,31 +20,29 @@ div .Informations {
 	background-color: rgb(0, 0, 0);
 }
 
-.leftdiv {
-	width: 48%;
-	height: 100%;
-	background-color: white;
-	margin : 1%;
-	min-width: 300px;
-	display: inline-block;
+
+iframe {
+	width: 100%;
+	margin-bottom: 1%;
+	min-width: 250px;
+	min-height: 400px;
 }
 
 .rightdiv {
 	text-align:left;
-	font-size: calc(1em + 1vw);
-	width: 48%;
+	font-size: calc(0.3em + 1vw);
+	width: 100%;
 	background-color: rgb(0, 0, 0);
 	margin: 1%;
-	min-width: 380px;
 	display: inline-block;
-	position: flex;
+	
 }
 
 ul.Days {
 	text-align: left;
 	width: 25%;
 	height: 100%;
-	margin-bottom: 15%;
+	margin-bottom: 5%;
 	margin-top: 5%;
 	min-width: 150px ;
 	display: inline-block;
@@ -50,11 +51,16 @@ ul.Days {
 
 ul.Hours {
 	display: inline-block;
-	min-width: 150px;
 	text-align: left;
-	width: 25%;
+	width: 50%;
 	height: 100%;
 	list-style-type: none;
-	margin-bottom: 15%;
+	margin-bottom: 5%;
 	margin-top: 5%;
+	padding-inline-start: 0px;
 }
+
+ul, p {
+	padding-inline-start: 3%;
+}
+

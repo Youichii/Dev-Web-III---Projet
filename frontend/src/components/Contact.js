@@ -35,15 +35,15 @@ const Contact = ( {Mon, Tue, Wen, Thu , Fri, Sat, Sun, mail, number, address} ) 
 }
 
 Contact.defaultProps = {
-    Mon : "8h00 - 16h30",
-    Tue : "8h00 - 16h30",
-    Wen : "8h00 - 12h30",
-    Thu : "8h00 - 16h30",
-    Fri : "8h00 - 16h30",
-    Sat : "8h00 - 16h30",
+    Mon : "Pas d'horaires",
+    Tue : "Pas d'horaires",
+    Wen : "Pas d'horaires",
+    Thu : "Pas d'horaires",
+    Fri : "Pas d'horaires",
+    Sat : "Pas d'horaires",
     Sun : "Fermé",
     mail : "pas d'adresse mail",
-    number : "+32495757504",
+    number : "Pas de téléphone",
     address : "Traverse d'Esope 4 , 1348 Louvain-la-Neuve, Belgique"
 
 }
