@@ -19,6 +19,7 @@ const Panier = () => {
 
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
+    const [IDCommande, setIdCommande]= useState("");
     let utilisateur = 100000000000;
     let id_commande =  100000000000;
 
@@ -82,6 +83,8 @@ const Panier = () => {
         })
         .then(data => {
             id_commande = data[0].IdCommande;
+            setIdCommande(data[0].IdCommande);
+
             var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             };
@@ -91,7 +94,6 @@ const Panier = () => {
             })
             .then(data => {
                 setDonneesPanier(data);
-                id_commande = data[0].IdCommande;
                 let total = 0 ;
                 data.map(x => total+=x["Quantite"]*x["Prix"]);
                 setTotal(total.toFixed(2)) ;
@@ -101,7 +103,7 @@ const Panier = () => {
                     nbr_lignes += "45px " ;
                 }
                 document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
-            })
+s            })
         })
     }
 
@@ -119,6 +121,7 @@ const Panier = () => {
     }
 
     const ajouter_commande = () => {
+
         let heure_selectionnee = document.getElementById('heures_reserv').value ;
         let typeCommande, commentaire_client, rue, numero, postal, ville ;
         (document.getElementById("commentaire").value == "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
@@ -139,7 +142,7 @@ const Panier = () => {
         
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
+               body: JSON.stringify({commande : IDCommande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
         fetch(`http://localhost:3001/api/orders`, myInit)
         .then(res => {
