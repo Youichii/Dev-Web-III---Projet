@@ -7,9 +7,9 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
-//import Home from './components/pages/Home'
+
 import Home from './Home'
-import Communaute from "./Communaute.js"
+import Comunaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
@@ -51,11 +51,11 @@ function App() {
             </Route>
 
             <Route exact path="/Communaute">
-              <Communaute />
+              <Comunaute />
             </Route>
 
             <Route exact path="/Carte">
-              <Communaute />
+              <Menu />
             </Route>
 
             <Route exact path="/inscription"> 
