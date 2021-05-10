@@ -146,14 +146,12 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
-            //supprimer_commande() ;
-            console.log("ok");
             fetch ("http://localhost:3001/api/valider_commande",{
                 method: "POST",
                 headers:{
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({prenom : "Clémentine", mail:donnees_adresse[0].Mail, commande:donnees_panier, heure:document.getElementById('heures_reserv').value})
+                body: JSON.stringify({prenom : donnees_adresse[0].Prenom, mail:donnees_adresse[0].Mail, commande:donnees_panier, heure:document.getElementById('heures_reserv').value})
             })
             .then((res)=> {
                 return res;

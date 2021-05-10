@@ -55,10 +55,23 @@ const Staff = () => {
 
     }, [changement]);
 
-    const ajouter_commandes = (idCommande, type_commande) => {
+    const ajouter_commandes = (client, type_commande) => {
+        if (type_commande === "ENV") {
+            var donnees = { method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: client.Mail, methode:client.IdMethode, prenom:client.Prenom, idcommande:client.IdCommande})
+            };
+            fetch('http://localhost:3001/api/commande_prete', donnees)
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log("mail envoyé")
+            })
+        }
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : idCommande, type: type_commande})
+               body: JSON.stringify({commande : client.IdCommande, type: type_commande})
         };
 
         fetch('http://localhost:3001/api/orders/states', myInit)
@@ -103,7 +116,7 @@ const Staff = () => {
         let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
-        (liste_aliments.idMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
+        (liste_aliments.IdMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
         
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
@@ -116,7 +129,7 @@ const Staff = () => {
 
 
     const load_panier = (informations, identifiant) => {
-        let identifiantCommande = informations.IdClient ;
+        let identifiantCommande = informations.IdCommande ;
         fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
@@ -124,7 +137,6 @@ const Staff = () => {
             return res.json();
         })
         .then(data => {
-            
             let nbr_lignes = "";
             let info_commentaire, lieu ;
             let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.Rue + '</span></div> \
@@ -132,7 +144,7 @@ const Staff = () => {
                     <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.Ville + '</span></div> \
                     <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.Postal + '</span>' ;
 
-            (informations.commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.Commentaire ;
+            (informations.Commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.Commentaire ;
             (informations.IdMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
             let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommade + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
@@ -157,8 +169,9 @@ const Staff = () => {
 
         donnees.filter(element => element.IdEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
+        console.log("informations : ", elem);
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENC")}  />        
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem, "ENC")}  />        
         )
     }
 
@@ -175,7 +188,7 @@ const Staff = () => {
 
         return (
 
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem.IdCommande, "ENV")}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem, "ENV")}  />
         )
     }
 
