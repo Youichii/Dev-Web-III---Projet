@@ -103,7 +103,7 @@ const Panier = () => {
                     nbr_lignes += "45px " ;
                 }
                 document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
-s            })
+            })
         })
     }
 

@@ -617,19 +617,19 @@ app.post("/envoye", function (req, res){
 });
 
 app.post("/api/valider_commande", function (req, res){
-  let detail_commande = "", commande_html="";
+  let detail_commande = "", commande_html="", sous_total;
   let data = req.body.commande;
   let total = 0;
   for (let i=0 ; i<data.length; i++){
     detail_commande+= "\t- " + data[i].Produit + "\n\t\t\tquantité : \t\tx" + data[i].Quantite + "\n\t\ttotal : \t\t\t€" + data[i].Prix + "\n\n" ;
     total += data[i].Quantite * data[i].Prix ;
+    sous_total = (data[i].Prix * data[i].Quantite).toFixed(2);
 
-    commande_html += `<div>
-                      <div class="aliment">- ${data[i].Produit}</div>
-                      <div class="info">quantité : <span class="quantite">x${data[i].Quantite}</span></div>
-                      <div class="info">total : <span class="sous_total">€${data[i].Prix}</span></div>
-                    </div>`;
- 
+    commande_html += `<tr> 
+                      <td class="quantite">${data[i].Quantite}</td> 
+                      <td class="nom">${data[i].Produit}</td> 
+                      <td class="sous_total">€${sous_total}</td> 
+                    </tr> `; 
   }
   detail_commande += "\n\n\tTOTAL : " + total + "€";
 
@@ -656,26 +656,31 @@ app.post("/api/valider_commande", function (req, res){
           padding: 0px 0px 20px 0px;}
         .cadre_titre {
           padding: 0% 16% 0% 16%;}
+        @media only screen and (max-width:600px) {
+          body .alignement {font-size: 10px;}
+          body .commande {font-size: 10px;}
+        }
         .commande{
-            padding: 0px 0px 0px 304px;
+            padding:0px 29% 0px 29%;
           font-size: 20px;
-          color:#545454}
-        .info{
-          padding: 5px 0px 0px 50px;
-          color:#545454}
-        .quantite{
-          padding: 0px 0px 0px 55px;}
-        .sous_total{
-          padding: 0px 0px 0px 81px;}
+          color:#545454;
+          line-height: 33px;}
         .general{
-            padding: 0px 0px 0px 265px;
+            padding: 0px 0px 0px 42%;
           color:#545454}
         .prix{
-          padding: 0px 0px 0px 141px;
+          padding: 0px 0px 0px 9%;
           color:#545454}
         .heure{
-          padding: 0px 0px 0px 135px;
+          padding: 0px 0px 0px 8.3%;
           color:#545454}
+        .quantite{
+          width:1.5%;}
+        .nom{
+          width:2%;}
+        .sous_total{
+          width:0.4%;
+          text-align: right;}
       </style>
     </head>
     <body>
@@ -684,8 +689,11 @@ app.post("/api/valider_commande", function (req, res){
         <div class="alignement"><h2>Bonjour ${req.body.prenom} ! Votre commande a bien été reçue.</h2></div>
         <div class="alignement"><h2>Récapitulatif :</h2></div>
         <div class="commande">
-          ${commande_html}
+          <TABLE> 
+            ${commande_html}
+          </TABLE> 
         </div>
+  
         <div class="general"><h2>TOTAL : <span class="prix">€${total}</span></h2></div>
         <div class="general"><h2>HEURE : <span class="heure">${req.body.heure}</span></h2></div>
         <br>
@@ -693,9 +701,6 @@ app.post("/api/valider_commande", function (req, res){
       </div>
     </body>
   </html>`;
-  console.log(texte_html);
-  //${commande_html}
-
 
   let mailOptions ={
     from: {
