@@ -40,7 +40,7 @@ app.get('/api/client/:clientName', (req,res) => {
   })
 })
 
-app.put('/api/mail', (req, res) => {  
+app.put('/api/client/mail', (req, res) => {  
   const clientName = req.body.clientName
   const mail = req.body.mail
   console.log(mail)
@@ -52,7 +52,7 @@ app.put('/api/mail', (req, res) => {
   })
 })
 
-app.put('/api/phone', (req, res) => {  
+app.put('/api/client/phone', (req, res) => {  
   const clientName = req.body.clientName
   const phone= req.body.phone
   const sqlInsert = "UPDATE `clients` SET `Gsm` = ? WHERE `clients`.`IdClient` = ?;"
@@ -63,7 +63,7 @@ app.put('/api/phone', (req, res) => {
   })
 })
 
-app.put('/api/username', (req, res) => {  
+app.put('/api/client/username', (req, res) => {  
   const username = req.body.username
   const clientName = req.body.clientName  //to take the variable from the html page
   const sqlInsert = "UPDATE `clients` SET `Pseudo` = ? WHERE `clients`.`IdClient` = ?;"
@@ -71,7 +71,7 @@ app.put('/api/username', (req, res) => {
   })
 })
 
-app.put('/api/adress', (req, res) => {
+app.put('/api/client/adress', (req, res) => {
   const clientName = req.body.clientName  
   const street = req.body.street
   const number = req.body.number 
@@ -123,12 +123,12 @@ app.put('/api/coord/tel', (req, res) => {
   })
 })
 
-app.put('/api/coord/map', (req, res) => {
+/*app.put('/api/coord/map', (req, res) => {
   const mapRest = req.body.mapRest
   const sqlGet = "UPDATE `coordonnees` SET `Map` = ? WHERE `coordonnees`.`IdRest` = 1;"
   db.query(sqlGet, mapRest, (err,result) => {
   })
-})
+})*/  //not working because of google policy
 
 app.put('/api/coord/address', (req, res) => {
   const streetRest = req.body.streetRest
@@ -157,7 +157,7 @@ app.post('/api/menu',(req, res) => {
 
 // Informations
 
-app.get('/api/coordonnees', (req,res) => {
+app.get('/api/coordonnees', (res) => {
   const sqlGet = "SELECT * FROM `coordonnees`"
   db.query(sqlGet,(err, result) => {
     res.send(result)
