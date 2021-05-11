@@ -1,4 +1,3 @@
-
 const Cookie = () => {
 	require('./cookie.css')
 

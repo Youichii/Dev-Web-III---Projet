@@ -15,6 +15,7 @@ import Chart from './components/Chart';
 import Historique from './Historique';
 import Modification from './Modification';
 import Cookie from './Cookies';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -85,9 +86,9 @@ function App() {
             <Route exact path="/Cookie"> 
               <Cookie/>
             </Route>
-
           </Switch>
         </div>
+        <Footer />
       </div>
     </Router>
   );
