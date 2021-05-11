@@ -7,7 +7,7 @@ const Communaute = () => {
     let [nom, setNom] = useState(null)
     let [ville, setVille] = useState(null)
 
-
+   
   
     
 
@@ -19,9 +19,12 @@ const Communaute = () => {
         }
         fetch('http://localhost:3001/users', remplirCommunaute)
         .then(response =>{
+            console.log("coucou : ", response)
             return response.json()
+
         })
         .then(json =>{
+            console.log(json)
             setUtilisateurs(json)
         })
 
