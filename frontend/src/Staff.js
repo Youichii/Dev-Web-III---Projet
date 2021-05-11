@@ -70,7 +70,7 @@ const Staff = () => {
             })
         }
 
-        /*var myInit = { method: 'PUT',
+        var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : client.IdCommande, type: type_commande})
         };
@@ -80,7 +80,7 @@ const Staff = () => {
         })
         .then(data => {
             setChangement(!changement) ;
-        })*/
+        })
     }
 
     const supprimer_commandes = (idCommande) => {

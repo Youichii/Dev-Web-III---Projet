@@ -1065,7 +1065,7 @@ app.post('/apitest/users', (req, res) => {
 }) 
   
  app.get('/apitest/orders', (req, res) => {
-  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
+  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Mail, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
   FROM reservations AS RE  \
   JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
   JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
@@ -1105,7 +1105,7 @@ app.delete('/apitest/orders', (req, res) => {
 app.get('/apitest/users/:idClient/address', (req, res) => {
   const identifiant = req.params.idClient 
   
-  const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+  const sqlInsert = "SELECT Mail, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
   db_test.query(sqlInsert, [identifiant], (err, result) => {
     console.log("err : ", err);
     res.send(result) ;

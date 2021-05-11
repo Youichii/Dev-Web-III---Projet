@@ -1,4 +1,3 @@
-  
 import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations/InputInformations';
 import Axios from "axios";
