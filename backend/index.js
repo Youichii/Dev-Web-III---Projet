@@ -294,7 +294,7 @@ app.post('/api/users', (req, res) => {
   
  app.get('/api/orders', (req, res) => {
   console.log("get /api/orders");
-    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
+    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, CL.Mail, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
     FROM reservations AS RE  \
     JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
     JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
@@ -334,25 +334,11 @@ app.delete('/api/orders', (req, res) => {
     })
 })
 
-/*app.get('/api/panier/:idCommande', (req, res) => {
-  const idCommande  = req.params.idCommande ;
-
-  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
-  FROM `commandes` AS C  \
-  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit   \
-  WHERE C.IdCommande = ?";
-  db.query(sqlInsert, [idCommande], (err, result) => {
-    console.log("erreur : ", err) ;
-    res.send(result) ;
-  })
-})*/
-
-
 app.get('/api/users/:idClient/address', (req, res) => {
     const identifiant = req.params.idClient ;
     console.log("get /api/users/:idClient");
 
-    const sqlInsert = "SELECT Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+    const sqlInsert = "SELECT Mail, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
     db.query(sqlInsert, [identifiant], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
@@ -393,6 +379,19 @@ app.get('/api/orders/users/:identifiantCommande', (req, res) => {
       console.log("err : ", err);
       res.send(result) ;
     })
+
+})
+
+app.get('/api/user/:utilisateur/order', (req, res) => { 
+  const identifiantClient = req.params.utilisateur ;
+
+  const sqlInsert = "select IdCommande \
+  FROM reservations \
+  WHERE IdClient=? AND IdEtat = 'PAN'";
+  db.query(sqlInsert, [identifiantClient], (err, result) => {
+    console.log("err : ", err);
+    res.send(result) ;
+  })
 
 })
 
@@ -622,6 +621,258 @@ app.get('/loadingBasket', (req, res) =>{
 
 
 
+
+/*API mail*/
+//Envoi d'un mail pour valider la commande du panier
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth:{
+      user: "nozak001@gmail.com",
+      pass:"hellodev0"
+  }
+});
+
+transporter.verify((err, success)=>{
+  err ? console.log (err) : console.log(`Pret à envoyer des mail: ${success}`);
+});
+
+app.post("/envoye", function (req, res){
+  let mailOptions ={
+      from: "nozak001@gmail.com",
+      to: "nozak001@gmail.com",
+      subject: "test mail",
+      text:`${req.body.emailer.message}`
+  };
+  transporter.sendMail(mailOptions, function (err, data){
+      if (err) {
+          res.json({
+              status:"fail"
+          });
+      }else {
+          console.log ("Email envoyé avec succes !");
+          res.json ({status: "Email envoyé"});
+      }
+  }); 
+});
+
+app.post("/api/valider_commande", function (req, res){
+  let detail_commande = "", commande_html="", sous_total;
+  let data = req.body.commande;
+  let total = 0;
+  for (let i=0 ; i<data.length; i++){
+    detail_commande+= "\t- " + data[i].Produit + "\n\t\t\tquantité : \t\tx" + data[i].Quantite + "\n\t\ttotal : \t\t\t€" + data[i].Prix + "\n\n" ;
+    total += data[i].Quantite * data[i].Prix ;
+    sous_total = (data[i].Prix * data[i].Quantite).toFixed(2);
+
+    commande_html += `<tr> 
+                      <td class="quantite">${data[i].Quantite}</td> 
+                      <td class="nom">${data[i].Produit}</td> 
+                      <td class="sous_total">€${sous_total}</td> 
+                    </tr> `; 
+  }
+  detail_commande += "\n\n\tTOTAL : " + total + "€";
+
+  let texte_validation = `Bonjour ${req.body.prenom} ! Votre commande a bien été reçue.\nVoici un récapitulatif : \n\n` + detail_commande + ` \
+                \n\tHeure où la commande est prête : ${req.body.heure} \n\nNous faisons au plus vite pour vous satisfaire !  \n\n\L'équipe ChickNFish`;
+  let texte_html = `<!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        .alignement{
+          text-align:center;
+          color:#545454}
+        .signature{
+          text-align:center;
+          color:#ff8100;
+          font-size: 19px;}
+        .cadre {
+          background-color: #ffe5be;
+          margin: 0% 15% 0% 15%;
+          padding: 5px 0px 18px 0px;}
+        .titre {
+            border-bottom: 1px solid;
+          padding: 0px 0px 20px 0px;}
+        .cadre_titre {
+          padding: 0% 16% 0% 16%;}
+        @media only screen and (max-width:600px) {
+          body .alignement {font-size: 10px;}
+          body .commande {font-size: 10px;}
+        }
+        .commande{
+            padding:0px 29% 0px 29%;
+          font-size: 20px;
+          color:#545454;
+          line-height: 33px;}
+        .general{
+            padding: 0px 0px 0px 42%;
+          color:#545454}
+        .prix{
+          padding: 0px 0px 0px 9%;
+          color:#545454}
+        .heure{
+          padding: 0px 0px 0px 8.3%;
+          color:#545454}
+        .quantite{
+          width:1.5%;}
+        .nom{
+          width:2%;}
+        .sous_total{
+          width:0.4%;
+          text-align: right;}
+      </style>
+    </head>
+    <body>
+      <div class="cadre">
+        <div class="alignement cadre_titre"><h1 class="titre">Chick 'N' Fish</h1></div>
+        <div class="alignement"><h2>Bonjour ${req.body.prenom} ! Votre commande a bien été reçue.</h2></div>
+        <div class="alignement"><h2>Récapitulatif :</h2></div>
+        <div class="commande">
+          <TABLE> 
+            ${commande_html}
+          </TABLE> 
+        </div>
+  
+        <div class="general"><h2>TOTAL : <span class="prix">€${total}</span></h2></div>
+        <div class="general"><h2>HEURE : <span class="heure">${req.body.heure}</span></h2></div>
+        <br>
+        <div class="signature"><b>L'équipe Chick 'N' Fish</b></div>
+      </div>
+    </body>
+  </html>`;
+
+  let mailOptions ={
+    from: {
+      name: "Chick 'N' Fish",
+      address: 'nozak001@gmail.com'
+    },
+    to: req.body.mail,
+    subject: "Votre commande a bien été reçue !",
+    text:texte_validation,
+    html:texte_html
+  };
+
+  transporter.sendMail(mailOptions, function (err, data){
+      if (err) {
+          res.send({status:"fail"});
+      }
+      else {
+          console.log ("Email envoyé avec succes !");
+          res.send({status:"success"});
+      }
+  }); 
+});
+
+app.post("/api/commande_prete", function (req, res){
+
+  let texte_utf ;
+  let sujet ;
+  if (req.body.methode === "LIV"){
+    sujet = `Votre commande N${req.body.idcommande} est en route !`;
+    texte_utf = `Bonjour ${req.body.prenom} ! \n Votre commande arrive bientôt, nous sommes en route. \nEncore quelques minutes de patience ... \n\n\L'équipe ChickNFish` ;
+    texte_html = `<!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          .alignement{
+            text-align:center;
+            color:#545454}
+          .signature{
+            text-align:center;
+            color:#ff8100;
+            font-size: 17px;}
+          .cadre {
+            background-color: #ffe5be;
+            margin: 0% 15% 0% 15%;
+            padding: 5px 0px 18px 0px;}
+          .titre {
+              border-bottom: 1px solid;
+            padding: 0px 0px 20px 0px;}
+          .cadre_titre {
+            padding: 0% 16% 0% 16%;}
+          @media only screen and (max-width:600px) {
+            .alignement {font-size: 14px;}
+          }
+        </style>
+      </head>
+      <body>
+        <div class="cadre">
+          <div class="alignement cadre_titre"><h1 class="titre">Chick 'N' Fish</h1></div>
+          <div class="alignement"><h2>Bonjour ${req.body.prenom} !</h2></div>
+          <div class="alignement"><h3>Votre commande arrive bientôt, nous sommes en route.</h3></div>
+          <div class="alignement"><h3>Encore quelques minutes de patience ...</h3></div>
+          <br><br>
+          <div class="signature"><b>L'équipe Chick 'N' Fish</b></div>
+        </div>
+      </body>
+    </html>`;
+  }
+  else {
+    sujet = `Votre commande N${req.body.idcommande} est prête !`;
+    texte_utf = `Bonjour ${req.body.prenom} ! Votre commande est prête à être récupérée, nous vous attendons ! \n\n\L'équipe ChickNFish` ;
+    texte_html = `<!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          .alignement{
+            text-align:center;
+            color:#545454}
+          .signature{
+            text-align:center;
+            color:#ff8100;
+            font-size: 17px;}
+          .cadre {
+            background-color: #ffe5be;
+            margin: 0% 15% 0% 15%;
+            padding: 5px 0px 18px 0px;}
+          .titre {
+              border-bottom: 1px solid;
+            padding: 0px 0px 20px 0px;}
+          .cadre_titre {
+            padding: 0% 16% 0% 16%;}
+          @media only screen and (max-width:600px) {
+            .alignement {font-size: 14px;}
+          }
+          .adresse {
+            line-height:24px;}
+        </style>
+      </head>
+      <body>
+        <div class="cadre">
+          <div class="alignement cadre_titre"><h1 class="titre">Chick 'N' Fish</h1></div>
+          <div class="alignement"><h2>Bonjour ${req.body.prenom} !</h2></div>
+          <div class="alignement"><h3>Votre commande est prête à être récupérée, nous vous attendons !</h3></div><br>
+          <div class="alignement adresse"><h4>Traverse d'Esope 4,<br>1348 Ottignies-Louvain-la-Neuve</h4></div>
+          <br>
+          <div class="signature"><b>L'équipe Chick 'N' Fish</b></div>
+        </div>
+      </body>
+    </html>`;
+  }
+
+  let mailOptions ={
+      from: {
+        name: "Chick 'N' Fish",
+        address: 'nozak001@gmail.com'
+      },
+      to: req.body.email,
+      subject: sujet,
+      text:texte_utf,
+      html:texte_html
+  };
+
+  transporter.sendMail(mailOptions, function (err, data){
+      if (err) {
+          res.send({status:"fail"});
+      }
+      else {
+          console.log ("Email envoyé avec succes !");
+          res.send({status:"success"});
+      }
+  }); 
+});
 
 
 
