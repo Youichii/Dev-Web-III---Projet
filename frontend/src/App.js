@@ -14,6 +14,7 @@ import Modification from './Modification'
 import Stat from './Stat';
 import Cookie from './Cookies';
 import Footer from './Footer';
+import Chart from './components/Chart';
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
             </Route>
 
             <Route exact path="/stat" >
-              <App />
+              <Stat />
             </Route>
 
             <Route exact path="/Communaute">
@@ -81,6 +82,7 @@ function App() {
             <Route exact path="/Cookie"> 
               <Cookie/>
             </Route>
+
           </Switch>
         </div>
         <Footer />

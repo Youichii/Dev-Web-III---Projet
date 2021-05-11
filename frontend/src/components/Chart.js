@@ -3,7 +3,7 @@ import {Doughnut} from 'react-chartjs-2';
 import Axios from 'axios'
 
 
-function App() {
+function Chart() {
 
   const [genre, setGenre]= useState([]);
   const [ville, setVille] = useState([]);
@@ -297,4 +297,4 @@ console.log(ageData)
       
     );
 }
-export default App;
+export default Chart;

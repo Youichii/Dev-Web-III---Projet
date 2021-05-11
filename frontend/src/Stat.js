@@ -1,13 +1,14 @@
 import React from 'react';
 //import '../../App.css';
-import App from './components/Chart'
+import Chart from './components/Chart'
 
-export default function Stat() {
+function Stat() {
   return (
     <>
-        <App />
+        <Chart />
     </>
     
   );
 
 };
+export default Stat
