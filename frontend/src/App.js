@@ -9,8 +9,8 @@ import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 //import Home from './components/pages/Home'
 import Home from './Home'
-import Communaute from "./Communaute.js"
-import Menu from "./Menu.js";
+import Communaute from "./Communaute"
+import Menu from "./Menu";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
 import Historique from './Historique';
@@ -54,8 +54,8 @@ function App() {
               <Communaute />
             </Route>
 
-            <Route exact path="/Carte">
-              <Communaute />
+            <Route exact path="/Menu">
+              <Menu />
             </Route>
 
             <Route exact path="/inscription"> 
@@ -66,12 +66,6 @@ function App() {
               <ProfilPrive />
             </Route>
 
-            <Route path ="/" exact component={Home}/>
-            <Route path = "/home" exact component={Home}/>
-
-            <Route exact path="/Menu"> 
-              <Menu />
-            </Route>
             
             <Route exact path="/Historique"> 
               <Historique/>

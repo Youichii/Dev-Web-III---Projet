@@ -3,20 +3,18 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Carte = () => {
-    const [tableau_panier, setTableau]= useState([]) 
+    require('./carte.css')
     const [titres, setTitres] = useState(null)
     const [paniers, setPanier] = useState(null)
     const [contenu, setContenu]= useState(null)
 
-    
-    let id_client = 20
-    let prixTotal = 0 
-    let tableauPrix = [] 
+ 
     let id_comm = 20
+    let id_client = 2802
 
         
     useEffect(()=>{
-        let id_comm = 200
+
         var remplirCategorie = {method: 'GET', 
             headers:{'Content-type':'application/json'}
         }
@@ -61,9 +59,8 @@ const Carte = () => {
         if(compteur === 0){
             var myInit = { method:'POST', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdCommande : id_comm, 
-                                    IdClient : id_client,
-                                    IdEtat:"Composition",                      
+            body: JSON.stringify({  IdCommande : Number(id_comm), 
+                                    IdClient : Number(id_client)                     
                                 })
             }
             fetch('http://localhost:3001/orders', myInit)
@@ -90,6 +87,19 @@ const Carte = () => {
             .then(res => {
                 return res.json();
             })
+
+        // On recharge la table de la commande. 
+            var panier = {method: 'GET', 
+        headers: {'Content-type':'application/json'}
+        }; 
+        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+            .then(response=>{ 
+                return response.json()
+            })
+            .then(json =>{ 
+                setPanier(json)
+            }) 
+
         }
 
         else{
@@ -107,24 +117,19 @@ const Carte = () => {
                 return res.json();
             }) 
         }
+        var panier = {method: 'GET', 
+        headers: {'Content-type':'application/json'}
+        }; 
+        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+            .then(response=>{ 
+                return response.json()
+            })
+            .then(json =>{ 
+                setPanier(json)
+            }) 
     }
         
-    function payer() {
-        // On change le status dans la table de reservation de "Composition" à "Panier"
-        var myInit = { method:'PUT', 
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdComm : id_comm, 
-                                    IdClient : id_client,
-                                    Etat:"Panier",                      
-            })
-        }
-        fetch('http://localhost:3001/orders', myInit)
-            .then(res => {
-                return res.json();
-            })
-    }
-    
-        
+
     return(
         <div>
             <div id = 'bordPrincipal'>
@@ -150,27 +155,26 @@ const Carte = () => {
             </div>
         
             <span className="symbolpanier">Panier &#128722;
-                <div id="panier">
-                    <div id="article"> 
-                        {paniers&&paniers.map(panier => (
-                            <div className="basket">
-                                {contenu && contenu.filter(content => panier.IdCategorie === content.IdCategorie).map(contenu_filtre => (
-                                    <div>
-                                    <div className='produit'>{contenu_filtre.Produit}</div>
-                                    <div className='prix'>{contenu_filtre.Prix} X {panier.Quantite}</div>
+                <div id="panier" >
+                    {paniers&&paniers.map(contenu_filtre => (
+                                    <div className='commande'>
+                                    <div className='titre'>{contenu_filtre.Produit}</div>
+                                    <div className='description'>Total: {contenu_filtre.Quantite*contenu_filtre.Prix}€</div>
+                                    <div className='price'>{contenu_filtre.Prix}€ X {contenu_filtre.Quantite}</div>
                                     </div>
-                                ))}
-                                <div className='quantite'>{panier.Quantite}</div>
-                            </div>
-                        ))}         
-                    </div>
-
+                                   
+                    ))}
+                
+                </div>
+                               
+                    
+                     
                     <div id="total">
              
                     </div>
-                </div>
+                
             </span>
-        <NavLink to="/panier"><a href="/" className="symbolpayer" onClick={payer}>Passer Commande &#128184;</a></NavLink>
+        <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink>
     </div>
     );
 };

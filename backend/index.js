@@ -111,12 +111,7 @@ app.post('/api/users', (req, res) => {
   
   
  app.get('/api/orders', (req, res) => {
-    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
-    FROM reservations AS RE  \
-    JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
-    JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
-    JOIN menu AS ME ON CO.IdProduit = ME.IdProduit \
-    GROUP BY RE.IdCommande" ;
+    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix FROM reservations AS RE JOIN clients AS CL ON RE.IdClient = CL.IdClient JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  JOIN menu AS ME ON CO.IdProduit = ME.IdProduit GROUP BY RE.IdCommande" ;
     db.query(sqlInsert, [], (err, result) => {
       console.log("erreur : ", err);
       res.send(result) ;
@@ -152,10 +147,7 @@ app.delete('/api/orders', (req, res) => {
 app.get('/api/panier/:idCommande', (req, res) => {
   const idCommande  = req.params.idCommande 
 
-  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
-  FROM `commandes` AS C  \
-  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit   \
-  WHERE C.IdCommande = ?";
+  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite FROM `commandes` AS C  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit  WHERE C.IdCommande = ?";
   db.query(sqlInsert, [idCommande], (err, result) => {
     console.log("erreur : ", err) ;
     res.send(result) ;
@@ -182,9 +174,7 @@ app.post('/api/orders', (req, res) => {
     const postal  = req.body.postal ;
     const ville  = req.body.ville ;
 
-    const sqlInsert = "UPDATE reservations \
-    SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? \
-    WHERE IdCommande = ?" ;
+    const sqlInsert = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
 
     db.query(sqlInsert, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
       console.log("err : ", err);
@@ -195,11 +185,7 @@ app.post('/api/orders', (req, res) => {
 app.get('/api/orders/users/:identifiantClient', (req, res) => { 
     const identifiantClient = req.params.identifiantClient ;
 
-    const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
-    FROM commandes AS C  \
-    JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
-    JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE IdClient = ?";
+    const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit FROM commandes AS C JOIN menu AS ME ON C.IdProduit = ME.IdProduit  JOIN reservations AS RE ON C.IdCommande = RE.IdCommande  WHERE IdClient = ?";  
     db.query(sqlInsert, [identifiantClient], (err, result) => {
       console.log("err : ", err);
       res.send(result) ;
@@ -220,10 +206,7 @@ app.put('/api/orders/foods', (req, res) => {
 })
 
 app.get('/api/hours', (req, res) => {
-    const sqlInsert = "SELECT HLivree \
-    FROM reservations \
-    GROUP BY HLivree  \
-    HAVING COUNT(HLivree)  > 5";
+    const sqlInsert = "SELECT HLivree FROM reservations GROUP BY HLivree HAVING COUNT(HLivree)  > 5";
     db.query(sqlInsert, [], (err, result) => {
       console.log("err : ", err);
       console.log("result : ", result) ;
@@ -278,7 +261,6 @@ app.delete('/comment', (req, res) => {
   
 })
 
-
 // requête PUT pour UPDATE le satus d'un client
 app.put('/status', (req, res) =>{
     const Status = req.body.Status
@@ -291,6 +273,29 @@ app.put('/status', (req, res) =>{
       if(err) throw err; 
       res.send(result); 
     })
+})
+
+// Requête GET pour ramener les Nom sans doublons. 
+app.get('/filterNom', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+//  Requête GET pour ramener les Villes sans doublons.
+app.get('/filterVille', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
 })
 
 // Requête GET pour trier le contenu de la communauté sur base de la ville 
@@ -332,11 +337,12 @@ app.get('/usersnom/:nom', (req,res) =>{
   })
 })
 
+
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du status 
 app.get('/userstrie1/:ville/:status', (req, res) =>{
    
-  const Status = req.params.valueStatus
-  const Ville = req.params.valueVille
+  const Status = req.params.status
+  const Ville = req.params.ville
    
   const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ?  "
  
@@ -353,7 +359,7 @@ app.get('/userstrie1/:status/:nom', (req, res) =>{
   const Status = req.params.valueStatus
   const Nom = req.params.valueNom
   
-  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Nom` = ? "
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? and `Nom` = ? "
  
   db.query(sqlInsert,[Status, Nom],(err, result) => {
       if(err) throw err ;
@@ -418,28 +424,12 @@ app.get('/loadingBasket/:IdCommande', (req, res) =>{
 
   const IdCommande = req.params.id_comm
 
-  const sqlInsert = 'select * FROM commandes WHERE `IdCommande` = ?'
+  const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
   db.query(sqlInsert,[IdCommande], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
-
-// POST pour exporter la commande du client 
-// app.post('/orders', (req, res) =>{ 
-//   const Ville = null 
-//   const Zip = null
-//   const Numero = null 
-  
-
-//   const sqlInsert = "INSERT INTO reservations (`IdCommande` = ?,`IdClient` = ?, `IdEtat` = ?, `IdMethode`= ?, `DateCommande`= ?, `HLivree`= ?, `Commentaire`= ?, `Rue`= ?, `Numero`= ?, `Zip`= ?, `Ville`= ?) VALUES (?,?,?,?,?,?,?)  "
-
-//   db.query(sqlInsert, [IdCommande, IdClient, IdEtat, IdMethode, DateCommande, HLivree, Commentaire, Rue, Ville, Zip, Numero], (err, result) => {
-//     if(err) throw err; 
-//     res.send(result); 
-//   })
-// })
-
 
 // POST qui envoie les article dans le panier temporaire
 app.post('/intermediateBasket', (req, res) => {
@@ -448,13 +438,14 @@ app.post('/intermediateBasket', (req, res) => {
   const IdProduit = req.body.IdProduit
   const Quantite = req.body.Quantite
 
-
   const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
   db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
     if(err) throw err; 
     res.send(result); 
   })
 })
+
+
 
 
 // PUT qui change la quantite d'un produit dans la DB 
@@ -472,6 +463,17 @@ app.put('/changingquantity', (req, res) =>{
   })
 })
 
+// INSERTE la table reservation 
+app.post('/orders', (req, res) => {
+ 
+  const IdClient = req.body.IdClient
+
+  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[IdClient, null, null, null, 'P', null,  null, null, null, null], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
 
 // Page Historique -------------------------------------------------------------------------------------------------------
 
@@ -479,21 +481,20 @@ app.put('/changingquantity', (req, res) =>{
 
 app.get('/historical', (req, res) =>{
 
-  const IdCommande = req.params.id_comm
-
-  const sqlInsert = 'select * FROM reservations WHERE `idEtat` = "H"'
-  db.query(sqlInsert,[IdCommande], (err, result) => {
+  const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
+  
+  db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
 
-app.get('/historical', (req, res) =>{
 
-  const IdCommande = req.params.id_comm
+// Get qui va chercher une liste sans doublons de toutes les années d'historiques 
+app.get('/year', (req, res) =>{
 
-  const sqlInsert = 'select DateCommande FROM reservations WHERE `idEtat` = "H"'
-  db.query(sqlInsert,[IdCommande], (err, result) => {
+  const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
+  db.query(sqlInsert,['H'], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })

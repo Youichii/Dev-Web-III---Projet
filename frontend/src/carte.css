@@ -1,10 +1,25 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color : black; 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .Menu{
-  
+    margin-top:40px;
     grid-template-columns: 20% 60% 20%; 
     display : grid; 
-    height: 10px;
+    height: 60px;
     /* width:10px; */
     text-overflow: scroll;
+    background-color: black;
     
   }
   
@@ -83,23 +98,27 @@
 
 span.symbolpanier:hover div{
   visibility: visible;
-  background-color: rgb(240, 222, 144);
+  /* background-color: rgb(240, 222, 144); */
   border-color:black;
   border-style:solid;
+
 }
 
 #panier{
   position:fixed;
   right:0px;
   bottom:0px;
-  top:360px;
+  top:410px;
   left:21%;
   width: 57%;
   height :40%; 
   overflow-y:scroll ;
-  background-color:#76df35;
-  color:black;
+  color:#be5833;
+  background-color: black;
+  border-color:#e49622;
+
 }
+
 
 .symbolpayer{
   float:right;
@@ -112,9 +131,8 @@ span.symbolpanier:hover div{
   color:blanchedalmond;
 }
 
-.panierStyle{
-  color:red;
-}
+
+
 
 /* Menu */
 
@@ -130,7 +148,7 @@ span.symbolpanier:hover div{
   height: fit-content;
   grid-column-start:2;
   grid-column-end:5;
-  height:350px;
+  height:550px;
   overflow-y: scroll;
 }
 #bordure{
@@ -154,6 +172,8 @@ span.symbolpanier:hover div{
 .titre{
   color: brown;
   font-size: large;
+  text-decoration:underline;
+  text-decoration-color: brown;
 }
 
 .contenu{
@@ -172,6 +192,7 @@ span.symbolpanier:hover div{
 .price{ 
   color:#ff6e40; 
   float: right;
+  margin-bottom:20px
 }
 
 .description{
