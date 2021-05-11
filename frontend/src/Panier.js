@@ -2,50 +2,22 @@ import {useEffect, useState} from "react" ;
 import BoutonPanier from './components/BoutonPanier/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio/BoutonRadio';
-import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
 
 const Panier = () => {
     require('./panier.css')
-    Axios.defaults.withCredentials = true;
-
     const [heures, setHeures] = useState([]);
 
     const [total, setTotal] = useState(0);
     let compteur = 1 ;
+    let identifiantClient = 7 ;
+    let id_commande = 1 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
 
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
-    const [IDCommande, setIdCommande]= useState("");
-    let utilisateur = 100000000000;
-    let id_commande =  100000000000;
-
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
-                utilisateur = response.data.user[0].IdClient;
-
-                recuperer_utilisateur();
-                recuperer_panier();
-			}
-			else {
-				setLoginStatus(false);
-			}
-		});
-	}, []);
-
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);
-		});
-	}
-
     useEffect(() => {
+        recuperer_utilisateur();
+        recuperer_panier();
+
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
@@ -54,6 +26,7 @@ const Panier = () => {
             return res.json();
         })
         .then(data => {
+            
             const intermediaire = [] ;
             let min = 1080 ; //18h
             let max = 1440 ; //00h
@@ -75,34 +48,23 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/user/${utilisateur}/order`, myInit)
+        fetch(`http://localhost:3001/api/orders/users/${id_commande}`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            id_commande = data[0].IdCommande;
-            setIdCommande(data[0].IdCommande);
-
-            var myInit = { method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-            };
-            fetch(`http://localhost:3001/api/orders/users/${id_commande}`, myInit)
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                setDonneesPanier(data);
-                console.log("data : ", data);
-                let total = 0 ;
-                data.map(x => total+=x["Quantite"]*x["Prix"]);
-                setTotal(total.toFixed(2)) ;
-                
-                let nbr_lignes = ""
-                for (let i = 0 ; i<data.length ; i++) {
-                    nbr_lignes += "45px " ;
-                }
-                document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
-            })
+            setDonneesPanier(data);
+            console.log("data : ", data);
+            let total = 0 ;
+            data.map(x => total+=x["Quantite"]*x["Prix"]);
+            setTotal(total.toFixed(2)) ;
+            
+            let nbr_lignes = ""
+            for (let i = 0 ; i<data.length ; i++) {
+                nbr_lignes += "45px " ;
+            }
+            console.log("classe : ", document.getElementsByClassName("c_info_aliments"));
+            document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
         })
     }
 
@@ -110,7 +72,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/users/${utilisateur}/address`, myInit)
+        fetch(`http://localhost:3001/api/users/${identifiantClient}/address`, myInit)
         .then(res => {
             return res.json();
         })
@@ -140,26 +102,14 @@ const Panier = () => {
         
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : IDCommande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
+               body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
         fetch(`http://localhost:3001/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            fetch ("http://localhost:3001/api/valider_commande",{
-                method: "POST",
-                headers:{
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({prenom : donnees_adresse[0].Prenom, mail:donnees_adresse[0].Mail, commande:donnees_panier, heure:document.getElementById('heures_reserv').value})
-            })
-            .then((res)=> {
-                return res;
-            })
-            .then (()=>{
-                console.log("mail envoye");
-            });
+            console.log("ok");
         })
     }
 
@@ -195,9 +145,11 @@ const Panier = () => {
                 changer_prix(id_produit, String(id_commande) + String(id_produit));
             })
             if (nouvelle_qtite === 0) {
+                console.log("passe bien ici");
                 document.getElementById(id_produit).style.display = "inline";
             }
             else if (nouvelle_qtite === 1) {
+                console.log("passe bien ici");
                 document.getElementById(id_produit).style.display = "none";
             }
         }
@@ -263,100 +215,97 @@ const Panier = () => {
     }
 
     return (
-        <div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
-            <div className="panier">
-                <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
-                <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>
+        <div className="panier">
+            <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
+			<div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>
 
-                <div className="i_avancement1 c_avancement1">
-                    <div id="i_ligne_avant_1"></div>
-                    <div id="i_numero_1">1</div>
+            <div className="i_avancement1 c_avancement1">
+				<div id="i_ligne_avant_1"></div>
+				<div id="i_numero_1">1</div>
+			</div>
+
+            <div className="i_avancement2 c_avancement2">
+                <div id="i_ligne_avant_2"></div>
+				<div id="i_numero_2">2</div>
+			</div>
+
+            <div className="c_info_panier i_info_panier">
+                <div className="c_titres_panier i_titres_panier">
+					<div className="i_titre_produit titres">Produit</div>
+					<div className="i_titre_quantite titres" id="titre_qtite">Quantité</div>
+					<div className="i_titre_prix titres">Prix</div>
+				</div>
+			
+				<div className="i_info_aliments c_info_aliments" id="info_aliments">
+                    {donnees_panier && donnees_panier.map(affichage_aliments)}
+				</div>
+
+                <div className="c_cadre_total i_cadre_total">
+                <div className="i_titre_total">Total</div>
+                    <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
                 </div>
+			</div>
 
-                <div className="i_avancement2 c_avancement2">
-                    <div id="i_ligne_avant_2"></div>
-                    <div id="i_numero_2">2</div>
-                </div>
+            <div className="i_boutons1 c_boutons1">
+                <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={valider_panier} />
+                <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimer_commande} />
+			</div>
 
-                <div className="c_info_panier i_info_panier">
-                    <div className="c_titres_panier i_titres_panier">
-                        <div className="i_titre_produit titres">Produit</div>
-                        <div className="i_titre_quantite titres" id="titre_qtite">Quantité</div>
-                        <div className="i_titre_prix titres">Prix</div>
-                    </div>
+            <div className="c_info_reception i_info_reception">
+				<div className="i_heure" id="elem_heure">
+					<label class="label_informations" for="heure_livraison">Heure</label><br />
+					<div id="heure_livraison">
+                        <select className="decorated" name="heures_reserv" id="heures_reserv">
+                            {heures.map(heure => (
+                                <option class="choix_heure" value={`${heure.h}:${heure.m}`}>{heure.h}{":"}{heure.m}</option>
+                            ))}
+                        </select>
+                    </div>								
+				</div>
+
+                <div className="i_apres_heure"></div>
+
+				<div className="i_moy_reception">
+					<label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
+					<div className="c_reception">
+                        <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
+                        <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
+					</div>
+				</div>
+
+                <div className="i_apres_reception"></div>
+				
+				<div className="i_payement">
+					<label class="label_informations" for="mode_payement">Mode de payement</label><br />
+					<div className="i_mode_payement c_mode_payement">
+                        <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
+                        <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
+					</div>
+				</div>
+				
+                <div class="i_apres_payement"></div>
                 
-                    <div className="i_info_aliments c_info_aliments" id="info_aliments">
-                        {donnees_panier && donnees_panier.map(affichage_aliments)}
+                {donnees_adresse && donnees_adresse.map(info => (
+                    <div className="i_adresse c_adresse" id="zone_adresse">
+                        <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
+                        <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
+                        <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip}/>
+                        <AdresseCommande className_div="i_ville" fom="ville" Text="Ville" id="ville" name="nom_ville" type="text" placeholder={info.Ville}/>
+
                     </div>
+                ))}
+				
+			</div>
 
-                    <div className="c_cadre_total i_cadre_total">
-                    <div className="i_titre_total">Total</div>
-                        <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
-                    </div>
-                </div>
+            <div className="i_commentaire" id="elem_commentaire">
+				<label for="commentaire" id="titre_elem_commentaire">Commentaire</label><br />
+				<textarea placeholder="Texte prédéfini" id="commentaire" wrap="hard"></textarea>
+			</div>
 
-                <div className="i_boutons1 c_boutons1">
-                    <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={valider_panier} />
-                    <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimer_commande} />
-                </div>
-
-                <div className="c_info_reception i_info_reception">
-                    <div className="i_heure" id="elem_heure">
-                        <label class="label_informations" for="heure_livraison">Heure</label><br />
-                        <div id="heure_livraison">
-                            <select className="decorated" name="heures_reserv" id="heures_reserv">
-                                {heures.map(heure => (
-                                    <option class="choix_heure" value={`${heure.h}:${heure.m}`}>{heure.h}{":"}{heure.m}</option>
-                                ))}
-                            </select>
-                        </div>								
-                    </div>
-
-                    <div className="i_apres_heure"></div>
-
-                    <div className="i_moy_reception">
-                        <label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
-                        <div className="c_reception">
-                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
-                            <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
-                        </div>
-                    </div>
-
-                    <div className="i_apres_reception"></div>
-                    
-                    <div className="i_payement">
-                        <label class="label_informations" for="mode_payement">Mode de payement</label><br />
-                        <div className="i_mode_payement c_mode_payement">
-                            <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
-                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
-                        </div>
-                    </div>
-                    
-                    <div class="i_apres_payement"></div>
-                    
-                    {donnees_adresse && donnees_adresse.map(info => (
-                        <div className="i_adresse c_adresse" id="zone_adresse">
-                            <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
-                            <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
-                            <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip}/>
-                            <AdresseCommande className_div="i_ville" fom="ville" Text="Ville" id="ville" name="nom_ville" type="text" placeholder={info.Ville}/>
-
-                        </div>
-                    ))}
-                    
-                </div>
-
-                <div className="i_commentaire" id="elem_commentaire">
-                    <label for="commentaire" id="titre_elem_commentaire">Commentaire</label><br />
-                    <textarea placeholder="Texte prédéfini" id="commentaire" wrap="hard"></textarea>
-                </div>
-
-                <div className="i_boutons2 c_boutons2">
-                    <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouter_commande} />
-                    <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annuler_info} />
-                </div>
-            </div>
+			<div className="i_boutons2 c_boutons2">
+                <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouter_commande} />
+                <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annuler_info} />
+			</div>
         </div>
     );
 }
