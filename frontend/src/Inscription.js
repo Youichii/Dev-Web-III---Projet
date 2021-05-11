@@ -207,54 +207,56 @@ const Inscription = () => {
 					valeur = radios[i].value;
 					}
 				}
+			
 
-			var jour = document.getElementById('selection_jour').selectedIndex;
-			var mois = document.getElementById('selection_mois').selectedIndex;
-			var annee = document.getElementById('selection_annee').selectedIndex;
-			var date = annee + "-" + mois + "-" + jour ;
+				var jour = document.getElementById('selection_jour').selectedIndex;
+				var mois = document.getElementById('selection_mois').selectedIndex;
+				var annee = document.getElementById('selection_annee').selectedIndex;
+				var date = annee + "-" + mois + "-" + jour ;
 
-			let neswletter_cochee ;
-			(document.getElementById("newsletter_user").checked) ? neswletter_cochee = 1 : neswletter_cochee = 0 ;
+				let neswletter_cochee ;
+				(document.getElementById("newsletter_user").checked) ? neswletter_cochee = 1 : neswletter_cochee = 0 ;
 
-			var myInit = { method: 'POST',
-				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({name : document.getElementById("nom_user").value,
-										firstname : document.getElementById("prenom_user").value,
-										birthday : date,
-										phone : document.getElementById("telephone_user").value,
-										mail : document.getElementById("mail_user").value,
-										gender : valeur,
-										pwd : document.getElementById("mdp_user").value,
-										rue : document.getElementById("adresse_user").value,
-										numero : document.getElementById("numero_user").value,
-										postal : document.getElementById("postal_user").value,
-										ville : document.getElementById("ville_user").value,
-										nwsletter : neswletter_cochee})
-			};
+				var myInit = { method: 'POST',
+					headers: {'Content-Type': 'application/json'},
+					body: JSON.stringify({name : document.getElementById("nom_user").value,
+											firstname : document.getElementById("prenom_user").value,
+											birthday : date,
+											phone : document.getElementById("telephone_user").value,
+											mail : document.getElementById("mail_user").value,
+											gender : valeur,
+											pwd : document.getElementById("mdp_user").value,
+											rue : document.getElementById("adresse_user").value,
+											numero : document.getElementById("numero_user").value,
+											postal : document.getElementById("postal_user").value,
+											ville : document.getElementById("ville_user").value,
+											nwsletter : neswletter_cochee})
+				};
 
-			fetch('http://localhost:3001/api/users', myInit)
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				if (data.message === false) {
-					document.getElementById("erreur_inscription").innerHTML = "Cette adresse mail existe déjà ! Essayez-en une autre";
-				}
-				else {
-					document.getElementById("erreur_inscription").innerHTML = "";
-					let mail_valide = document.getElementById("mail_user").value ;
-					let mdp_valide = document.getElementById("mdp_user").value;
-					Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
-					if (response.data.message) {
-						setLoginStatus(false);
-						setUsername(10000000000);
-					} else {
-						setLoginStatus(true);
-						setUsername(response.data[0].IdClient);
+				fetch('http://localhost:3001/api/users', myInit)
+				.then(res => {
+					return res.json();
+				})
+				.then(data => {
+					if (data.message === false) {
+						document.getElementById("erreur_inscription").innerHTML = "Cette adresse mail existe déjà ! Essayez-en une autre";
 					}
-					});
-				}
-			})
+					else {
+						document.getElementById("erreur_inscription").innerHTML = "";
+						let mail_valide = document.getElementById("mail_user").value ;
+						let mdp_valide = document.getElementById("mdp_user").value;
+						Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((response) => {
+							if (response.data.message) {
+								setLoginStatus(false);
+								setUsername(10000000000);
+							} else {
+								setLoginStatus(true);
+								setUsername(response.data[0].IdClient);
+							}
+						});
+					}
+				})
+			}
 		}				
 		else {
 			document.getElementById("politique_erreur").innerHTML = "Ce champ est obligatoire";
@@ -357,9 +359,9 @@ const Inscription = () => {
 					<div className="i_champ_politique">
 						<input type="checkbox" id="politique_user" required onClick={pol_confidentialite}/><span className="pol"> J'accepte les <a href="https://www.privacypolicies.com/live/3ed9c526-0710-45e2-9a58-ec772750de85">termes et conditions</a> & <a href="https://www.privacypolicies.com/live/5b2841b7-4ad5-46a7-ac31-25ea7960e6f3">politique de confidentialité</a></span>
 					</div>
-
-					<div className="i_bouton_envoi_insc">
-							<input id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
+					<div className="i_titre_captcha pol">CAPTCHA</div>
+					<div className="i_champ_captcha">
+						<input type="text" id="captcha_user" required />
 					</div>
 					<div className='message_erreur politique_erreur' id="politique_erreur"></div>
 				
@@ -372,6 +374,6 @@ const Inscription = () => {
 		</div>
 	</div>
     );
-}}
+}
 
 export default Inscription;
