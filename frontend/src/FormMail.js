@@ -10,7 +10,8 @@ import './FormMail.css'
          corps:""
      });
 
-     //tient compte des changement du champ
+     //tient compte des changement des champs
+    
 
      function handleChange(e){
          setEmailer((prevState)=>({

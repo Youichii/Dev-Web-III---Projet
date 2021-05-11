@@ -17,7 +17,7 @@ it ("FormMail loads with initial state of 0",()=>{
 
 it ("form can be submittes & input fields work",()=>{
     const mailSubmit = jest.fn();
-    //const {input} = render (<FormMail input/>)
+    
     const {debug, queryByTestId} = render (<FormMail SubmitEmail = {mailSubmit}/>);
     fireEvent.change(queryByTestId("promo-msg"), {target: {value: 'promo du jour'}});
     fireEvent.change(queryByTestId("sujet-msg"), {target: {value: 'corps du jour'}});
