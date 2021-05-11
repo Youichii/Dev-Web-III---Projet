@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Doughnut} from 'react-chartjs-2';
-import './Chart.css';
 import Axios from 'axios'
 
 
@@ -18,7 +17,7 @@ function App() {
   }, [])
 
   const VilleStat=()=>{
-    Axios.get("http://localhost:3000/api/localisation-stat")
+    Axios.get("http://localhost:3001/api/localisation-stat")
     .then((response)=>{
       setVille(response.data)
       
@@ -44,7 +43,7 @@ function App() {
   }, [])
 
   const GenreStat=()=>{
-    Axios.get("http://localhost:3000/api/genre-stat")
+    Axios.get("http://localhost:3001/api/genre-stat")
     .then((response)=>{
       setGenre(response.data)
       
@@ -71,7 +70,7 @@ useEffect(()=>{
 }, [])
 
 const AgeStat=()=>{
-  Axios.get("http://localhost:3000/api/age-stat")
+  Axios.get("http://localhost:3001/api/age-stat")
   .then((response)=>{
     setAge(response.data)
     
@@ -298,4 +297,4 @@ console.log(ageData)
       
     );
 }
-export default Chart;
+export default App;

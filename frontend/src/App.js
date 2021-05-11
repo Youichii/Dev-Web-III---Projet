@@ -65,9 +65,6 @@ function App() {
               <ProfilPrive />
             </Route>
 
-            <Route path ="/" exact component={Home}/>
-            <Route path = "/home" exact component={Home}/>
-
             <Route exact path="/Menu"> 
               <Menu />
             </Route>
