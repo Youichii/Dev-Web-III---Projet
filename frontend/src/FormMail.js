@@ -52,7 +52,7 @@ import './FormMail.css'
                         value={emailer.subject}
                      />
                     <textarea 
-                        placeholder="Message"
+                        placeholder="Promo"
                         onChange = {handleChange}
                         name="message"
                         value={emailer.message}
