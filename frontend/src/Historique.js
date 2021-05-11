@@ -14,6 +14,7 @@ const Historique = () => {
 
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
+    const [date, setDate] = useState("");
 
     useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
@@ -29,9 +30,7 @@ const Historique = () => {
 
     const deconnexion = () => {
 		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
+			setLoginStatus(false);			
 		});
 	}
 
