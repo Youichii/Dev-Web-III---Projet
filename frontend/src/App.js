@@ -13,7 +13,8 @@ import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
 import Historique from './Historique';
-import Modification from './Modification'
+import Modification from './Modification';
+import Cookie from './Cookies';
 
 function App() {
   return (
@@ -79,6 +80,10 @@ function App() {
             
             <Route exact path="/Historique"> 
               <Historique/>
+            </Route>
+
+            <Route exact path="/Cookie"> 
+              <Cookie/>
             </Route>
 
           </Switch>
