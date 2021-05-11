@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import BoutonCommunautee from './components/BoutonCommunautee'; 
+import React from 'react';
 const Communaute = () => {
     require("./communaute.css")
     let [utilisateurs, setUtilisateurs] = useState(null)
@@ -19,13 +20,11 @@ const Communaute = () => {
         }
         fetch('http://localhost:3001/users', remplirCommunaute)
         .then(response =>{
-            console.log("coucou : ", response)
             return response.json()
-
         })
-        .then(json =>{
-            console.log(json)
-            setUtilisateurs(json)
+        .then(coucou =>{
+            console.log(typeof coucou.map(x=> x))
+            setUtilisateurs(coucou)
         })
 
         // GET qui récupère une version sans doublons des villes 

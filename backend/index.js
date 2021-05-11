@@ -278,7 +278,6 @@ app.delete('/comment', (req, res) => {
   
 })
 
-
 // requête PUT pour UPDATE le satus d'un client
 app.put('/status', (req, res) =>{
     const Status = req.body.Status
@@ -291,6 +290,29 @@ app.put('/status', (req, res) =>{
       if(err) throw err; 
       res.send(result); 
     })
+})
+
+// Requête GET pour ramener les Nom sans doublons. 
+app.get('/filterNom', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+//  Requête GET pour ramener les Villes sans doublons.
+app.get('/filterVille', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
 })
 
 // Requête GET pour trier le contenu de la communauté sur base de la ville 
@@ -332,11 +354,12 @@ app.get('/usersnom/:nom', (req,res) =>{
   })
 })
 
+
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du status 
 app.get('/userstrie1/:ville/:status', (req, res) =>{
    
-  const Status = req.params.valueStatus
-  const Ville = req.params.valueVille
+  const Status = req.params.status
+  const Ville = req.params.ville
    
   const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ?  "
  
@@ -353,7 +376,7 @@ app.get('/userstrie1/:status/:nom', (req, res) =>{
   const Status = req.params.valueStatus
   const Nom = req.params.valueNom
   
-  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Nom` = ? "
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? and `Nom` = ? "
  
   db.query(sqlInsert,[Status, Nom],(err, result) => {
       if(err) throw err ;
@@ -391,6 +414,7 @@ app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{
         res.send(result);
     })
 })
+
 
 
 
