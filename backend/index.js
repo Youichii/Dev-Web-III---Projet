@@ -621,7 +621,6 @@ app.get('/loadingBasket', (req, res) =>{
 
 
 
-
 /*API mail*/
 //Envoi d'un mail pour valider la commande du panier
 let transporter = nodemailer.createTransport({
