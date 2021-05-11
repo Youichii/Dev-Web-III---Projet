@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'benton-sans';
+    src: url('./img/BentonSans-Comp-Black-Regular.otf');
+}
+
+.footer {
+    display: grid;
+	grid-template-columns: 34.5% 31% 34.5%;
+    grid-template-rows: auto;
+	grid-gap: 2px;
+	padding: 5px;
+
+    height: 150px;
+    background-color: black;
+}
+.regles_legales {
+    grid-column-start: 1;
+	grid-column-end: 2;
+
+    display: grid;
+	grid-template-columns: auto;
+    grid-template-rows: 24% 17% 17% 17% 17% 5%;
+    grid-gap: 2px;
+    padding: 13px 5px 5px 30px;
+    color: white;
+    font-family:"Lucida Sans", sans-serif;
+}
+.titre_mention {
+    grid-row-start: 1;
+	grid-row-end: 2;
+}
+.mentions_legales {
+    grid-row-start: 2;
+	grid-row-end: 3;
+    font-size: 14px;
+}
+.confidentialite {
+    grid-row-start: 3;
+	grid-row-end: 4;
+    font-size: 14px;
+}
+.cookies {
+    grid-row-start: 4;
+	grid-row-end: 5;
+    font-size: 14px;
+}
+.cgu {
+    grid-row-start: 5;
+	grid-row-end: 6;
+    font-size: 14px;
+}
+
+.regles_legales a:link {
+	color:white;
+	text-decoration:none;
+} 
+.regles_legales a:visited {
+	color: white;
+	text-decoration:none; 
+} 
+.regles_legales a:hover {
+	color: white;
+	text-decoration:none; 
+}
+.regles_legales a:active {
+	color:white;
+}
+
+.aide {
+    grid-column-start: 2;
+	grid-column-end: 3;
+    color: white;
+}

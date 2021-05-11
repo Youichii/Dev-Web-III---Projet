@@ -12,6 +12,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Historique from './Historique';
 import Modification from './Modification'
 import Stat from './Stat';
+import Cookie from './Cookies';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -68,8 +70,12 @@ function App() {
               <Historique/>
             </Route>    
 
+            <Route exact path="/Cookie"> 
+              <Cookie/>
+            </Route>
           </Switch>
         </div>
+        <Footer />
       </div>
     </Router>
   );

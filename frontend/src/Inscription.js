@@ -196,15 +196,17 @@ const Inscription = () => {
 	}
 
 	const inscrire = () => {
+		if (document.getElementById("politique_user").checked) {
+			document.getElementById("politique_erreur").innerHTML = "";
 
-		if (verification_valeurs()) {
-			var radios = document.getElementsByName('myradio');
-			var valeur;
-			for(var i = 0; i < radios.length; i++){
-				if(radios[i].checked){
-				valeur = radios[i].value;
+			if (verification_valeurs()) {
+				var radios = document.getElementsByName('myradio');
+				var valeur;
+				for(var i = 0; i < radios.length; i++){
+					if(radios[i].checked){
+					valeur = radios[i].value;
+					}
 				}
-			}
 
 			var jour = document.getElementById('selection_jour').selectedIndex;
 			var mois = document.getElementById('selection_mois').selectedIndex;
@@ -253,8 +255,24 @@ const Inscription = () => {
 					});
 				}
 			})
+		}				
+		else {
+			document.getElementById("politique_erreur").innerHTML = "Ce champ est obligatoire";
 		}
     }
+
+	const pol_confidentialite = () => {
+		if (document.getElementById("politique_user").checked) {
+			document.getElementById("bouton_inscription_envoi").style.cursor = "pointer";
+			document.getElementById("bouton_inscription_envoi").classList.remove("bouton_bloque");
+			document.getElementById("bouton_inscription_envoi").classList.add("bouton_ouvert");
+		}
+		else {
+			document.getElementById("bouton_inscription_envoi").style.cursor = "default";
+			document.getElementById("bouton_inscription_envoi").classList.add("bouton_bloque");
+			document.getElementById("bouton_inscription_envoi").classList.remove("bouton_ouvert");
+		}
+	}
 
     return (
 		<div>
@@ -316,39 +334,44 @@ const Inscription = () => {
 							<div className="message_erreur" id="erreur_sexe"></div>
 						</div>
 					
-						<div className="i_titre_telephone pol">TELEPHONE</div>
-						<InputInformations className_div="i_champ_telephone" id_input="telephone_user" id_span="erreur_telephone" maxLenght="100"/>
-					
-						<div className="i_titre_mail pol">ADRESSE E-MAIL</div>
-						<InputInformations className_div="i_champ_mail" id_input="mail_user" id_span="erreur_mail" maxLenght="100"/>
-					
-						<div className="i_titre_mdp_insc pol">MOT DE PASSE</div>
-						<InputInformations className_div="i_champ_mdp_insc" type="password" id_input="mdp_user" id_span="erreur_mdp" maxLenght="100"/>
-					
-						<div className="i_champ_newsletter">
-							<input type="checkbox" id="newsletter_user" required /><span className="pol"> Je souhaite m'abonner à la newsletter</span>
-						</div>
-					
-						<div className="i_champ_politique">
-							<input type="checkbox" id="politique_user" required /><span className="pol"> J'accepte les termes et conditions & politique de confidentialité</span>
-						</div>
-					
-						<div className="i_titre_captcha pol">CAPTCHA</div>
-						<div className="i_champ_captcha">
-							<input type="text" id="captcha_user" required />
-						</div>
-
-						<div className="message_erreur" id="erreur_inscription"></div>
+					<div className="i_titre_sexe pol">SEXE</div>
+					<div className="i_champ_sexe">
+						<BoutonRadio id_div="radio_femme" name="myradio" value="f" form="sexef_user" text=" FEMME" checked="yes" />
+						<BoutonRadio id_div="radio_homme" name="myradio" value="h" form="sexeh_user" text=" HOMME" />
+						<div className="message_erreur" id="erreur_sexe"></div>
+					</div>
+				
+					<div className="i_titre_telephone pol">TELEPHONE</div>
+					<InputInformations className_div="i_champ_telephone" id_input="telephone_user" id_span="erreur_telephone" maxLenght="100"/>
+				
+					<div className="i_titre_mail pol">ADRESSE E-MAIL</div>
+					<InputInformations className_div="i_champ_mail" id_input="mail_user" id_span="erreur_mail" maxLenght="100"/>
+				
+					<div className="i_titre_mdp_insc pol">MOT DE PASSE</div>
+					<InputInformations className_div="i_champ_mdp_insc" type="password" id_input="mdp_user" id_span="erreur_mdp" maxLenght="100"/>
+				
+					<div className="i_champ_newsletter">
+						<input type="checkbox" id="newsletter_user" required /><span className="pol"> Je souhaite m'abonner à la newsletter</span>
+					</div>
+				
+					<div className="i_champ_politique">
+						<input type="checkbox" id="politique_user" required onClick={pol_confidentialite}/><span className="pol"> J'accepte les <a href="https://www.privacypolicies.com/live/3ed9c526-0710-45e2-9a58-ec772750de85">termes et conditions</a> & <a href="https://www.privacypolicies.com/live/5b2841b7-4ad5-46a7-ac31-25ea7960e6f3">politique de confidentialité</a></span>
 					</div>
 
 					<div className="i_bouton_envoi_insc">
 							<input id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
 					</div>
+					<div className='message_erreur politique_erreur' id="politique_erreur"></div>
+				
+				</div>
 
+				<div className="i_bouton_envoi_insc">
+						<input className="bouton_bloque" id="bouton_inscription_envoi" type="button" value="S'INSCRIRE" onClick={inscrire} />
 				</div>
 			</div>
 		</div>
+	</div>
     );
-}
+}}
 
 export default Inscription;
