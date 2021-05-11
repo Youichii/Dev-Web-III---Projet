@@ -99,3 +99,21 @@ div.dd-wraper-2 p {
 div.dd-wraper-2 button {
     display: inline-block;
 }
+
+div.dd-wraper-3 {
+    font-size: calc(0.2em + 1vw);
+    margin: 1%;
+    padding : 1%;
+    font-weight: 800;
+    border : 1px solid black;
+    background-image: url("./img/poulet.jpg");
+    background-size: cover;
+    border-radius: 100px;
+    text-align: center;
+}
+
+input.Delete {
+    width: fit-content;
+    background-color: black;
+    color: white;
+}

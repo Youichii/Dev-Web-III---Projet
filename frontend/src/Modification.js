@@ -13,14 +13,28 @@ const Modification = () => {
     const [Vendredi, setVendredi] = useState(null)
     const [Samedi, setSamedi] = useState(null)
     const [Dimanche, setDimanche] = useState(null)
+
     const [horairesList, setHorairesList] = useState([]);
+
     const [coordonneesList, setCoordonneesList] = useState([]);
+
     const [mailRest, setMailRest] = useState("");
+
     const [telRest, setTelRest] = useState("");
+
     const [streetRest, setStreetRest] = useState('');
     const [zipCodeRest, setZipRest] = useState('');
     const [cityRest, setCityRest] = useState('');
     const [numberRest, setNumberRest] = useState('');
+
+    const [titres, setTitres] = useState([]);
+    const [contenu, setContenu]= useState([]);
+
+    const [categorie, setCategorie] = useState("blank");
+    const [prix, setPrix] = useState("");
+    const [description, setDescription] = useState("");
+    const [produit, setProduit] = useState("");
+
     //const [mapRest, setMapRest] = useState(''); 
 
     const getHoraires = () => {
@@ -29,8 +43,22 @@ const Modification = () => {
         })
     }
 
+    const getCategorie =() => {
+        Axios.get('http://localhost:3001/categories').then((response) =>{
+            setTitres(response.data)
+        })
+    }
+
+    const getMenu =() => {
+        Axios.get('http://localhost:3001/menu').then((response) =>{
+            setContenu(response.data)
+        })
+    }
+
     const getCoordonnees = () => {
         getHoraires();
+        getCategorie();
+        getMenu();
         Axios.get('http://localhost:3001/api/coordonnees').then((response) => {
            setCoordonneesList(response.data)
        })
@@ -54,6 +82,23 @@ const Modification = () => {
                 window.alert("Ce numéro de téléphone existe déjà !")
             }
         })
+    }
+
+    const submitMenu = () => {
+        if(categorie !== ""){
+            Axios.post('http://localhost:3001/api/menu', {
+                categorie : categorie,
+                produit : produit,
+                prix : prix,
+                description : description,
+            }).then((response) => {
+                if (response) {
+                    window.alert("Veuillez spécifier la catégorie du produit")
+                }
+
+            })
+        }
+        else window.alert("Veuillez spécifier la catégorie du produit")
     }
 
     /*const submitMapRest = () => {
@@ -230,7 +275,7 @@ const Modification = () => {
                         {coordonneesList.map((val) => {return <p>{val.Gsm}</p>})}
                         <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelRest}/>
                         <Button />
-                    </form>
+                    </form><br /><br />
                     
                     <form onSubmit={submitAdressRest}>
                         {coordonneesList.map((val) => {return <p>{val.Rue}</p>})}
@@ -247,6 +292,44 @@ const Modification = () => {
                     
 
             } />
+            <Dropdown title="Menu" className="dd-wraper-3" content={
+                <div id = 'bordPrincipal'>
+                {titres&&titres.map(titre => (
+                    <fieldset className="cadre">
+                        <details>
+                            <summary className="titre" key = {titre.NomCategorie}> {titre.NomCategorie} </summary>
+                            {contenu && contenu.filter(contenus => contenus.IdCategorie === titre.NomCategorie.slice(0,3)).map(contenu_filtre => (
+                                <div> 
+                                    <div className="haut">
+                                        <span className="contenu">{contenu_filtre.Produit}</span>
+                                        <span className="price">{contenu_filtre.Prix.toFixed(2) + "€" }</span>
+                                    </div>
+                                    <div className="bas">  
+                                        <span className="description">{contenu_filtre.Description}</span>  
+                                    </div>
+                    
+                                    
+                                </div>
+                            ))}
+                            <form onSubmit={submitMenu}>
+                                <select onChange={(e) => {
+                                    setCategorie(e.target.value)}} name="categorie">
+                                    <option value="blank"></option>
+                                    <option value={titre.IdCategorie}>{titre.NomCategorie}</option>
+                                </select>
+                                <Input placeholder="Produit" setFunc={setProduit}/>
+                                <Input type="number" min="0.00" max="999.99" step="0.01" placeholder="Prix" setFunc={setPrix}/>
+                                <Input min="0" placeholder="Description" setFunc={setDescription}/>
+                                <Button text="+"/>
+                            </form>
+
+                        </details>
+                        
+                    </fieldset>
+                    
+                ))}   
+            </div>
+            }/>
         </div>
     )    
 }
