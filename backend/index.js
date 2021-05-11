@@ -94,6 +94,7 @@ app.get('/api/coord/horaires', (req,res) => {
 })
 
 app.put('/api/coord/horaires', (req,res) => {
+  console.log("getting request")
   const lundi = req.body.Lundi
   const mardi = req.body.Mardi
   const mercredi = req.body.Mercredi
