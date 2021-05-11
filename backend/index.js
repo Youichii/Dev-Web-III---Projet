@@ -563,7 +563,7 @@ app.get('/api/age-stat', (req, res)=>{
 })
 
 app.get('/api/avis', (req, res)=>{
-  const sqlGet="SELECT Avis, idClients from Avis";
+  const sqlGet="SELECT Avis, IdClient from Avis";
   db.query(sqlGet, (err, result)=>{
     res.send(result)
     console.log(result)

@@ -19,8 +19,7 @@ const Home = () => {
 
     const AfficherAvis = ()=>{
         Axios.get("http://localhost:3001/api/avis").then((response)=>{
-            setDataAvis(response.data)
-            
+            setDataAvis(response.data)            
         })
     }
 
@@ -42,7 +41,7 @@ const Home = () => {
                 {dataAvis.map((val)=>{
                     return(
                         <>
-                            <h2>{val.idClients}</h2>
+                            <h2>{val.IdClient}</h2>
                             <p>{val.Avis}</p>
                             
                         </>

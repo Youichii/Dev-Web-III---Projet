@@ -19,6 +19,7 @@ function App() {
       <div className="App">
         <div className="content">
           <Switch>
+
             <Route exact path="/">
               <Home />
             </Route>
@@ -45,10 +46,6 @@ function App() {
 
             <Route exact path="/connexion">
               <Connexion />
-            </Route>
-
-            <Route exact path="/Communaute">
-              <Communaute />
             </Route>
             
             <Route exact path="/stat" > 
