@@ -140,6 +140,20 @@ app.put('/api/coord/address', (req, res) => {
   })
 })
 
+app.post('/api/menu',(req, res) => {
+  const categorie = req.body.categorie
+  const produit = req.body.produit
+  const prix = req.body.prix
+  const description = req.body.description
+  const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
+  db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
+    if(err){
+      res.send(err)
+      console.log(err)
+    }
+  })
+})
+
 // Informations
 
 app.get('/api/coordonnees', (req,res) => {
@@ -559,7 +573,7 @@ app.get('/menu', (req, res) =>{
 
 // requête GET dans la table categories pour importer toutes les catégories de menu. 
 app.get('/categories', (req, res) =>{
-  db.query('select NomCategorie FROM categories ', (err, result) => {
+  db.query('select * FROM categories ', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
