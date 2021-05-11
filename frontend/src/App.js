@@ -1,5 +1,4 @@
 import React from 'react'
-import Banner from './Banner';
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
@@ -19,7 +18,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Banner />
         <div className="content">
           <Switch>
             <Route exact path="/">
@@ -55,10 +53,6 @@ function App() {
             </Route>
 
             <Route exact path="/Communaute">
-              <Communaute />
-            </Route>
-
-            <Route exact path="/Carte">
               <Communaute />
             </Route>
 

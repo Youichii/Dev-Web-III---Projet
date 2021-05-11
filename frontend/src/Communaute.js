@@ -1,7 +1,12 @@
 import {useEffect, useState} from 'react';
+import Axios from "axios";
+import Banner from './Banner.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Communaute = () => {
     require("./communaute.css")
+    Axios.defaults.withCredentials = true;
+
     let [utilisateurs, setUtilisateurs] = useState(null)
     let[commentaires, setCommentaires] = useState(null)
     let [bis, setBis] = useState(null)
@@ -9,8 +14,29 @@ const Communaute = () => {
     // let user2 = []
     // let [filtreVille , setFiltreVille]= useState(null)
     var user = []
-  
-    
+
+    const [loginStatus, setLoginStatus] = useState(false);
+	const [username, setUsername] = useState("");
+
+    useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
+			if (response.data.loggedIn === true) {
+				setLoginStatus(true);
+				setUsername(response.data.user[0].IdClient);
+			}
+			else {
+				setLoginStatus(false);
+			}
+		});
+	}, []); 
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}    
 
     useEffect(()=>{
 
@@ -299,7 +325,7 @@ const Communaute = () => {
     return(
 
         <div>
-       
+            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <fieldset id = "recherche">
 
                 <select id="selectVille" onChange={()=>Trie()}>
