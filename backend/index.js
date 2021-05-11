@@ -808,3 +808,63 @@ app.post('/apitest/intermediateBasket', (req, res) => {
     })
   });
 })
+
+
+//----------API NEWSLETTER------------------
+
+let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth:{
+        user: "nozak001@gmail.com",
+        pass:"hellodev0"
+    }
+});
+
+transporter.verify((err, success)=>{
+    err? console.log (err)
+    : console.log(`=====Pret à envoyé des mail: ${success}======`);
+});
+
+//faire passer les options au transporter et pouvoir enfaire des requêtes
+
+app.post("/envoye", function (req, res){
+    const listMail = [];
+
+    const sqlGet = "SELECT Prenom,  Mail FROM Clients";
+    db.query(sqlGet, (err, result)=>{
+        res.send(result);
+        result.forEach(Clients => {
+            listMail.push(Clients.Mail);
+            clientPrenom = Clients.Prenom;
+            return listMail, clientPrenom;
+            
+            
+        })
+
+    });
+
+    let mailOptions ={
+        from: "Chick'N'Fish nozak001@gmail.com",
+        to: listMail,
+        subject:`${req.body.emailer.subject}` ,
+        html:`<html>
+                <body>
+                    <h1>Comment vas-tu aujourd'hui ?</h1>
+                    <p> ${req.body.emailer.corps}</p>
+                    <h2>${req.body.emailer.message}</h2>
+                </body>`
+    };
+
+
+    transporter.sendMail(mailOptions, function (err, data){
+        if (err) {
+            res.json({
+                status:"fail"
+            });
+        }else {
+            console.log ("=====Email envoyé avec succes !===== ");
+            res.json ({status: "Email envoyé"});
+
+        }
+    }); 
+});
