@@ -479,21 +479,20 @@ app.put('/changingquantity', (req, res) =>{
 
 app.get('/historical', (req, res) =>{
 
-  const IdCommande = req.params.id_comm
-
-  const sqlInsert = 'select * FROM reservations WHERE `idEtat` = "H"'
-  db.query(sqlInsert,[IdCommande], (err, result) => {
+  const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
+  
+  db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
 
-app.get('/historical', (req, res) =>{
 
-  const IdCommande = req.params.id_comm
+// Get qui va chercher une liste sans doublons de toutes les années d'historiques 
+app.get('/year', (req, res) =>{
 
-  const sqlInsert = 'select DateCommande FROM reservations WHERE `idEtat` = "H"'
-  db.query(sqlInsert,[IdCommande], (err, result) => {
+  const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
+  db.query(sqlInsert,['H'], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
