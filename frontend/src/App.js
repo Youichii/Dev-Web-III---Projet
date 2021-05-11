@@ -13,6 +13,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Chart from './components/Chart';
 import Historique from './Historique';
 import Modification from './Modification'
+import Stat from './Stat';
 
 function App() {
   return (
@@ -48,12 +49,12 @@ function App() {
               <Connexion />
             </Route>
 
-            <Route exact path="/stat" component={Chart} >
-              <Chart />
-            </Route>
-
             <Route exact path="/Communaute">
               <Communaute />
+            </Route>
+            
+            <Route exact path="/stat" > 
+              <Stat/>
             </Route>
 
             <Route exact path="/inscription"> 

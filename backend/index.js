@@ -527,6 +527,40 @@ app.get('/userstrie1/:status/:nom', (req, res) =>{
   })
 })
 
+// NOELLE API
+
+app.get('/api/users', (req, res)=>{
+  const sqlSelect = "SELECT * FROM Clients";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+
+  });
+});
+
+app.get('/api/genre-stat', (req, res)=>{
+  const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+});
+
+app.get('/api/localisation-stat', (req, res)=>{
+  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+});
+
+app.get('/api/age-stat', (req, res)=>{
+  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+  db.query(sqlSelect,(err, result)=>{
+      res.send(result);
+      console.log(result)
+  })
+})
 
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du nom 
 app.get('/userstrie1/:ville/:nom', (req, res) =>{
