@@ -1,19 +1,18 @@
 import {useEffect, useState} from 'react';
-
+import BoutonCommunautee from './components/BoutonCommunautee/BoutonCommunautee'; 
 const Communaute = () => {
     require("./communaute.css")
     let [utilisateurs, setUtilisateurs] = useState(null)
     let[commentaires, setCommentaires] = useState(null)
-    let [bis, setBis] = useState(null)
-    // let [filtreStatus, setFiltreStatus]= useState(null)
-    // let user2 = []
-    // let [filtreVille , setFiltreVille]= useState(null)
-    // let user = []
+    let [nom, setNom] = useState(null)
+    let [ville, setVille] = useState(null)
+
+
   
     
 
     useEffect(()=>{
-
+        
         // GET qui va chercher tous les profil de la communauté
         var remplirCommunaute = {method : 'GET',
         headers:{'Content-type':'application/json'}
@@ -24,14 +23,37 @@ const Communaute = () => {
         })
         .then(json =>{
             setUtilisateurs(json)
-            setBis(json)
         })
 
-        // GET qui va chercher tous les commentaires du patron sur la communauté
+        // GET qui récupère une version sans doublons des villes 
+        var remplirVille = {method : 'GET',
+        headers:{'Content-type':'application/json'}
+        }
+        fetch('http://localhost:3001/filterVille', remplirVille)
+        .then(response =>{
+            return response.json()
+        })
+        .then(json =>{
+            setVille(json)
+        })
+
+        // GET qui récupère une version sans doublons des nom
+        var remplirNom = {method : 'GET',
+        headers:{'Content-type':'application/json'}
+        }
+        fetch('http://localhost:3001/filterNom', remplirNom)
+        .then(response =>{
+            return response.json()
+        })
+        .then(json =>{
+            setNom(json)
+        })
+
+        // GET qui récupère le contenu de commentaires 
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comments', remplirCommentaire)
+        fetch('http://localhost:3001/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -61,7 +83,7 @@ const Communaute = () => {
             //Update le status du client dans la base de donnée. 
             retournerStatus = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ Status: "De-Blacklister" , Couleur: "red", Identifiant:id})
+            body: JSON.stringify({ Status: 1 , IdClient:id})
             
             }
             fetch('http://localhost:3001/status', retournerStatus)
@@ -80,7 +102,7 @@ const Communaute = () => {
             //Update le status du client dans la base de donnée. 
             retournerStatus = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ Status: "Blacklister" , Couleur: "white", Identifiant:id})
+            body: JSON.stringify({ Status: 0, IdClient:id})
             }
             fetch('http://localhost:3001/status', retournerStatus)
             .then(res => {
@@ -90,14 +112,17 @@ const Communaute = () => {
     }
 
     //Fonctionnelle 
-    function supprimer(id) {
+    function supprimer(commentaire, id) {
 
+       
         // DELETE le commentaire de la table 
         var supprimerCommentaire = { method : 'DELETE',
         headers : {'Content-Type':'application/json'},
-        body: JSON.stringify({IdCommentaire : id})
+        body: JSON.stringify({  IdClient: id, 
+                                Commentaire:commentaire
+        })
         }
-        fetch('http://localhost:3001/commentaire', supprimerCommentaire)
+        fetch('http://localhost:3001/comment', supprimerCommentaire)
             .then(response => {
                 return response.json();
             }) 
@@ -106,7 +131,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comments', remplirCommentaire)
+        fetch('http://localhost:3001/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -120,6 +145,7 @@ const Communaute = () => {
         
         // Récupérer la valeur du commentaire 
         let comment = document.getElementById("text"+id).value
+        console.log(comment)
         
         // Empêcher l'envoie d'un commentaire vide
         if (comment === ""){
@@ -129,9 +155,8 @@ const Communaute = () => {
         // POST qui ajoute le commentaire dans la base de donnée
         var retournerCommentaire = { method:'POST', 
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({  IdUtilisateur :id,
-                                Commentaire : comment,
-                                IdCommentaire :comment+id , 
+        body: JSON.stringify({  IdClient  :id,
+                                Commentaire : comment
                             })
         }
         fetch('http://localhost:3001/comment', retournerCommentaire)
@@ -147,7 +172,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comments', remplirCommentaire)
+        fetch('http://localhost:3001/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -181,7 +206,7 @@ const Communaute = () => {
             })
         }
     
-        else if(valueStatus === '' && valueVille !== '' && valueNom === ''){
+        else if(valueVille !== '' && valueStatus === '' && valueNom === ''){
 
             // GET qui va chercher les profils sur base de la ville selectionné  
             var remplirCommunauteVille = {method : 'GET',
@@ -198,6 +223,13 @@ const Communaute = () => {
 
         else if (valueVille === '' && valueStatus !== '' && valueNom === ''){
 
+            if(valueStatus === "Blacklisté"){
+                valueStatus=1
+            }
+            else{
+                valueStatus=0
+            }
+
             // GET qui va chercher les profils sur base du status slesctionné 
             var remplirCommunauteStatus = {method : 'GET',
             headers:{'Content-type':'application/json'}
@@ -213,7 +245,7 @@ const Communaute = () => {
         }
 
         else if (valueVille === '' && valueStatus === '' && valueNom !== ''){
-
+            
             // GET qui va chercher les profils sur base du nom selectionné 
             var remplirCommunauteNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
@@ -226,20 +258,62 @@ const Communaute = () => {
                 setUtilisateurs(json)
             })
         }
-        
-        else{
-            //  Ne fonctionne pas 
-            var remplirCommunauteStatusVille = {method : 'GET',
+
+        else if(valueVille !== '' && valueStatus !== '' && valueNom === ''){
+
+            if(valueStatus === "Blacklisté"){
+                valueStatus=1
+            }
+            else{
+                valueStatus=0
+            }
+
+            var remplirCommunauteVilleStatus = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/userstrie1/${valueStatus}/${valueVille}/${valueNom}`, remplirCommunauteStatusVille)
-            .then(response =>{
+            fetch(`http://localhost:3001/userVilleStatus/${valueVille}/${valueStatus}`, remplirCommunauteVilleStatus)
+            .then(response=>{
                 return response.json()
             })
             .then(json =>{
                 setUtilisateurs(json)
             })
         }
+
+        else if(valueVille === '' && valueStatus !== '' && valueNom !== ''){
+
+            if(valueStatus === "Blacklisté"){
+                valueStatus=1
+            }
+            else{
+                valueStatus=0
+            }
+
+            var remplirCommunauteStatusNom = {method : 'GET',    
+            headers:{'Content-type':'application/json'}
+            }
+            fetch(`http://localhost:3001/userStatusNom/${valueStatus}/${valueNom}`, remplirCommunauteStatusNom)
+            .then(response=>{
+                return response.json()
+            })
+            .then(json =>{
+                setUtilisateurs(json)
+            })
+        }
+
+        else if(valueVille !== '' && valueStatus === '' && valueNom !== ''){
+            var remplirCommunauteVilleNom = {method : 'GET',    
+            headers:{'Content-type':'application/json'}
+            }
+            fetch(`http://localhost:3001/userVilleNom/${valueVille}/${valueNom}`, remplirCommunauteVilleNom)
+            .then(response=>{
+                return response.json()
+            })
+            .then(json =>{
+                setUtilisateurs(json)
+            })
+        }
+       
 
         
     }
@@ -254,24 +328,26 @@ const Communaute = () => {
 
                     <option value=''>--Selectionnez un ville--</option>
 
-                    {bis&&bis.map(utilisateur => 
+                    {ville&&ville.map(utilisateur => 
+                       
                         <option>{utilisateur.Ville}</option>
+                        
                     )}
-
+    
                 </select>
                 
                 <select id="selectStatus" onChange={()=>Trie()}>
 
                     <option value=''>--Selectionnez un status--</option>
-                    <option>De-Blacklister</option>
-                    <option>Blacklister</option>
+                    <option>Non-Blacklisté</option>
+                    <option>Blacklisté</option>
                                 
                 </select>
 
                 <select id="selectName" onChange={()=>Trie()}>
                     
                     <option value=''>--Selectionnez un Nom--</option>
-                    {bis&&bis.map(utilisateur => 
+                    {nom&&nom.map(utilisateur => 
                         <option>{utilisateur.Nom}</option>
                     )}
                                 
@@ -286,40 +362,35 @@ const Communaute = () => {
 
                     <div  className = "coordonnes">
 
-                        <div className="utilisateur" style={{color:utilisateur.Couleur}} id={utilisateur.Identifiant+"utilisateur"} >{utilisateur.Prenom} {utilisateur.Nom}</div>
-
-                        <button className = "blacklist" id={"blacklist" + utilisateur.Identifiant}  onClick={() => changerCouleur(utilisateur.Identifiant)}>{utilisateur.Status}</button>
-
+                        <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Status === 1)?{color:"red"}:{color:"white"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
+                    
+                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')}/>
+                        
                         <div className="mail">{utilisateur.Mail}</div>
 
-                        <div className="tel">{utilisateur.Tel}</div>
+                        <div className="tel">{utilisateur.Gsm}</div>
 
                         <div className="ville">{utilisateur.Ville}</div>
 
-                        <div className="age">{utilisateur.DateNaissance}</div>
+                        <div className="age">{utilisateur.Anniversaire}</div>
 
-                        <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.Identifiant} ></input>
+                        <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.IdClient} ></input>
 
-                        <button className="envoyer" id = {"envoyer" + utilisateur.Identifiant} onClick={() => ecrire(utilisateur.Identifiant)} > Envoyer</button>
+                        
+                        <BoutonCommunautee className='envoyer' id ={'envoyer'+ utilisateur.IdClient} onClick={() => ecrire(utilisateur.IdClient)} value='Envoyer'/>
 
-                        <div className ='commentaire' id={utilisateur.Identifiant+"commentaire"}> 
+                        <div id={utilisateur.IdClient+"commentaire"} className ='com'> 
 
-                            {commentaires&&commentaires.filter(commentaire =>  commentaire.IdUtilisateur === utilisateur.Identifiant).map(commentaire_id => (
-                                <div id = {commentaire_id.IdUtilisateur} > -  {commentaire_id.Commentaire}<button className='boutton_supprimer' onClick={() => supprimer(commentaire_id.IdCommentaire)}>X</button></div>
+                            {commentaires&&commentaires.filter(commentaire =>  commentaire.IdClient === utilisateur.IdClient).map(commentaire_id => (
+                                <div id = {commentaire_id.Commentaire + commentaire_id.IdClient} > -  {commentaire_id.Commentaire} <BoutonCommunautee className='boutton_supprimer' onClick={() => supprimer(commentaire_id.Commentaire, commentaire_id.IdClient)} value='X'/></div>
                             ))}   
                             
                         </div>
-
                     </div>
-           
                 ))}
             </div>
-
-        </div>
-            
+        </div>       
     )
-
-
 }
 
 export default Communaute; 
