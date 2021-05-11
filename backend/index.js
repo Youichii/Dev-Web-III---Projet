@@ -622,70 +622,80 @@ app.get('/loadingBasket', (req, res) =>{
 /*------------------------- API TEST AURÉ ------------------------------- */
 //Profil Privé
 
-app.get('/apitest/client/:clientName', (req,res) => {
-  const name = req.params.clientName
-  const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
-  db.query(sqlGet, name ,(err, result) => {
-    console.log(result)
-    res.send(result)
+app.get('/apitest/client/:IdClient', (req,res) => {
+  const IdClient = req.params.IdClient
+  const sqlGet = "SELECT `Pseudo`,`Nom`,`Prenom`,`Rue`,`Numero`,`Zip`,`Ville`,`Anniversaire`,`Gsm`,`Mail`,`Genre`,`Status` FROM `clients` WHERE `IdClient` = ?"
+  db_test.query(sqlGet, IdClient ,(err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
 app.put('/apitest/client/mail', (req, res) => {  
-  const clientName = req.body.clientName
+  const IdClient = req.body.IdClient
   const mail = req.body.mail
   console.log(mail)
   const sqlInsert = "UPDATE `clients` SET `Mail` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [mail, clientName], (err, result) => {
-      if(err){
+  db_test.query(sqlInsert, [mail, IdClient], (err, result) => {
+    if(err){
       res.send(err)
     }
+    else res.send(result)
   })
 })
 
 app.put('/apitest/client/phone', (req, res) => {  
-  const clientName = req.body.clientName
+  const IdClient = req.body.IdClient
   const phone= req.body.phone
   const sqlInsert = "UPDATE `clients` SET `Gsm` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [phone, clientName], (err, result) => {
+  db_test.query(sqlInsert, [phone, IdClient], (err, result) => {
     if(err){
       res.send(err)
     }
+    else res.send(result)
   })
 })
 
 app.put('/apitest/client/username', (req, res) => {  
   const username = req.body.username
-  const clientName = req.body.clientName  //to take the variable from the html page
+  const IdClient = req.body.IdClient  //to take the variable from the html page
   const sqlInsert = "UPDATE `clients` SET `Pseudo` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [username, clientName], (err, result) => {
+  db_test.query(sqlInsert, [username, IdClient], (err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result) 
   })
 })
 
 app.put('/apitest/client/adress', (req, res) => {
-  const clientName = req.body.clientName  
+  const IdClient = req.body.IdClient  
   const street = req.body.street
   const number = req.body.number 
   const zipCode = req.body.zipCode
   const city = req.body.city
-  console.log(clientName, street, number, zipCode, city)
   const sqlInsert = "UPDATE `clients` SET `Rue` = ?, `Numero` = ?, `Zip` = ?, `Ville` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [street, number, zipCode, city, clientName], (err, result) => {
+  db_test.query(sqlInsert, [street, number, zipCode, city, IdClient], (err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
 
 //Modification des informations
 
-app.get('/apitest/coord/horaires', (req,res) => {
-  const sqlGet = "SELECT * FROM `horaires`"
-  db.query(sqlGet,(err, result) => {
+app.get('/apitest/coord/horaires', (req, res) => {
+  const sqlGet = "SELECT * FROM `horaires` WHERE 1"
+  db_test.query(sqlGet,(err, result) => {
     res.send(result)
   })
 })
 
 app.put('/apitest/coord/horaires', (req,res) => {
-  console.log("getting request")
   const lundi = req.body.Lundi
   const mardi = req.body.Mardi
   const mercredi = req.body.Mercredi
@@ -694,7 +704,11 @@ app.put('/apitest/coord/horaires', (req,res) => {
   const samedi = req.body.Samedi
   const dimanche = req.body.Dimanche
   const sqlGet = "UPDATE `horaires` SET `Lundi` = COALESCE(?, `Lundi`), `Mardi` = COALESCE(?, `Mardi`), `Mercredi` = COALESCE(?,`Mercredi`), `Jeudi` = COALESCE(?, `Jeudi`), `Vendredi` = COALESCE(?, `Vendredi`), `Samedi` = COALESCE(?, `Samedi`), `Dimanche`= COALESCE(?, `Dimanche`) WHERE `horaires`.`IdHoraire` = 1;"
-  db.query(sqlGet, [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche], (err, result) => {
+  db_test.query(sqlGet, [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche], (err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
   
 })
@@ -702,15 +716,22 @@ app.put('/apitest/coord/horaires', (req,res) => {
 app.put('/apitest/coord/mail', (req,res) => {
   const mailRest = req.body.mailRest
   const sqlGet = "UPDATE `coordonnees` SET `Mail` = ? WHERE `coordonnees`.`IdRest` = 1;"
-  db.query(sqlGet, mailRest, (err,result) => {
-    console.log(err)
+  db_test.query(sqlGet, mailRest, (err,result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
 app.put('/apitest/coord/tel', (req, res) => {
   const telRest = req.body.telRest
   const sqlGet = "UPDATE `coordonnees` SET `Gsm` = ? WHERE `coordonnees`.`IdRest` = 1;"
-  db.query(sqlGet, telRest, (err,result) => {
+  db_test.query(sqlGet, telRest, (err,result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
@@ -720,8 +741,11 @@ app.put('/apitest/coord/address', (req, res) => {
   const zipCodeRest = req.body.zipCodeRest
   const cityRest = req.body.cityRest
   const sqlGet = "UPDATE `coordonnees` SET `Rue` = ?, `Numero` = ?, `Zip` = ?, `Ville` = ? WHERE `coordonnees`.`IdRest` = 1;"
-  db.query(sqlGet, [streetRest, numberRest, zipCodeRest, cityRest], (err, result) => {
-
+  db_test.query(sqlGet, [streetRest, numberRest, zipCodeRest, cityRest], (err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
@@ -731,11 +755,11 @@ app.post('/apitest/menu',(req, res) => {
   const prix = req.body.prix
   const description = req.body.description
   const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
-  db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
+  db_test.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
     if(err){
       res.send(err)
-      console.log(err)
     }
+    else res.send(result)
   })
 })
 
@@ -743,8 +767,11 @@ app.post('/apitest/menu',(req, res) => {
 
 app.get('/apitest/coordonnees', (res) => {
   const sqlGet = "SELECT * FROM `coordonnees`"
-  db.query(sqlGet,(err, result) => {
-    res.send(result)
+  db_test.query(sqlGet,(err, result) => {
+    if(err){
+      res.send(err)
+    }
+    else res.send(result)
   })
 })
 
