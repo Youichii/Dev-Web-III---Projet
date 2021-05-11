@@ -60,12 +60,13 @@ code {
     background-image: url("./img/Cadre_Menu_Gauche.jpg");
     margin-left: 10%;
     margin-right:5%;
+    background-size:cover;
   
   }
   
   #img2{
     width:100%;
-    background-repeat:repeat-y;
+    background-size:cover;
   
   }
   
@@ -80,7 +81,7 @@ code {
     font-size: 80%;
     font-weight: 1000;
     text-align: center;
-  
+    background-size:cover;
   }
   
   #img3{
