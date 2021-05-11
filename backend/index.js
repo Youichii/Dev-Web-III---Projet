@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mysql = require('mysql')
 const cors = require('cors')
+const nodemailer =require('nodemailer')
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
