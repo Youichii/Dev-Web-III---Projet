@@ -562,6 +562,14 @@ app.get('/api/age-stat', (req, res)=>{
   })
 })
 
+app.get('/api/avis', (req, res)=>{
+  const sqlGet="SELECT Avis, idClients from Avis";
+  db.query(sqlGet, (err, result)=>{
+    res.send(result)
+    console.log(result)
+  })
+})
+
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du nom 
 app.get('/userstrie1/:ville/:nom', (req, res) =>{
    

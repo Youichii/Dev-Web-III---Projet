@@ -1,66 +1,61 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import img1 from '../src/images/img1.jpeg'
 import img2 from '../src/images/img2.jpeg'
 import img3 from '../src/images/img3.jpeg'
 import img4 from '../src/images/img4.jpeg'
+//import AvisClients from './components/AvisClients'
+import Axios from 'axios'
 
-import { useEffect, useState } from 'react';
-import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import './Home.css';
 
-function Home() {
-    require('./Home.css');
-    Axios.defaults.withCredentials = true;
+const Home = () => {
 
-	const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
+    const [dataAvis, setDataAvis] = useState([]);
 
-	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
-			}
-			else {
-				setLoginStatus(false);
-			}
-		});
-	}, []);
+    useEffect(() => {
+        AfficherAvis()
+        
+    }, [])
 
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
-		});
-	}
+    const AfficherAvis = ()=>{
+        Axios.get("http://localhost:3001/api/avis").then((response)=>{
+            setDataAvis(response.data)
+            
+        })
+    }
 
     return (
-        <div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
-            <div className="hero-container">
-                <div className="hero-img">
-                    <ul className="defilement-img">
-                        <li><img className="img" src={img1} alt="image1"></img></li>
-                        <li><img className="img" src={img2} alt="image2"></img></li>
-                        <li><img className="img" src={img3} alt="image3"></img></li>
-                        <li><img className="img" src={img4} alt="image4"></img></li>
-                        
-                    </ul>
-            
-                </div>
-
-                <div className="commentaire">
-                    <ul className="avis-clients">
-                        <h1>Avis</h1>
+        <div className="hero-container">
+            <div className="hero-img">
+                <ul className="defilement-img">
+                    <li><img className="img" src={img1} alt="image1"></img></li>
+                    <li><img className="img" src={img2} alt="image2"></img></li>
+                    <li><img className="img" src={img3} alt="image3"></img></li>
+                    <li><img className="img" src={img4} alt="image4"></img></li>
+                    
+                </ul>
         
-                    </ul>
-                </div>
+            </div>
+
+            <div onLoad ={AfficherAvis} className="commentaires">
+                <h1>Avis de nos clients</h1>
+                {dataAvis.map((val)=>{
+                    return(
+                        <>
+                            <h2>{val.idClients}</h2>
+                            <p>{val.Avis}</p>
+                            
+                        </>
+                    )
+                })}
                 
             </div>
+
+
         </div>
+
+
     )
 }
 
-export default Home
+export default Home;

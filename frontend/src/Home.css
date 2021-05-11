@@ -1,97 +1,110 @@
-*{
-box-sizing: border-box
-}
 
+    
 .hero-container{
 
-height: 100%;
-width: 100%;
-min-width: 1200px;
-display:grid;
-flex-direction: column;
-align-items: center;
-object-fit: contain;
-background-color: black;
+    height: 100%;
+    width: 100%;
+    min-width: 1200px;
+    display:grid;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    background-color: black;
 }
 
 div ul{
-list-style-type: none;
+    list-style-type: none;
 }
 
 .hero-img{
-width: 300px;
-height: 200px;
-border: none;
-margin: 50px 60px; 
-padding: 10px;
+    width: 300px;
+    height: 200px;
+    border: none;
+    margin: 50px 60px; 
+    padding: 10px;
 
 }
 
 
 .defilement-img img{
-width: 700px;
-height: 500px;
-margin: 10px;
-opacity: 0.9;
+    width: 650px;
+    height: 490px;
+    margin: 10px;
+    opacity: 0.9;
 
 }
 
 .defilement-img{
-list-style-type: none;
-display: flex;
-margin: 0;
-position: relative;
-top:0;
-padding:0;
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    position: relative;
+    top:0;
+    padding:0;
 
 }
 
 @keyframes slide{
 
-10%{left:0px;}
-35%{left:0px;}
-45%{left:-100%;}
-55%{left: -100%;}
-65%{left: -150%;}
-75%{left:-150%;}
-85%{left:-200%;}
-95%{left: -200%;}
+    10%{left:0px;}
+    35%{left:0px;}
+    45%{left:-100%;}
+    55%{left: -100%;}
+    65%{left: -150%;}
+    75%{left:-150%;}
+    85%{left:-200%;}
+    95%{left: -200%;}
 
 }
 .defilement-img{
-animation: slide 5s  linear infinite;
+    animation: slide 5s  linear infinite;
 }
 
-.commentaire{
+.commentaires{
     display: grid;
+    width: 1000px;
+    height: 100% auto;
     position: relative;
-    background-color: white;
-    opacity: 0.4;
-    border-radius: 5%;
-    width: 900px;
-    height: auto;
+    box-sizing: border-box;
+    border: solid;
+    border-color: rgb(145, 110, 35);
+    border-radius: 0.1%;
     text-align: left;
+    margin: 20px;
+}
 
+div.commentaires h1{
+    color:  rgb(145, 110, 35);
+    opacity: 1;
+}
 
+div.commentaires h2{
+    color: white;
+    font-style: italic;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+div.commentaires p {
+    color: white;
+    font-size: 17px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 
 
 @media screen and (min-width:300px) {
-.hero-container{
-    width: 400px;
-    height: 400px;
-}
-.defilement-img img{
-    width: 150px;
-    height: 100px;
-    margin: 10px;
-    opacity: 0.9;
+    .hero-container{
+        width: 400px;
+        height: 400px;
+    }
+    .defilement-img img{
+        width: 150px;
+        height: 100px;
+        margin: 10px;
+        opacity: 0.9;
 
-}
-.commentaire{
-    font-size: 17px;
-}
+    }
+
 
 }
 
@@ -106,9 +119,7 @@ animation: slide 5s  linear infinite;
         margin: 10px;
         opacity: 0.9;
     }
-    .commentaire{
-        font-size: 20px;
-    }
+
 }
 
 @media only screen and (min-width:600px){
@@ -121,9 +132,6 @@ animation: slide 5s  linear infinite;
         height: 390px;
         margin: 10px;
         opacity: 0.9;
-    }
-    .commentaire{
-        font-size: 29px;
     }
 }
 
@@ -141,9 +149,4 @@ animation: slide 5s  linear infinite;
 
 
     }
-
-    .commentaire{
-        font-size: 30px;
-    }
 }
-
