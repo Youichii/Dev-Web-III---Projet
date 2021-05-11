@@ -619,7 +619,7 @@ app.get('/loadingBasket', (req, res) =>{
   })
 })
 
-
+/*------------------------- API TEST AURÉ ------------------------------- */
 
 /*API mail*/
 //Envoi d'un mail pour valider la commande du panier
