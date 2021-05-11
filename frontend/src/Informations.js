@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import HalfDiv from './components/HalfDiv'
 import Header from './components/Header'
 import Contact from './components/Contact'
 import Axios from 'axios'
-
 import { useEffect, useState } from 'react';
-import Axios from "axios";
 import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
