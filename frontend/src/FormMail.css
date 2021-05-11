@@ -10,7 +10,7 @@
 .formulaire-email{
   margin: 20px;
   display: flex;
-  height: 500px;
+  height: auto;
   justify-content: center;
   align-items: center;
   border: solid;
@@ -29,21 +29,31 @@
   
   box-sizing: content-box;
   height: auto;
-  min-height: 300px;
+  min-height: 200px;
+  margin: 10px;
+  background-color: white;
+}
+
+.champ-formulaire input {
+  
+  box-sizing: content-box;
+  height: auto;
+  min-height: 100px;
   margin: 10px;
   background-color: white;
 }
 .champ-formulaire legend{
   color: white;
 }
-.btn-email{
+.champ-formulaire button{
   height: 40px;
   width: 100px;
   display: flex;
   align-items: center;
   background-color: rgb(197, 168, 38);
   border: transparent;
-  border-radius: 0.5px;
+  border-radius: 6px;
+  align-self: center;
  
 }
 

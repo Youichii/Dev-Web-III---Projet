@@ -24,11 +24,17 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get('/api/users', (req, res)=>{
-    
-    const sqlGet = "SELECT  Mail  FROM Clients";
+    const mailList = []
+    const sqlGet = "SELECT  Mail FROM Clients";
     db.query(sqlGet, (err, result)=>{
         res.send(result);
-        console.log(result)
+        result.forEach(Clients => {
+            mailList.push (Clients.Mail);
+            
+            console.log(mailList);
+            return mailList;
+            
+        });
 
     });
 });
@@ -57,11 +63,31 @@ transporter.verify((err, success)=>{
 //faire passer les options au transporter et pouvoir enfaire des requêtes
 
 app.post("/envoye", function (req, res){
+    const listMail = [];
+
+    const sqlGet = "SELECT Prenom,  Mail FROM Clients";
+    db.query(sqlGet, (err, result)=>{
+        res.send(result);
+        result.forEach(Clients => {
+            listMail.push(Clients.Mail);
+            clientPrenom = Clients.Prenom;
+            return listMail, clientPrenom;
+            
+            
+        })
+
+    });
+
     let mailOptions ={
-        from: "nozak001@gmail.com",
-        to: "nozak001@gmail.co",
-        subject: "test mail",
-        text:`${req.body.emailer.message}`
+        from: "Chick'N'Fish nozak001@gmail.com",
+        to: listMail,
+        subject:`${req.body.emailer.subject}` ,
+        html:`<html>
+                <body>
+                    <h1>Comment vas-tu aujourd'hui ?</h1>
+                    <p> ${req.body.emailer.corps}</p>
+                    <h2>${req.body.emailer.message}</h2>
+                </body>`
     };
 
 

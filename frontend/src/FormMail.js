@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import MailingList from './components/MailingList';
 import './FormMail.css'
 
  function FormEmail (){
@@ -29,7 +30,9 @@ import './FormMail.css'
          .then((res)=> res.json())
          .then (()=>{
              setEmailer({
-                 message:""
+                 message:"",
+                 subject:"",
+                 corps:""
              });
          });
      };
@@ -41,16 +44,31 @@ import './FormMail.css'
 
                  <form data-testid="mailform" className="champ-formulaire" onSubmit={SubmitEmail}>
                      <legend>Creer une newsletter</legend>
-                     <textarea 
-                         placeholder="Message"
-                         onChange = {handleChange}
-                         name="message"
-                         value={emailer.message}
+
+                    <input
+                        placeholder="Sujet du message"
+                        onChange={handleChange}
+                        name="subject"
+                        value={emailer.subject}
                      />
+                    <textarea 
+                        placeholder="Message"
+                        onChange = {handleChange}
+                        name="message"
+                        value={emailer.message}
+                    />
+                    <textarea 
+                        placeholder="Corps"
+                        onChange = {handleChange}
+                        name="corps"
+                        value={emailer.corps}
+                    />
+
                      <button className="btn-email">Envoyer email</button>
                  </form>
 
              </div>
+ 
 
 
          </div>
