@@ -6,7 +6,7 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 import Home from './Home'
-import Communaute from "./Communaute.js"
+import Comunaute from "./Communaute.js"
 import Menu from "./Menu.js";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Historique from './Historique';
@@ -49,9 +49,17 @@ function App() {
             <Route exact path="/connexion">
               <Connexion />
             </Route>
-            
-            <Route exact path="/stat" > 
-              <Stat/>
+
+            <Route exact path="/stat" >
+              <App />
+            </Route>
+
+            <Route exact path="/Communaute">
+              <Comunaute />
+            </Route>
+
+            <Route exact path="/Carte">
+              <Menu />
             </Route>
 
             <Route exact path="/inscription"> 

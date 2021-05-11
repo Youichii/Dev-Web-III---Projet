@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "chart": "^0.1.2",
     "chart.js": "^3.2.1",
+    "json": "^11.0.0",
     "json-server": "^0.16.3",
     "react": "^17.0.1",
     "react-chartjs-2": "^3.0.3",

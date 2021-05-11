@@ -397,6 +397,7 @@ app.get('/api/hours', (req, res) => {
     })
 })
 
+
 // ------------- Code Cécile--------------------------------------------------------------------------------------------------
 
 // Code de la page Communauté ------------------------------------------------------------------------------------------------
@@ -444,7 +445,6 @@ app.delete('/comment', (req, res) => {
   
 })
 
-
 // requête PUT pour UPDATE le satus d'un client
 app.put('/status', (req, res) =>{
     const Status = req.body.Status
@@ -457,6 +457,29 @@ app.put('/status', (req, res) =>{
       if(err) throw err; 
       res.send(result); 
     })
+})
+
+// Requête GET pour ramener les Nom sans doublons. 
+app.get('/filterNom', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+//  Requête GET pour ramener les Villes sans doublons.
+app.get('/filterVille', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
 })
 
 // Requête GET pour trier le contenu de la communauté sur base de la ville 
@@ -498,11 +521,12 @@ app.get('/usersnom/:nom', (req,res) =>{
   })
 })
 
+
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du status 
 app.get('/userstrie1/:ville/:status', (req, res) =>{
    
-  const Status = req.params.valueStatus
-  const Ville = req.params.valueVille
+  const Status = req.params.status
+  const Ville = req.params.ville
    
   const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ?  "
  
@@ -519,7 +543,7 @@ app.get('/userstrie1/:status/:nom', (req, res) =>{
   const Status = req.params.valueStatus
   const Nom = req.params.valueNom
   
-  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Nom` = ? "
+  const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? and `Nom` = ? "
  
   db.query(sqlInsert,[Status, Nom],(err, result) => {
       if(err) throw err ;
@@ -527,48 +551,6 @@ app.get('/userstrie1/:status/:nom', (req, res) =>{
   })
 })
 
-// NOELLE API
-
-app.get('/api/users', (req, res)=>{
-  const sqlSelect = "SELECT * FROM Clients";
-  db.query(sqlSelect, (err, result)=>{
-      res.send(result);
-      console.log(result)
-
-  });
-});
-
-app.get('/api/genre-stat', (req, res)=>{
-  const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
-  db.query(sqlSelect, (err, result)=>{
-      res.send(result);
-      console.log(result)
-  });
-});
-
-app.get('/api/localisation-stat', (req, res)=>{
-  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
-  db.query(sqlSelect, (err, result)=>{
-      res.send(result);
-      console.log(result)
-  });
-});
-
-app.get('/api/age-stat', (req, res)=>{
-  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
-  db.query(sqlSelect,(err, result)=>{
-      res.send(result);
-      console.log(result)
-  })
-})
-
-app.get('/api/avis', (req, res)=>{
-  const sqlGet="SELECT Avis, IdClient from Avis";
-  db.query(sqlGet, (err, result)=>{
-    res.send(result)
-    console.log(result)
-  })
-})
 
 // Requête GET pour trier le contenu de la communauté sur base de la ville et du nom 
 app.get('/userstrie1/:ville/:nom', (req, res) =>{
@@ -615,7 +597,7 @@ app.get('/menu', (req, res) =>{
 
 // requête GET dans la table categories pour importer toutes les catégories de menu. 
 app.get('/categories', (req, res) =>{
-  db.query('select * FROM categories ', (err, result) => {
+  db.query('select NomCategorie FROM categories ', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
@@ -626,28 +608,12 @@ app.get('/loadingBasket/:IdCommande', (req, res) =>{
 
   const IdCommande = req.params.id_comm
 
-  const sqlInsert = 'select * FROM commandes WHERE `IdCommande` = ?'
+  const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
   db.query(sqlInsert,[IdCommande], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
-
-// POST pour exporter la commande du client 
-// app.post('/orders', (req, res) =>{ 
-//   const Ville = null 
-//   const Zip = null
-//   const Numero = null 
-  
-
-//   const sqlInsert = "INSERT INTO reservations (`IdCommande` = ?,`IdClient` = ?, `IdEtat` = ?, `IdMethode`= ?, `DateCommande`= ?, `HLivree`= ?, `Commentaire`= ?, `Rue`= ?, `Numero`= ?, `Zip`= ?, `Ville`= ?) VALUES (?,?,?,?,?,?,?)  "
-
-//   db.query(sqlInsert, [IdCommande, IdClient, IdEtat, IdMethode, DateCommande, HLivree, Commentaire, Rue, Ville, Zip, Numero], (err, result) => {
-//     if(err) throw err; 
-//     res.send(result); 
-//   })
-// })
-
 
 // POST qui envoie les article dans le panier temporaire
 app.post('/intermediateBasket', (req, res) => {
@@ -656,14 +622,12 @@ app.post('/intermediateBasket', (req, res) => {
   const IdProduit = req.body.IdProduit
   const Quantite = req.body.Quantite
 
-
   const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
   db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
     if(err) throw err; 
     res.send(result); 
   })
 })
-
 
 // PUT qui change la quantite d'un produit dans la DB 
 app.put('/changingquantity', (req, res) =>{
@@ -680,7 +644,17 @@ app.put('/changingquantity', (req, res) =>{
   })
 })
 
+// INSERTE la table reservation 
+app.post('/orders', (req, res) => {
+ 
+  const IdClient = req.body.IdClient
 
+  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[IdClient, null, null, null, 'P', null,  null, null, null, null], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
 // Page Historique -------------------------------------------------------------------------------------------------------
 
 //GET les infos des commandes terminé
