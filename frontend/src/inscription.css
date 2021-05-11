@@ -101,7 +101,7 @@ a:active {
 .c_champs_informations {
 	display: grid;
 	grid-template-columns: 31% 9% 20% 9% 31%;
-	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 10% 4% 8% 2.5% 8% 2%;
+	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 10% 4% 5% 3% 2.5% 8% 2%;
 	grid-gap: 0px;
 	padding: 5px;
 	background-color: var(--bg);
@@ -324,16 +324,16 @@ input[type=text]:focus, input[type=password]:focus,  input[type=number]:focus {
 .i_titre_captcha{
 	grid-column-start: 1;
 	grid-column-end: 6;
-	grid-row-start: 17;
-	grid-row-end: 18;
+	grid-row-start: 18;
+	grid-row-end: 19;
 
 	background-color: var(--bg);
 }
 .i_champ_captcha{
 	grid-column-start: 1;
 	grid-column-end: 6;
-	grid-row-start: 18;
-	grid-row-end: 19;
+	grid-row-start: 19;
+	grid-row-end: 20;
 
 	background-color: var(--bg);
 }
@@ -347,18 +347,29 @@ input[type=text]:focus, input[type=password]:focus,  input[type=number]:focus {
 	background-color: var(--bg);
 }
 
-#bouton_inscription_envoi {
+.bouton_ouvert{
 	background-color: var(--principale);
     border: none;
     color: white;
     width: 65%;
     height: 45px;
     font-size: 18px;
-	cursor: pointer;
-	/*font-family:DejaVu Sans Mono, monospace;*/
+	cursor: default;
 }
-#bouton_inscription_envoi:hover{
+.bouton_ouvert:hover{
 	background-color:var(--survol_bouton);
+}
+.bouton_bloque:hover{
+	background-color:var(--principale);
+}
+.bouton_bloque{
+	background-color: var(--principale);
+    border: none;
+    color: white;
+    width: 65%;
+    height: 45px;
+    font-size: 18px;
+	cursor: default;
 }
 #bouton_inscription_envoi:focus{
 	outline:0;
@@ -434,6 +445,27 @@ input:-webkit-autofill {
 	background-color: var(--bg);
 }
 
+.i_champ_politique a:link {
+	color:white;
+	text-decoration:none;
+} 
+.i_champ_politique a:visited {
+	color: #b1b1b1;
+	text-decoration:none; 
+} 
+.i_champ_politique a:hover {
+	color: var(--principale);
+	text-decoration:none; 
+}
+.i_champ_politique a:active {
+	color:var(--survol_bouton); /*#f9af4f;*/
+}
+.politique_erreur {
+	grid-column-start: 1;
+	grid-column-end: 6;
+	grid-row-start: 17;
+	grid-row-end: 18;
+}
 
 
 @media only screen and (max-width: 1550px) {
