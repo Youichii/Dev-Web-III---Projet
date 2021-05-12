@@ -20,12 +20,13 @@ it ("form can be submittes & input fields work",()=>{
     
     const {debug, queryByTestId} = render (<FormMail SubmitEmail = {mailSubmit}/>);
     fireEvent.change(queryByTestId("promo-msg"), {target: {value: 'promo du jour'}});
-    fireEvent.change(queryByTestId("sujet-msg"), {target: {value: 'corps du jour'}});
+    fireEvent.change(queryByTestId("sujet-msg"), {target: {value: 'sujet du jour' }});
     fireEvent.change(queryByTestId("corps-msg"), {target: {value: 'corps du jour'}});
     fireEvent.submit(queryByTestId("mailform"));
     expect(queryByTestId("promo-msg").innerHTML).toEqual('promo du jour');
     expect(queryByTestId("corps-msg").innerHTML).toEqual('corps du jour');
-    expect(queryByTestId("sujet-msg").innerHTML).toEqual('corps du jour');
+    expect(queryByTestId("sujet-msg").innerHTML).toEqual('sujet du jour');
+    
 })
 ;
 
