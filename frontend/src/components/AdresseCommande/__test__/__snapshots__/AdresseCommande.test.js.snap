@@ -19,23 +19,3 @@ exports[`matches snapshot 1 AdresseCommande 1`] = `
   />
 </div>
 `;
-
-exports[`matches snapshot 2 AdresseCommande 1`] = `
-<div
-  className="i_adresse_livraison"
-  data-testid="adresse_commande"
->
-  <label
-    className="label_adresse"
-  >
-    Adresse de livraison
-  </label>
-  <br />
-  <input
-    id="adresse_livraison"
-    name="add_livraison"
-    placeholder="Rue du paradis"
-    type="text"
-  />
-</div>
-`;
