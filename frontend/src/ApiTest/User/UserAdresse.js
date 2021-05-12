@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-class User{
+class UserAdresse{
     test1(){
         const identifiantClient = '3';
         return Axios.get(`http://localhost:3001/apitest/users/${identifiantClient}/address`).then((response) => {
@@ -23,4 +23,4 @@ class User{
     }
 }
 
-export default User;
+export default UserAdresse;
