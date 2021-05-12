@@ -1214,3 +1214,234 @@ app.post('/apitest/intermediateBasket', (req, res) => {
     })
   });
 })
+
+
+// ---test Cécile API-------------------------------------------------------------
+
+
+// ------------- Code Cécile--------------------------------------------------------------------------------------------------
+
+// Code de la page Communauté ------------------------------------------------------------------------------------------------
+
+// requête GET dans la table communaute pour importer tout le contenu de la communauté 
+app.get('/apitest/users', (req, res) =>{
+  db.query('select * FROM clients ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// requête GET dans la table commentaire pour importer tous les commentaires sur la communauté
+app.get('/apitest/comment', (req, res) =>{
+    db.query('select * FROM `commentaires`', (err, result) => {
+      if(err) throw err ;
+      res.send(result);
+    })
+})
+
+// requête POST pour écrire les commentaires du patron dans la base de donnée 
+app.post('/apitest/comment', (req, res) =>{
+  const IdClient  = req.body.IdClient
+  const Commentaire  = req.body.Commentaire
+
+  const sqlInsert = " INSERT INTO `commentaires` (`IdClient`, `Commentaire`) VALUES (?, ?);"
+
+  db.query(sqlInsert, [IdClient, Commentaire], (err, result) => {
+    if(err) throw err;  
+    res.send(result); 
+  })
+})
+
+// requête DELETE pour supprimer un commentaire de la table commentaire 
+app.delete('/apitest/comment', (req, res) => {
+  const Commentaire  = req.body.Commentaire ;
+  const IdClient = req.body.IdClient
+
+  const sqlInsert = "DELETE FROM `commentaires` WHERE `Commentaire` = ? && `IdClient`=?"
+
+  db.query(sqlInsert, [Commentaire, IdClient], (err, result) => {
+      if(err) throw err;  
+      res.send(result) ;
+  })
+  
+})
+
+// requête PUT pour UPDATE le satus d'un client
+app.put('/apitest/status', (req, res) =>{
+    const Status = req.body.Status
+    const IdClient= req.body.IdClient
+    
+  
+    const sqlInsert = " UPDATE clients SET `Status`= ? WHERE IdClient = ?;" 
+  
+    db.query(sqlInsert, [Status, IdClient], (err, result) => {
+      if(err) throw err; 
+      res.send(result); 
+    })
+})
+
+// Requête GET pour ramener les Nom sans doublons. 
+app.get('/apitest/filterNom', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+//  Requête GET pour ramener les Villes sans doublons.
+app.get('/apitest/filterVille', (req, res) =>{
+   
+  const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
+
+  db.query(sqlInsert,(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+// Requête GET pour trier le contenu de la communauté sur base de la ville 
+app.get('/apitest/usersville/:ville', (req, res) =>{
+   
+    const Ville = req.params.ville
+   
+    const sqlInsert = "SELECT * FROM `clients` WHERE `Ville` = ?"
+
+    db.query(sqlInsert,[Ville],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+// Requête GET pour trier le contenu de la communauté sur base du status
+app.get('/apitest/usersstatus/:status', (req, res) =>{
+   
+    const Status = req.params.status
+
+    const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
+
+    db.query(sqlInsert,[Status],(err, result) => {
+        if(err) throw err ;
+        res.send(result);
+    })
+})
+
+// Requête GET pour trier le contenu de la communauté sur base du nom
+app.get('/apitest/usersnom/:nom', (req,res) =>{
+
+  const Nom = req.params.nom
+
+  const sqlInsert = "SELECT * FROM `clients` WHERE `Nom` = ?"
+
+  db.query(sqlInsert,[Nom],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
+})
+
+
+
+
+
+
+
+
+// Code pour la carte Menu  --------------------------------------------------------------------------------------------------
+
+
+// requête GET dans la table menu pour importer tout le contenu du menu 
+app.get('/apitest/menu', (req, res) =>{
+  db.query('select * FROM menu ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// requête GET dans la table categories pour importer toutes les catégories de menu. 
+app.get('/apitest/categories', (req, res) =>{
+  db.query('select NomCategorie FROM categories ', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+//GET les infos de la commande en cours
+app.get('/apitest/loadingBasket/:IdCommande', (req, res) =>{
+
+  const IdCommande = req.params.id_comm
+
+  const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
+  db.query(sqlInsert,[IdCommande], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// POST qui envoie les article dans le panier temporaire
+app.post('/apitest/intermediateBasket', (req, res) => {
+  console.log("ajouter un nouvel article")
+  const IdCommande = req.body.IdCommande
+  const IdProduit = req.body.IdProduit
+  const Quantite = req.body.Quantite
+
+  const sqlInsert = "INSERT INTO `commandes` (`IdCommande`, `IdProduit`, `Quantite`) VALUE (?, ?, ?); "
+  db.query(sqlInsert, [IdCommande, IdProduit, Quantite], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
+})
+
+// PUT qui change la quantite d'un produit dans la DB 
+app.put('/apitest/changingquantity', (req, res) =>{
+  console.log("changer la quantite")
+  const IdCommande = req.body.IdCommande
+  const IdProduit = req.body.IdProduit
+  const Quantite = req.body.Quantite
+  
+  const sqlInsert = " UPDATE `commandes` SET `Quantite` = ? WHERE `IdCommande` = ? && `IdProduit` = ? ;" 
+
+  db.query(sqlInsert, [Quantite, IdCommande, IdProduit], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
+})
+
+// INSERTE la table reservation 
+app.post('/apitest/orders', (req, res) => {
+ 
+  const IdClient = req.body.IdClient
+
+  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[IdClient, null, null, null, 'P', null,  null, null, null, null], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+// Page Historique -------------------------------------------------------------------------------------------------------
+
+//GET les infos des commandes terminé
+
+app.get('/apitest/historical', (req, res) =>{
+
+  const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
+  
+  db.query(sqlInsert, (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
+
+
+// Get qui va chercher une liste sans doublons de toutes les années d'historiques 
+app.get('/apitest/year', (req, res) =>{
+
+  const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
+  db.query(sqlInsert,['H'], (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
+})
