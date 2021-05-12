@@ -749,23 +749,35 @@ app.put('/apitest/coord/address', (req, res) => {
   })
 })
 
+app.delete('/apitest/menu', (req, res) => {
+  const idProduit = req.body.idProduit
+  const sqlGet = "DELETE FROM `menu` WHERE `IdProduit` = ?"
+  db_test.query(sqlGet, idProduit, (err, result) => {
+    if(err) {
+      res.send(err)
+    }
+    res.send(204, "Resource deleted successfully")
+  })
+})
+
 app.post('/apitest/menu',(req, res) => {
+  const idProduit = req.body.idProduit
   const categorie = req.body.categorie
   const produit = req.body.produit
   const prix = req.body.prix
   const description = req.body.description
-  const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
-  db_test.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
+  const sqlGet = "INSERT INTO `menu`(`IdProduit`, `IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?,?);"
+  db_test.query(sqlGet, [idProduit, categorie, produit, prix, description ], (err, result) => {
     if(err){
       res.send(err)
     }
-    else res.send(result)
+    else res.send(201, "Created")
   })
 })
 
 // Informations
 
-app.get('/apitest/coordonnees', (res) => {
+app.get('/apitest/coordonnees', (req,res) => {
   const sqlGet = "SELECT * FROM `coordonnees`"
   db_test.query(sqlGet,(err, result) => {
     if(err){
