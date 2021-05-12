@@ -16,11 +16,6 @@ it("render text correctly AdresseCommande", () => {
     expect(getByTestId('adresse_commande')).toHaveTextContent("Adresse de livraison");
 })
 
-/*it("render color correctly AdresseCommande", () => {
-    const {getByTestId} = render(<AdresseCommande color="green" text='Hello' onClick={()=> {console.log("hello")}} ></AdresseCommande>);
-    expect(getByTestId('adresse_commande')).toHaveStyle("backgroundColor : black")
-})*/
-
 it("matches snapshot 1 AdresseCommande", () => {
     const tree = renderer.create(<AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder="Rue du paradis"></AdresseCommande>).toJSON(); //convert to a virtualDOM object
     expect(tree).toMatchSnapshot(); 

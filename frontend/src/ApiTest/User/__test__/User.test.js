@@ -12,7 +12,7 @@ it("test API User valeur existante", async function () {
     expect(typeof data).toEqual("object");
 
     //Vérification contenu
-    expect(data).toEqual([{"Numero": "10","Rue": "Rue afz","Ville": "Bruxelles","Zip": 3000}]);
+    expect(data).toEqual([{"Mail": "b.c@gmail.com", "Numero": "10","Rue": "Rue afz","Ville": "Bruxelles","Zip": 3000}]);
 })
 
 it("test API User valeur inexistante", async function () {

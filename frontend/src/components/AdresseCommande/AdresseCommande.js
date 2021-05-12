@@ -10,11 +10,6 @@ const AdresseCommande = ({ className_div, form, Text, id, name, type, placeholde
 
 }
 
-/*AdresseCommande.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
-
 AdresseCommande.propTypes = {
     className_div : PropTypes.string,
     form : PropTypes.string,

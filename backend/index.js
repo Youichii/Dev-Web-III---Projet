@@ -254,19 +254,6 @@ app.get('/api/deconnexion', function(request, response) {
   response.send({loggedIn:false});
 });
 
-
-//Connexion
-/*app.get('/api/users/:mail/:pwd', (req, res) => {
-  const mail = req.params.mail ;
-  const pwd = req.params.pwd  ;
-  
-  const sqlInsert = "SELECT IdClient from clients where Mail = ? and Mdp = ?";
-  db.query(sqlInsert, [mail, pwd], (err, result) => {
-    console.log(err);
-    res.send(result) ;
-  })
-})*/
-
 app.post('/api/users', (req, res) => {
     console.log("post /api/users");
     const name = req.body.name ;
@@ -382,7 +369,7 @@ app.get('/api/orders/users/:identifiantCommande', (req, res) => {
 
 })
 
-app.get('/api/user/:utilisateur/order', (req, res) => { 
+app.get('/api/order/user/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
 
   const sqlInsert = "select IdCommande \
@@ -1128,7 +1115,6 @@ app.put('/apitest/orders', (req, res) => {
     const numero  = req.body.numero ;
     const postal  = req.body.postal ;
     const ville  = req.body.ville ;
-    console.log("methode : ", methode);
 
     const sqlInsert = "UPDATE reservations \
     SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? \
@@ -1140,7 +1126,7 @@ app.put('/apitest/orders', (req, res) => {
     })
 })
 
-app.get('/apitest/orders/users/:identifiantCommande', (req, res) => { 
+app.get('/apitest/orders/:identifiantCommande', (req, res) => { 
   const identifiantCommande = req.params.identifiantCommande ;
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
@@ -1154,6 +1140,20 @@ app.get('/apitest/orders/users/:identifiantCommande', (req, res) => {
   })
 })
 
+
+app.get('/apitest/order/user/:utilisateur', (req, res) => { 
+  const identifiantClient = req.params.utilisateur ;
+
+  const sqlInsert = "select IdCommande \
+  FROM reservations \
+  WHERE IdClient=? AND IdEtat = 'PAN'";
+  db_test.query(sqlInsert, [identifiantClient], (err, result) => {
+    console.log("err : ", err);
+    res.send(result) ;
+  })
+
+})
+
 app.put('/apitest/orders/:idCommande/foods/:idProduit', (req, res) => {
   const idCommande = req.params.idCommande;
   const idProduit = req.params.idProduit;  
@@ -1162,7 +1162,6 @@ app.put('/apitest/orders/:idCommande/foods/:idProduit', (req, res) => {
   const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
   db_test.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
     console.log("err : ", err);
-    console.log("resl :" , result.changedRows);
     res.send(result) ;
   })
 })
@@ -1178,6 +1177,8 @@ app.get('/apitest/hours', (req, res) => {
     res.send(result) ;
   })
 })
+
+
 
 app.get('/apitest/users', (req, res) =>{
   db_test.query('select * FROM clients ', (err, result) => {

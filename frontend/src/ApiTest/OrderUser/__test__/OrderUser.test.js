@@ -12,7 +12,7 @@ it("test API OrderUser valeur existante", async function () {
     expect(typeof data).toEqual("object");
 
     //Vérification contenu
-    expect(data).toEqual([{"IdCommande": 5,"IdProduit": 18,"Prix": 10.9,"Produit": "Filet de Merlu","Quantite": 1}]);
+    expect(data[0]).toEqual({"IdCommande": 5,"IdProduit": 18,"Prix": 10.9,"Produit": "Filet de Merlu","Quantite": 1});
 })
 
 it("test API OrderUser valeur inexistante", async function () {
