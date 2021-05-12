@@ -12,7 +12,7 @@ it("test API PanierGet valeur existante", async function () {
     expect(typeof data).toEqual("object");
 
     //Vérification contenu
-    expect(data).toEqual([{"IdCommande": 5,"IdProduit": 18,"Produit": "Filet de Merlu","Quantite": 1}]);
+    expect(data).toEqual([{"IdCommande": 2}]);
 })
 
 it("test API PanierGet valeur inexistante", async function () {
