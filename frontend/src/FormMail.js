@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import MailingList from './components/MailingList';
+
 import './FormMail.css'
 
  function FormEmail (){
