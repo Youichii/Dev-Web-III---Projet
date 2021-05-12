@@ -3,6 +3,8 @@ import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
 import Axios from 'axios'
 import Input from './components/Input/Input'
+import Banner from './Banner.js';
+import BannerConnect from './components/BannerConnect.js';
 
 const Modification = () => {
     require('./modification.css')
@@ -137,6 +139,8 @@ const Modification = () => {
 
     return (
         <div onLoad={getCoordonnees}>
+            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            
             <Dropdown title= "Horaires" className="dd-wraper"
                 content={
                     <ul className="listHoraires">

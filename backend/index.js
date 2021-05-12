@@ -157,7 +157,7 @@ app.post('/api/menu',(req, res) => {
 
 // Informations
 
-app.get('/api/coordonnees', (res) => {
+app.get('/api/coordonnees', (req, res) => {
   const sqlGet = "SELECT * FROM `coordonnees`"
   db.query(sqlGet,(err, result) => {
     res.send(result)
