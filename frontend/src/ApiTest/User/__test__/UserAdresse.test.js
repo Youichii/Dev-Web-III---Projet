@@ -1,6 +1,6 @@
-import User from '../User';
+import User from '../UserAdresse';
 
-it("test API User valeur existante", async function () {
+it("test API UserAdresse valeur existante", async function () {
     const response = new User();
     var reponse = await response.test1();
     var data = reponse.data ;
@@ -12,10 +12,10 @@ it("test API User valeur existante", async function () {
     expect(typeof data).toEqual("object");
 
     //Vérification contenu
-    expect(data).toEqual([{"Numero": "10","Rue": "Rue afz","Ville": "Bruxelles","Zip": 3000}]);
+    expect(data).toEqual([{"Mail": "b.c@gmail.com", "Numero": "10","Rue": "Rue afz","Ville": "Bruxelles","Zip": 3000}]);
 })
 
-it("test API User valeur inexistante", async function () {
+it("test API UserAdresse valeur inexistante", async function () {
     const response = new User();
     var reponse = await response.test2();
     var data = reponse.data ;
@@ -30,7 +30,7 @@ it("test API User valeur inexistante", async function () {
     expect(data.length).toEqual(0);
 })
 
-it("test API User valeur vide", async function () {
+it("test API UserAdresse valeur vide", async function () {
     const response = new User();
     var reponse = await response.test3()
     .catch(err => {

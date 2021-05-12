@@ -8,11 +8,6 @@ const BoutonPanier = ({ className, id_div, id_elem, name, value, onClick }) => {
     )
 }
 
-/*BoutonPanier.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
-
 BoutonPanier.propTypes = {
     className : PropTypes.string,
     id_div : PropTypes.string,

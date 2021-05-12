@@ -1,6 +1,6 @@
 import Hours from '../Hours';
 
-it("testing API Hours", async function () {
+it("test API Hours", async function () {
     const response = new Hours();
     var reponse = await response.api();
     var data = reponse.data ;
