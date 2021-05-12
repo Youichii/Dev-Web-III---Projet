@@ -45,13 +45,13 @@ import {useState} from 'react';
                  <form data-testid="mailform" className="champ-formulaire" onSubmit={SubmitEmail}>
                      <legend>Creer une newsletter</legend>
 
-                    <input
+                    <textarea
                         data-testid="sujet-msg"
                         placeholder="Sujet du message"
                         onChange={handleChange}
                         name="subject"
                         value={emailer.subject}
-                     />
+                    />
                     <textarea 
                         data-testid="promo-msg"
                         placeholder="Promo"
