@@ -16,7 +16,7 @@ it("get correctly value = 'homme' BoutonRadio", () => {
     expect(getByTestId('input_bouton_radio')).toHaveAttribute('value', 'homme');
 })
 
-it("render text correctly BoutonRadio", () => {
+it("render text value correctly BoutonRadio", () => {
     const {getByTestId} = render(<BoutonRadio text="Mistercash" ></BoutonRadio>);
     expect(getByTestId('label_bouton_radio')).toHaveTextContent("Mistercash");
 })

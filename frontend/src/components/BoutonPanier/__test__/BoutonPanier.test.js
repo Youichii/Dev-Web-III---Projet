@@ -11,13 +11,17 @@ it("renders without crashing BoutonPanier", () => {
     ReactDOM.render(<BoutonPanier></BoutonPanier>, div)
 })
 
-it("render value correctly BoutonPanier", () => {
+it("render value text correctly BoutonPanier", () => {
     const {getByTestId} = render(<BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour"></BoutonPanier>);
     expect(getByTestId('input_bouton_panier')).toHaveAttribute('value', 'Retour');
+})
+
+it("render id correctly BoutonPanier", () => {
+    const {getByTestId} = render(<BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour"></BoutonPanier>);
     expect(getByTestId('div_bouton_panier')).toHaveAttribute('id', 'elem_bouton_annuler2');
 })
 
-it("render type correctly BoutonPanier", () => {
+it("render type input correctly BoutonPanier", () => {
     const {getByTestId} = render(<BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour"></BoutonPanier>);
     expect(getByTestId('input_bouton_panier')).toHaveAttribute('type', 'button');
 })
