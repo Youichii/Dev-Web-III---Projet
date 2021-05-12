@@ -1214,3 +1214,38 @@ app.post('/apitest/intermediateBasket', (req, res) => {
     })
   });
 })
+
+
+// Stat
+app.get('/apitest/genre-stat', (req, res)=>{
+  const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+})
+
+app.get('/apitest/localisation-stat', (req, res)=>{
+  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+})
+
+app.get('/api/age-stat', (req, res)=>{
+  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+  db.query(sqlSelect,(err, result)=>{
+      res.send(result);
+      console.log(result)
+  })
+})
+app.get('/apitest/age-stat', (req, res)=>{
+  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+  db.query(sqlSelect,(err, result)=>{
+      res.send(result);
+      console.log(result)
+  })
+})
+
+
