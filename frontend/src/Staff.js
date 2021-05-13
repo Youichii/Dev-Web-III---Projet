@@ -77,7 +77,7 @@ const Staff = () => {
      * @param {object} client           contient toutes les informations relatives à la commande d'un client
      * @param {string} type_commande    type de commande ; à faire ou en cours
      */
-    const ajouter_commandes = (client, type_commande) => {
+    const ajouterCommande = (client, type_commande) => {
         if (type_commande === "ENV") {
             var donnees = { method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -112,7 +112,7 @@ const Staff = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {number} idCommande identifiant de la commande à supprimer
      */
-    const supprimer_commandes = (idCommande) => {
+    const supprimerCommande = (idCommande) => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({"commande" : idCommande})
@@ -134,7 +134,7 @@ const Staff = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {number} identifiant identifiant du div/de la ligne d'informations pour lequel/laquelle la couleur de fond doit changer
      */
-    const nouveau_bg = (identifiant) => {
+    const nouveauBg = (identifiant) => {
         let ligne_info = document.getElementById(identifiant);
         let couleur_survol = "var(--bg_survol)";
         
@@ -155,7 +155,7 @@ const Staff = () => {
      * @param {number} identifiant  identifiant du div/de la ligne d'informations pour lequel/laquelle la couleur de fond doit changer
      * @param {string} couleur      ancienne couleur de fond de la ligne
      */
-    const ancien_bg = (identifiant, couleur) => {
+    const ancienBg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
         let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
@@ -180,7 +180,7 @@ const Staff = () => {
      * @param {object} informations contient toutes les informations concernant une commande
      * @param {string} identifiant  type de commande ; à faire, en cours ou envoyé
      */
-    const load_panier = (informations, identifiant) => {
+    const chargementPanier = (informations, identifiant) => {
         let identifiantCommande = informations.IdCommande ;
         fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
             method: 'GET',
@@ -218,7 +218,7 @@ const Staff = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {object} elem contient toutes les informations relatives à une commande
      */
-    const elements_afaire = (elem) => {
+    const elementsAfaire = (elem) => {
         let taille = "12% ";
         let nbr_lignes_afaire = "12% " ;
         let type_couleur, bg_bouton ;
@@ -230,7 +230,7 @@ const Staff = () => {
         document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
         console.log("informations : ", elem);
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "afaire")} onClick_ok={() => ajouter_commandes(elem, "ENC")}  />        
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "afaire")} onClick_ok={() => ajouterCommande(elem, "ENC")}  />        
         )
     }
 
@@ -241,7 +241,7 @@ const Staff = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {object} elem contient toutes les informations relatives à une commandem
      */
-    const elements_encours = (elem) => {
+    const elementsEncours = (elem) => {
         let taille = "12% ";
         let  nbr_lignes_encours = "12% ";
         let type_couleur, bg_bouton ;
@@ -254,7 +254,7 @@ const Staff = () => {
 
         return (
 
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "encours")} onClick_ok={() => ajouter_commandes(elem, "ENV")}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "encours")} onClick_ok={() => ajouterCommande(elem, "ENV")}  />
         )
     }
 
@@ -265,7 +265,7 @@ const Staff = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {object} elem contient toutes les informations relatives à une commande
      */
-    const elements_envoye = (elem) => {
+    const elementsEnvoye = (elem) => {
         let taille = "12% ";
         let nbr_lignes_envoye = "12% " ;
         let type_couleur, bg_bouton ;
@@ -277,7 +277,7 @@ const Staff = () => {
         document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
 
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveau_bg(elem.IdClient)} onMouseLeave={() => ancien_bg(elem.IdClient, type_couleur)} onClick_panier={() => load_panier(elem, "envoye")} onClick_ok={() => supprimer_commandes(elem.IdCommande)}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "envoye")} onClick_ok={() => supprimerCommande(elem.IdCommande)}  />
         )
     }
 
@@ -300,7 +300,7 @@ const Staff = () => {
                     </div>
 
                     <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                        {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elements_afaire)}
+                        {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elementsAfaire)}
                     </div>
 
                     <div className="details_commande">
@@ -324,7 +324,7 @@ const Staff = () => {
                         <div className="i_prix_titre">Prix</div>
                     </div>
                     <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                        {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elements_encours)}
+                        {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elementsEncours)}
                     </div>
 
                     <div className="details_commande">
@@ -348,7 +348,7 @@ const Staff = () => {
                         <div className="i_prix_titre">Prix</div>
                     </div>
                     <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                        {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elements_envoye)}
+                        {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elementsEnvoye)}
                     </div>
 
                     <div className="details_commande">

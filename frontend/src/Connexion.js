@@ -47,7 +47,7 @@ const Connexion = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	const verification_valeurs = () => {
+	const verificationValeurs = () => {
 		let compteur = true ;
 		document.getElementById("erreur_connexion").innerHTML = "";
 		let mail = document.getElementById("texte_utilisateur").value ;
@@ -83,8 +83,8 @@ const Connexion = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	const recuperer_client = () => {
-		if (verification_valeurs()) {
+	const recupererClient = () => {
+		if (verificationValeurs()) {
 			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 				if (reponse.data.message) {
 					setLoginStatus(false);
@@ -116,7 +116,7 @@ const Connexion = () => {
 						<InputInformations className_div="i_champ_mdp" id_input="texte_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
 						
 						<div className="i_bouton_envoi">
-							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
+							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recupererClient} />
 							<br></br><span className="message_erreur" id="erreur_connexion"></span>
 						</div>
 					</div>

@@ -67,7 +67,7 @@ const Inscription = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	const verification_valeurs = () => {
+	const verificationValeurs = () => {
 		let compteur = true ;
 
 		if (document.getElementById("nom_utilisateur").value === "") { 
@@ -223,7 +223,7 @@ const Inscription = () => {
 		if (document.getElementById("politique_utilisateur").checked) {
 			document.getElementById("politique_erreur").innerHTML = "";
 
-			if (verification_valeurs()) {
+			if (verificationValeurs()) {
 				var radios = document.getElementsByName('radio_genre');
 				var valeur;
 				for(var i = 0; i < radios.length; i++){
@@ -292,7 +292,7 @@ const Inscription = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	const pol_confidentialite = () => {
+	const polConfidentialite = () => {
 		if (document.getElementById("politique_utilisateur").checked) {
 			document.getElementById("bouton_inscription_envoi").style.cursor = "pointer";
 			document.getElementById("bouton_inscription_envoi").classList.remove("bouton_bloque");
@@ -379,7 +379,7 @@ const Inscription = () => {
 					</div>
 				
 					<div className="i_champ_politique">
-						<input type="checkbox" id="politique_utilisateur" required onClick={pol_confidentialite}/><span className="pol"> J'accepte les <a href="https://www.privacypolicies.com/live/3ed9c526-0710-45e2-9a58-ec772750de85">termes et conditions</a> & <a href="https://www.privacypolicies.com/live/5b2841b7-4ad5-46a7-ac31-25ea7960e6f3">politique de confidentialité</a></span>
+						<input type="checkbox" id="politique_utilisateur" required onClick={polConfidentialite}/><span className="pol"> J'accepte les <a href="https://www.privacypolicies.com/live/3ed9c526-0710-45e2-9a58-ec772750de85">termes et conditions</a> & <a href="https://www.privacypolicies.com/live/5b2841b7-4ad5-46a7-ac31-25ea7960e6f3">politique de confidentialité</a></span>
 					</div>
 					<div className="i_titre_captcha pol">CAPTCHA</div>
 					<div className="i_champ_captcha">

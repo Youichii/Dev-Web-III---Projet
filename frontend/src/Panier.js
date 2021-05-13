@@ -34,8 +34,8 @@ const Panier = () => {
 				setUsername(response.data.user[0].IdClient);
                 utilisateur = response.data.user[0].IdClient;
 
-                recuperer_utilisateur();
-                recuperer_panier();
+                recupererUtilisateur();
+                recupererPanier();
 			}
 			else {setLoginStatus(false);}
 		});
@@ -91,7 +91,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const recuperer_panier = () => {
+    const recupererPanier = () => {
         var info = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
@@ -132,7 +132,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const recuperer_utilisateur = () => {
+    const recupererUtilisateur = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
@@ -152,7 +152,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const ajouter_commande = () => {
+    const ajouterCommande = () => {
         let heure_selectionnee = document.getElementById('heures_reserv').value ;
         let typeCommande, commentaire_client, rue, numero, postal, ville ;
         (document.getElementById("commentaire").value === "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
@@ -202,7 +202,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const supprimer_commande = () => {
+    const supprimerCommande = () => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande})
@@ -226,7 +226,7 @@ const Panier = () => {
      * @param {number} qtite       quantité actuelle
      * @param {string} calcul      type de calcul à appliquer sur la quantité actuelle ; moins ou plus
      */
-    const modifier_quantite = (id_commande, id_produit, qtite, calcul) => {
+    const modifierQuantite = (id_commande, id_produit, qtite, calcul) => {
         let nouvelle_qtite ;
         (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite+1 ;
         var myInit = { method: 'PUT',
@@ -241,7 +241,7 @@ const Panier = () => {
             })
             .then(donnees => {
                 document.getElementById(String(id_commande) + String(id_produit)).value = nouvelle_qtite;
-                changer_prix(id_produit, String(id_commande) + String(id_produit));
+                changerPrix(id_produit, String(id_commande) + String(id_produit));
             })
             if (nouvelle_qtite === 0) {
                 document.getElementById(id_produit).style.display = "inline";
@@ -260,7 +260,7 @@ const Panier = () => {
      * @param {number} id_produit  identifiant du produit pour lequel il faut modifier la quantité
      * @param {string} id_prix     identifiant du div dans lequel il faut afficher le nouveau prix du produit selon la quantité
      */
-    const changer_prix = (id_produit, id_prix) => {
+    const changerPrix = (id_produit, id_prix) => {
         let information = donnees_panier.filter(element => element.IdProduit === id_produit)[0];
         
         document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.Prix + " €";
@@ -276,7 +276,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const afficher_adresse = () => {
+    const afficherAdresse = () => {
 	    document.getElementById('zone_adresse').style.display = "grid" ; 
     }
 
@@ -286,7 +286,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const cacher_adresse = () => {
+    const cacherAdresse = () => {
         document.getElementById('zone_adresse').style.display = "none" ; 
     }
     
@@ -297,7 +297,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const valider_panier = () => {
+    const validerPanier = () => {
         document.getElementById('i_grise_etape1').style.display= "none";
         document.getElementById('i_grise_etape2').style.display= "inline";
         document.getElementById('i_ligne_avant_1').style.borderColor= "#414141";
@@ -313,7 +313,7 @@ const Panier = () => {
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
-    const annuler_info = () => {
+    const annulerInfo = () => {
         document.getElementById('i_grise_etape2').style.display= "none";
         document.getElementById('i_grise_etape1').style.display= "inline";
         document.getElementById('i_numero_1').style.backgroundColor= "#A18C7B";
@@ -329,7 +329,7 @@ const Panier = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      * @param {object} element informations concernant un aliment ; sa quantité, son nom, son prix, son id 
      */
-    const affichage_aliments = (element) => {
+    const affichageAliments = (element) => {
         let type_couleur ;
         (compteur%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur++ ;
@@ -339,9 +339,9 @@ const Panier = () => {
                 <div className={`i_nom_aliment ${type_couleur}`}>{element.Produit}</div> 
                 <div class="aliment_barre" id={element.IdProduit}><hr /></div>
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
-                    <button className='bouton_moins incrementeur' onClick={() => modifier_quantite(element.IdCommande, element.IdProduit, element.Quantite,"moins")} >-</button> 
+                    <button className='bouton_moins incrementeur' onClick={() => modifierQuantite(element.IdCommande, element.IdProduit, element.Quantite,"moins")} >-</button> 
                     <input id={`${element.IdCommande}${element.idProd}`} className='nombre_aliment' type='number' value={element.Quantite} readonly="readonly" />
-                    <button className='bouton_plus incrementeur' onClick={() => modifier_quantite(element.IdCommande, element.IdProduit, element.Quantite, "plus")}>+</button>
+                    <button className='bouton_plus incrementeur' onClick={() => modifierQuantite(element.IdCommande, element.IdProduit, element.Quantite, "plus")}>+</button>
                 </div> 
                 <div id={`${element.IdCommande}${element.IdProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{(element.Prix*element.Quantite).toFixed(2)}{" €"}</div> 
             </div>
@@ -373,7 +373,7 @@ const Panier = () => {
                     </div>
                 
                     <div className="i_info_aliments c_info_aliments" id="info_aliments">
-                        {donnees_panier && donnees_panier.map(affichage_aliments)}
+                        {donnees_panier && donnees_panier.map(affichageAliments)}
                     </div>
 
                     <div className="c_cadre_total i_cadre_total">
@@ -383,8 +383,8 @@ const Panier = () => {
                 </div>
 
                 <div className="i_boutons1 c_boutons1">
-                    <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={valider_panier} />
-                    <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimer_commande} />
+                    <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={validerPanier} />
+                    <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimerCommande} />
                 </div>
 
                 <div className="c_info_reception i_info_reception">
@@ -404,8 +404,8 @@ const Panier = () => {
                     <div className="i_moy_reception">
                         <label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
                         <div className="c_reception">
-                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacher_adresse}/>
-                            <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficher_adresse}/>
+                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacherAdresse}/>
+                            <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficherAdresse}/>
                         </div>
                     </div>
 
@@ -438,8 +438,8 @@ const Panier = () => {
                 </div>
 
                 <div className="i_boutons2 c_boutons2">
-                    <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouter_commande} />
-                    <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annuler_info} />
+                    <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouterCommande} />
+                    <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annulerInfo} />
                 </div>
             </div>
         </div>
