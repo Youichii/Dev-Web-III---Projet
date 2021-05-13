@@ -37,7 +37,7 @@ function Chart() {
   })
  
 
-  const VilleCount = ville.map((val)=>{
+  const villeNombre = ville.map((val)=>{
     return val.nombre
   })
 
@@ -68,7 +68,7 @@ function Chart() {
     
   });
   
-  const genreCount = genre.map((val)=>{
+  const genreNombre = genre.map((val)=>{
     return val.nombre;
   });
 
@@ -132,20 +132,20 @@ for (let i in donneeAge){
 
 
 }
-let ageLabels = Object.keys(rangeAge);
-let ageData = Object.keys(rangeAge).map((key)=>rangeAge[key]);
+let ageTitre = Object.keys(rangeAge);
+let ageNombre = Object.keys(rangeAge).map((key)=>rangeAge[key]);
 console.log(rangeAge)
-console.log(ageLabels)
-console.log(ageData)
+console.log(ageTitre)
+console.log(ageNombre)
 
 
 
-  const data =['data_gender', 'data_age', 'data_loc']
-  const data_gender = {
+  const data =['donneesGenre', 'donneesAge', 'donneesLoc']
+  const donneesGenre = {
       labels:donneeGenre,
       datasets:[{
         label:'Population',
-        data:genreCount,
+        data:genreNombre,
         //backgroundColor:'green',
         backgroundColor:[
           'rgba(255, 99, 132, 0.6)',
@@ -157,11 +157,11 @@ console.log(ageData)
         hoverBorderColor:'#000'
       }]
     }
-  const data_age ={
-      labels: ageLabels,
+  const donneesAge={
+      labels: ageTitre,
       datasets:[{
         label:'Age',
-        data:ageData,
+        data:ageNombre,
         //backgroundColor:'green',
         backgroundColor:[
           'rgba(255, 99, 132, 0.6)',
@@ -179,11 +179,11 @@ console.log(ageData)
     
   }
 
-  const data_loc ={
+  const donneesLoc ={
     labels:donneeVille,
     datasets:[{
       label:'Localité',
-      data: VilleCount,
+      data: villeNombre,
       //backgroundColor:'green',
       backgroundColor:[
         'rgba(255, 99, 132, 0.6)',

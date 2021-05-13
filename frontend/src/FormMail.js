@@ -31,10 +31,10 @@ import './FormMail.css'
      * @author Noelle Khazoum <kh.noelle@gmail.com> 
      */ 
 
-     const SubmitEmail = async(e) =>{
+     const SoumettreEmail = async(e) =>{
         e.preventDefault();
         console.log({emailer});
-        const response = await fetch ("http://localhost:3000/envoye",{
+        const reponse = await fetch ("http://localhost:3000/envoye",{
             method: "POST",
             headers:{
                 "Content-type": "application/json"
@@ -45,7 +45,7 @@ import './FormMail.css'
         .then (()=>{
             setEmailer({
                 message:"",
-                subject:"",
+                sujet:"",
                 corps:""
             });
         });
@@ -56,14 +56,14 @@ import './FormMail.css'
         <div className="email-container">
         <div className="formulaire-email">
 
-            <form data-testid="mailform" className="champ-formulaire" onSubmit={SubmitEmail}>
+            <form data-testid="mailform" className="champ-formulaire" onSubmit={SoumettreEmail}>
                 <legend>Creer une newsletter</legend>
 
                <input
                    placeholder="Sujet du message"
                    onChange={handleChange}
-                   name="subject"
-                   value={emailer.subject}
+                   name="sujet"
+                   value={emailer.sujet}
                 />
                <textarea 
                    placeholder="Promo"
