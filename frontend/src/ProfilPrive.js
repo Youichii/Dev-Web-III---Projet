@@ -169,7 +169,7 @@ const ProfilPrive = () => {
             </div>
         )
     }
-    else return <div>What</div>
+    else return <div></div>
 };
 
 export default ProfilPrive
