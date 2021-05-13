@@ -50,27 +50,27 @@ const Connexion = () => {
 	const verification_valeurs = () => {
 		let compteur = true ;
 		document.getElementById("erreur_connexion").innerHTML = "";
-		let mail = document.getElementById("text_user").value ;
-		let pwd = document.getElementById("text_mdp").value ;
+		let mail = document.getElementById("texte_utilisateur").value ;
+		let pwd = document.getElementById("texte_mdp").value ;
 
 		if (mail === "") { 
-			document.getElementById("text_user").style.borderColor="var(--erreur)";
+			document.getElementById("texte_utilisateur").style.borderColor="var(--erreur)";
 			document.getElementById("erreur_mail").innerHTML = "Veuillez entrer votre adresse";
 			compteur = false ;
 		}
 		else {
-			document.getElementById("text_user").style.borderColor="var(--bordure)";
+			document.getElementById("texte_utilisateur").style.borderColor="var(--bordure)";
 			document.getElementById("erreur_mail").innerHTML = "";
 			mail_valide = mail ;
 		}
 
 		if (pwd === "") { 
-			document.getElementById("text_mdp").style.borderColor="var(--erreur)";
+			document.getElementById("texte_mdp").style.borderColor="var(--erreur)";
 			document.getElementById("erreur_mdp").innerHTML = "Veuillez entrer votre mot de passe";
 			compteur = false ;
 		}
 		else {
-			document.getElementById("text_mdp").style.borderColor="var(--bordure)";
+			document.getElementById("texte_mdp").style.borderColor="var(--bordure)";
 			document.getElementById("erreur_mdp").innerHTML = "";
 			mdp_valide = pwd ; 
 		}
@@ -85,14 +85,14 @@ const Connexion = () => {
 	 */
 	const recuperer_client = () => {
 		if (verification_valeurs()) {
-			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((response) => {
-				if (response.data.message) {
+			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+				if (reponse.data.message) {
 					setLoginStatus(false);
 					setUsername(10000000000);
 					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail et/ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
 				} else {
 					setLoginStatus(true);
-					setUsername(response.data[0].IdClient);
+					setUsername(reponse.data[0].IdClient);
 					document.getElementById("erreur_connexion").innerHTML = "";
 				}
 			});
@@ -110,10 +110,10 @@ const Connexion = () => {
 
 					<div className="i_zones_info c_zones_info">
 						<div className="i_titre_adresse">ADRESSE E-MAIL</div>
-						<InputInformations className_div="i_champ_adresse" id_input="text_user" id_span="erreur_mail" maxLenght="100"/>
+						<InputInformations className_div="i_champ_adresse" id_input="texte_utilisateur" id_span="erreur_mail" maxLenght="100"/>
 
 						<div className="i_titre_mdp">MOT DE PASSE</div>
-						<InputInformations className_div="i_champ_mdp" id_input="text_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
+						<InputInformations className_div="i_champ_mdp" id_input="texte_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
 						
 						<div className="i_bouton_envoi">
 							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />

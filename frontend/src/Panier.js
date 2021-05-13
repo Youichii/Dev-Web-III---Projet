@@ -11,12 +11,10 @@ const Panier = () => {
     Axios.defaults.withCredentials = true;
 
     const [heures, setHeures] = useState([]);
-
     const [total, setTotal] = useState(0);
     let compteur = 1 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
-
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
     const [IDCommande, setIdCommande]= useState("");
@@ -69,18 +67,18 @@ const Panier = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnees => {
             const intermediaire = [] ;
             let min = 1080 ; //18h
             let max = 1440 ; //00h
             for (var minutes = min; minutes < max; minutes+=15) {
-                var nbHour = parseInt(minutes / 60);
+                var nbHeures = parseInt(minutes / 60);
                 var nbminuteRestante = (minutes % 60);
                 let heure_finale ;
 
                 (nbminuteRestante === 0 ) ? heure_finale = "00" : heure_finale =  nbminuteRestante.toString();
-                if ( data.filter(elem => elem.HLivree === (nbHour.toString() + ":" + heure_finale)).length === 0 ){ 
-                    intermediaire.push(({"h" : nbHour.toString(), "m" : heure_finale}));
+                if ( donnees.filter(elem => elem.HLivree === (nbHeures.toString() + ":" + heure_finale)).length === 0 ){ 
+                    intermediaire.push(({"h" : nbHeures.toString(), "m" : heure_finale}));
                 }
             }
             setHeures(intermediaire);
@@ -101,9 +99,9 @@ const Panier = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
-            id_commande = data[0].IdCommande;
-            setIdCommande(data[0].IdCommande);
+        .then(donnees => {
+            id_commande = donnees[0].IdCommande;
+            setIdCommande(donnees[0].IdCommande);
 
             var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
@@ -112,14 +110,14 @@ const Panier = () => {
             .then(res => {
                 return res.json();
             })
-            .then(data => {
-                setDonneesPanier(data);
+            .then(donnees => {
+                setDonneesPanier(donnees);
                 let total = 0 ;
-                data.map(x => total+=x["Quantite"]*x["Prix"]);
+                donnees.map(x => total+=x["Quantite"]*x["Prix"]);
                 setTotal(total.toFixed(2)) ;
                 
                 let nbr_lignes = ""
-                for (let i = 0 ; i<data.length ; i++) {
+                for (let i = 0 ; i<donnees.length ; i++) {
                     nbr_lignes += "45px " ;
                 }
                 document.getElementsByClassName("c_info_aliments")[0].style.gridTemplateRows = nbr_lignes ;
@@ -142,8 +140,8 @@ const Panier = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
-            setDonneesAdresse(data);
+        .then(donnees => {
+            setDonneesAdresse(donnees);
         })
     }
 
@@ -181,7 +179,7 @@ const Panier = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnees => {
             fetch ("http://localhost:3001/api/valider_commande",{
                 method: "POST",
                 headers:{
@@ -213,7 +211,7 @@ const Panier = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnees => {
             console.log("supprimer ok");
         })
     }
@@ -230,7 +228,7 @@ const Panier = () => {
      */
     const modifier_quantite = (id_commande, id_produit, qtite, calcul) => {
         let nouvelle_qtite ;
-        (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite + 1 ;
+        (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite+1 ;
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({quantite : nouvelle_qtite})
@@ -241,7 +239,7 @@ const Panier = () => {
             .then(res => {
                 return res.json();
             })
-            .then(data => {
+            .then(donnees => {
                 document.getElementById(String(id_commande) + String(id_produit)).value = nouvelle_qtite;
                 changer_prix(id_produit, String(id_commande) + String(id_produit));
             })
@@ -263,10 +261,10 @@ const Panier = () => {
      * @param {string} id_prix     identifiant du div dans lequel il faut afficher le nouveau prix du produit selon la quantité
      */
     const changer_prix = (id_produit, id_prix) => {
-        let information = donnees_panier.filter(element => element.IdProduit == id_produit)[0];
+        let information = donnees_panier.filter(element => element.IdProduit === id_produit)[0];
         
         document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.Prix + " €";
-        information.quantite = Number(document.getElementById(id_prix).value);
+        information.Quantite = Number(document.getElementById(id_prix).value);
         let total = 0 ;
         donnees_panier.map(aliment => total+=aliment.Quantite*aliment.Prix);
         setTotal(total) ;

@@ -7,16 +7,14 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Staff = () => {
-    require('./staff.css')
+    require('./staff.css');
     Axios.defaults.withCredentials = true;
 
     let compteur_afaire = 1 ;
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
-
     const [donnees, setDonnees] = useState(null);
     const [changement, setChangement] = useState(true);
-
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
 
@@ -64,8 +62,8 @@ const Staff = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
-            setDonnees(data);
+        .then(donnees => {
+            setDonnees(donnees);
         })
 
     }, [changement]);
@@ -89,7 +87,7 @@ const Staff = () => {
             .then(res => {
                 return res.json();
             })
-            .then(data => {
+            .then(donnees => {
                 console.log("mail envoyé")
             })
         }
@@ -102,7 +100,7 @@ const Staff = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnees => {
             setChangement(!changement) ;
         })
     }
@@ -124,7 +122,7 @@ const Staff = () => {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnnees => {
             setChangement(!changement) ;
         })
     }
@@ -190,7 +188,7 @@ const Staff = () => {
         }).then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(donnees => {
             let nbr_lignes = "";
             let info_commentaire, lieu ;
             let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.Rue + '</span></div> \
@@ -202,11 +200,11 @@ const Staff = () => {
             (informations.IdMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
             let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommade + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
-            for (let i=0 ; i< data.length ; i++){
-                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + data[i]["Produit"] + "</div><div class=quantite_aliment>x&ensp;" + data[i]["Quantite"] + "</div></div>";
+            for (let i=0 ; i< donnees.length ; i++){
+                liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + donnees[i]["Produit"] + "</div><div class=quantite_aliment>x&ensp;" + donnees[i]["Quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCom.substring(14, 19) + " - " + informations.DateCom.substring(8, 10) + "/" + informations.DateCom.substring(5, 7) + "/" + informations.DateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
+            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCommande.substring(14, 19) + " - " + informations.DateCommande.substring(8, 10) + "/" + informations.DateCommande.substring(5, 7) + "/" + informations.DateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
                             
             document.getElementById(identifiant).innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;

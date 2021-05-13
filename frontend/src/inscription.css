@@ -79,20 +79,6 @@ html {
 	background-color: var(--bg);
 }
 
-/*a:link {
-	color : black;
-	text-decoration:none;
-}
-a:visited {
-	color :black;
-	text-decoration:none;
-}
-a:active {
-	color:black;
-	text-decoration:none;
-}*/
-
-
 .c_champs_informations {
 	display: grid;
 	grid-template-columns: 31% 9% 20% 9% 31%;
@@ -524,8 +510,8 @@ input:-webkit-autofill {
 				grid-column-end: 6;}
 	#radio_femme {font-size: 15px;}
 	#radio_homme {font-size: 15px;}
-	#adresse_user {width: 90%;}
-	#postal_user{width: 81%;}
+	#adresse_utilisateur {width: 90%;}
+	#postal_utilisateur{width: 81%;}
 	.message_erreur {font-size:10px;}
 	#id_erreur_anniversaire{grid-row-start: 9;
 		grid-row-end: 10;}
