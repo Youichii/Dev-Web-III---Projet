@@ -1,5 +1,8 @@
-import {useState} from 'react';
-import './FormMail.css'
+import { useEffect, useState } from 'react';
+import './FormMail.css';
+import Axios from "axios";
+import Banner from './Banner.js';
+import BannerConnect from './components/BannerConnect.js';
 
 
 /**
@@ -12,6 +15,37 @@ import './FormMail.css'
      const [emailer, setEmailer] = useState({
          message:""
      });
+
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
+
+
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
+			}
+			else {setStatutConnexion(false);}
+		});
+	}, []);
+
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
+		});
+	} 
 
     /**
      * Tient compte des changement des valeurs
@@ -53,37 +87,40 @@ import './FormMail.css'
 
 
      return(
-        <div className="email-container">
-        <div className="formulaire-email">
+        <div>
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+            <div className="email-container">
+                <div className="formulaire-email">
 
-            <form data-testid="mailform" className="champ-formulaire" onSubmit={SoumettreEmail}>
-                <legend>Creer une newsletter</legend>
+                    <form data-testid="mailform" className="champ-formulaire" onSubmit={SoumettreEmail}>
+                        <legend>Creer une newsletter</legend>
 
-               <input
-                   placeholder="Sujet du message"
-                   onChange={handleChange}
-                   name="sujet"
-                   value={emailer.sujet}
-                />
-               <textarea 
-                   placeholder="Promo"
-                   onChange = {handleChange}
-                   name="message"
-                   value={emailer.message}
-               />
-               <textarea 
-                   placeholder="Corps"
-                   onChange = {handleChange}
-                   name="corps"
-                   value={emailer.corps}
-               />
+                    <input
+                        placeholder="Sujet du message"
+                        onChange={handleChange}
+                        name="sujet"
+                        value={emailer.sujet}
+                        />
+                    <textarea 
+                        placeholder="Promo"
+                        onChange = {handleChange}
+                        name="message"
+                        value={emailer.message}
+                    />
+                    <textarea 
+                        placeholder="Corps"
+                        onChange = {handleChange}
+                        name="corps"
+                        value={emailer.corps}
+                    />
 
-                <button className="btn-email">Envoyer email</button>
-            </form>
+                        <button className="btn-email">Envoyer email</button>
+                    </form>
 
+                </div>
+
+            </div>
         </div>
-
-    </div>
      );
  }
 

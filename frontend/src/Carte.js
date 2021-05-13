@@ -13,34 +13,38 @@ const Carte = () => {
     const [titres, setTitres] = useState(null)
     const [paniers, setPanier] = useState(null)
     const [contenu, setContenu]= useState(null)
+    let id_comm = 20;
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
- 
-    let id_comm = 20
-   
 
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
-
-    Axios.defaults.withCredentials = true;
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	}  
+
         
     useEffect(()=>{
 
@@ -94,7 +98,7 @@ const Carte = () => {
             var premiereEntre = { method:'POST', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({  IdCommande : Number(id_comm), 
-                                    IdClient : Number(username)                     
+                                    IdClient : Number(utilisateur)                     
                                 })
             }
             fetch('http://localhost:3001/orders', premiereEntre)
@@ -160,7 +164,7 @@ const Carte = () => {
 
     return(
         <div>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
             <div id = 'bordPrincipal'>
                 {titres&&titres.map(titre => (
                     <fieldset className="cadre">

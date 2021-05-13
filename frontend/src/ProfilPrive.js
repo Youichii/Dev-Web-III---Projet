@@ -23,29 +23,36 @@ const ProfilPrive = () => {
     const [number, setNumber] = useState('');
     const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('')
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [usernameCON, setUsernameCON] = useState("");
 
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsernameCON(response.data.user[0].IdClient);
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	} 
 
     const submitUsername = () => {
         Axios.put('http://localhost:3001/api/client/username', {
@@ -101,7 +108,7 @@ const ProfilPrive = () => {
 
     return (
         <div>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
             <div onLoad={getClient} className="profilPrive">
                 <Header title= {"Votre profil" } headerclass="profilheader"  />
                 <Picture />

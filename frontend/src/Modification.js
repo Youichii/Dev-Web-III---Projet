@@ -40,29 +40,36 @@ const Modification = () => {
     const [description, setDescription] = useState("");
     const [produit, setProduit] = useState("");
 
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState(10000000000);
-
     //const [mapRest, setMapRest] = useState(''); 
 
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			console.log("vérifier tjrs connecté : ", response);
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
+
+
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
 	} 
 
@@ -166,7 +173,7 @@ const Modification = () => {
 
     return (
         <div onLoad={getCoordonnees}>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
             
             <Dropdown title= "Horaires" className="dd-wraper"
                 content={

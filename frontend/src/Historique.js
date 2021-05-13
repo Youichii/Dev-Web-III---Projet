@@ -10,29 +10,37 @@ const Historique = () => {
 
     let [historiques, setHistoriques] = useState(null)
     let[annees, setAnnees]= useState([])
-    
-
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
     const [date, setDate] = useState("");
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);			
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	} 
 
 
     let mois = [{"Id":"01", "Mois":"Janvier"},{"Id":'02', "Mois":"Février"},{"Id":'03', "Mois":"Mars"},{"Id":'04', "Mois":"Avril"},{"Id":'05', "Mois":"Mai"},{"Id":'06', "Mois":"Juin"},{"Id":'07', "Mois":"Juillet"},{"Id":'08', "Mois":"Août"},{"Id":'09', "Mois":"Septembre"},{"Id":'10', "Mois":"Octobre"},{"Id":'11', "Mois":"Novembre"},{"Id":'12', "Mois":"Décembre"} ]
@@ -65,7 +73,7 @@ const Historique = () => {
 
     return(
         <div>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
             {historiques&&historiques.map(historique =>  
                 setDate.push(historique.DateCommande) 
             )}

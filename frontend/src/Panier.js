@@ -15,43 +15,39 @@ const Panier = () => {
     let compteur = 1 ;
     const [donnees_panier, setDonneesPanier] =  useState(null);
     const [donnees_adresse, setDonneesAdresse] =  useState(null);
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
     const [IDCommande, setIdCommande]= useState("");
     let utilisateur = 100000000000;
     let id_commande =  100000000000;
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateurCON, setUtilisateur] = useState(10000000000);
 
 
-    /**
-     * Vérifie si l'utilisateur est connecté au chargement de la page
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
-                utilisateur = response.data.user[0].IdClient;
-
-                recupererUtilisateur();
-                recupererPanier();
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setLoginStatus(false);}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
 
-    /**
-     * Déconnecte l'utilisateur
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	} 
 
 
     /**
@@ -350,7 +346,7 @@ const Panier = () => {
 
     return (
         <div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateurCON}/> : <Banner />}
             <div className="panier">
                 <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
                 <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>

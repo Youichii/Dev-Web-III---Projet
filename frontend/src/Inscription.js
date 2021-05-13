@@ -12,8 +12,8 @@ const Inscription = () => {
 	const [liste_jours, setListeJours] = useState(null);
 	const [liste_mois, setListeMois] = useState(["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"]);
 	const [liste_annee, setListeAnnee] = useState(null);
-	const [loginStatus, setLoginStatus] = useState("");
-	const [username, setUsername] = useState("");
+	const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
 
 	/**
@@ -22,12 +22,12 @@ const Inscription = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setLoginStatus(false);}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
@@ -38,10 +38,10 @@ const Inscription = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	} 
 
 
 	/**
@@ -270,11 +270,11 @@ const Inscription = () => {
 						let mdp_valide = document.getElementById("mdp_utilisateur").value;
 						Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 							if (reponse.data.message) {
-								setLoginStatus(false);
-								setUsername(10000000000);
+								setStatutConnexion(false);
+								setUtilisateur(10000000000);
 							} else {
-								setLoginStatus(true);
-								setUsername(reponse.data[0].IdClient);
+								setStatutConnexion(true);
+								setUtilisateur(reponse.data[0].IdClient);
 							}
 						});
 					}
@@ -307,7 +307,7 @@ const Inscription = () => {
 
     return (
 		<div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
 			<div className="inscription c_cadre_inscription">
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 					<div className="i_bouton_con">CONNEXION</div>

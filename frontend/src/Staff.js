@@ -15,36 +15,36 @@ const Staff = () => {
     let compteur_envoye = 1 ;
     const [donnees, setDonnees] = useState(null);
     const [changement, setChangement] = useState(true);
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
 
-    /**
-     * Vérifie si l'utilisateur est connecté au chargement de la page
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setLoginStatus(false);}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
 
-    /**
-     * Déconnecte l'utilisateur
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}
+	} 
 
 
     /**
@@ -283,7 +283,7 @@ const Staff = () => {
 
     return (
         <div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
             <div className="staff c_page">
 
                 <div className="c_cadre_commandes_afaire i_cadre_attente">

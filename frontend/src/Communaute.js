@@ -14,32 +14,36 @@ const Communaute = () => {
     let[commentaires, setCommentaires] = useState(null)
     let [nom, setNom] = useState(null)
     let [ville, setVille] = useState(null)
+    const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
-    const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState("");
 
-    useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setStatutConnexion(false);}
 		});
-	}, []); 
+	}, []);
 
-    const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
-			setLoginStatus(false);
-			console.log("deconnecté");
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
-	}    
-    
-
-   
+	}  
   
     
 
@@ -96,7 +100,7 @@ const Communaute = () => {
     
    
    
-     
+
     function changerCouleur(id){
     /**
      * Change la couleur du Nom et du Prénom d'une personne 
@@ -358,7 +362,7 @@ const Communaute = () => {
     return(
 
         <div>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
             <fieldset id = "recherche">
 
                 <select id="selectVille" onChange={()=>Trie()}>

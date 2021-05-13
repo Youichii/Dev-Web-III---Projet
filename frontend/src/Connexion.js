@@ -8,10 +8,10 @@ const Connexion = () => {
 	require('./connexion.css');
 	Axios.defaults.withCredentials = true;
 
-	const [loginStatus, setLoginStatus] = useState(false);
-	const [username, setUsername] = useState(10000000000);
 	let mail_valide = "vide";
 	let mdp_valide = "vide";
+	const [statutConnexion, setStatutConnexion] = useState(false);
+	const [utilisateur, setUtilisateur] = useState(10000000000);
 
 
 	/**
@@ -20,12 +20,12 @@ const Connexion = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			if (response.data.loggedIn === true) {
-				setLoginStatus(true);
-				setUsername(response.data.user[0].IdClient);
+		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+			if (reponse.data.loggedIn === true) {
+				setStatutConnexion(true);
+				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setLoginStatus(false);}
+			else {setStatutConnexion(false);}
 		});
 	}, []);
 
@@ -36,8 +36,8 @@ const Connexion = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			setLoginStatus(false);
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+			setStatutConnexion(false);
 		});
 	} 
 
@@ -87,12 +87,12 @@ const Connexion = () => {
 		if (verificationValeurs()) {
 			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 				if (reponse.data.message) {
-					setLoginStatus(false);
-					setUsername(10000000000);
+					setStatutConnexion(false);
+					setUtilisateur(10000000000);
 					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail et/ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
 				} else {
-					setLoginStatus(true);
-					setUsername(reponse.data[0].IdClient);
+					setStatutConnexion(true);
+					setUtilisateur(reponse.data[0].IdClient);
 					document.getElementById("erreur_connexion").innerHTML = "";
 				}
 			});
@@ -101,7 +101,7 @@ const Connexion = () => {
 
 	return (
 		<div>
-			{loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
 			<div className="connexion c_cadre">
 				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 					<div className="i_bouton_connexion">CONNEXION</div>
