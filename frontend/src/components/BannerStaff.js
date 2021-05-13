@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const BannerStaff = ({ onClick }) => {
-    require('../bannerStaff.css');
+    require('../css/bannerStaff.css');
     return (
         <nav className="navbar">                    
             <NavLink to='/home'>

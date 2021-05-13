@@ -8,7 +8,7 @@ import Axios from 'axios';
 import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
-import './Accueil.css';
+import './css/Accueil.css';
 
 const Accueil = () => {
 

@@ -6,7 +6,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Carte = () => {
-    require('./carte.css');
+    require('./css/carte.css');
     Axios.defaults.withCredentials = true;
     
     const [tableau_panier, setTableau]= useState([]);

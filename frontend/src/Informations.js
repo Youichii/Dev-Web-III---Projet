@@ -10,7 +10,7 @@ import BannerConnect from './components/BannerConnect.js';
 
 
 const Informations = () => {
-    require('./informations.css');
+    require('./css/informations.css');
     Axios.defaults.withCredentials = true;
 
     const [horairesList, setHorairesList] = useState([]);

@@ -11,7 +11,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const ProfilPrive = () => {
-    require('./profilPrive.css')
+    require('./css/profilPrive.css')
     Axios.defaults.withCredentials = true;
 
     const [username, setUsername] = useState('');

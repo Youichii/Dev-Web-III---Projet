@@ -6,7 +6,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Inscription = () => {
-	require('./inscription.css');
+	require('./css/inscription.css');
 	Axios.defaults.withCredentials = true;
 
 	const [liste_jours, setListeJours] = useState(null);

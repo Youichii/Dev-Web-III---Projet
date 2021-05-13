@@ -8,7 +8,7 @@ import BannerConnect from './components/BannerConnect.js';
 import { useEffect, useState } from 'react';
 
 const Modification = () => {
-    require('./modification.css');
+    require('./css/modification.css');
     Axios.defaults.withCredentials = true;
 
     const [Lundi, setLundi] = useState(null)

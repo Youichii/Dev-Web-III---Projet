@@ -3,7 +3,7 @@ import Sidebareright from "./Sidebareright";
 import Carte from "./Carte";
 
 const Menu = () => {
-    require("./carte.css")
+    require("./css/carte.css")
     
     return ( 
         <div className = "Menu"> 

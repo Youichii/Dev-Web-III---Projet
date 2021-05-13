@@ -7,7 +7,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Staff = () => {
-    require('./staff.css');
+    require('./css/staff.css');
     Axios.defaults.withCredentials = true;
 
     let compteur_afaire = 1 ;

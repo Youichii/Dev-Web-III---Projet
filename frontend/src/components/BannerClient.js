@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const BannerClient = ({ onClick }) => {
-    require('../bannerClient.css');
+    require('../css/bannerClient.css');
     return (
         <nav className="c_barre_nav">                    
             <NavLink to='/home'>

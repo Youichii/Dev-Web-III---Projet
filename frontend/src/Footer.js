@@ -1,5 +1,5 @@
 const Footer = () => {
-	require('./footer.css')
+	require('./css/footer.css')
 	
     return (
         <div className="footer">

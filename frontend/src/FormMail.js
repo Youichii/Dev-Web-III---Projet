@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './FormMail.css';
 import Axios from "axios";
 import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
@@ -11,7 +10,7 @@ import BannerConnect from './components/BannerConnect.js';
  */
 
  function FormEmail (){
-
+    require('./css/FormMail.css');
      const [emailer, setEmailer] = useState({
          message:""
      });

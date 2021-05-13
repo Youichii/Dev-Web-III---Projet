@@ -9,7 +9,7 @@ div.dd-wraper {
     padding : 1%;
     font-weight: 800;
     border : 1px solid black;
-    background-image: url("./img/poulet.jpg");
+    background-image: url("../img/poulet.jpg");
     background-size: cover;
     border-radius: 100px;
 }
@@ -82,7 +82,7 @@ div.dd-wraper-2 {
     padding : 1%;
     font-weight: 800;
     border : 1px solid black;
-    background-image: url("./img/poulet.jpg");
+    background-image: url("../img/poulet.jpg");
     background-size: cover;
     border-radius: 100px;
 }
@@ -106,7 +106,7 @@ div.dd-wraper-3 {
     padding : 1%;
     font-weight: 800;
     border : 1px solid black;
-    background-image: url("./img/poulet.jpg");
+    background-image: url("../img/poulet.jpg");
     background-size: cover;
     border-radius: 100px;
     text-align: center;

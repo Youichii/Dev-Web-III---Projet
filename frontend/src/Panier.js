@@ -7,7 +7,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Panier = () => {
-    require('./panier.css');
+    require('./css/panier.css');
     Axios.defaults.withCredentials = true;
 
     const [heures, setHeures] = useState([]);

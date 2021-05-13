@@ -5,7 +5,7 @@ import facebook from "./img/Facebook.png";
 import twitter from "./img/Twitter.png";
 
 const Banner = () => {
-    require('./bannerKK.css');
+    require('./css/banniereBasique.css');
     
     return(
         <nav className="navbar banniere_visiteur">          

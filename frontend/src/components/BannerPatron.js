@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const BannerPatron = ({ onClick }) => {
-    require('../bannerPatron.css');
+    require('../css/bannerPatron.css');
     return (
         <nav className="navbar">                    
             <li><a href="/" >Statistiques</a></li>

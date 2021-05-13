@@ -5,7 +5,7 @@ import BannerConnect from './components/BannerConnect.js';
 
 
 const Historique = () => {
-    require("./historique.css")
+    require("./css/historique.css")
     Axios.defaults.withCredentials = true;
 
     let [historiques, setHistoriques] = useState(null)

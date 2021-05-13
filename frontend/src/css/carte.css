@@ -57,7 +57,7 @@ code {
     grid-column: 1;
     grid-row-start: 1;
     grid-row-end: 4;
-    background-image: url("./img/Cadre_Menu_Gauche.jpg");
+    background-image: url("../img/Cadre_Menu_Gauche.jpg");
     margin-left: 10%;
     margin-right:5%;
     background-size:cover;
@@ -74,7 +74,7 @@ code {
     grid-column:3;
     grid-row: 1;
     /* grid-row-end: 4; */
-    background-image: url("./img/Cadre_Menu_Droit.jpg");
+    background-image: url("../img/Cadre_Menu_Droit.jpg");
     margin-right: 10%;
     margin-left:5%;
     color: black;

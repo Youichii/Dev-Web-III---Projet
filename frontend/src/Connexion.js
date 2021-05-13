@@ -5,7 +5,7 @@ import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
 
 const Connexion = () => {
-	require('./connexion.css');
+	require('./css/connexion.css');
 	Axios.defaults.withCredentials = true;
 
 	let mail_valide = "vide";

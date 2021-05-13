@@ -6,7 +6,7 @@ import BannerPatron from './BannerPatron.js';
 import BannerClient from './BannerClient.js';
 
 const BannerConnect = ({onClick, client}) => {
-    //require('../bannerConnect.css');
+    //require('../css/bannerConnect.css');
     if (client === 1) {
         return (
             <BannerPatron onClick={onClick}></BannerPatron>
