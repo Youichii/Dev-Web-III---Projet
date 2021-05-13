@@ -18,7 +18,7 @@ const Communaute = () => {
         var remplirCommunaute = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/users', remplirCommunaute)
+        fetch('/users', remplirCommunaute)
         .then(response =>{
             return response.json()
         })
@@ -31,7 +31,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comment', remplirCommentaire)
+        fetch('/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -64,7 +64,7 @@ const Communaute = () => {
             body: JSON.stringify({ Status: 0 , IdClient:id})
             
             }
-            fetch('http://localhost:3001/status', retournerStatus)
+            fetch('/status', retournerStatus)
             .then(res => {
                 return res.json();
             })
@@ -82,7 +82,7 @@ const Communaute = () => {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ Status: 1, IdClient:id})
             }
-            fetch('http://localhost:3001/status', retournerStatus)
+            fetch('/status', retournerStatus)
             .then(res => {
                 return res.json();
             })       
@@ -100,7 +100,7 @@ const Communaute = () => {
                                 Commentaire:commentaire
         })
         }
-        fetch('http://localhost:3001/comment', supprimerCommentaire)
+        fetch('/comment', supprimerCommentaire)
             .then(response => {
                 return response.json();
             }) 
@@ -109,7 +109,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comment', remplirCommentaire)
+        fetch('/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -137,7 +137,7 @@ const Communaute = () => {
                                 Commentaire : comment
                             })
         }
-        fetch('http://localhost:3001/comment', retournerCommentaire)
+        fetch('/comment', retournerCommentaire)
         .then(res => {
             return res.json();
         })
@@ -150,7 +150,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/comment', remplirCommentaire)
+        fetch('/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -174,7 +174,7 @@ const Communaute = () => {
             var remplirCommunaute = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch('http://localhost:3001/users', remplirCommunaute)
+            fetch('/users', remplirCommunaute)
             .then(response =>{
                 return response.json()
             })
@@ -190,7 +190,7 @@ const Communaute = () => {
             var remplirCommunauteVille = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/usersville/${valueVille}`, remplirCommunauteVille)
+            fetch(`/usersville/${valueVille}`, remplirCommunauteVille)
             .then(response =>{
                 return response.json()
             })
@@ -212,7 +212,7 @@ const Communaute = () => {
             var remplirCommunauteStatus = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/usersstatus/${valueStatus}`, remplirCommunauteStatus)
+            fetch(`/usersstatus/${valueStatus}`, remplirCommunauteStatus)
             .then(response =>{
                 return response.json()
             })
@@ -228,7 +228,7 @@ const Communaute = () => {
             var remplirCommunauteNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/usersnom/${valueNom}`, remplirCommunauteNom)
+            fetch(`/usersnom/${valueNom}`, remplirCommunauteNom)
             .then(response=>{
                 return response.json()
             })
@@ -249,7 +249,7 @@ const Communaute = () => {
             var remplirCommunauteVilleStatus = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/userVilleStatus/${valueVille}/${valueStatus}`, remplirCommunauteVilleStatus)
+            fetch(`/userVilleStatus/${valueVille}/${valueStatus}`, remplirCommunauteVilleStatus)
             .then(response=>{
                 return response.json()
             })
@@ -270,7 +270,7 @@ const Communaute = () => {
             var remplirCommunauteStatusNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/userStatusNom/${valueStatus}/${valueNom}`, remplirCommunauteStatusNom)
+            fetch(`/userStatusNom/${valueStatus}/${valueNom}`, remplirCommunauteStatusNom)
             .then(response=>{
                 return response.json()
             })
@@ -283,7 +283,7 @@ const Communaute = () => {
             var remplirCommunauteVilleNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`http://localhost:3001/userVilleNom/${valueVille}/${valueNom}`, remplirCommunauteVilleNom)
+            fetch(`/userVilleNom/${valueVille}/${valueNom}`, remplirCommunauteVilleNom)
             .then(response=>{
                 return response.json()
             })

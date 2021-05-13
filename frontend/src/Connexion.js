@@ -37,7 +37,7 @@ const Connexion = () => {
 			var myInit = { method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			};
-			fetch(`http://localhost:3001/api/users/${mail}/${pwd}`, myInit)
+			fetch(`/api/users/${mail}/${pwd}`, myInit)
 			.then(res => {
 				return res.json();
 			})

@@ -20,7 +20,7 @@ const Carte = () => {
         var remplirCategorie = {method: 'GET', 
             headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/categories', remplirCategorie)
+        fetch('/categories', remplirCategorie)
         .then(response=>{ 
             return response.json()
         })
@@ -32,7 +32,7 @@ const Carte = () => {
         var remplirMenu = {method: 'GET', 
             headers: {'Content-type':'application/json'}
         }; 
-        fetch('http://localhost:3001/menu', remplirMenu)
+        fetch('/menu', remplirMenu)
             .then(response=>{ 
                 return response.json()
             })
@@ -44,7 +44,7 @@ const Carte = () => {
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+        fetch(`/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
@@ -66,7 +66,7 @@ const Carte = () => {
                                     IdEtat:"Composition",                      
                                 })
             }
-            fetch('http://localhost:3001/orders', myInit)
+            fetch('/orders', myInit)
             .then(res => {
                 return res.json();
             })
@@ -86,7 +86,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 })  
             }
-            fetch('http://localhost:3001/intermediateBasket', remplirPanier)
+            fetch('/intermediateBasket', remplirPanier)
             .then(res => {
                 return res.json();
             })
@@ -102,7 +102,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 }) 
             }
-            fetch('http://localhost:3001/changingquantity',changerquantite)
+            fetch('/changingquantity',changerquantite)
             .then(res => {
                 return res.json();
             }) 
@@ -118,7 +118,7 @@ const Carte = () => {
                                     Etat:"Panier",                      
             })
         }
-        fetch('http://localhost:3001/orders', myInit)
+        fetch('/orders', myInit)
             .then(res => {
                 return res.json();
             })

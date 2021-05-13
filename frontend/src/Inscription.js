@@ -202,7 +202,7 @@ const Inscription = () => {
 										nwsletter : neswletter_cochee})
 			};
 
-			fetch('http://localhost:3001/api/users', myInit)
+			fetch('/api/users', myInit)
 			.then(res => {
 				return res.json();
 			})

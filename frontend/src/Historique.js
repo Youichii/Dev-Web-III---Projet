@@ -12,7 +12,7 @@ const Historique = () => {
         var remplirHistorique = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/historical', remplirHistorique)
+        fetch('/historical', remplirHistorique)
         .then(response =>{
             return response.json()
         })
@@ -24,7 +24,7 @@ const Historique = () => {
         var remplirDate = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/historicalDate', remplirDate)
+        fetch('/historicalDate', remplirDate)
         .then(response =>{
             return response.json()
         })

@@ -24,20 +24,20 @@ const Modification = () => {
     //const [mapRest, setMapRest] = useState(''); 
 
     const getHoraires = () => {
-        Axios.get(`http://localhost:3001/api/coord/horaires`).then((response)=> {
+        Axios.get(`/api/coord/horaires`).then((response)=> {
             setHorairesList(response.data)
         })
     }
 
     const getCoordonnees = () => {
         getHoraires();
-        Axios.get('http://localhost:3001/api/coordonnees').then((response) => {
+        Axios.get('/api/coordonnees').then((response) => {
            setCoordonneesList(response.data)
        })
     } 
 
     const submitMailRest = () => {
-        Axios.put('http://localhost:3001/api/coord/mail', {
+        Axios.put('/api/coord/mail', {
             mailRest : mailRest
         }).then ((response) => {
             if (response){
@@ -47,7 +47,7 @@ const Modification = () => {
     }
 
     const submitTelRest = () => {
-        Axios.put('http://localhost:3001/api/coord/tel', {
+        Axios.put('/api/coord/tel', {
             telRest : telRest
         }).then ((response) => {
             if (response){
@@ -57,7 +57,7 @@ const Modification = () => {
     }
 
     /*const submitMapRest = () => {
-        Axios.put('http://localhost:3001/api/coord/map', {
+        Axios.put('/api/coord/map', {
             mapRest : mapRest
         }).then((response) => {
             console.log("ok")
@@ -65,7 +65,7 @@ const Modification = () => {
     }*/
 
     const submitAdressRest = () => {
-        Axios.put('http://localhost:3001/api/coord/address', {
+        Axios.put('/api/coord/address', {
             streetRest : streetRest,
             numberRest : numberRest,
             zipCodeRest : zipCodeRest,
@@ -77,7 +77,7 @@ const Modification = () => {
     }
 
     const submitDay = () => {
-        Axios.put('http://localhost:3001/api/coord/horaires', {
+        Axios.put('/api/coord/horaires', {
             Lundi : Lundi,
             Mardi : Mardi,
             Mercredi : Mercredi,

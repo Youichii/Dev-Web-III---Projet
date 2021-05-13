@@ -21,7 +21,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/hours`, myInit)
+        fetch(`/api/hours`, myInit)
         .then(res => {
             return res.json();
         })
@@ -48,7 +48,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/orders/users/${identifiantClient}`, myInit)
+        fetch(`/api/orders/users/${identifiantClient}`, myInit)
         .then(res => {
             return res.json();
         })
@@ -70,7 +70,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/users/${identifiantClient}`, myInit)
+        fetch(`/api/users/${identifiantClient}`, myInit)
         .then(res => {
             return res.json();
         })
@@ -102,7 +102,7 @@ const Panier = () => {
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
-        fetch(`http://localhost:3001/api/orders`, myInit)
+        fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
@@ -117,7 +117,7 @@ const Panier = () => {
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande})
         };
-        fetch(`http://localhost:3001/api/orders`, myInit)
+        fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
@@ -135,7 +135,7 @@ const Panier = () => {
         };
 
         if ((nouvelle_qtite <= 100) && (nouvelle_qtite >= 0)) {
-            fetch(`http://localhost:3001/api/orders/foods`, myInit)
+            fetch(`/api/orders/foods`, myInit)
             .then(res => {
                 return res.json();
             })
@@ -155,12 +155,12 @@ const Panier = () => {
     }
 
     const changer_prix = (id_produit, id_prix) => {
-        let information = donnees_panier.filter(element => element.idProd == id_produit)[0];
+        let information = donnees_panier.filter(element => element.IdProduit == id_produit)[0];
         
-        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.prix + " €";
-        information.quantite = Number(document.getElementById(id_prix).value);
+        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.Prix + " €";
+        information.Quantite = Number(document.getElementById(id_prix).value);
         let total = 0 ;
-        donnees_panier.map(aliment => total+=aliment.quantite*aliment.prix);
+        donnees_panier.map(aliment => total+=aliment.Quantite*aliment.Prix);
         setTotal(total) ;
     }
 

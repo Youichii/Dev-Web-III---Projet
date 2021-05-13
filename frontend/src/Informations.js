@@ -11,14 +11,14 @@ const Informations = () => {
     const [coordonneesList, setCoordonneesList] = useState([])
 
     const getHoraires = () => {
-         Axios.get('http://localhost:3001/api/coord/horaires').then((response) => {
+         Axios.get('/api/coord/horaires').then((response) => {
             setHorairesList(response.data)
         })
     }
 
     const getCoordonnees = () => {
         getHoraires();
-        Axios.get('http://localhost:3001/api/coordonnees').then((response) => {
+        Axios.get('/api/coordonnees').then((response) => {
             setCoordonneesList(response.data)
 
        })
