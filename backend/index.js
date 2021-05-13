@@ -677,26 +677,13 @@ app.get('/year', (req, res) =>{
   })
 })
 
-
-app.get('/api/users', (req, res)=>{
-  const mailList = []
-  const sqlGet = "SELECT  Mail FROM Clients";
-  db.query(sqlGet, (err, result)=>{
-      res.send(result);
-      result.forEach(Clients => {
-          mailList.push (Clients.Mail);
-          
-          console.log(mailList);
-          return mailList;
-          
-      });
-
-  });
-});
+//------------------------ MAIL Newsletter---------------------
 
 
-//faire passer les options au transporter et pouvoir enfaire des requêtes
 
+/** 
+ * Créer un transporter pour les mails et définir les paramètres
+**/
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth:{
@@ -705,15 +692,26 @@ let transporter = nodemailer.createTransport({
   }
 });
 
+/** 
+ * Verifier que le transporter fonctionne est qu'il est bien prêt à envoyer des mails
+ **/
 transporter.verify((err, success)=>{
   err? console.log (err)
   : console.log(`=====Pret à envoyé des mail: ${success}======`);
 });
 
+/**
+ * Post dans le quel on récupère du SQL, on définit les options d'envoie et l'envoie en lui même
+ * @author: Noelle Khazoum <kh.noelle@gmail.com>
+ * @method: forEach permet de récupérer les mails et de les ajouter à une liste
+ * @param: /
+ * @returns: Renvoie la liste qui contient les adresse mails.
+ */
+
 app.post("/envoye", function (req, res){
   const listMail = [];
 
-  const sqlGet = "SELECT Prenom,  Mail FROM Clients";
+  const sqlGet = "SELECT Prenom,  Mail FROM Clients where Newsletter =1";
   db.query(sqlGet, (err, result)=>{
       res.send(result);
       result.forEach(Clients => {
@@ -749,7 +747,7 @@ app.post("/envoye", function (req, res){
   }); 
 });
 
-
+//-------------------
 app.post("/api/valider_commande", function (req, res){
   let detail_commande = "", commande_html="", sous_total;
   let data = req.body.commande;
