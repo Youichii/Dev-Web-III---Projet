@@ -8,6 +8,7 @@ import ProfilPrive from './ProfilPrive';
 import Home from './Home'
 import Comunaute from "./Communaute.js"
 import Menu from "./Menu.js";
+import FormMail from './FormMail';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Historique from './Historique';
 import Modification from './Modification'
@@ -35,7 +36,11 @@ function App() {
               <Modification />
             </Route>
 
-            <Route exact path="/informations">
+            <Router exact path="/newsletter">
+              <FormMail/>
+            </Router>
+
+            <Route exact path="/informations"> 
               <Informations />
             </Route>
 
