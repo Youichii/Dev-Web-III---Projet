@@ -16,7 +16,7 @@ const Carte = () => {
 
  
     let id_comm = 20
-    let id_client = 2802
+   
 
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
@@ -81,28 +81,31 @@ const Carte = () => {
 
     }, [])
     
+    /**
+     * Remplie le panier de commande selon ce que le client ajoute ou retire
+     * @author Cécile Bonnet <c.bonnet@gmail.com>
+     * @param {Number} idProduit du produit que l'on veut ajouter au panier. 
+     * 
+     */
     function panier(idProduit) {
-     
+ 
         let compteur = 0 
-        // On créé une fois une entrée dans la table de reservation. 
         if(compteur === 0){
-            var myInit = { method:'POST', 
+            var premiereEntre = { method:'POST', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({  IdCommande : Number(id_comm), 
-                                    IdClient : Number(id_client)                     
+                                    IdClient : Number(username)                     
                                 })
             }
-            fetch('http://localhost:3001/orders', myInit)
+            fetch('http://localhost:3001/orders', premiereEntre)
             .then(res => {
                 return res.json();
             })
         compteur += 1
         }
-        
-        // On récupère la quanité indiqué sur la page. 
+
         let qtt = Number(document.getElementById(idProduit+"compteur").value)
-        
-        //  On ajoute un produit dans la table
+
         if(qtt === 1){
             
             var remplirPanier = { method:'POST', 
@@ -117,23 +120,19 @@ const Carte = () => {
                 return res.json();
             })
 
-        // On recharge la table de la commande. 
             var panier = {method: 'GET', 
-        headers: {'Content-type':'application/json'}
-        }; 
-        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+            headers: {'Content-type':'application/json'}
+            }; 
+            fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
             .then(json =>{ 
                 setPanier(json)
             }) 
-
         }
 
         else{
-            
-            // On change la quantité d'un produit qui est déjà dans la table. 
             var changerquantite = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({  IdCommande : Number(id_comm), 
