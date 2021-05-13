@@ -80,6 +80,14 @@ const Modification = () => {
         })
     }
 
+    const DelProduit = (id) => {
+        Axios.delete(`http://localhost:3001/api/menu`, {
+            id : id
+        }).then((response) => {
+            
+        })
+    }
+
     const getCoordonnees = () => {
         getHoraires();
         getCategorie();
@@ -332,7 +340,10 @@ const Modification = () => {
                                         <span className="price">{contenu_filtre.Prix.toFixed(2) + "€" }</span>
                                     </div>
                                     <div className="bas">  
-                                        <span className="description">{contenu_filtre.Description}</span>  
+                                        <span className="description">{contenu_filtre.Description}</span>
+                                        <form>
+                                            <button onClick={DelProduit()}>X</button>
+                                        </form>  
                                     </div>
                     
                                     
