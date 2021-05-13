@@ -9,14 +9,12 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 
-//mysql.createPool
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
   database : 'profilprive'
 })
-
 app.listen(3001, () => {
   console.log("running on port 3001");
 })
@@ -26,7 +24,7 @@ app.use(cors({
   origin:["http://localhost:3000"],
   methods:["GET", "POST", "PUT", "DELETE"],
   credentials:true
-}))  //to avoid CORS policy
+}))
 
 
 //Profil Privé
@@ -166,10 +164,13 @@ app.get('/api/coordonnees', (req, res) => {
 
 
 
-//Cookie
+/**
+ * Crée les différents éléments nécessaires à la création de cookies - sessions
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ */
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
-
 app.use(session({
   key:"userId",
 	secret: 'secret',
@@ -178,32 +179,44 @@ app.use(session({
   cookie: { expires: new Date(Date.now() + 1800000) }
 }));
 
+/**
+ * Récupère l'identifiant du client correspondant aux informations précisées,
+ * et crée un cookie si les informations sont correctes
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param  {string} email  mail de l'utilisateur
+ * @param  {string} mdp    mot de passe de l'utilisateur
+ * @return {object}        l'identifiant du client, sinon un message d'erreur
+ */ 
 app.get('/api/connect-users/:mail/:pwd', function(request, response) {
-	var username = request.params.mail;
-  //console.log("avant : ", request.session.loggedin);
-	var password = request.params.pwd;
-	if (username && password) {
-		db.query('SELECT IdClient FROM clients WHERE Mail = ? and Mdp = ?', [username, password], function(error, results, fields) {
+	var email = request.params.mail;
+	var mdp = request.params.pwd;
+	if (email && mdp) {
+		db.query('SELECT IdClient FROM clients WHERE Mail = ? and Mdp = ?', [email, mdp], function(error, results, fields) {
 			if (results.length > 0) {
-        console.log("bon username");
         request.session.user = results ;
-        //console.log("user : ", request.session.user);
         response.send(results);
 			} 
       else {
-        console.log("mauvais username");
-				response.send({message:'ko', msg:'Incorrect Username and/or Password!'});
+				response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
 			}			
 			response.end();
 		});
 	} 
   else {
-    console.log("vide username");
-		response.send({message:'ko', msg:'Please enter Username and Password!'});
+		response.send({message:'ko', msg:"Nom d'utilisateur et/ou mot de passe vide"});
 		response.end();
 	}
 });
 
+/**
+ * Vérifie si l'utilisateur est connecté
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @return {object} true si utilisateur connecté, false sinon
+ */ 
 app.get('/api/connexion', function(request, response){
   if (request.session.user){
     response.send({loggedIn:true, user:request.session.user});
@@ -213,28 +226,38 @@ app.get('/api/connexion', function(request, response){
   }
 });
 
+/**
+ * Déconnecte l'utilisateur en supprimant la session
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @return {object} renvoie false pour signifier que l'utilisateur est déconnecté
+ */ 
 app.get('/api/deconnexion', function(request, response) {
-  console.log("deconnexion");
   request.session.destroy();
   response.send({loggedIn:false});
 });
 
-
-//Connexion
-/*app.get('/api/users/:mail/:pwd', (req, res) => {
-
-  const mail = req.params.mail ;
-  const pwd = req.params.pwd  ;
-  
-  const sqlInsert = "SELECT IdClient from clients where Mail = ? and Mdp = ?";
-  db.query(sqlInsert, [mail, pwd], (err, result) => {
-    console.log(err);
-    res.send(result) ;
-  })
-})*/
-
+/**
+ * Ajoute un utilisateur
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method POST
+ * @param {string} name
+ * @param {string} firstname
+ * @param {string} birthday
+ * @param {string} phone
+ * @param {string} mail
+ * @param {string} gender
+ * @param {string} pwd
+ * @param {string} rue
+ * @param {string} numero
+ * @param {number} postal
+ * @param {string} ville
+ * @param {number} neswletter
+ * @return {object} renvoie false si le client existe déjà, sinon les codes de retour adéquats
+ */ 
 app.post('/api/users', (req, res) => {
-
   const name = req.body.name ;
   const firstname = req.body.firstname ;
   const birthday = req.body.birthday ;
@@ -256,106 +279,142 @@ app.post('/api/users', (req, res) => {
     else {
       const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
       db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
-        console.log(err) ;
         res.send(result);
       });
     }
   });
 }) 
   
-  
- app.get('/api/orders', (req, res) => {
-    const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, CL.Mail, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
-    FROM reservations AS RE  \
-    JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
-    JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
-    JOIN menu AS ME ON CO.IdProduit = ME.IdProduit \
-    GROUP BY RE.IdCommande" ;
-    db.query(sqlInsert, [], (err, result) => {
-      console.log("erreur : ", err);
-      res.send(result) ;
-    })
-})
-
-app.put('/api/orders/states', (req, res) => {
-    const type = req.body.type;
-    const commande  = req.body.commande;
-    
-    const sqlInsert = 'UPDATE reservations SET IdEtat = ? where IdCommande = ?';
-    db.query(sqlInsert, [type, commande], (err, result) => {
-      console.log("erreur : ", err);
-      res.send(result) ;
-    })
-})
-
-app.delete('/api/orders', (req, res) => {
-    const commande  = req.body.commande ;
-
-    const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
-    db.query(sqlInsert1, [commande], (err, result) => {
-      console.log("erreur : ", err)
-      //res.send(result) ;
-    })
-    const sqlInsert2 = "DELETE FROM `reservations` where `IdCommande` = ?;";
-    db.query(sqlInsert2, [commande], (err, result) => {
-      console.log("erreur : ", err)
-      res.send(result) ;
-    })
-})
-
-/*app.get('/api/panier/:idCommande', (req, res) => {
-  const idCommande  = req.params.idCommande 
-
-  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite FROM `commandes` AS C  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit  WHERE C.IdCommande = ?";
-  db.query(sqlInsert, [idCommande], (err, result) => {
-    console.log("erreur : ", err) ;
+/**
+ * Récupère toutes les commandes à faire
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */ 
+app.get('/api/orders', (req, res) => {
+  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, CL.Mail, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
+  FROM reservations AS RE  \
+  JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
+  JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
+  JOIN menu AS ME ON CO.IdProduit = ME.IdProduit \
+  GROUP BY RE.IdCommande" ;
+  db.query(sqlInsert, [], (err, result) => {
     res.send(result) ;
   })
-})*/
+})
 
+/**
+ * Modifie l'état d'une commande
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method PUT
+ * @param {string} type     nouvel état de la commande ; à faire, en cours, envoyé
+ * @param {number} commande identifiant de la commande à modifier
+ */
+app.put('/api/orders/states', (req, res) => {
+  const type = req.body.type;
+  const commande  = req.body.commande;
+  
+  const sqlInsert = 'UPDATE reservations SET IdEtat = ? where IdCommande = ?';
+  db.query(sqlInsert, [type, commande], (err, result) => {
+    res.send(result) ;
+  })
+})
+
+/**
+ * Supprime une commande totale
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method DELETE
+ * @param {number} commande identifiant de la commande à supprimer
+ */
+app.delete('/api/orders', (req, res) => {
+  const commande  = req.body.commande ;
+
+  const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
+  db.query(sqlInsert1, [commande], (err, result) => {
+  })
+  const sqlInsert2 = "DELETE FROM `reservations` where `IdCommande` = ?;";
+  db.query(sqlInsert2, [commande], (err, result) => {
+    res.send(result) ;
+  })
+})
+
+/**
+ * Récupère les informations liées à l'adresse et au mail d'un client
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param {number} identifiant  identifiant du client pour lequel on souhaite récupérer les informations
+ */
 app.get('/api/users/:idClient/address', (req, res) => {
-    const identifiant = req.params.idClient 
-    
-    const sqlInsert = "SELECT Mail, Prenom, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
-    db.query(sqlInsert, [identifiant], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
+  const identifiant = req.params.idClient 
+  
+  const sqlInsert = "SELECT Mail, Prenom, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+  db.query(sqlInsert, [identifiant], (err, result) => {
+    res.send(result) ;
+  })
 })
 
+/**
+ * Complète les informations d'une commande qui passe du panier à la la liste des commandes
+ * à faire par le staff
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method PUT
+ * @param {number} commande     identifiant de la commande à compléter
+ * @param {string} methode      méthode ; emporter, livrer
+ * @param {string} commentaire  éventuel commentaire à propos de la commande
+ * @param {string} hSelec       heure sélectionnée pour récupérer la commande
+ * @param {string} rue          rue à laquelle envoyer la commande, si méthode = à livrer
+ * @param {string} numero       numéro de maison auquel envoyer la commande, si méthode = à livrer
+ * @param {number} postal       code postal auquel envoyer la commande, si méthode = à livrer
+ * @param {string} ville        ville à laquelle envoyer la commande, si méthode = à livrer
+ */
 app.put('/api/orders', (req, res) => {
-    const commande  = req.body.commande ;
-    const methode  = req.body.methode ;
-    const commentaire  = req.body.commentaire ;
-    const hSelec  = req.body.hSelec ;
-    const rue  = req.body.rue ;
-    const numero  = req.body.numero ;
-    const postal  = req.body.postal ;
-    const ville  = req.body.ville ;
+  const commande  = req.body.commande ;
+  const methode  = req.body.methode ;
+  const commentaire  = req.body.commentaire ;
+  const hSelec  = req.body.hSelec ;
+  const rue  = req.body.rue ;
+  const numero  = req.body.numero ;
+  const postal  = req.body.postal ;
+  const ville  = req.body.ville ;
 
-    const sqlInsert = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
+  const sqlInsert = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
 
-    db.query(sqlInsert, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
+  db.query(sqlInsert, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
+    res.send(result) ;
+  })
 })
 
+/**
+ * Récupère tous les produits, ainsi que leur id, leur prix et leur quantité, d'une commande spécifique
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param {number} identifiantCommande identifiant de la commande à compléter
+ */
 app.get('/api/orders/users/:identifiantCommande', (req, res) => { 
-    const identifiantCommande = req.params.identifiantCommande ;
+  const identifiantCommande = req.params.identifiantCommande ;
 
-    const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
-    FROM commandes AS C  \
-    JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
-    JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-    WHERE C.IdCommande = ?";
-    db.query(sqlInsert, [identifiantCommande], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
-
+  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
+  FROM commandes AS C  \
+  JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
+  JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
+  WHERE C.IdCommande = ?";
+  db.query(sqlInsert, [identifiantCommande], (err, result) => {
+    res.send(result) ;
+  })
 })
 
+/**
+ * Récupère la commande du panier d'un client
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ * @param {number} identifiantClient identifiant du client pour lequel récupérer la commande
+ */
 app.get('/api/user/:utilisateur/order', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
 
@@ -363,31 +422,42 @@ app.get('/api/user/:utilisateur/order', (req, res) => {
   FROM reservations \
   WHERE IdClient=? AND IdEtat = 'PAN'";
   db.query(sqlInsert, [identifiantClient], (err, result) => {
-    console.log("err : ", err);
     res.send(result) ;
   })
-
 })
 
+/**
+ * Modifie la quantité d'un produit d'une commande spécifique
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method PUT
+ * @param {number} idCommande identifiant de la commande spécifique
+ * @param {number} idProduit  identifiant du produit pour lequel modifier la quantité
+ * @param {number} quantite   nouvelle quantité du produit
+ */
 app.put('/api/orders/:idCommande/foods/:idProduit', (req, res) => {
-    const idCommande = req.params.idCommande;
-    const idProduit = req.params.idProduit ; 
-    const quantite = req.body.quantite;
+  const idCommande = req.params.idCommande;
+  const idProduit = req.params.idProduit ; 
+  const quantite = req.body.quantite;
 
-    const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
-    db.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
+  const sqlInsert = "UPDATE commandes SET Quantite = ? WHERE IdCommande = ? and IdProduit = ?" ;
+  db.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
+    res.send(result) ;
+  })
 })
 
+/**
+ * Récupère les heures non disponibles pour récupérer une commande, car elles ont été déjà sélectionnées 
+ * trop de fois
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */
 app.get('/api/hours', (req, res) => {
-    const sqlInsert = "SELECT HLivree FROM reservations GROUP BY HLivree HAVING COUNT(HLivree)  > 5";
-    db.query(sqlInsert, [], (err, result) => {
-      console.log("err : ", err);
-      console.log("result : ", result) ;
-      res.send(result) ;
-    })
+  const sqlInsert = "SELECT HLivree FROM reservations GROUP BY HLivree HAVING COUNT(HLivree) > 5";
+  db.query(sqlInsert, [], (err, result) => {
+    res.send(result) ;
+  })
 })
 
 
@@ -413,10 +483,10 @@ app.get('/users', (req, res) =>{
  * @method GET
  **/
 app.get('/comment', (req, res) =>{
-    db.query('select * FROM `commentaires`', (err, result) => {
-      if(err) throw err ;
-      res.send(result);
-    })
+  db.query('select * FROM `commentaires`', (err, result) => {
+    if(err) throw err ;
+    res.send(result);
+  })
 })
 
 /**
@@ -432,7 +502,6 @@ app.post('/comment', (req, res) =>{
   const commentaire  = req.body.Commentaire
 
   const sqlInsert = " INSERT INTO `commentaires` (`IdClient`, `Commentaire`) VALUES (?, ?);"
-
   db.query(sqlInsert, [idClient, commentaire], (err, result) => {
     if(err) throw err;  
     res.send(result); 
@@ -452,12 +521,10 @@ app.delete('/comment', (req, res) => {
   const idClient = req.body.IdClient
 
   const sqlInsert = "DELETE FROM `commentaires` WHERE `Commentaire` = ? && `IdClient`=?"
-
   db.query(sqlInsert, [commentaire, idClient], (err, result) => {
       if(err) throw err;  
       res.send(result) ;
   })
-  
 })
 
 /**
@@ -469,16 +536,14 @@ app.delete('/comment', (req, res) => {
  * @param {String} commentaire que le patron a fait sur le client
  **/
 app.put('/status', (req, res) =>{
-    const Status = req.body.Status
-    const IdClient= req.body.IdClient
-    
+  const Status = req.body.Status
+  const IdClient= req.body.IdClient
   
-    const sqlInsert = " UPDATE clients SET `Status`= ? WHERE IdClient = ?;" 
-  
-    db.query(sqlInsert, [Status, IdClient], (err, result) => {
-      if(err) throw err; 
-      res.send(result); 
-    })
+  const sqlInsert = " UPDATE clients SET `Status`= ? WHERE IdClient = ?;" 
+  db.query(sqlInsert, [Status, IdClient], (err, result) => {
+    if(err) throw err; 
+    res.send(result); 
+  })
 })
 
 /**
@@ -488,9 +553,7 @@ app.put('/status', (req, res) =>{
  * @method GET
  **/
 app.get('/filterNom', (req, res) =>{
-   
   const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
-
   db.query(sqlInsert,(err, result) => {
       if(err) throw err ;
       res.send(result);
@@ -505,9 +568,7 @@ app.get('/filterNom', (req, res) =>{
  * @method GET
  **/
 app.get('/filterVille', (req, res) =>{
-   
   const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
-
   db.query(sqlInsert,(err, result) => {
       if(err) throw err ;
       res.send(result);
@@ -523,15 +584,13 @@ app.get('/filterVille', (req, res) =>{
  * 
  **/
 app.get('/usersville/:ville', (req, res) =>{
-   
-    const ville = req.params.ville
-   
-    const sqlInsert = "SELECT * FROM `clients` WHERE `Ville` = ?"
-
-    db.query(sqlInsert,[ville],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
+  const ville = req.params.ville
+  
+  const sqlInsert = "SELECT * FROM `clients` WHERE `Ville` = ?"
+  db.query(sqlInsert,[ville],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
 })
 
 /**
@@ -542,15 +601,13 @@ app.get('/usersville/:ville', (req, res) =>{
  * @param {String} status que le patron a choisi pour faire son trie  
   **/
 app.get('/usersstatus/:status', (req, res) =>{
-   
-    const status = req.params.status
+  const status = req.params.status
 
-    const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
-
-    db.query(sqlInsert,[status],(err, result) => {
-        if(err) throw err ;
-        res.send(result);
-    })
+  const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
+  db.query(sqlInsert,[status],(err, result) => {
+      if(err) throw err ;
+      res.send(result);
+  })
 })
 
 /**
@@ -561,78 +618,14 @@ app.get('/usersstatus/:status', (req, res) =>{
  * @param {String} nom que le patron a choisi pour faire son trie  
   **/
 app.get('/usersnom/:nom', (req,res) =>{
-
   const nom = req.params.nom
 
   const sqlInsert = "SELECT * FROM `clients` WHERE `Nom` = ?"
-
   db.query(sqlInsert,[nom],(err, result) => {
       if(err) throw err ;
       res.send(result);
   })
 })
-
-
-// // Requête GET pour trier le contenu de la communauté sur base de la ville et du status 
-// app.get('/userstrie1/:ville/:status', (req, res) =>{
-   
-//   const Status = req.params.status
-//   const Ville = req.params.ville
-   
-//   const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ?  "
- 
-//   db.query(sqlInsert,[Status, Ville],(err, result) => {
-//       if(err) throw err ;
-//       res.send(result);
-//   })
-// })
-
-
-// // Requête GET pour trier le contenu de la communauté sur base du status et du nom 
-// app.get('/userstrie1/:status/:nom', (req, res) =>{
-   
-//   const Status = req.params.valueStatus
-//   const Nom = req.params.valueNom
-  
-//   const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? and `Nom` = ? "
- 
-//   db.query(sqlInsert,[Status, Nom],(err, result) => {
-//       if(err) throw err ;
-//       res.send(result);
-//   })
-// })
-
-
-// // Requête GET pour trier le contenu de la communauté sur base de la ville et du nom 
-// app.get('/userstrie1/:ville/:nom', (req, res) =>{
-   
-//   const Ville = req.params.valueVille
-//   const Nom = req.params.valueNom
-  
-//   const sqlInsert = " SELECT * FROM `Clients` WHERE `Ville` = ? && `Nom` = ? "
- 
-//   db.query(sqlInsert,[Ville, Nom],(err, result) => {
-//       if(err) throw err ;
-//       res.send(result);
-//   })
-// })
-
-
-// // Requête GET pour trier le contenu de la communauté sur base de la ville, du nom et du status 
-// app.get('/userstrie1/:status/:ville/:nom', (req, res) =>{ 
-   
-//     const Status = req.params.valueStatus
-//     const Ville = req.params.valueVille
-//     const Nom = req.params.valueNom
-    
-//     const sqlInsert = " SELECT * FROM `Clients` WHERE `Status` = ? && `Ville` = ? && `Nom` = ? "
-   
-//     db.query(sqlInsert,[Status, Ville, Nom],(err, result) => {
-//         if(err) throw err ;
-//         res.send(result);
-//     })
-// })
-
 
 
 // Code pour la carte Menu  --------------------------------------------------------------------------------------------------
@@ -669,7 +662,6 @@ app.get('/categories', (req, res) =>{
  * @param {String} idcommande de la commande en cours 
   **/ 
 app.get('/loadingBasket/:IdCommande', (req, res) =>{
-
   const idCommande = req.params.id_comm
 
   const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
@@ -688,7 +680,6 @@ app.get('/loadingBasket/:IdCommande', (req, res) =>{
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
 app.post('/intermediateBasket', (req, res) => {
-  
   const idCommande = req.body.IdCommande
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
@@ -711,13 +702,11 @@ app.post('/intermediateBasket', (req, res) => {
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
 app.put('/changingquantity', (req, res) =>{
- 
   const idCommande = req.body.IdCommande
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
   
   const sqlInsert = " UPDATE `commandes` SET `Quantite` = ? WHERE `IdCommande` = ? && `IdProduit` = ? ;" 
-
   db.query(sqlInsert, [quantite, idCommande, idProduit], (err, result) => {
     if(err) throw err; 
     res.send(result); 
@@ -732,7 +721,6 @@ app.put('/changingquantity', (req, res) =>{
  * 
   **/ 
 app.post('/orders', (req, res) => {
- 
   const idClient = req.body.IdClient
 
   const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
@@ -752,15 +740,12 @@ app.post('/orders', (req, res) => {
  * 
 **/ 
 app.get('/historical', (req, res) =>{
-
   const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
-  
   db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
-
 
 /**
  * Récupère à l'aide d'un GET toutes les année différentes contenu dans la db
@@ -769,7 +754,6 @@ app.get('/historical', (req, res) =>{
  * 
 **/ 
 app.get('/year', (req, res) =>{
-
   const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
   db.query(sqlInsert,['H'], (err, result) => {
     if(err) throw err ;
@@ -777,8 +761,8 @@ app.get('/year', (req, res) =>{
   })
 })
 
-//------------------------ MAIL Newsletter---------------------
 
+//------------------------ MAIL Newsletter---------------------
 
 
 /** 
@@ -797,12 +781,9 @@ let transporter = nodemailer.createTransport({
  **/
 transporter.verify((err, success)=>{
   err? console.log (err)
-  : console.log(`=====Pret à envoyé des mail: ${success}======`);
+  : console.log(`=====Pret à envoyer des mail: ${success}======`);
 });
 
-
-
-app.post("/envoye", function (req, res){
 
 /**
  * Post dans le quel on récupère du SQL, on définit les options d'envoie et l'envoie en lui même
@@ -811,7 +792,7 @@ app.post("/envoye", function (req, res){
  * @param /
  * @returns {list} mailList Renvoie la liste qui contient les adresse mails.
  */
-
+app.post("/envoye", function (req, res){
   const listMail = [];
 
   const sqlGet = "SELECT Prenom,  Mail FROM Clients where Newsletter =1";
@@ -858,9 +839,7 @@ app.post("/envoye", function (req, res){
  * @method /
  * @param /
  **/
-
 app.get('/api/genre-stat', (req, res)=>{
-
   const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
   db.query(sqlSelect, (err, result)=>{
       res.send(result);
@@ -876,7 +855,6 @@ app.get('/api/genre-stat', (req, res)=>{
  * @param /
  **/
 app.get('/api/localisation-stat', (req, res)=>{
-
   const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
   db.query(sqlSelect, (err, result)=>{
       res.send(result);
@@ -890,7 +868,6 @@ app.get('/api/localisation-stat', (req, res)=>{
  * @method /
  * @param /
  **/
-
 app.get('/api/age-stat', (req, res)=>{
   const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
   db.query(sqlSelect,(err, result)=>{
@@ -908,8 +885,6 @@ app.get('/api/age-stat', (req, res)=>{
  * @param/
  * @returns /
  **/
-
-
 app.get('/api/avis', (req, res)=>{
   const sqlGet="SELECT Avis, idClients from Avis";
   db.query(sqlGet, (err, result)=>{
@@ -917,8 +892,20 @@ app.get('/api/avis', (req, res)=>{
     console.log(result)
   })
 });
-//---------------------
 
+
+
+
+/**
+ * Envoie un mail au client lorsqu'il envoie sa commande, afin de lui dire qu'elle a été validée
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method POST
+ * @param {number} commande identifiant de la commande spécifique
+ * @param {number} prenom   prénom du client qui a passé commande
+ * @param {number} heure    heure à laquelle le client souhaite récupérer/recevoir sa commande
+ * @param {number} mail     mail du client à qui envoyer le mail   
+ */
 app.post("/api/valider_commande", function (req, res){
   let detail_commande = "", commande_html="", sous_total;
   let data = req.body.commande;
@@ -1021,14 +1008,23 @@ app.post("/api/valider_commande", function (req, res){
           res.send({status:"fail"});
       }
       else {
-          console.log ("Email envoyé avec succes !");
           res.send({status:"success"});
       }
   }); 
 });
 
+/**
+ * Envoie un mail au client lorsque sa commande est prête, et qu'il va bientôt la recevoir,
+ * ou peut venir la chercher.
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method POST
+ * @param {number} commande identifiant de la commande spécifique
+ * @param {number} prenom   prénom du client qui a passé commande
+ * @param {number} methode  méthode choisie par le client pour récupérer sa commande ; emporter, livrer
+ * @param {number} mail     mail du client à qui envoyer le mail   
+ */
 app.post("/api/commande_prete", function (req, res){
-
   let texte_utf, texte_html ;
   let sujet ;
   if (req.body.methode === "LIV"){
@@ -1133,7 +1129,6 @@ app.post("/api/commande_prete", function (req, res){
           res.send({status:"fail"});
       }
       else {
-          console.log ("Email envoyé avec succes !");
           res.send({status:"success"});
       }
   }); 
