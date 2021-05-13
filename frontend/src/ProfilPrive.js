@@ -4,11 +4,8 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import Button from './components/Button/Button'
 import Input from './components/Input/Input'
-
-
-
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const ProfilPrive = () => {
     require('./css/profilPrive.css')
@@ -108,7 +105,7 @@ const ProfilPrive = () => {
 
     return (
         <div>
-            {statutConnexion ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={username}/> : <BanniereBasique />}
             <div onLoad={getClient} className="profilPrive">
                 <Header title= {"Votre profil" } headerclass="profilheader"  />
                 <Picture />

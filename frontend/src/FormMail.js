@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 
 /**
@@ -87,7 +87,7 @@ import BannerConnect from './components/BannerConnect.js';
 
      return(
         <div>
-            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div className="email-container">
                 <div className="formulaire-email">
 

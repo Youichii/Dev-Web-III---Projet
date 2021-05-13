@@ -3,8 +3,8 @@ import BoutonPanier from './components/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const Panier = () => {
     require('./css/panier.css');
@@ -346,7 +346,7 @@ const Panier = () => {
 
     return (
         <div>
-			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateurCON}/> : <Banner />}
+			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateurCON}/> : <BanniereBasique />}
             <div className="panier">
                 <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
                 <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>

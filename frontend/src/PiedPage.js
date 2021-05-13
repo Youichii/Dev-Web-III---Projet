@@ -1,5 +1,5 @@
-const Footer = () => {
-	require('./css/footer.css')
+const PiedPage = () => {
+	require('./css/piedPage.css')
 	
     return (
         <div className="footer">
@@ -18,4 +18,4 @@ const Footer = () => {
     );
 }
 
-export default Footer;
+export default PiedPage;

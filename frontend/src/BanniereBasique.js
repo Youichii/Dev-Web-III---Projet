@@ -4,7 +4,7 @@ import instagram from "./img/Instagram.png";
 import facebook from "./img/Facebook.png";
 import twitter from "./img/Twitter.png";
 
-const Banner = () => {
+const BanniereBasique = () => {
     require('./css/banniereBasique.css');
     
     return(
@@ -34,5 +34,5 @@ const Banner = () => {
     )
 
 }
-export default Banner; 
+export default BanniereBasique; 
             

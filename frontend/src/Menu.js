@@ -1,5 +1,5 @@
-import Sidebareleft from "./Sidebareleft";
-import Sidebareright from "./Sidebareright";
+import BarreLateraleGauche from "./BarreLateraleGauche";
+import BarreLateraleDroite from "./BarreLateraleDroite";
 import Carte from "./Carte";
 
 const Menu = () => {
@@ -7,9 +7,9 @@ const Menu = () => {
     
     return ( 
         <div className = "Menu"> 
-            <Sidebareleft/>
+            <BarreLateraleGauche/>
             <Carte />
-            <Sidebareright />
+            <BarreLateraleDroite />
         </div>
     )
 }

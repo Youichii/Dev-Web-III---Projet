@@ -2,8 +2,8 @@ import logo from "../img/logo.jpg";
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const BannerClient = ({ onClick }) => {
-    require('../css/bannerClient.css');
+const BanniereClient = ({ onClick }) => {
+    require('../css/banniereClient.css');
     return (
         <nav className="c_barre_nav">                    
             <NavLink to='/home'>
@@ -27,13 +27,13 @@ const BannerClient = ({ onClick }) => {
 
 }
 
-/*BannerClient.defaultProps = {
+/*BanniereClient.defaultProps = {
     color: 'steelblue',
     text : 'Hello'
 }*/
 
-BannerClient.propTypes = {
+BanniereClient.propTypes = {
     onClick : PropTypes.func
 }
 
-export default BannerClient; 
+export default BanniereClient; 

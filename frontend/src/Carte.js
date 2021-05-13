@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const Carte = () => {
     require('./css/carte.css');
@@ -164,7 +164,7 @@ const Carte = () => {
 
     return(
         <div>
-            {statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div id = 'bordPrincipal'>
                 {titres&&titres.map(titre => (
                     <fieldset className="cadre">

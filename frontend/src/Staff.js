@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react" ;
 import React from 'react' ;
 import DetailCommande from './components/DetailCommande';
-
 import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const Staff = () => {
     require('./css/staff.css');
@@ -283,7 +282,7 @@ const Staff = () => {
 
     return (
         <div>
-			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div className="staff c_page">
 
                 <div className="c_cadre_commandes_afaire i_cadre_attente">

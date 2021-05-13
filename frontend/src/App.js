@@ -14,7 +14,7 @@ import Historique from './Historique';
 import Modification from './Modification'
 import Stat from './Stat';
 import Cookie from './Cookies';
-import Footer from './Footer';
+import PiedPage from './PiedPage';
 
 function App() {
   return (
@@ -85,7 +85,7 @@ function App() {
 
           </Switch>
         </div>
-        <Footer />
+        <PiedPage />
       </div>
     </Router>
   );

@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import InputInformations from './components/InputInformations';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from 'axios';
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const Inscription = () => {
 	require('./css/inscription.css');
@@ -307,7 +307,7 @@ const Inscription = () => {
 
     return (
 		<div>
-			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
 			<div className="inscription c_cadre_inscription">
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 					<div className="i_bouton_con">CONNEXION</div>

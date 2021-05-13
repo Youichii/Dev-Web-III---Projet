@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations';
 import Axios from "axios";
-import Banner from './Banner.js';
-import BannerConnect from './components/BannerConnect.js';
+import BanniereBasique from './BanniereBasique.js';
+import BanniereConnection from './components/BanniereConnection.js';
 
 const Connexion = () => {
 	require('./css/connexion.css');
@@ -101,7 +101,7 @@ const Connexion = () => {
 
 	return (
 		<div>
-			{statutConnexion ? <BannerConnect onClick={deconnexion} client={utilisateur}/> : <Banner />}
+			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
 			<div className="connexion c_cadre">
 				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 					<div className="i_bouton_connexion">CONNEXION</div>
