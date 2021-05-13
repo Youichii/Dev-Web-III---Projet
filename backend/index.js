@@ -381,9 +381,12 @@ app.put('/api/orders', (req, res) => {
   const postal  = req.body.postal ;
   const ville  = req.body.ville ;
 
-  const sqlInsert = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
-
-  db.query(sqlInsert, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
+  const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ? and Quantite = 0" ;
+  db.query(sqlInsert1, [commande], (err, result) => {})
+  const sqlInsert2 = "DELETE from reservations where IdCommande = ? AND IdCommande not IN (SELECT distinct IdCommande FROM commandes AS CO)" ;
+  db.query(sqlInsert2, [commande], (err, result) => {})
+  const sqlInsert3 = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
+  db.query(sqlInsert3, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
     res.send(result) ;
   })
 })

@@ -426,6 +426,16 @@ input:-webkit-autofill {
 	background-color: var(--bg);
 }
 
+#erreur_inscription {
+	grid-column-start: 1;
+	grid-column-end: 6;
+	grid-row-start: 20;
+	grid-row-end: 21;
+	text-align: center;
+	font-size: 16px;
+}
+
+
 .i_champ_politique a:link {
 	color:white;
 	text-decoration:none;
@@ -475,10 +485,10 @@ input:-webkit-autofill {
 	select {height: 51px;
 		padding: 5px 8px 5px 10px;}
 
-	.i_champ_captcha {grid-row-start: 21;
-			grid-row-end: 22;}
-	.i_titre_captcha {grid-row-start: 20;
-				grid-row-end: 21;}
+	.i_champ_captcha {grid-row-start: 22;
+			grid-row-end: 23;}
+	.i_titre_captcha {grid-row-start: 21;
+				grid-row-end: 22;}
 	.i_champ_politique {grid-row-start: 19;
 		grid-row-end: 20;
 		font-size: 16px;}
@@ -497,7 +507,7 @@ input:-webkit-autofill {
 					grid-row-end: 14;}
 	.i_titre_telephone {grid-row-start: 12;
 						grid-row-end: 13;}
-	.c_champs_informations {grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 1% 2% 8% 2.5% 7% 2.5% 7% 2.5% 8% 5% 5% 3% 6% 1%;}
+	.c_champs_informations {grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 1% 2% 7% 2.5% 7% 2.5% 7% 2.5% 8% 5% 6% 2% 3% 6% 0.5%;}
 	.i_titre_sexe {grid-column-start: 1;
 		grid-column-end: 3;
 		grid-row-start: 10;
@@ -516,8 +526,10 @@ input:-webkit-autofill {
 	#id_erreur_anniversaire{grid-row-start: 9;
 		grid-row-end: 10;}
 	.i_titre_anniversaire {grid-column-end: 6;}
-	#erreur_inscription{grid-row-start: 22;
-		grid-row-end: 23;}
+	#erreur_inscription{grid-row-start: 23;
+		grid-row-end: 24;}
+	.politique_erreur {grid-row-start: 20;
+		grid-row-end: 21;}
 }
 @media only screen and (max-width: 376px) {
 	.i_champ_politique {font-size: 13px;}

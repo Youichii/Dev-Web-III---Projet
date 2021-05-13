@@ -32,6 +32,10 @@ const Panier = () => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
+                utilisateur = reponse.data.user[0].IdClient;
+
+                recupererUtilisateur();
+                recupererPanier();
 			}
 			else {setStatutConnexion(false);}
 		});

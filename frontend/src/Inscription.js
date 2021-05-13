@@ -90,7 +90,7 @@ const Inscription = () => {
 			document.getElementById("erreur_prenom").innerHTML = "";
 		}
 
-		var format_tel = /[+][3][2][4][0-9]{9}/ ;
+		var format_tel = /[+][3][2][4][0-9]{8}/ ;
 		var tel = document.getElementById("telephone_utilisateur").value ;
 		if (tel === "") { 
 			document.getElementById("telephone_utilisateur").style.borderColor="var(--erreur)";
@@ -99,7 +99,7 @@ const Inscription = () => {
 		}
 		else if (tel.match(format_tel) === null || tel.match(format_tel)[0] !== tel.match(format_tel).input) {
 			document.getElementById("telephone_utilisateur").style.borderColor="var(--erreur)";
-			document.getElementById("erreur_telephone").innerHTML = "Veuillez respecter le format (+324069525896 par exemple)";
+			document.getElementById("erreur_telephone").innerHTML = "Veuillez respecter le format (+32406952589 par exemple)";
 			compteur = false ;
 		}
 		else {
@@ -109,7 +109,7 @@ const Inscription = () => {
 
 		if (document.getElementById("adresse_utilisateur").value === "") { 
 			document.getElementById("adresse_utilisateur").style.borderColor="var(--erreur)";
-			document.getElementById("adresse_utilisateur").innerHTML = "Votre rue";
+			document.getElementById("erreur_rue").innerHTML = "Votre rue";
 			compteur = false ;
 		}
 		else {
@@ -164,11 +164,22 @@ const Inscription = () => {
 			document.getElementById("erreur_mail").innerHTML = "";
 		}
 
-		if (document.getElementById('selection_jour').selectedIndex === 0 || document.getElementById('selection_mois').selectedIndex === 0 || document.getElementById('selection_annee').selectedIndex === 0) { 
+		var mois_longs = [2, 4, 6, 9, 11] ;
+		var jour = document.getElementById('selection_jour').selectedIndex ;
+		var mois = document.getElementById('selection_mois').selectedIndex ;
+		var annee = document.getElementById('selection_annee').selectedIndex ;
+		if (jour === 0 || mois === 0 || annee === 0) { 
 			document.getElementById("selection_jour").style.borderColor="var(--erreur)";
 			document.getElementById("selection_mois").style.borderColor="var(--erreur)";
 			document.getElementById("selection_annee").style.borderColor="var(--erreur)";
 			document.getElementById("erreur_anniversaire").innerHTML = "Veuillez sélectionner votre date de naissance";
+			compteur = false ;
+		}
+		else if ((mois_longs.includes(mois) && jour > 30) || (mois === 2 && jour > 28)) {
+			document.getElementById("selection_jour").style.borderColor="var(--erreur)";
+			document.getElementById("selection_mois").style.borderColor="var(--erreur)";
+			document.getElementById("selection_annee").style.borderColor="var(--erreur)";
+			document.getElementById("erreur_anniversaire").innerHTML = "Veuillez sélectionner une date de naissance valide";
 			compteur = false ;
 		}
 		else {
@@ -386,6 +397,8 @@ const Inscription = () => {
 						<input type="text" id="captcha_user" required />
 					</div>
 					<div className='message_erreur politique_erreur' id="politique_erreur"></div>
+
+					<div className="message_erreur" id="erreur_inscription"></div>
 				
 				</div>
 
