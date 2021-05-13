@@ -23,6 +23,12 @@ const Panier = () => {
     let utilisateur = 100000000000;
     let id_commande =  100000000000;
 
+
+    /**
+     * Vérifie si l'utilisateur est connecté au chargement de la page
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			if (response.data.loggedIn === true) {
@@ -33,20 +39,28 @@ const Panier = () => {
                 recuperer_utilisateur();
                 recuperer_panier();
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setLoginStatus(false);}
 		});
 	}, []);
 
+
+    /**
+     * Déconnecte l'utilisateur
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const deconnexion = () => {
 		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
 			setLoginStatus(false);
-			console.log("deconnecté");
 		});
 	}
 
+
+    /**
+     * Permet de créer une liste contenant les heures encore disponibles pour passer commande
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(() => {
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
@@ -73,6 +87,12 @@ const Panier = () => {
         })
     }, []);
 
+
+    /**
+     * Récupére les différents éléments du panier du client connecté, et stocke les informations dans différentes variables
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const recuperer_panier = () => {
         var info = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
@@ -107,6 +127,13 @@ const Panier = () => {
         })
     }
 
+
+    /**
+     * Récupère le mail, la rue, le numéro de maison, le ZIP et la ville de l'utilisateur connecté, et stocke ces informations
+     * dans une variable
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const recuperer_utilisateur = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
@@ -120,24 +147,30 @@ const Panier = () => {
         })
     }
 
-    const ajouter_commande = () => {
 
+     /**
+     * Ajoute la commande du panier dans les commandes à faire du restaurant, avec les informations nécessaires
+     * Envoie également un mail pour valider la commande
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    const ajouter_commande = () => {
         let heure_selectionnee = document.getElementById('heures_reserv').value ;
         let typeCommande, commentaire_client, rue, numero, postal, ville ;
-        (document.getElementById("commentaire").value == "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
-        (document.getElementsByName("myradio1")[0].checked == true) ? typeCommande= "EMP" : typeCommande = "LIV";
+        (document.getElementById("commentaire").value === "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
+        (document.getElementsByName("myradio1")[0].checked === true) ? typeCommande= "EMP" : typeCommande = "LIV";
 
-        if (typeCommande == "EMP") {
+        if (typeCommande === "EMP") {
             rue = null ;
             numero = null ;
             postal = null ;
             ville = null ;
         }
         else {
-            (document.getElementById('adresse_livraison').value == "") ? rue = document.getElementById('adresse_livraison').placeholder : rue = document.getElementById('adresse_livraison').value ;
-            (document.getElementById('numero_maison').value == "") ? numero = document.getElementById('numero_maison').placeholder : numero = document.getElementById('numero_maison').value ;
-            (document.getElementById('code_postal').value == "") ? postal = document.getElementById('code_postal').placeholder : postal = document.getElementById('code_postal').value ;
-            (document.getElementById('ville').value == "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
+            (document.getElementById('adresse_livraison').value === "") ? rue = document.getElementById('adresse_livraison').placeholder : rue = document.getElementById('adresse_livraison').value ;
+            (document.getElementById('numero_maison').value === "") ? numero = document.getElementById('numero_maison').placeholder : numero = document.getElementById('numero_maison').value ;
+            (document.getElementById('code_postal').value === "") ? postal = document.getElementById('code_postal').placeholder : postal = document.getElementById('code_postal').value ;
+            (document.getElementById('ville').value === "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
         }
         
         var myInit = { method: 'PUT',
@@ -165,6 +198,12 @@ const Panier = () => {
         })
     }
 
+
+    /**
+     * Permet de supprimer une commande complète
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const supprimer_commande = () => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
@@ -179,6 +218,16 @@ const Panier = () => {
         })
     }
 
+
+    /**
+     * Vérifie si l'utilisateur est connecté au chargement de la page
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {number} id_commande identifiant de la commande du client connecté
+     * @param {number} id_produit  identifiant du produit pour lequel il faut modifier la quantité
+     * @param {number} qtite       quantité actuelle
+     * @param {string} calcul      type de calcul à appliquer sur la quantité actuelle ; moins ou plus
+     */
     const modifier_quantite = (id_commande, id_produit, qtite, calcul) => {
         let nouvelle_qtite ;
         (calcul === "moins") ? nouvelle_qtite = qtite-1 : nouvelle_qtite = qtite + 1 ;
@@ -205,6 +254,14 @@ const Panier = () => {
         }
     }
 
+
+    /**
+     * Permet de supprimer une commande complète
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {number} id_produit  identifiant du produit pour lequel il faut modifier la quantité
+     * @param {string} id_prix     identifiant du div dans lequel il faut afficher le nouveau prix du produit selon la quantité
+     */
     const changer_prix = (id_produit, id_prix) => {
         let information = donnees_panier.filter(element => element.IdProduit == id_produit)[0];
         
@@ -215,36 +272,65 @@ const Panier = () => {
         setTotal(total) ;
     }
 
+
+    /**
+     * Affiche les informations concernant l'adresse du client
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const afficher_adresse = () => {
 	    document.getElementById('zone_adresse').style.display = "grid" ; 
     }
 
+
+    /**
+     * Masque les informations concernant l'adresse du client
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const cacher_adresse = () => {
         document.getElementById('zone_adresse').style.display = "none" ; 
     }
     
+
+    /**
+     * Valide la première partie de la commande pour passer à la seconde partie, concernant les informations
+     * d'heure, de payement, de livraison et de payement
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const valider_panier = () => {
         document.getElementById('i_grise_etape1').style.display= "none";
         document.getElementById('i_grise_etape2').style.display= "inline";
-        
         document.getElementById('i_ligne_avant_1').style.borderColor= "#414141";
         document.getElementById('i_numero_1').style.backgroundColor= "#414141";
-        
         document.getElementById('i_ligne_avant_2').style.borderColor= "white";
         document.getElementById('i_numero_2').style.backgroundColor= "#A18C7B";
     }
 
+
+    /**
+     * Annule la seconde partie de la commande pour revenir à la première partie, concernant les informations
+     * de la commande et le commentaire éventuel
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const annuler_info = () => {
         document.getElementById('i_grise_etape2').style.display= "none";
         document.getElementById('i_grise_etape1').style.display= "inline";
-        
         document.getElementById('i_numero_1').style.backgroundColor= "#A18C7B";
         document.getElementById('i_ligne_avant_1').style.borderColor= "white";
-    
         document.getElementById('i_ligne_avant_2').style.borderColor= "#414141";
         document.getElementById('i_numero_2').style.backgroundColor= "#414141";
     }
 
+
+    /**
+     * Affiche l'information à propos d'un produit présent dans le panier
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} element informations concernant un aliment ; sa quantité, son nom, son prix, son id 
+     */
     const affichage_aliments = (element) => {
         let type_couleur ;
         (compteur%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;

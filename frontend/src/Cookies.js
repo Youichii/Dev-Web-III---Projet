@@ -1,7 +1,6 @@
 const Cookie = () => {
-	require('./cookie.css')
+	require('./cookie.css');
 
-	
     return (
         <div className="grid_container">
             <div className="corps">

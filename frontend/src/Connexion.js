@@ -13,29 +13,40 @@ const Connexion = () => {
 	let mail_valide = "vide";
 	let mdp_valide = "vide";
 
+
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
-			console.log("vérifier tjrs connecté : ", response);
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
 				setUsername(response.data.user[0].IdClient);
-				console.log("rechargement : ", response.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-				console.log("faux");
-			}
+			else {setLoginStatus(false);}
 		});
 	}, []);
 
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const deconnexion = () => {
 		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
 			setLoginStatus(false);
-			console.log("deconnecté");
 		});
 	} 
 
+
+	/**
+	 * Vérifie si les l'utilisateur a bien entrée son mail et son mot de passe, et affiche des messages si nécessaire
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const verification_valeurs = () => {
 		let compteur = true ;
 		document.getElementById("erreur_connexion").innerHTML = "";
@@ -66,19 +77,22 @@ const Connexion = () => {
 		return compteur ;
 	}
 
+
+	/**
+	 * Permet de créer un cookie lors de la connexion de l'utilisateur si ses informations sont correctes
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const recuperer_client = () => {
 		if (verification_valeurs()) {
 			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((response) => {
-				console.log("connexion : ", response) ; 
 				if (response.data.message) {
 					setLoginStatus(false);
 					setUsername(10000000000);
-					//console.log("message erreur : ", response.data.message);
 					document.getElementById("erreur_connexion").innerHTML = "Il semble que votre adresse e-mail et/ou votre mot de passe soient incorrects. Veuillez essayer à nouveau, s'il vous plaît";
 				} else {
 					setLoginStatus(true);
 					setUsername(response.data[0].IdClient);
-					console.log("connexion réussie : ", response.data[0].IdClient);
 					document.getElementById("erreur_connexion").innerHTML = "";
 				}
 			});

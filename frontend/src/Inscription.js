@@ -17,26 +17,40 @@ const Inscription = () => {
 	const [loginStatus, setLoginStatus] = useState("");
 	const [username, setUsername] = useState("");
 
+
+	/**
+	 * Vérifie si l'utilisateur est connecté au chargement de la page
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
 				setUsername(response.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setLoginStatus(false);}
 		});
 	}, []);
 
+
+	/**
+	 * Déconnecte l'utilisateur
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const deconnexion = () => {
 		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
 			setLoginStatus(false);
-			console.log("deconnecté");
 		});
 	}
 
+
+	/**
+	 * Crée des listes contenant les valeurs des différents jours possibles et années possibles
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	useEffect(() => {
 		let jour = [], annee = [] ;
         for (let i = 1 ; i<32 ; i++) {
@@ -49,6 +63,12 @@ const Inscription = () => {
 		setListeAnnee(annee);
     }, []);
 
+
+	/**
+	 * Vérifie que l'utilisateur remplit bien tous les champs et que leur format est respecté, affiche des messages si nécessaire
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const verification_valeurs = () => {
 		let compteur = true ;
 
@@ -195,6 +215,12 @@ const Inscription = () => {
 		return compteur ;
 	}
 
+
+	/**
+	 * Permet à l'utilisateur de s'inscrire si il a bien coché la politique de confidentialité
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const inscrire = () => {
 		if (document.getElementById("politique_user").checked) {
 			document.getElementById("politique_erreur").innerHTML = "";
@@ -207,7 +233,6 @@ const Inscription = () => {
 					valeur = radios[i].value;
 					}
 				}
-			
 
 				var jour = document.getElementById('selection_jour').selectedIndex;
 				var mois = document.getElementById('selection_mois').selectedIndex;
@@ -263,6 +288,12 @@ const Inscription = () => {
 		}
     }
 
+
+	/**
+	 * Adapte le css si l'utilisateur coche la case de politique de confidentialité ou non
+	 * 
+	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
+	 */
 	const pol_confidentialite = () => {
 		if (document.getElementById("politique_user").checked) {
 			document.getElementById("bouton_inscription_envoi").style.cursor = "pointer";

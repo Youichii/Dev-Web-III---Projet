@@ -20,26 +20,41 @@ const Staff = () => {
     const [loginStatus, setLoginStatus] = useState(false);
 	const [username, setUsername] = useState("");
 
+
+    /**
+     * Vérifie si l'utilisateur est connecté au chargement de la page
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(()=> {
 		Axios.get("http://localhost:3001/api/connexion").then((response) => {
 			if (response.data.loggedIn === true) {
 				setLoginStatus(true);
 				setUsername(response.data.user[0].IdClient);
 			}
-			else {
-				setLoginStatus(false);
-			}
+			else {setLoginStatus(false);}
 		});
 	}, []);
 
+
+    /**
+     * Déconnecte l'utilisateur
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     const deconnexion = () => {
 		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
-			console.log("deconnexion: ", response) ; 
 			setLoginStatus(false);
-			console.log("deconnecté");
 		});
 	}
 
+
+    /**
+     * Récupére toutes les commandes à faire des clients, et stocke ces informations 
+     * dans une variable
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(() => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
@@ -55,6 +70,15 @@ const Staff = () => {
 
     }, [changement]);
 
+
+    /**
+     * Prévenient un client que sa commande arrive / est prête et déplace sa ligne de commande
+     * dans le cadre adéquat
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} client           contient toutes les informations relatives à la commande d'un client
+     * @param {string} type_commande    type de commande ; à faire ou en cours
+     */
     const ajouter_commandes = (client, type_commande) => {
         if (type_commande === "ENV") {
             var donnees = { method: 'POST',
@@ -83,6 +107,13 @@ const Staff = () => {
         })
     }
 
+
+    /**
+     * Supprime une commande totale
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {number} idCommande identifiant de la commande à supprimer
+     */
     const supprimer_commandes = (idCommande) => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
@@ -98,6 +129,13 @@ const Staff = () => {
         })
     }
 
+
+    /**
+     * Change la couleur de fond d'une ligne lors du survol de celle-ci
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {number} identifiant identifiant du div/de la ligne d'informations pour lequel/laquelle la couleur de fond doit changer
+     */
     const nouveau_bg = (identifiant) => {
         let ligne_info = document.getElementById(identifiant);
         let couleur_survol = "var(--bg_survol)";
@@ -111,6 +149,14 @@ const Staff = () => {
         ligne_info.getElementsByClassName("i_bouton_suivant")[0].style.color = "white";
     }
 
+
+    /**
+     * Remet la couleur de fond d'une ligne de base lorsque le survol n'est plus présent
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {number} identifiant  identifiant du div/de la ligne d'informations pour lequel/laquelle la couleur de fond doit changer
+     * @param {string} couleur      ancienne couleur de fond de la ligne
+     */
     const ancien_bg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
         let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
@@ -128,6 +174,14 @@ const Staff = () => {
     }
 
 
+    /**
+     * Charge les informations détaillées d'une commande ; les différents aliments de la commande, ainsi que
+     * les informations relatives au client
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} informations contient toutes les informations concernant une commande
+     * @param {string} identifiant  type de commande ; à faire, en cours ou envoyé
+     */
     const load_panier = (informations, identifiant) => {
         let identifiantCommande = informations.IdCommande ;
         fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
@@ -159,6 +213,13 @@ const Staff = () => {
         })
     }
 
+
+    /**
+     * Affiche une ligne de commande à faire avec les informations importantes
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} elem contient toutes les informations relatives à une commande
+     */
     const elements_afaire = (elem) => {
         let taille = "12% ";
         let nbr_lignes_afaire = "12% " ;
@@ -175,6 +236,13 @@ const Staff = () => {
         )
     }
 
+
+    /**
+     * Affiche une ligne de commande en cours avec les informations importantes
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} elem contient toutes les informations relatives à une commandem
+     */
     const elements_encours = (elem) => {
         let taille = "12% ";
         let  nbr_lignes_encours = "12% ";
@@ -192,6 +260,13 @@ const Staff = () => {
         )
     }
 
+
+    /**
+     * Affiche une ligne de commande envoyée avec les informations importantes
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     * @param {object} elem contient toutes les informations relatives à une commande
+     */
     const elements_envoye = (elem) => {
         let taille = "12% ";
         let nbr_lignes_envoye = "12% " ;
