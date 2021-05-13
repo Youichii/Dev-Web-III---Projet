@@ -753,7 +753,7 @@ app.post("/envoye", function (req, res){
 //-------------------Statistiques---------
 
 /**
- * Récupère à l'aide d'un GET les genres de la base de données et comptre le nombre pour chacun 
+ * Récupère à l'aide d'un GET les genres de la table Clients et compte le nombre pour chaque genre
  * @author Noelle Khazoum <kh.noelle@gmail.com>
  * @method /
  * @param /
@@ -770,7 +770,7 @@ app.get('/api/genre-stat', (req, res)=>{
 
 
 /**
- * Récupère à l'aide d'un GET les Villes de la base de données et comptre le nombre pour chaque ville
+ * Récupère à l'aide d'un GET les Villes de la table Clients et compte le nombre pour chaque ville
  * @author Noelle Khazoum <kh.noelle@gmail.com>
  * @method /
  * @param /
@@ -785,7 +785,7 @@ app.get('/api/localisation-stat', (req, res)=>{
 });
 
 /**
- * Récupère à l'aide d'un GET les ages de la base de données et comptre le nombre pour chaque age
+ * Récupère à l'aide d'un GET les ages de la table Clients et compte le nombre pour chaque age
  * @author Noelle Khazoum <kh.noelle@gmail.com>
  * @method /
  * @param /
@@ -797,8 +797,27 @@ app.get('/api/age-stat', (req, res)=>{
       res.send(result);
       console.log(result)
   })
-})
+});
 
+
+//-------------------Accueil-----------
+/** 
+ * Récupères les avis et les prénoms des clients de la table Avis
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * @method /
+ * @param/
+ * @returns /
+ **/
+
+
+app.get('/api/avis', (req, res)=>{
+  const sqlGet="SELECT Avis, idClients from Avis";
+  db.query(sqlGet, (err, result)=>{
+    res.send(result)
+    console.log(result)
+  })
+});
+//---------------------
 
 app.post("/api/valider_commande", function (req, res){
   let detail_commande = "", commande_html="", sous_total;
