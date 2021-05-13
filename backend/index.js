@@ -700,15 +700,18 @@ transporter.verify((err, success)=>{
   : console.log(`=====Pret à envoyé des mail: ${success}======`);
 });
 
-/**
- * Post dans le quel on récupère du SQL, on définit les options d'envoie et l'envoie en lui même
- * @author: Noelle Khazoum <kh.noelle@gmail.com>
- * @method: forEach permet de récupérer les mails et de les ajouter à une liste
- * @param: /
- * @returns: Renvoie la liste qui contient les adresse mails.
- */
+
 
 app.post("/envoye", function (req, res){
+
+/**
+ * Post dans le quel on récupère du SQL, on définit les options d'envoie et l'envoie en lui même
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * @method  forEach permet de récupérer les mails et de les ajouter à une liste
+ * @param /
+ * @returns {list} mailList Renvoie la liste qui contient les adresse mails.
+ */
+
   const listMail = [];
 
   const sqlGet = "SELECT Prenom,  Mail FROM Clients where Newsletter =1";
@@ -747,7 +750,56 @@ app.post("/envoye", function (req, res){
   }); 
 });
 
-//-------------------
+//-------------------Statistiques---------
+
+/**
+ * Récupère à l'aide d'un GET les genres de la base de données et comptre le nombre pour chacun 
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * @method /
+ * @param /
+ **/
+
+app.get('/api/genre-stat', (req, res)=>{
+
+  const sqlSelect = "SELECT Genre, COUNT(*) as nombre FROM Clients group by Genre";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+});
+
+
+/**
+ * Récupère à l'aide d'un GET les Villes de la base de données et comptre le nombre pour chaque ville
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * @method /
+ * @param /
+ **/
+app.get('/api/localisation-stat', (req, res)=>{
+
+  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
+  db.query(sqlSelect, (err, result)=>{
+      res.send(result);
+      console.log(result)
+  });
+});
+
+/**
+ * Récupère à l'aide d'un GET les ages de la base de données et comptre le nombre pour chaque age
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * @method /
+ * @param /
+ **/
+
+app.get('/api/age-stat', (req, res)=>{
+  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+  db.query(sqlSelect,(err, result)=>{
+      res.send(result);
+      console.log(result)
+  })
+})
+
+
 app.post("/api/valider_commande", function (req, res){
   let detail_commande = "", commande_html="", sous_total;
   let data = req.body.commande;
