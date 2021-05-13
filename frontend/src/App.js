@@ -5,7 +5,7 @@ import Panier from './Panier';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
-import Home from './Home'
+import Accueil from './Accueil'
 import FormMail from './FormMail';
 import Communaute from "./Communaute";
 import Menu from "./Menu";
@@ -24,11 +24,11 @@ function App() {
           <Switch>
 
             <Route exact path="/">
-              <Home />
+              <Accueil />
             </Route>
 
-            <Route exact path="/home">
-              <Home />
+            <Route exact path="/accueil">
+              <Accueil/>
             </Route>
 
             <Route exact path ="/modification">

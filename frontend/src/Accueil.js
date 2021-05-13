@@ -6,11 +6,11 @@ import img4 from '../src/images/img4.jpeg'
 //import AvisClients from './components/AvisClients'
 import Axios from 'axios'
 
-import './Home.css';
+import './Accueil.css';
 
-const Home = () => {
+const Accueil = () => {
 
-    const [dataAvis, setDataAvis] = useState([]);
+    const [donneeAvis, setDonneeAvis] = useState([]);
 
 /**
  * Récupère les avis des clients de l'URL et les enregistre dans une liste
@@ -24,7 +24,7 @@ const Home = () => {
 
     const AfficherAvis = ()=>{
         Axios.get("http://localhost:3001/api/avis").then((response)=>{
-            setDataAvis(response.data)            
+            setDonneeAvis(response.data)            
         })
     }
 
@@ -43,7 +43,7 @@ const Home = () => {
 
             <div onLoad ={AfficherAvis} className="commentaires">
                 <h1>Avis de nos clients</h1>
-                {dataAvis.map((val)=>{
+                {donneeAvis.map((val)=>{
                     return(
                         <>
                             <h2>{val.IdClient}</h2>
@@ -62,4 +62,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Accueil;
