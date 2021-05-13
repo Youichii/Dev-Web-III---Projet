@@ -207,7 +207,7 @@ console.log(ageNombre)
         <div className="chart-gender">
           <h2>Genre</h2>
           <Doughnut 
-            data={data_gender}
+            data={donneesGenre}
             options={{
               title:{
                 display:true,
@@ -240,7 +240,7 @@ console.log(ageNombre)
         <div className="chart-age">
           <h2>AGE</h2>
           <Doughnut 
-            data={data_age}
+            data={donneesAge}
             options={{
               title:{
                 display:true,
@@ -275,7 +275,7 @@ console.log(ageNombre)
         <div className="chart-loc">
           <h2>AGE</h2>
           <Doughnut 
-            data={data_loc}
+            data={donneesLoc}
             options={{
               title:{
                 display:true,
