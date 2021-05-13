@@ -12,6 +12,11 @@ const Home = () => {
 
     const [dataAvis, setDataAvis] = useState([]);
 
+/**
+ * Récupère les avis des clients de l'URL et les enregistre dans une liste
+ *@author Noelle Khazoum <kh.noelle@gmail.com>
+ */
+
     useEffect(() => {
         AfficherAvis()
         

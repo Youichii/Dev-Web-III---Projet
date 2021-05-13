@@ -2,7 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import Axios from 'axios'
 
-
+/**
+ * Dessine des graphiques des données reçues de la base de données
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ */
 function Chart() {
 
   const [genre, setGenre]= useState([]);
@@ -10,7 +13,11 @@ function Chart() {
   const [age, setAge] = useState([]);
 
 
-// recupératin données des villes
+/**
+ * Récupère les données liées à la ville dans l'URL et les enregistre dans une liste
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * 
+ */
 
   useEffect(()=>{
     VilleStat()
@@ -28,15 +35,20 @@ function Chart() {
   const donneeVille = ville.map((val)=>{
     return val.Ville
   })
-  console.log(donneeVille)
+ 
 
   const VilleCount = ville.map((val)=>{
     return val.nombre
   })
 
-  console.log(VilleCount)
 
-// recupération des données des genres
+
+
+
+/**
+ * Récupère les données liées au genre dans l'URL et les enregistre dans une liste 
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ */
 
   useEffect(()=>{
     GenreStat()
@@ -50,20 +62,22 @@ function Chart() {
     })
 
   }
- 
+
   const donneeGenre = genre.map((val)=>{
     return val.Genre;
     
   });
-  console.log(donneeGenre)
   
   const genreCount = genre.map((val)=>{
     return val.nombre;
-  })
+  });
 
-  console.log(genreCount)
 
-// recupération des ages
+/**
+ * Récupère les données liées à l'age dans l'URL et les enregistre dans une liste 
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ * 
+ */
 
 useEffect(()=>{
   AgeStat()
