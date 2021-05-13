@@ -306,10 +306,7 @@ app.delete('/api/orders', (req, res) => {
 /*app.get('/api/panier/:idCommande', (req, res) => {
   const idCommande  = req.params.idCommande 
 
-  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite \
-  FROM `commandes` AS C  \
-  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit   \
-  WHERE C.IdCommande = ?";
+  const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Produit, Quantite FROM `commandes` AS C  JOIN `menu` AS ME ON C.IdProduit = ME.IdProduit  WHERE C.IdCommande = ?";
   db.query(sqlInsert, [idCommande], (err, result) => {
     console.log("erreur : ", err) ;
     res.send(result) ;
@@ -336,9 +333,7 @@ app.put('/api/orders', (req, res) => {
     const postal  = req.body.postal ;
     const ville  = req.body.ville ;
 
-    const sqlInsert = "UPDATE reservations \
-    SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? \
-    WHERE IdCommande = ?" ;
+    const sqlInsert = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
 
     db.query(sqlInsert, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
       console.log("err : ", err);
@@ -387,10 +382,7 @@ app.put('/api/orders/:idCommande/foods/:idProduit', (req, res) => {
 })
 
 app.get('/api/hours', (req, res) => {
-    const sqlInsert = "SELECT HLivree \
-    FROM reservations \
-    GROUP BY HLivree  \
-    HAVING COUNT(HLivree)  > 5";
+    const sqlInsert = "SELECT HLivree FROM reservations GROUP BY HLivree HAVING COUNT(HLivree)  > 5";
     db.query(sqlInsert, [], (err, result) => {
       console.log("err : ", err);
       console.log("result : ", result) ;
@@ -630,6 +622,8 @@ app.post('/intermediateBasket', (req, res) => {
   })
 })
 
+
+
 // PUT qui change la quantite d'un produit dans la DB 
 app.put('/changingquantity', (req, res) =>{
   console.log("changer la quantite")
@@ -651,11 +645,12 @@ app.post('/orders', (req, res) => {
   const IdClient = req.body.IdClient
 
   const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
-  db.query(sqlInsert,[IdClient, null, null, null, 'P', null,  null, null, null, null], (err, result) => {
+  db.query(sqlInsert,[IdClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
 })
+
 // Page Historique -------------------------------------------------------------------------------------------------------
 
 //GET les infos des commandes terminé

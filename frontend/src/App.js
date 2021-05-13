@@ -6,16 +6,15 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 import ProfilPrive from './ProfilPrive';
 import Home from './Home'
-import Comunaute from "./Communaute.js"
-import Menu from "./Menu.js";
 import FormMail from './FormMail';
+import Communaute from "./Communaute";
+import Menu from "./Menu";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Historique from './Historique';
 import Modification from './Modification'
 import Stat from './Stat';
 import Cookie from './Cookies';
 import Footer from './Footer';
-import Chart from './components/Chart';
 
 function App() {
   return (
@@ -61,10 +60,10 @@ function App() {
             </Route>
 
             <Route exact path="/Communaute">
-              <Comunaute />
+              <Communaute />
             </Route>
 
-            <Route exact path="/Carte">
+            <Route exact path="/Menu">
               <Menu />
             </Route>
 
@@ -76,10 +75,6 @@ function App() {
               <ProfilPrive />
             </Route>
 
-            <Route exact path="/Menu"> 
-              <Menu />
-            </Route>
-            
             <Route exact path="/Historique"> 
               <Historique/>
             </Route>    
