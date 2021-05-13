@@ -8,7 +8,7 @@ const Historique = () => {
     require("./historique.css")
     Axios.defaults.withCredentials = true;
 
-    let [historique, setHistorique] = useState(null)
+    let [historiques, setHistoriques] = useState(null)
     let[annees, setAnnees]= useState([])
     
 
@@ -39,7 +39,6 @@ const Historique = () => {
    
     useEffect(()=>{
 
-        // GET qui va chercher toutes les commandes
         var remplirHistorique = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
@@ -48,10 +47,9 @@ const Historique = () => {
             return response.json()
         })
         .then(json =>{
-            setHistorique(json)
+            setHistoriques(json)
         })
 
-        // GET qui va chercher une liste sans doublon des années. 
         var remplirAnnees = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
@@ -63,14 +61,13 @@ const Historique = () => {
             setAnnees(json)
         })
 
-
     },[])
 
     return(
         <div>
             {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
-            {historique&&historique.map(histo =>  
-                setDate.push(histo.DateCommande) 
+            {historiques&&historiques.map(historique =>  
+                setDate.push(historique.DateCommande) 
             )}
             <div id = 'cadre'>
                 {annees&&annees.map(annee => 
@@ -78,7 +75,6 @@ const Historique = () => {
                         <summary className='annee'>{annee.Annee }</summary>
                         {mois.map(remplirMois =>                       
                             <details>
-
                                 <summary className='mois'>{remplirMois.Mois}</summary> 
                                 <table className="tableau">
                                     <tr className="titres">
@@ -88,21 +84,20 @@ const Historique = () => {
                                         <th> Contenu de la commande </th>
                                         <th> Total de la commande </th>                                       
                                     </tr>
-                                    {historique&&historique.filter(historik =>
-                                    String(historik.DateCommande).slice(5,7) === remplirMois.Id &&  String(historik.DateCommande).slice(0,4) === annee.Annee )
-                                    .map(histo =>
+                                    {historiques&&historiques.filter(historique =>
+                                    String(historique.DateCommande).slice(5,7) === remplirMois.Id &&  String(historique.DateCommande).slice(0,4) === annee.Annee )
+                                    .map(remplirHistorique =>
                                         <tr className='ligneHistorique'>
-                                            <td className="ligne">{histo.DateCommande.slice(0,10)}</td>
-                                            <td className="ligne">{histo.IdClient}</td>
-                                            <td className="ligne">{histo.Ville}</td>
-                                            <td className="ligne">{histo.Produits}</td>
-                                            <td className="ligne">{histo.Total}€</td>
+                                            <td className="ligne">{remplirHistorique.DateCommande.slice(0,10)}</td>
+                                            <td className="ligne">{remplirHistorique.IdClient}</td>
+                                            <td className="ligne">{remplirHistorique.Ville}</td>
+                                            <td className="ligne">{remplirHistorique.Produits}</td>
+                                            <td className="ligne">{remplirHistorique.Total}€</td>
                                         </tr>
                                     )} 
                                 </table>
                             </details> 
                         )}  
-    
                     </details>             
                 )}
             </div>

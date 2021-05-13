@@ -53,9 +53,8 @@ const Communaute = () => {
         .then(response =>{
             return response.json()
         })
-        .then(coucou =>{
-            console.log(typeof coucou.map(x=> x))
-            setUtilisateurs(coucou)
+        .then(json =>{
+            setUtilisateurs(json)
         })
 
         // GET qui récupère une version sans doublons des villes 
@@ -97,42 +96,40 @@ const Communaute = () => {
     
    
    
-    // Fonctionnelle 
+     
     function changerCouleur(id){
+    /**
+     * Change la couleur du Nom et du Prénom d'une personne 
+     * de la communauté  en rouge ou en blanc lorsque le 
+     * patron la Blackliste ou la Déblackliste. 
+     * @author Cécile Bonnet <c.bonnet@gmail.com>
+     * @param {Number} id de la Personne sur qui le patron a cliqué pour la blacklister/déblacklister. 
+     * 
+     */
         
-        // Récupère les valeurs du boutons et de l'id 
         let boutonValeur = document.getElementById("blacklist"+id).innerHTML 
-
-        // Déclarer une variable commune aux deux conditions 
         var retournerStatus;
 
-        // Condition 1 
         if (boutonValeur === "Blacklister"){
 
-            // Changer dans la page HTML la Couleur du Nom ainsi que l'intitulé du bouton 
             document.getElementById("blacklist"+id).innerHTML = "De-Blacklister"
             document.getElementById(id+"utilisateur").style.color = "red"  
 
-            //Update le status du client dans la base de donnée. 
             retournerStatus = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ Status: 1 , IdClient:id})
-            
             }
             fetch('http://localhost:3001/status', retournerStatus)
             .then(res => {
                 return res.json();
             })
         }
-
-        // Condition 2 
+       
         else {
 
-            // Changer dans la page HTML la Couleur du Nom ainsi que l'intitulé du bouton 
             document.getElementById("blacklist"+id).innerHTML = "Blacklister"   
             document.getElementById(id+"utilisateur").style.color = "white" 
 
-            //Update le status du client dans la base de donnée. 
             retournerStatus = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ Status: 0, IdClient:id})
@@ -144,11 +141,16 @@ const Communaute = () => {
         }
     }
 
-    //Fonctionnelle 
+     /**
+     * Supprimer un commentaire que le patron a écrit sur un client. 
+     * @author Cécile Bonnet <c.bonnet@gmail.com>
+     * @param {Number} id de la personne chez qui le patron souhaite supprimer
+     * un commentaire.
+     * @param {String} commentaire que le patron souhaite supprimer 
+     * 
+     */
     function supprimer(commentaire, id) {
 
-       
-        // DELETE le commentaire de la table 
         var supprimerCommentaire = { method : 'DELETE',
         headers : {'Content-Type':'application/json'},
         body: JSON.stringify({  IdClient: id, 
@@ -160,7 +162,6 @@ const Communaute = () => {
                 return response.json();
             }) 
 
-        // Recharge les commentaires de la page 
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
@@ -173,23 +174,25 @@ const Communaute = () => {
         })    
     }
 
-    // Fonctionnelle 
+     /**
+     * Supprimer un commentaire que le patron a écrit sur un client. 
+     * @author Cécile Bonnet <c.bonnet@gmail.com>
+     * @param {Number} id de la Personne chez qui le patron veut envoyer un commentaire.
+     * @returns {false} la fonction return false si le patron tente d'envoyer un commentaire
+     * vide. 
+     */
     function ecrire(id){ 
-        
-        // Récupérer la valeur du commentaire 
-        let comment = document.getElementById("text"+id).value
-        console.log(comment)
-        
-        // Empêcher l'envoie d'un commentaire vide
-        if (comment === ""){
+ 
+        let commentaire = document.getElementById("text"+id).value
+   
+        if (commentaire === ""){
             return false
         }
 
-        // POST qui ajoute le commentaire dans la base de donnée
         var retournerCommentaire = { method:'POST', 
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({  IdClient  :id,
-                                Commentaire : comment
+                                Commentaire : commentaire
                             })
         }
         fetch('http://localhost:3001/comment', retournerCommentaire)
@@ -197,11 +200,9 @@ const Communaute = () => {
             return res.json();
         })
 
-        // Vider le placeHolder et remettre la place initial 
         document.getElementById("text"+id).value = ""
         document.getElementById("text"+id).innerHTML = "<placeholder = 'Commentaire sur le client'>" 
-        
-        // Recharger les commentaires
+
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
@@ -214,8 +215,14 @@ const Communaute = () => {
         })
     }
   
-
+    /**
+     * Effectue un trie sur base de 3 fieldset Nom, Ville et Status. Récupère le 
+     * paramètre de tri souhaité et l'applique.  
+     * @author Cécile Bonnet <c.bonnet@gmail.com>
+     * 
+     */
     function Trie(){
+
         
         let valueStatus =document.getElementById("selectStatus").value
         let valueVille = document.getElementById("selectVille").value
@@ -224,8 +231,7 @@ const Communaute = () => {
 
         
         if(valueVille === '' && valueStatus === '' && valueNom === ''){
-            
-            // GET qui va chercher tous les profil de la communauté
+        
             var remplirCommunaute = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
@@ -241,7 +247,6 @@ const Communaute = () => {
     
         else if(valueVille !== '' && valueStatus === '' && valueNom === ''){
 
-            // GET qui va chercher les profils sur base de la ville selectionné  
             var remplirCommunauteVille = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
@@ -254,98 +259,97 @@ const Communaute = () => {
             })
         }
 
-        else if (valueVille === '' && valueStatus !== '' && valueNom === ''){
+        // else if (valueVille === '' && valueStatus !== '' && valueNom === ''){
 
-            if(valueStatus === "Blacklisté"){
-                valueStatus=1
-            }
-            else{
-                valueStatus=0
-            }
+        //     if(valueStatus === "Blacklisté"){
+        //         valueStatus=1
+        //     }
+        //     else{
+        //         valueStatus=0
+        //     }
 
-            // GET qui va chercher les profils sur base du status slesctionné 
-            var remplirCommunauteStatus = {method : 'GET',
-            headers:{'Content-type':'application/json'}
-            }
-            fetch(`http://localhost:3001/usersstatus/${valueStatus}`, remplirCommunauteStatus)
-            .then(response =>{
-                return response.json()
-            })
-            .then(json =>{
-                setUtilisateurs(json)
-            })
+            // var remplirCommunauteStatus = {method : 'GET',
+            // headers:{'Content-type':'application/json'}
+            // }
+            // fetch(`http://localhost:3001/usersstatus/${valueStatus}`, remplirCommunauteStatus)
+            // .then(response =>{
+            //     return response.json()
+            // })
+            // .then(json =>{
+            //     setUtilisateurs(json)
+            // })
 
-        }
+        // }
 
-        else if (valueVille === '' && valueStatus === '' && valueNom !== ''){
+        // else if (valueVille === '' && valueStatus === '' && valueNom !== ''){
             
-            // GET qui va chercher les profils sur base du nom selectionné 
-            var remplirCommunauteNom = {method : 'GET',    
-            headers:{'Content-type':'application/json'}
-            }
-            fetch(`http://localhost:3001/usersnom/${valueNom}`, remplirCommunauteNom)
-            .then(response=>{
-                return response.json()
-            })
-            .then(json =>{
-                setUtilisateurs(json)
-            })
-        }
+        //     // GET qui va chercher les profils sur base du nom selectionné 
+        //     var remplirCommunauteNom = {method : 'GET',    
+        //     headers:{'Content-type':'application/json'}
+        //     }
+        //     fetch(`http://localhost:3001/usersnom/${valueNom}`, remplirCommunauteNom)
+        //     .then(response=>{
+        //         return response.json()
+        //     })
+        //     .then(json =>{
+        //         setUtilisateurs(json)
+        //     })
+        // }
 
-        else if(valueVille !== '' && valueStatus !== '' && valueNom === ''){
+        // else if(valueVille !== '' && valueStatus !== '' && valueNom === ''){
 
-            if(valueStatus === "Blacklisté"){
-                valueStatus=1
-            }
-            else{
-                valueStatus=0
-            }
+        //     if(valueStatus === "Blacklisté"){
+        //         valueStatus=1
+        //     }
+        //     else{
+        //         valueStatus=0
+        //     }
 
-            var remplirCommunauteVilleStatus = {method : 'GET',    
-            headers:{'Content-type':'application/json'}
-            }
-            fetch(`http://localhost:3001/userVilleStatus/${valueVille}/${valueStatus}`, remplirCommunauteVilleStatus)
-            .then(response=>{
-                return response.json()
-            })
-            .then(json =>{
-                setUtilisateurs(json)
-            })
-        }
+        //     var remplirCommunauteVilleStatus = {method : 'GET',    
+        //     headers:{'Content-type':'application/json'}
+        //     }
+        //     fetch(`http://localhost:3001/userVilleStatus/${valueVille}/${valueStatus}`, remplirCommunauteVilleStatus)
+        //     .then(response=>{
+        //         return response.json()
+        //     })
+        //     .then(json =>{
+        //         setUtilisateurs(json)
+        //     })
+        // }
 
-        else if(valueVille === '' && valueStatus !== '' && valueNom !== ''){
+        // else if(valueVille === '' && valueStatus !== '' && valueNom !== ''){
 
-            if(valueStatus === "Blacklisté"){
-                valueStatus=1
-            }
-            else{
-                valueStatus=0
-            }
+        //     if(valueStatus === "Blacklisté"){
+        //         valueStatus=1
+        //     }
+        //     else{
+        //         valueStatus=0
+        //     }
 
-            var remplirCommunauteStatusNom = {method : 'GET',    
-            headers:{'Content-type':'application/json'}
-            }
-            fetch(`http://localhost:3001/userStatusNom/${valueStatus}/${valueNom}`, remplirCommunauteStatusNom)
-            .then(response=>{
-                return response.json()
-            })
-            .then(json =>{
-                setUtilisateurs(json)
-            })
-        }
+        //     var remplirCommunauteStatusNom = {method : 'GET',    
+        //     headers:{'Content-type':'application/json'}
+        //     }
+        //     fetch(`http://localhost:3001/userStatusNom/${valueStatus}/${valueNom}`, remplirCommunauteStatusNom)
+        //     .then(response=>{
+        //         return response.json()
+        //     })
+        //     .then(json =>{
+        //         setUtilisateurs(json)
+        //     })
+        // }
 
-        else if(valueVille !== '' && valueStatus === '' && valueNom !== ''){
-            var remplirCommunauteVilleNom = {method : 'GET',    
-            headers:{'Content-type':'application/json'}
-            }
-            fetch(`http://localhost:3001/userVilleNom/${valueVille}/${valueNom}`, remplirCommunauteVilleNom)
-            .then(response=>{
-                return response.json()
-            })
-            .then(json =>{
-                setUtilisateurs(json)
-            })
-        }
+        // else if(valueVille !== '' && valueStatus === '' && valueNom !== ''){
+        //     var remplirCommunauteVilleNom = {method : 'GET',    
+        //     headers:{'Content-type':'application/json'}
+        //     }
+        //     fetch(`http://localhost:3001/userVilleNom/${valueVille}/${valueNom}`, remplirCommunauteVilleNom)
+        //     .then(response=>{
+        //         return response.json()
+        //     })
+        //     .then(json =>{
+        //         setUtilisateurs(json)
+        //     })
+        // }
        
 
         
