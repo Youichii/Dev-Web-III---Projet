@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
 import Axios from 'axios'
@@ -38,6 +38,29 @@ const Modification = () => {
     const [produit, setProduit] = useState("");
 
     //const [mapRest, setMapRest] = useState(''); 
+
+    const [loginStatus, setLoginStatus] = useState(false);
+	const [usernameCON, setUsernameCON] = useState("");
+
+    useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
+			if (response.data.loggedIn === true) {
+				setLoginStatus(true);
+				setUsernameCON(response.data.user[0].IdClient);
+			}
+			else {
+				setLoginStatus(false);
+			}
+		});
+	}, []);
+
+    const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	}
 
     const getHoraires = () => {
         Axios.get(`http://localhost:3001/api/coord/horaires`).then((response)=> {
@@ -139,7 +162,7 @@ const Modification = () => {
 
     return (
         <div onLoad={getCoordonnees}>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+            {loginStatus ? <BannerConnect onClick={deconnexion}/> : <Banner />}
             
             <Dropdown title= "Horaires" className="dd-wraper"
                 content={

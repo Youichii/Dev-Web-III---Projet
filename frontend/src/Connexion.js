@@ -80,6 +80,7 @@ const Connexion = () => {
 					setUsername(response.data[0].IdClient);
 					console.log("connexion réussie : ", response.data[0].IdClient);
 					document.getElementById("erreur_connexion").innerHTML = "";
+					window.open("http://localhost:3000/profil-prive", "_self");
 				}
 			});
 		}
@@ -102,7 +103,7 @@ const Connexion = () => {
 						<InputInformations className_div="i_champ_mdp" id_input="text_mdp" id_span="erreur_mdp" maxLenght="100" type="password"/>
 						
 						<div className="i_bouton_envoi">
-							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client} />
+							<input id="bouton_connexion_envoi" type="button" value="CONNEXION" onClick={recuperer_client}/>
 							<br></br><span className="message_erreur" id="erreur_connexion"></span>
 						</div>
 					</div>

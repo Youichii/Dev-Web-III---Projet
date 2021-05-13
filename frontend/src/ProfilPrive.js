@@ -15,7 +15,6 @@ const ProfilPrive = () => {
     Axios.defaults.withCredentials = true;
 
     const [username, setUsername] = useState('');
-    const clientName = "1";
     const [clientInfosList, setClientInfosList] = useState([]);
     const [street, setStreet] = useState('');
     const [zipCode, setZip] = useState('');
@@ -50,21 +49,21 @@ const ProfilPrive = () => {
     const submitUsername = () => {
         Axios.put('http://localhost:3001/api/client/username', {
             username : username,
-            clientName : clientName,
+            usernameCON : usernameCON,
         }).then(() => {
             console.log("Hello")
         })
     }
     
     const getClient = () => {
-        Axios.get(`http://localhost:3001/api/client/${clientName}`).then((response)=> {
+        Axios.get(`http://localhost:3001/api/client/${usernameCON}`).then((response)=> {
             setClientInfosList(response.data)
         })
     }
 
     const submitAdress = () => {
         Axios.put('http://localhost:3001/api/client/adress', {
-            clientName : clientName,
+            usernameCON : usernameCON,
             street : street,
             number : number,
             zipCode : zipCode,
@@ -77,7 +76,7 @@ const ProfilPrive = () => {
 
     const submitPhone = () => {
         Axios.put('http://localhost:3001/api/client/phone', {
-            clientName : clientName,
+            usernameCON : usernameCON,
             phone : phone
         }).then ((response) => {
             if (response){
@@ -88,7 +87,7 @@ const ProfilPrive = () => {
 
     const submitMail = () => {
         Axios.put('http://localhost:3001/api/client/mail', {
-            clientName : clientName,
+            usernameCON : usernameCON,
             mail : mail
         }).then ((response) => {
             if (response){
@@ -98,77 +97,79 @@ const ProfilPrive = () => {
         })
     }
     
-
-    return (
-        <div>
-            {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
-            <div onLoad={getClient} className="profilPrive">
-                <Header title= {"Votre profil" } headerclass="profilheader"  />
-                <Picture />
-                <div className="privateinfo">                    
-                    <div className="gauche">
-                        {clientInfosList.map((val) =>{
-                            return (
-                            <label>
-                                <h1>
-                                    {val.Pseudo}
-                                </h1>
-                            </label>
-                            );
-                        })}
-                        <form onSubmit={submitUsername}> 
-                            <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setUsername}/>
-                            <Button />
-                        </form>
-                        {clientInfosList.map((val) =>{
-                            return (
-                                <p>
-                                    {val.Nom} | {val.Prenom}<br />
-                                    {(val.Anniversaire).slice(0,10)}
-                                </p>
-                                );  
-                        })}                   
-                        {clientInfosList.map((val) => {
-                            return (
-                                <p>{val.Rue} {val.Numero}, <br />
-                                {val.Zip} {val.Ville}
-                                </p>
+    if(usernameCON){
+        return (
+            <div onLoad={getClient}>
+                {loginStatus ? <BannerConnect onClick={deconnexion} client={username}/> : <Banner />}
+                <div className="profilPrive">
+                    <Header title= {"Votre profil" } headerclass="profilheader"  />
+                    <Picture />
+                    <div className="privateinfo">                    
+                        <div className="gauche">
+                            {clientInfosList.map((val) =>{
+                                return (
+                                <label>
+                                    <h1>
+                                        {val.Pseudo}
+                                    </h1>
+                                </label>
                                 );
-                        })}
-                        <form onSubmit={submitAdress}>
-                            <Input name="Street" max="50" placeholder="Rue" setFunc={setStreet}/><br/>
-                            <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumber}/><br/>
-                            <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
-                            <Input name="City" max="40" placeholder="Ville" setFunc={setCity}/><br/>
-                            <Button />
-                        </form>
-                        {clientInfosList.map((val) =>{
-                            return (
-                                <p>
-                                        {val.Gsm}
-                                </p>
-                                );  
-                        })} 
-                        <form onSubmit={submitPhone}>
-                            <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setPhone}/><br/>
-                            <Button/>
-                        </form>
-                        {clientInfosList.map((val) =>{
-                            return (
-                                <p>
-                                        {val.Mail}
-                                </p>
-                                );  
-                        })}
-                        <form onSubmit={submitMail}>
-                            <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
-                            <Button />
-                        </form>
+                            })}
+                            <form onSubmit={submitUsername}> 
+                                <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setUsername}/>
+                                <Button />
+                            </form>
+                            {clientInfosList.map((val) =>{
+                                return (
+                                    <p>
+                                        {val.Nom} | {val.Prenom}<br />
+                                        {(val.Anniversaire).slice(0,10)}
+                                    </p>
+                                    );  
+                            })}                   
+                            {clientInfosList.map((val) => {
+                                return (
+                                    <p>{val.Rue} {val.Numero}, <br />
+                                    {val.Zip} {val.Ville}
+                                    </p>
+                                    );
+                            })}
+                            <form onSubmit={submitAdress}>
+                                <Input name="Street" max="50" placeholder="Rue" setFunc={setStreet}/><br/>
+                                <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumber}/><br/>
+                                <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
+                                <Input name="City" max="40" placeholder="Ville" setFunc={setCity}/><br/>
+                                <Button />
+                            </form>
+                            {clientInfosList.map((val) =>{
+                                return (
+                                    <p>
+                                            {val.Gsm}
+                                    </p>
+                                    );  
+                            })} 
+                            <form onSubmit={submitPhone}>
+                                <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setPhone}/><br/>
+                                <Button/>
+                            </form>
+                            {clientInfosList.map((val) =>{
+                                return (
+                                    <p>
+                                            {val.Mail}
+                                    </p>
+                                    );  
+                            })}
+                            <form onSubmit={submitMail}>
+                                <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
+                                <Button />
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div>            
-        </div>
-    )
+                </div>            
+            </div>
+        )
+    }
+    else return <div>What</div>
 };
 
 export default ProfilPrive

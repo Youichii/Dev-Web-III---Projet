@@ -71,10 +71,10 @@ button:hover {
     cursor:pointer;
 }
 
-/*#img{
+#img{
     height: auto;
     width: 100%;
     grid-column:3;
     display: grid;
     margin-left: 15%; 
-} */
+} 
