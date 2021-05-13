@@ -682,7 +682,25 @@ app.get('/year', (req, res) =>{
 })
 
 
-//Envoi d'un mail pour valider la commande du panier
+app.get('/api/users', (req, res)=>{
+  const mailList = []
+  const sqlGet = "SELECT  Mail FROM Clients";
+  db.query(sqlGet, (err, result)=>{
+      res.send(result);
+      result.forEach(Clients => {
+          mailList.push (Clients.Mail);
+          
+          console.log(mailList);
+          return mailList;
+          
+      });
+
+  });
+});
+
+
+//faire passer les options au transporter et pouvoir enfaire des requêtes
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth:{
@@ -692,27 +710,49 @@ let transporter = nodemailer.createTransport({
 });
 
 transporter.verify((err, success)=>{
-  err ? console.log (err) : console.log(`Pret à envoyer des mail: ${success}`);
+  err? console.log (err)
+  : console.log(`=====Pret à envoyé des mail: ${success}======`);
 });
 
 app.post("/envoye", function (req, res){
+  const listMail = [];
+
+  const sqlGet = "SELECT Prenom,  Mail FROM Clients";
+  db.query(sqlGet, (err, result)=>{
+      res.send(result);
+      result.forEach(Clients => {
+          listMail.push(Clients.Mail);
+          let clientPrenom = Clients.Prenom;
+          return listMail, clientPrenom;  
+      })
+  });
+
   let mailOptions ={
-      from: "nozak001@gmail.com",
-      to: "nozak001@gmail.com",
-      subject: "test mail",
-      text:`${req.body.emailer.message}`
+      from: "Chick'N'Fish nozak001@gmail.com",
+      to: listMail,
+      subject:`${req.body.emailer.subject}` ,
+      html:`<html>
+              <body>
+                  <h1>Comment vas-tu aujourd'hui ?</h1>
+                  <p> ${req.body.emailer.corps}</p>
+                  <h2>${req.body.emailer.message}</h2>
+              </body>`
   };
+
+
   transporter.sendMail(mailOptions, function (err, data){
       if (err) {
           res.json({
               status:"fail"
           });
       }else {
-          console.log ("Email envoyé avec succes !");
+          console.log ("=====Email envoyé avec succes !===== ");
           res.json ({status: "Email envoyé"});
+
       }
   }); 
 });
+
 
 app.post("/api/valider_commande", function (req, res){
   let detail_commande = "", commande_html="", sous_total;
