@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
 import Axios from 'axios'
 import Input from './components/Input/Input'
 import Banner from './Banner.js';
 import BannerConnect from './components/BannerConnect.js';
+import { useEffect, useState } from 'react';
 
 const Modification = () => {
-    require('./modification.css')
+    require('./modification.css');
+    Axios.defaults.withCredentials = true;
+
     const [Lundi, setLundi] = useState(null)
     const [Mardi, setMardi] = useState(null)
     const [Mercredi, setMercredi] = useState(null)
@@ -37,7 +40,31 @@ const Modification = () => {
     const [description, setDescription] = useState("");
     const [produit, setProduit] = useState("");
 
+    const [loginStatus, setLoginStatus] = useState(false);
+	const [username, setUsername] = useState(10000000000);
+
     //const [mapRest, setMapRest] = useState(''); 
+
+    useEffect(()=> {
+		Axios.get("http://localhost:3001/api/connexion").then((response) => {
+			console.log("vérifier tjrs connecté : ", response);
+			if (response.data.loggedIn === true) {
+				setLoginStatus(true);
+				setUsername(response.data.user[0].IdClient);
+			}
+			else {
+				setLoginStatus(false);
+			}
+		});
+	}, []);
+
+	const deconnexion = () => {
+		Axios.get(`http://localhost:3001/api/deconnexion`).then((response) => {
+			console.log("deconnexion: ", response) ; 
+			setLoginStatus(false);
+			console.log("deconnecté");
+		});
+	} 
 
     const getHoraires = () => {
         Axios.get(`http://localhost:3001/api/coord/horaires`).then((response)=> {

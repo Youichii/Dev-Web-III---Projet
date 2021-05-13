@@ -824,7 +824,7 @@ app.post("/api/valider_commande", function (req, res){
 
 app.post("/api/commande_prete", function (req, res){
 
-  let texte_utf ;
+  let texte_utf, texte_html ;
   let sujet ;
   if (req.body.methode === "LIV"){
     sujet = `Votre commande N${req.body.idcommande} est en route !`;
