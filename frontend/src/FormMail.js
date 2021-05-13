@@ -1,13 +1,23 @@
 import {useState} from 'react';
 import './FormMail.css'
 
+
+/**
+ * Récupère les valeurs des champs et soumet le formulaire
+ * @author Noelle Khazoum <kh.noelle@gmail.com>
+ */
+
  function FormEmail (){
 
      const [emailer, setEmailer] = useState({
          message:""
      });
 
-     //tient compte des changement du champ
+    /**
+     * Tient compte des changement des valeurs
+     * @author Noelle Khazoum <kh.noelle@gmail.com>
+     * @param {*} e objet Event qui contient les informations de l'évènement actuel
+     */
 
      function handleChange(e){
          setEmailer((prevState)=>({
@@ -15,6 +25,11 @@ import './FormMail.css'
              [e.target.name]: e.target.value,
          }));
      }
+
+    /**
+     * Soumet le formulaire en appuyant sur le bouton "envoyer"
+     * @author Noelle Khazoum <kh.noelle@gmail.com> 
+     */ 
 
      const SubmitEmail = async(e) =>{
         e.preventDefault();
