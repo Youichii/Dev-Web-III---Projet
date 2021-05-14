@@ -122,7 +122,7 @@ a:active {
 	/*padding: 0px 0px 15px 0px;*/
 	background-color: var(--bg);
 }
-#text_user {
+#texte_utilisateur {
 	width: 100%;
     height: 45px;
 	border-radius: 0px/0px;
@@ -132,7 +132,7 @@ a:active {
 	padding: 5px 10px 5px 10px;
 	color : white;	
 }
-#text_user:focus {
+#texte_utilisateur:focus {
 	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
@@ -157,7 +157,7 @@ a:active {
 	background-color: var(--bg);
 	/*padding: 0px 0px 35px 0px;*/
 }
-#text_mdp {
+#texte_mdp {
 	width: 100%;
     height: 45px;
 	border-radius: 0px/0px;
@@ -167,7 +167,7 @@ a:active {
 	padding: 5px 10px 5px 10px;
 	color : white;
 }
-#text_mdp:focus {
+#texte_mdp:focus {
 	border-color:var(--principale);
 	border-width: 2px;	
 	outline:  none;
@@ -284,8 +284,8 @@ input:-webkit-autofill {
 	.i_bouton_inscription {font-size: 18px;}
 	.i_titre_adresse {font-size: 15px;}
 	.i_titre_mdp {font-size: 15px;}
-	#text_user {height: 39px;}
-	#text_mdp {height: 39px;}
+	#texte_user {height: 39px;}
+	#texte_mdp {height: 39px;}
 	#bouton_connexion_envoi {height: 39px;}
 	/*.c_zones_info {grid-template-rows: 7% 19% 7% 19% 3% 21% 14%;}*/
 	.i_info_connexion {height: 469px;}

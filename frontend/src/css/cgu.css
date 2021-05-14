@@ -1,0 +1,20 @@
+.c_cgu {
+    padding: 50px 400px 50px 400px;
+}
+.titre {
+    text-align: center;
+    font-size: 26px;
+    color: #050596;
+}
+.article {
+    color: #050596;
+    font-size: 22px;
+    font-weight: bold;
+}
+.date {
+    text-align: center;
+    font-size: 18px;
+}
+.lien {
+    font-size: 13px;
+}

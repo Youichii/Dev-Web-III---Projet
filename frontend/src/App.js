@@ -15,6 +15,7 @@ import Modification from './Modification'
 import Stat from './Stat';
 import Cookie from './Cookies';
 import PiedPage from './PiedPage';
+import CGU from './CGU';
 
 function App() {
   return (
@@ -81,6 +82,10 @@ function App() {
 
             <Route exact path="/Cookie"> 
               <Cookie/>
+            </Route>
+
+            <Route exact path="/CGU"> 
+              <CGU/>
             </Route>
 
           </Switch>
