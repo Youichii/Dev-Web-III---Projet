@@ -30,7 +30,7 @@ const ProfilPrive = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -46,13 +46,13 @@ const ProfilPrive = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
 
     const submitUsername = () => {
-        Axios.put('http://localhost:3001/api/client/username', {
+        Axios.put('/api/client/username', {
             username : username,
             clientName : clientName,
         }).then(() => {
@@ -61,13 +61,13 @@ const ProfilPrive = () => {
     }
     
     const getClient = () => {
-        Axios.get(`http://localhost:3001/api/client/${clientName}`).then((response)=> {
+        Axios.get(`/api/client/${clientName}`).then((response)=> {
             setClientInfosList(response.data)
         })
     }
 
     const submitAdress = () => {
-        Axios.put('http://localhost:3001/api/client/adress', {
+        Axios.put('/api/client/adress', {
             clientName : clientName,
             street : street,
             number : number,
@@ -80,7 +80,7 @@ const ProfilPrive = () => {
     }
 
     const submitPhone = () => {
-        Axios.put('http://localhost:3001/api/client/phone', {
+        Axios.put('/api/client/phone', {
             clientName : clientName,
             phone : phone
         }).then ((response) => {
@@ -91,7 +91,7 @@ const ProfilPrive = () => {
     }
 
     const submitMail = () => {
-        Axios.put('http://localhost:3001/api/client/mail', {
+        Axios.put('/api/client/mail', {
             clientName : clientName,
             mail : mail
         }).then ((response) => {

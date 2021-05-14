@@ -21,7 +21,7 @@ const Historique = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -37,7 +37,7 @@ const Historique = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -50,7 +50,7 @@ const Historique = () => {
         var remplirHistorique = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/historical', remplirHistorique)
+        fetch('/historical', remplirHistorique)
         .then(response =>{
             return response.json()
         })
@@ -61,7 +61,7 @@ const Historique = () => {
         var remplirAnnees = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/year', remplirAnnees)
+        fetch('/year', remplirAnnees)
         .then(response =>{
             return response.json()
         })

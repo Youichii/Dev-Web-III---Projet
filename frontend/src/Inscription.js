@@ -22,7 +22,7 @@ const Inscription = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -38,7 +38,7 @@ const Inscription = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -267,7 +267,7 @@ const Inscription = () => {
 											nwsletter : neswletter_cochee})
 				};
 
-				fetch('http://localhost:3001/api/users', myInit)
+				fetch('/api/users', myInit)
 				.then(res => {
 					return res.json();
 				})
@@ -279,7 +279,7 @@ const Inscription = () => {
 						document.getElementById("erreur_inscription").innerHTML = "";
 						let mail_valide = document.getElementById("mail_utilisateur").value ;
 						let mdp_valide = document.getElementById("mdp_utilisateur").value;
-						Axios.get(`http://localhost:3001/api/users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+						Axios.get(`/api/users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 							if (reponse.data.message) {
 								setStatutConnexion(false);
 								setUtilisateur(10000000000);

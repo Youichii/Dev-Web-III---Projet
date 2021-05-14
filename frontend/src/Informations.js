@@ -23,7 +23,7 @@ const Informations = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -39,20 +39,20 @@ const Informations = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
 
     const getHoraires = () => {
-         Axios.get('http://localhost:3001/api/coord/horaires').then((response) => {
+         Axios.get('/api/coord/horaires').then((response) => {
             setHorairesList(response.data)
         })
     }
 
     const getCoordonnees = () => {
         getHoraires();
-        Axios.get('http://localhost:3001/api/coordonnees').then((response) => {
+        Axios.get('/api/coordonnees').then((response) => {
             setCoordonneesList(response.data)
 
        })

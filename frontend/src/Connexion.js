@@ -20,7 +20,7 @@ const Connexion = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -36,7 +36,7 @@ const Connexion = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -85,7 +85,7 @@ const Connexion = () => {
 	 */
 	const recupererClient = () => {
 		if (verificationValeurs()) {
-			Axios.get(`http://localhost:3001/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+			Axios.get(`/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 				if (reponse.data.message) {
 					setStatutConnexion(false);
 					setUtilisateur(10000000000);

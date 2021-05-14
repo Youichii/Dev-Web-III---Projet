@@ -28,7 +28,7 @@ const Panier = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -48,7 +48,7 @@ const Panier = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -63,7 +63,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/hours`, myInit)
+        fetch(`/api/hours`, myInit)
         .then(res => {
             return res.json();
         })
@@ -95,7 +95,7 @@ const Panier = () => {
         var info = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/orders/users/${utilisateur}`, info)
+        fetch(`/api/orders/users/${utilisateur}`, info)
         .then(res => {
             return res.json();
         })
@@ -106,7 +106,7 @@ const Panier = () => {
             var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             };
-            fetch(`http://localhost:3001/api/orders/${id_commande}`, myInit)
+            fetch(`/api/orders/${id_commande}`, myInit)
             .then(res => {
                 return res.json();
             })
@@ -136,7 +136,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/users/${utilisateur}/address`, myInit)
+        fetch(`/api/users/${utilisateur}/address`, myInit)
         .then(res => {
             return res.json();
         })
@@ -175,12 +175,12 @@ const Panier = () => {
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : IDCommande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
         };
-        fetch(`http://localhost:3001/api/orders`, myInit)
+        fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
         .then(donnees => {
-            fetch ("http://localhost:3001/api/valider_commande",{
+            fetch ("/api/valider_commande",{
                 method: "POST",
                 headers:{
                     "Content-type": "application/json"
@@ -207,7 +207,7 @@ const Panier = () => {
                headers: {'Content-Type': 'application/json'},
                body: JSON.stringify({commande : id_commande})
         };
-        fetch(`http://localhost:3001/api/orders`, myInit)
+        fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
@@ -235,7 +235,7 @@ const Panier = () => {
         };
 
         if ((nouvelle_qtite <= 100) && (nouvelle_qtite >= 0)) {
-            fetch(`http://localhost:3001/api/orders/${id_commande}/foods/${id_produit}`, myInit)
+            fetch(`/api/orders/${id_commande}/foods/${id_produit}`, myInit)
             .then(res => {
                 return res.json();
             })

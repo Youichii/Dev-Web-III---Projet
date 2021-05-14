@@ -25,7 +25,7 @@ import BanniereConnection from './components/BanniereConnection.js';
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -41,7 +41,7 @@ import BanniereConnection from './components/BanniereConnection.js';
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -67,7 +67,7 @@ import BanniereConnection from './components/BanniereConnection.js';
      const SoumettreEmail = async(e) =>{
         e.preventDefault();
         console.log({emailer});
-        const reponse = await fetch ("http://localhost:3000/envoye",{
+        const reponse = await fetch ("/envoye",{
             method: "POST",
             headers:{
                 "Content-type": "application/json"

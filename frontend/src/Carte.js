@@ -24,7 +24,7 @@ const Carte = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -40,7 +40,7 @@ const Carte = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	}  
@@ -51,7 +51,7 @@ const Carte = () => {
         var remplirCategorie = {method: 'GET', 
             headers:{'Content-type':'application/json'}
         }
-        fetch('http://localhost:3001/categories', remplirCategorie)
+        fetch('/categories', remplirCategorie)
         .then(response=>{ 
             return response.json()
         })
@@ -63,7 +63,7 @@ const Carte = () => {
         var remplirMenu = {method: 'GET', 
             headers: {'Content-type':'application/json'}
         }; 
-        fetch('http://localhost:3001/menu', remplirMenu)
+        fetch('/menu', remplirMenu)
             .then(response=>{ 
                 return response.json()
             })
@@ -75,7 +75,7 @@ const Carte = () => {
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+        fetch(`/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
@@ -101,7 +101,7 @@ const Carte = () => {
                                     IdClient : Number(utilisateur)                     
                                 })
             }
-            fetch('http://localhost:3001/orders', premiereEntre)
+            fetch('/orders', premiereEntre)
             .then(res => {
                 return res.json();
             })
@@ -119,7 +119,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 })  
             }
-            fetch('http://localhost:3001/intermediateBasket', remplirPanier)
+            fetch('/intermediateBasket', remplirPanier)
             .then(res => {
                 return res.json();
             })
@@ -127,7 +127,7 @@ const Carte = () => {
             var panier = {method: 'GET', 
             headers: {'Content-type':'application/json'}
             }; 
-            fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+            fetch(`/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
@@ -144,7 +144,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 }) 
             }
-            fetch('http://localhost:3001/changingquantity',changerquantite)
+            fetch('/changingquantity',changerquantite)
             .then(res => {
                 return res.json();
             }) 
@@ -152,7 +152,7 @@ const Carte = () => {
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`http://localhost:3001/loadingBasket/${id_comm}`, panier)
+        fetch(`/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })

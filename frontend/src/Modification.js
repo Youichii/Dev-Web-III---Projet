@@ -52,7 +52,7 @@ const Modification = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -68,25 +68,25 @@ const Modification = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
 
     const getHoraires = () => {
-        Axios.get(`http://localhost:3001/api/coord/horaires`).then((response)=> {
+        Axios.get(`/api/coord/horaires`).then((response)=> {
             setHorairesList(response.data)
         })
     }
 
     const getCategorie =() => {
-        Axios.get('http://localhost:3001/categories').then((response) =>{
+        Axios.get('/categories').then((response) =>{
             setTitres(response.data)
         })
     }
 
     const getMenu =() => {
-        Axios.get('http://localhost:3001/menu').then((response) =>{
+        Axios.get('/menu').then((response) =>{
             setContenu(response.data)
         })
     }
@@ -95,13 +95,13 @@ const Modification = () => {
         getHoraires();
         getCategorie();
         getMenu();
-        Axios.get('http://localhost:3001/api/coordonnees').then((response) => {
+        Axios.get('/api/coordonnees').then((response) => {
            setCoordonneesList(response.data)
        })
     } 
 
     const submitMailRest = () => {
-        Axios.put('http://localhost:3001/api/coord/mail', {
+        Axios.put('/api/coord/mail', {
             mailRest : mailRest
         }).then ((response) => {
             if (response){
@@ -111,7 +111,7 @@ const Modification = () => {
     }
 
     const submitTelRest = () => {
-        Axios.put('http://localhost:3001/api/coord/tel', {
+        Axios.put('/api/coord/tel', {
             telRest : telRest
         }).then ((response) => {
             if (response){
@@ -122,7 +122,7 @@ const Modification = () => {
 
     const submitMenu = () => {
         if(categorie !== ""){
-            Axios.post('http://localhost:3001/api/menu', {
+            Axios.post('/api/menu', {
                 categorie : categorie,
                 produit : produit,
                 prix : prix,
@@ -138,7 +138,7 @@ const Modification = () => {
     }
 
     /*const submitMapRest = () => {
-        Axios.put('http://localhost:3001/api/coord/map', {
+        Axios.put('/api/coord/map', {
             mapRest : mapRest
         }).then((response) => {
             console.log("ok")
@@ -146,7 +146,7 @@ const Modification = () => {
     }*/
 
     const submitAdressRest = () => {
-        Axios.put('http://localhost:3001/api/coord/address', {
+        Axios.put('/api/coord/address', {
             streetRest : streetRest,
             numberRest : numberRest,
             zipCodeRest : zipCodeRest,
@@ -158,7 +158,7 @@ const Modification = () => {
     }
 
     const submitDay = () => {
-        Axios.put('http://localhost:3001/api/coord/horaires', {
+        Axios.put('/api/coord/horaires', {
             Lundi : Lundi,
             Mardi : Mardi,
             Mercredi : Mercredi,

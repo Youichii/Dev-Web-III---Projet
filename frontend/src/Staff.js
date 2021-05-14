@@ -24,7 +24,7 @@ const Staff = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	useEffect(()=> {
-		Axios.get("http://localhost:3001/api/connexion").then((reponse) => {
+		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
@@ -40,7 +40,7 @@ const Staff = () => {
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
 	const deconnexion = () => {
-		Axios.get(`http://localhost:3001/api/deconnexion`).then((reponse) => {
+		Axios.get(`/api/deconnexion`).then((reponse) => {
 			setStatutConnexion(false);
 		});
 	} 
@@ -57,7 +57,7 @@ const Staff = () => {
                headers: {'Content-Type': 'application/json'},
         };
 
-        fetch('http://localhost:3001/api/orders', myInit)
+        fetch('/api/orders', myInit)
         .then(res => {
             return res.json();
         })
@@ -82,7 +82,7 @@ const Staff = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email: client.Mail, methode:client.IdMethode, prenom:client.Prenom, idcommande:client.IdCommande})
             };
-            fetch('http://localhost:3001/api/commande_prete', donnees)
+            fetch('/api/commande_prete', donnees)
             .then(res => {
                 return res.json();
             })
@@ -95,7 +95,7 @@ const Staff = () => {
                body: JSON.stringify({commande : client.IdCommande, type: type_commande})
         };
 
-        fetch('http://localhost:3001/api/orders/states', myInit)
+        fetch('/api/orders/states', myInit)
         .then(res => {
             return res.json();
         })
@@ -117,7 +117,7 @@ const Staff = () => {
                body: JSON.stringify({"commande" : idCommande})
         };
 
-        fetch('http://localhost:3001/api/orders', myInit)
+        fetch('/api/orders', myInit)
         .then(res => {
             return res.json();
         })
@@ -181,7 +181,7 @@ const Staff = () => {
      */
     const chargementPanier = (informations, identifiant) => {
         let identifiantCommande = informations.IdCommande ;
-        fetch(`http://localhost:3001/api/orders/${identifiantCommande}`, {
+        fetch(`/api/orders/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
         }).then(res => {
