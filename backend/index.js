@@ -362,14 +362,15 @@ app.get('/api/users/:idClient/address', (req, res) => {
  * 
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method PUT
- * @param {number} commande     identifiant de la commande à compléter
- * @param {string} methode      méthode ; emporter, livrer
- * @param {string} commentaire  éventuel commentaire à propos de la commande
- * @param {string} hSelec       heure sélectionnée pour récupérer la commande
- * @param {string} rue          rue à laquelle envoyer la commande, si méthode = à livrer
- * @param {string} numero       numéro de maison auquel envoyer la commande, si méthode = à livrer
- * @param {number} postal       code postal auquel envoyer la commande, si méthode = à livrer
- * @param {string} ville        ville à laquelle envoyer la commande, si méthode = à livrer
+ * @param {number} commande       identifiant de la commande à compléter
+ * @param {string} methode        méthode ; emporter, livrer
+ * @param {string} commentaire    éventuel commentaire à propos de la commande
+ * @param {string} hSelec         heure sélectionnée pour récupérer la commande
+ * @param {string} rue            rue à laquelle envoyer la commande, si méthode = à livrer
+ * @param {string} numero         numéro de maison auquel envoyer la commande, si méthode = à livrer
+ * @param {number} postal         code postal auquel envoyer la commande, si méthode = à livrer
+ * @param {string} ville          ville à laquelle envoyer la commande, si méthode = à livrer
+ * @param {string} typePayement   type de payement utilisé par le client ; liquide, mistercash
  */
 app.put('/api/orders', (req, res) => {
   const commande  = req.body.commande ;
@@ -380,13 +381,14 @@ app.put('/api/orders', (req, res) => {
   const numero  = req.body.numero ;
   const postal  = req.body.postal ;
   const ville  = req.body.ville ;
+  const typePayement = req.body.typePayement ;
 
   const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ? and Quantite = 0" ;
   db.query(sqlInsert1, [commande], (err, result) => {})
   const sqlInsert2 = "DELETE from reservations where IdCommande = ? AND IdCommande not IN (SELECT distinct IdCommande FROM commandes AS CO)" ;
   db.query(sqlInsert2, [commande], (err, result) => {})
-  const sqlInsert3 = "UPDATE reservations SET IdEtat = 'AFA', DateCom=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ? WHERE IdCommande = ?" ;
-  db.query(sqlInsert3, [hSelec, methode, commentaire, rue, numero, postal, ville, commande], (err, result) => {
+  const sqlInsert3 = "UPDATE reservations SET IdEtat = 'AFA', DateCommande=NOW(), HLivree = ?, IdMethode = ?, Commentaire = ?, Rue = ?, Numero = ?, Zip = ?, Ville = ?, PayementLiquide = ? WHERE IdCommande = ?" ;
+  db.query(sqlInsert3, [hSelec, methode, commentaire, rue, numero, postal, ville, typePayement, commande], (err, result) => {
     res.send(result) ;
   })
 })

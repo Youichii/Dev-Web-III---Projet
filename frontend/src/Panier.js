@@ -154,9 +154,10 @@ const Panier = () => {
      */
     const ajouterCommande = () => {
         let heure_selectionnee = document.getElementById('heures_reserv').value ;
-        let typeCommande, commentaire_client, rue, numero, postal, ville ;
+        let typeCommande, commentaire_client, rue, numero, postal, ville, payement ;
         (document.getElementById("commentaire").value === "") ? commentaire_client = null : commentaire_client = document.getElementById("commentaire").value;
         (document.getElementsByName("myradio1")[0].checked === true) ? typeCommande= "EMP" : typeCommande = "LIV";
+        (document.getElementsByName("myradio2")[0].checked === true) ? payement= 1 : payement = 0;
 
         if (typeCommande === "EMP") {
             rue = null ;
@@ -170,10 +171,10 @@ const Panier = () => {
             (document.getElementById('code_postal').value === "") ? postal = document.getElementById('code_postal').placeholder : postal = document.getElementById('code_postal').value ;
             (document.getElementById('ville').value === "") ? ville = document.getElementById('ville').placeholder : ville = document.getElementById('ville').value ;
         }
-        
+
         var myInit = { method: 'PUT',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : IDCommande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville})
+               body: JSON.stringify({commande : IDCommande, methode : typeCommande, commentaire : commentaire_client, hSelec : heure_selectionnee, rue : rue, numero : numero, postal : postal, ville : ville, typePayement : payement})
         };
         fetch(`/api/orders`, myInit)
         .then(res => {
@@ -414,8 +415,8 @@ const Panier = () => {
                     <div className="i_payement">
                         <label class="label_informations" for="mode_payement">Mode de payement</label><br />
                         <div className="i_mode_payement c_mode_payement">
-                            <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="femme" form="liquide" text="Liquide"/>
-                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="homme" form="mistercash" text="Mistercash" checked="yes"/>
+                            <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="liquide" form="liquide" text="Liquide"/>
+                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="mistercash" form="mistercash" text="Mistercash" checked="yes"/>
                         </div>
                     </div>
                     
