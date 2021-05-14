@@ -25,7 +25,10 @@ app.use(cors({
   methods:["GET", "POST", "PUT", "DELETE"],
   credentials:true
 }))
-
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 //Profil Privé
 
@@ -785,7 +788,7 @@ let transporter = nodemailer.createTransport({
  **/
 transporter.verify((err, success)=>{
   err? console.log (err)
-  : console.log(`=====Pret à envoyer des mail: ${success}======`);
+  : console.log(`Pret à envoyer des mail: ${success}`);
 });
 
 
@@ -828,7 +831,7 @@ app.post("/envoye", function (req, res){
               status:"fail"
           });
       }else {
-          console.log ("=====Email envoyé avec succes !===== ");
+          console.log ("Email envoyé avec succes !");
           res.json ({status: "Email envoyé"});
 
       }
@@ -890,10 +893,10 @@ app.get('/api/age-stat', (req, res)=>{
  * @returns /
  **/
 app.get('/api/avis', (req, res)=>{
-  const sqlGet="SELECT Avis, idClients from Avis";
+  const sqlGet="SELECT Avis, IdClient from avis";
   db.query(sqlGet, (err, result)=>{
+    console.log("res : ", result)
     res.send(result)
-    console.log(result)
   })
 });
 
