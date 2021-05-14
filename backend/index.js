@@ -398,7 +398,7 @@ app.put('/api/orders', (req, res) => {
  * @method GET
  * @param {number} identifiantCommande identifiant de la commande à compléter
  */
-app.get('/api/orders/users/:identifiantCommande', (req, res) => { 
+app.get('/api/orders/:identifiantCommande', (req, res) => { 
   const identifiantCommande = req.params.identifiantCommande ;
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
@@ -418,9 +418,8 @@ app.get('/api/orders/users/:identifiantCommande', (req, res) => {
  * @method GET
  * @param {number} identifiantClient identifiant du client pour lequel récupérer la commande
  */
-app.get('/api/user/:utilisateur/order', (req, res) => { 
+app.get('/api/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
-
   const sqlInsert = "select IdCommande \
   FROM reservations \
   WHERE IdClient=? AND IdEtat = 'PAN'";

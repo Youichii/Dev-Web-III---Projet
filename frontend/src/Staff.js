@@ -181,7 +181,7 @@ const Staff = () => {
      */
     const chargementPanier = (informations, identifiant) => {
         let identifiantCommande = informations.IdCommande ;
-        fetch(`http://localhost:3001/api/orders/users/${identifiantCommande}`, {
+        fetch(`http://localhost:3001/api/orders/${identifiantCommande}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json' }
         }).then(res => {
