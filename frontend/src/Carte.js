@@ -33,18 +33,6 @@ const Carte = () => {
 		});
 	}, []);
 
-
-	/**
-	 * Déconnecte l'utilisateur
-	 * 
-	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
-	 */
-	const deconnexion = () => {
-		Axios.get(`/api/deconnexion`).then((reponse) => {
-			setStatutConnexion(false);
-		});
-	}  
-
         
     useEffect(()=>{
 
@@ -164,7 +152,7 @@ const Carte = () => {
 
     return(
         <div>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+           
             <div id = 'bordPrincipal'>
                 {titres&&titres.map(titre => (
                     <fieldset className="cadre">
