@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react';
-import img1 from '../src/images/img1.jpeg'
-import img2 from '../src/images/img2.jpeg'
-import img3 from '../src/images/img3.jpeg'
-import img4 from '../src/images/img4.jpeg'
+import img1 from '../src/img/img1.jpeg'
+import img2 from '../src/img/img2.jpeg'
+import img3 from '../src/img/img3.jpeg'
+import img4 from '../src/img/img4.jpeg'
 //import AvisClients from './components/AvisClients'
 import Axios from 'axios';
 import BanniereBasique from './BanniereBasique.js';
