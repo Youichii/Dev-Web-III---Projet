@@ -103,6 +103,11 @@ span.symbolpanier:hover div{
   border-color:black;
   border-style:solid;
 
+
+}
+
+span.symbolpayer:hover a{
+  color:yellow;
 }
 
 #panier{
@@ -214,4 +219,10 @@ span.symbolpanier:hover div{
 .bas{
   margin-bottom:75px;
 }
-
+#lien{
+  margin-left: 20px;
+  text-align: center;
+}
+#lien:hover{
+  color:#ff9900;
+}

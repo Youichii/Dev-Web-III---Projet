@@ -5,6 +5,7 @@ import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import { NavLink } from "react-router-dom";
 
 const Panier = () => {
     require('./css/panier.css');
@@ -385,7 +386,7 @@ const Panier = () => {
 
                 <div className="i_boutons1 c_boutons1">
                     <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={validerPanier} />
-                    <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimerCommande} />
+                    <NavLink to="/Menu"><BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimerCommande} /></NavLink>
                 </div>
 
                 <div className="c_info_reception i_info_reception">
@@ -439,7 +440,7 @@ const Panier = () => {
                 </div>
 
                 <div className="i_boutons2 c_boutons2">
-                    <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouterCommande} />
+                   <NavLink to="/"> <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouterCommande} /></NavLink>
                     <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annulerInfo} />
                 </div>
             </div>

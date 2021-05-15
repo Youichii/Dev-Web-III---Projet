@@ -199,8 +199,7 @@ const Carte = () => {
             </span>
             <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink>
             
-            <span>Click on the image to download it:</span>
-            <a href={PDFMenu} download>
+            <a href={PDFMenu} download id='lien'>
             Cliquez sur le lien pour le telecharger 
             </a>
             

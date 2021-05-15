@@ -3,6 +3,7 @@ import Axios from "axios";
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
+
 const CGU = () => {
     require('./css/cgu.css');
 	Axios.defaults.withCredentials = true;
