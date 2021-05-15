@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 const MentionsLegales = () => {

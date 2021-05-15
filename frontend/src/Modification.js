@@ -3,7 +3,7 @@ import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
 import Axios from 'axios'
 import Input from './components/Input/Input'
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import { useEffect, useState } from 'react';
 

@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import Button from './components/Button/Button'
 import Input from './components/Input/Input'
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 const ProfilPrive = () => {

@@ -3,7 +3,7 @@ import BoutonPanier from './components/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 const Panier = () => {

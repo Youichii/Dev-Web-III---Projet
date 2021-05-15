@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import InputInformations from './components/InputInformations';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from 'axios';
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import { NavLink } from 'react-router-dom';
 import  { useHistory } from 'react-router-dom';
