@@ -77,10 +77,6 @@ function App() {
               <Historique/>
             </Route>    
 
-            <Route exact path="/Cookie"> 
-              <Cookie/>
-            </Route>
-
             <Route exact path="/CGU"> 
               <CGU/>
             </Route>
