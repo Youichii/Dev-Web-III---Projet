@@ -94,8 +94,6 @@ function App() {
               <MentionsLegales/>
             </Route>
 
-            
-
           </Switch>
         </div>
         <PiedPage />
