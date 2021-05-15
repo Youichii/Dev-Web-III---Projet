@@ -38,7 +38,7 @@ app.put('/api/put', (req, res) => {
 })
 
 app.get('/api/avis', (req, res)=>{
-  const sqlGet="SELECT Avis, idClients from Avis";
+  const sqlGet="select Avis.Avis as Avis, Clients.Prenom as Prenom from Avis, Clients where Avis.idClients = Clients.idClients";
   db.query(sqlGet, (err, result)=>{
     res.send(result)
     console.log(result)

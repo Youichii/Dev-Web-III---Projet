@@ -26,7 +26,10 @@ const Home = () => {
 
     return (
         <div className="hero-container">
+            <h1>Bienvenu au Chick 'N' Fish</h1>
+            <p>Venez découvrir nos plats frais et préparés maison. </p>
             <div className="hero-img">
+                
                 <ul className="defilement-img">
                     <li><img className="img" src={img1} alt="image1"></img></li>
                     <li><img className="img" src={img2} alt="image2"></img></li>
@@ -41,11 +44,11 @@ const Home = () => {
                 <h1>Avis de nos clients</h1>
                 {dataAvis.map((val)=>{
                     return(
-                        <>
-                            <h2>{val.idClients}</h2>
+                        <div className="avis">
+                            <h2>* {val.Prenom} *</h2>
                             <p>{val.Avis}</p>
                             
-                        </>
+                        </div>
                     )
                 })}
                 
