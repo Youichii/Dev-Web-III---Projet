@@ -1,16 +1,30 @@
+//Utulisation de l outil Mailtrap pour tester le transport SMTP
+
 const nodemailer = require('nodemailer');
-nodemailer.createTestAccount((err, account)=>{
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        sescure: false,
-        auth:{
-            user: "anabel5@ethereal.email",
-            pass: "YZ6QezYPZPYSeKX4uv"
-        }
 
-
-    });
+const transporter = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+        user: "d8626fcb5dae54",
+        pass: "fc6652bf2875f7"
+    }
 });
 
-transporter.send
+const mailOptions= {
+    from: '"Test Server" <test@example.com>',
+    to: "nozak001@gmail.com",
+    subject: "Email Test",
+    text: "This is an email test using Mailtrap.io"
+};
+
+transporter.sendMail(mailOptions, (err, info) => {
+    if(err){
+        console.log(err);
+        return next(err);
+    }
+    console.log("Info: ", info);
+    res.json({
+      message: "Email successfully sent."
+    });
+  });
