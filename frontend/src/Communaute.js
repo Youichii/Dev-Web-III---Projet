@@ -53,7 +53,7 @@ const Communaute = () => {
         var remplirCommunaute = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/users', remplirCommunaute)
+        fetch('/api/users', remplirCommunaute)
         .then(response =>{
             return response.json()
         })
@@ -65,7 +65,7 @@ const Communaute = () => {
         var remplirVille = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/filterVille', remplirVille)
+        fetch('/api/filterVille', remplirVille)
         .then(response =>{
             return response.json()
         })
@@ -77,7 +77,7 @@ const Communaute = () => {
         var remplirNom = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/filterNom', remplirNom)
+        fetch('/api/filterNom', remplirNom)
         .then(response =>{
             return response.json()
         })
@@ -89,7 +89,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/comment', remplirCommentaire)
+        fetch('/api/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -123,7 +123,7 @@ const Communaute = () => {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ Status: 1 , IdClient:id})
             }
-            fetch('/status', retournerStatus)
+            fetch('/api/status', retournerStatus)
             .then(res => {
                 return res.json();
             })
@@ -138,7 +138,7 @@ const Communaute = () => {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ Status: 0, IdClient:id})
             }
-            fetch('/status', retournerStatus)
+            fetch('/api/status', retournerStatus)
             .then(res => {
                 return res.json();
             })       
@@ -161,7 +161,7 @@ const Communaute = () => {
                                 Commentaire:commentaire
         })
         }
-        fetch('/comment', supprimerCommentaire)
+        fetch('/api/comment', supprimerCommentaire)
             .then(response => {
                 return response.json();
             }) 
@@ -169,7 +169,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/comment', remplirCommentaire)
+        fetch('/api/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -199,7 +199,7 @@ const Communaute = () => {
                                 Commentaire : commentaire
                             })
         }
-        fetch('/comment', retournerCommentaire)
+        fetch('/api/comment', retournerCommentaire)
         .then(res => {
             return res.json();
         })
@@ -210,7 +210,7 @@ const Communaute = () => {
         var remplirCommentaire = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
-        fetch('/comment', remplirCommentaire)
+        fetch('/api/comment', remplirCommentaire)
         .then(response =>{
             return response.json()
         })
@@ -239,7 +239,7 @@ const Communaute = () => {
             var remplirCommunaute = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch('/users', remplirCommunaute)
+            fetch('/api/users', remplirCommunaute)
             .then(response =>{
                 return response.json()
             })
@@ -254,7 +254,7 @@ const Communaute = () => {
             var remplirCommunauteVille = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch(`/usersville/${valueVille}`, remplirCommunauteVille)
+            fetch(`/api/usersville/${valueVille}`, remplirCommunauteVille)
             .then(response =>{
                 return response.json()
             })

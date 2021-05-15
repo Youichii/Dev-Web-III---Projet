@@ -18,6 +18,7 @@ import PiedPage from './PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
 
+
 function App() {
   return (
     <Router>
@@ -29,9 +30,9 @@ function App() {
               <Accueil />
             </Route>
 
-            <Route exact path="/accueil">
+            {/* <Route exact path="/accueil">
               <Accueil/>
-            </Route>
+            </Route> */}
 
             <Route exact path ="/modification">
               <Modification />
@@ -92,6 +93,8 @@ function App() {
             <Route exact path="/MentionsLegales"> 
               <MentionsLegales/>
             </Route>
+
+            
 
           </Switch>
         </div>

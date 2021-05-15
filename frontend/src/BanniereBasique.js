@@ -15,7 +15,7 @@ const BanniereBasique = () => {
                 <div className="fb_bv"><img id="facebook" src={facebook} /></div>
                 <div className="twi_bv"><img id="twitter" src={twitter} /></div>
             </div>
-            <NavLink to='/home' className="accueil_bv">
+            <NavLink to='/' className="accueil_bv">
                 <li>Accueil</li>
             </NavLink>
             <NavLink to='/informations' className="informations_bv">
