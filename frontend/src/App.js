@@ -29,10 +29,6 @@ function App() {
               <Accueil />
             </Route>
 
-            <Route exact path="/accueil">
-              <Accueil/>
-            </Route>
-
             <Route exact path ="/modification">
               <Modification />
             </Route>
@@ -95,6 +91,7 @@ function App() {
 
           </Switch>
         </div>
+        <Cookie/>
         <PiedPage />
       </div>
     </Router>

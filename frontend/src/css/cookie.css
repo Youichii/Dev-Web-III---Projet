@@ -1,114 +1,16 @@
-.grid_container {
-    display: grid;
-	grid-template-columns: 34.5% 31% 34.5%;
-    grid-template-rows: 79px 413px 198px;
-	grid-gap: 2px;
-	padding: 5px;
-}
-.corps {
-    grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 1;
-	grid-row-end: 4;
-}
-.general {
-    background-color: #6f6f6f;
-    width: 100%;
-    /*padding: 3% 33% 8% 33%;*/
-    z-index: 5;
-    opacity: 0.3;
-
-    grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 1;
-	grid-row-end: 4;
-}
-.cookie {
-    background-color:#f3f3f3;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-
-    grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
-    display: grid;
-	grid-template-columns: 70% 24% 5%;
-    grid-template-rows: 12% 55% 16% 11% 5%;
-	grid-gap: 2px;
-    font-family:"Lucida Sans", sans-serif;
-    font-size: 20px;
-}
-.titre_cookie {
-    grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 1;
-	grid-row-end: 2;
-    color: #2b2b2b;
-    margin: 35px 35px 0px 35px;
-}
-.corps_cookie {
-    grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
-    font-size: 18px;
-    color: #8a8a8a;
-    line-height: 27px;
-    margin: 35px 0px 0px 35px;
-}
-.prevention_cookie {
-    grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 3;
-	grid-row-end: 4;
-    font-size: 18px;
-    color: #8a8a8a;
-    line-height: 27px;
-    margin: 0px 0px 0px 35px;
-}
-.accepter_cookie {
-    grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 5;
-    background-color: #2b2b2b;
-    border: none;
-    color: #dedcdc;
-    width: 100%;
-    height: 38px;
-    font-size: 20px;
-    font-family: "Lucida Sans", sans-serif;
-}
-.accepter_cookie:hover {
-    background-color: #656464;
-    cursor: pointer;
-}
-
-.corps_cookie a:link {
-	color:#2b2b2b;
+.lienPolitiqueCookie a:link {
+	color:#d0cdcd;
 	text-decoration:underline;
 } 
-.corps_cookie a:visited {
-	color: #2b2b2b;
+.lienPolitiqueCookie a:visited {
+	color: #d0cdcd;
 	text-decoration:underline; 
 } 
-.corps_cookie a:hover {
-	color: black;
+.lienPolitiqueCookie a:hover {
+	color: #adabab;
 	text-decoration:none; 
 }
-.corps_cookie a:active {
-	color:black;
-}
-.croix{
-    grid-column-start: 3;
-	grid-column-end: 4;
-	grid-row-start: 1;
-	grid-row-end: 2;
-    color: #565353;
-    padding: 11px 13px 0px 0px;
-}
-.croix:hover {
-    cursor:pointer;
+.lienPolitiqueCookie a:active {
+	color:#908f8f;
+    text-decoration:none;
 }

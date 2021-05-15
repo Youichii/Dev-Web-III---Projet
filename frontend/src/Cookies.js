@@ -1,29 +1,16 @@
+import CookieConsent, { Cookies } from "react-cookie-consent";
+
 const Cookie = () => {
 	require('./css/cookie.css');
 
     return (
-        <div className="grid_container">
-            <div className="corps">
-                coucou
-                <div>ça va </div>
-            </div>
-            <div className="general"></div>
-            <div className="cookie">
-                <div className="croix">x</div>
-                <div className="titre_cookie">Avis relatifs aux cookies </div>
+            <CookieConsent location="bottom" cookieName="cookieAcceuil" expires={999} style={{"background-color" : "#ff3e3e", fontFamily: "Lucida Sans, sans-serif", fontSize: "14px"}} overlay buttonText="J'ACCEPTE" buttonStyle={{fontWeight: "bolder", "background-color" : "white", "color":"#ff3e3e", padding:"9px 20px", borderRadius:"5px"}}>
+                    <span className="lienPolitiqueCookie">En poursuivant votre navigation sur ce site, vous acceptez l'utilisation de Cookies ou autres traceurs afin de réaliser des statistiques de visites. Consultez la <a className="lienPolitiqueCookie" href="https://www.privacypolicies.com/live/544cc1d9-8359-45cf-a543-ab63691364cf">Politique relative au cookies</a> pour en savoir plus et connaitre les cookies que nous utilisons.</span>
 
-                <div className="corps_cookie">
-                Ce site utilise des cookies, notamment des cookies tiers. 
-                L'utilisation de cookies nous permet de personnaliser votre expérience sur notre site et d'analyser notre trafic
-                Consulter la <a href="https://www.privacypolicies.com/live/544cc1d9-8359-45cf-a543-ab63691364cf">Politique relative au cookies</a> pour en savoir plus, connaitre les cookies que nous utilisons et comment les désactiver et/ou retirer votre consentement.
-                </div>
-
-                <div className="prevention_cookie">En fermant cette bannière ou en cliquant sur "J'accepte", vous consentez à l'utilisation de cookies.</div>
-
-                <input className="accepter_cookie" type="button" value="J'accepte"/>
-            </div>
-        </div>
+            </CookieConsent>
     );
 }
+
+//export default Cookie;
 
 export default Cookie;
