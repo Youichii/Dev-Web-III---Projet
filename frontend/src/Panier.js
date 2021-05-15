@@ -74,7 +74,7 @@ const Panier = () => {
         var myInit = { method: 'GET',
                headers: {'Content-Type': 'application/json'},
         };
-        fetch(`http://localhost:3001/api/order/user/${utilisateur}`, myInit)
+        fetch(`http://localhost:3001/api/orders/users/${utilisateur}`, myInit)
         .then(res => {
             return res.json();
         })
