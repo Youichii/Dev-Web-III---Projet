@@ -18,6 +18,7 @@ import PiedPage from './PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
 
+
 function App() {
   return (
     <Router>

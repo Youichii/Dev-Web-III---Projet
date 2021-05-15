@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Axios from "axios";
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import PDFMenu from './pdf/ChickNFish_Menu.pdf';
 
 const Carte = () => {
     require('./css/carte.css');
@@ -14,7 +15,7 @@ const Carte = () => {
     const [paniers, setPanier] = useState(null)
     const [contenu, setContenu]= useState(null)
     let id_comm = 20;
-    const [statutConnexion, setStatutConnexion] = useState(false);
+    const [statutConnexion, setStatutConnexion] = useState(true);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
 
 
@@ -39,7 +40,7 @@ const Carte = () => {
         var remplirCategorie = {method: 'GET', 
             headers:{'Content-type':'application/json'}
         }
-        fetch('/categories', remplirCategorie)
+        fetch('/api/categories', remplirCategorie)
         .then(response=>{ 
             return response.json()
         })
@@ -51,7 +52,7 @@ const Carte = () => {
         var remplirMenu = {method: 'GET', 
             headers: {'Content-type':'application/json'}
         }; 
-        fetch('/menu', remplirMenu)
+        fetch('/api/menu', remplirMenu)
             .then(response=>{ 
                 return response.json()
             })
@@ -63,7 +64,7 @@ const Carte = () => {
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`/loadingBasket/${id_comm}`, panier)
+        fetch(`/api/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
@@ -89,7 +90,7 @@ const Carte = () => {
                                     IdClient : Number(utilisateur)                     
                                 })
             }
-            fetch('/orders', premiereEntre)
+            fetch('/api/orders', premiereEntre)
             .then(res => {
                 return res.json();
             })
@@ -107,7 +108,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 })  
             }
-            fetch('/intermediateBasket', remplirPanier)
+            fetch('/api/intermediateBasket', remplirPanier)
             .then(res => {
                 return res.json();
             })
@@ -132,7 +133,7 @@ const Carte = () => {
                                     Quantite : qtt
                                 }) 
             }
-            fetch('/changingquantity',changerquantite)
+            fetch('/api/changingquantity',changerquantite)
             .then(res => {
                 return res.json();
             }) 
@@ -140,7 +141,7 @@ const Carte = () => {
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`/loadingBasket/${id_comm}`, panier)
+        fetch(`/api/loadingBasket/${id_comm}`, panier)
             .then(response=>{ 
                 return response.json()
             })
@@ -154,6 +155,7 @@ const Carte = () => {
         <div>
            
             <div id = 'bordPrincipal'>
+            {statutConnexion===false ? (<span id="alerte" style={{color:"red"}} >&#9888;&#65039;Connectez-vous pour former votre panier&#9888;&#65039;</span>): <span></span>}
                 {titres&&titres.map(titre => (
                     <fieldset className="cadre">
                         <details>
@@ -166,7 +168,7 @@ const Carte = () => {
                                     </div>
                                     <div className="bas">  
                                     <span className="description">{contenu_filtre.Description}</span>  
-                                    <span><input id= {contenu_filtre.IdProduit+ "compteur"} className="valeur" type ="number"  step="1" min="0" defaultValue="0" onChange= {()=>panier(contenu_filtre.IdProduit)} ></input></span>
+                                    <span>{statutConnexion ? <input id= {contenu_filtre.IdProduit+ "compteur"} className="valeur" type ="number"  step="1" min="0" defaultValue="0" onChange= {()=>panier(contenu_filtre.IdProduit)}></input>:<span></span>}</span>
                                     </div>
                                 </div>
                             ))}
@@ -195,8 +197,14 @@ const Carte = () => {
                     </div>
                 
             </span>
-        <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink>
-    </div>
+            <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink>
+            
+            <span>Click on the image to download it:</span>
+            <a href={PDFMenu} download>
+            Cliquez sur le lien pour le telecharger 
+            </a>
+            
+        </div>
     );
 };
 

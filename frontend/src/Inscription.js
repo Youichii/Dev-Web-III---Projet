@@ -4,6 +4,8 @@ import BoutonRadio from './components/BoutonRadio';
 import Axios from 'axios';
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import { NavLink } from 'react-router-dom';
+import  { useHistory } from 'react-router-dom';
 
 const Inscription = () => {
 	require('./css/inscription.css');
@@ -279,13 +281,14 @@ const Inscription = () => {
 						document.getElementById("erreur_inscription").innerHTML = "";
 						let mail_valide = document.getElementById("mail_utilisateur").value ;
 						let mdp_valide = document.getElementById("mdp_utilisateur").value;
-						Axios.get(`/api/users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+						Axios.get(`/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
 							if (reponse.data.message) {
 								setStatutConnexion(false);
 								setUtilisateur(10000000000);
 							} else {
 								setStatutConnexion(true);
 								setUtilisateur(reponse.data[0].IdClient);
+								redirection() ;
 							}
 						});
 					}
@@ -316,12 +319,17 @@ const Inscription = () => {
 		}
 	}
 
+	const history = useHistory();
+	const redirection= function onfinish(data){
+		return history.push('/') ;
+	}
+
     return (
 		<div>
 			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
 			<div className="inscription c_cadre_inscription">
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
-					<div className="i_bouton_con">CONNEXION</div>
+					<NavLink to="/connexion" className="i_bouton_con">CONNEXION</NavLink>
 					<div className="i_bouton_insc">INSCRIPTION</div>
 					<div className="i_titre_connexion">INSCRIPTION AVEC UNE ADRESSE E-MAIL</div>
 					

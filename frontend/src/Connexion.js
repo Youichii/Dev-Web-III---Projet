@@ -3,6 +3,9 @@ import InputInformations from './components/InputInformations';
 import Axios from "axios";
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import { NavLink } from 'react-router-dom';
+import  { useHistory } from 'react-router-dom';
+
 
 const Connexion = () => {
 	require('./css/connexion.css');
@@ -93,11 +96,16 @@ const Connexion = () => {
 				} else {
 					setStatutConnexion(true);
 					setUtilisateur(reponse.data[0].IdClient);
-					document.getElementById("erreur_connexion").innerHTML = "";
+					redirection() ;
 				}
 			});
 		}
     }
+
+	const history = useHistory();
+	const redirection= function onfinish(data){
+		return history.push('/') ;
+	}
 
 	return (
 		<div>
@@ -105,7 +113,7 @@ const Connexion = () => {
 			<div className="connexion c_cadre">
 				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 					<div className="i_bouton_connexion">CONNEXION</div>
-					<div className="i_bouton_inscription">INSCRIPTION</div>
+					<NavLink to="/inscription" className="i_bouton_inscription">INSCRIPTION</NavLink>
 					<div className="i_titre_connexion">CONNEXION AVEC UNE ADRESSE E-MAIL</div>
 
 					<div className="i_zones_info c_zones_info">

@@ -142,19 +142,19 @@ app.put('/api/coord/address', (req, res) => {
   })
 })
 
-app.post('/api/menu',(req, res) => {
-  const categorie = req.body.categorie
-  const produit = req.body.produit
-  const prix = req.body.prix
-  const description = req.body.description
-  const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
-  db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
-    if(err){
-      res.send(err)
-      console.log(err)
-    }
-  })
-})
+// app.post('/api/menu',(req, res) => {
+//   const categorie = req.body.categorie
+//   const produit = req.body.produit
+//   const prix = req.body.prix
+//   const description = req.body.description
+//   const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
+//   db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
+//     if(err){
+//       res.send(err)
+//       console.log(err)
+//     }
+//   })
+// })
 
 // Informations
 
@@ -477,7 +477,7 @@ app.get('/api/hours', (req, res) => {
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
  **/
-app.get('/users', (req, res) =>{
+app.get('/api/users', (req, res) =>{
   db.query('select * FROM clients ', (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -489,7 +489,7 @@ app.get('/users', (req, res) =>{
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
  **/
-app.get('/comment', (req, res) =>{
+app.get('/api/comment', (req, res) =>{
   db.query('select * FROM `commentaires`', (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -504,7 +504,7 @@ app.get('/comment', (req, res) =>{
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
  **/
-app.post('/comment', (req, res) =>{
+app.post('/api/comment', (req, res) =>{
   const idClient  = req.body.IdClient
   const commentaire  = req.body.Commentaire
 
@@ -523,7 +523,7 @@ app.post('/comment', (req, res) =>{
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
  **/
-app.delete('/comment', (req, res) => {
+app.delete('/api/comment', (req, res) => {
   const commentaire  = req.body.Commentaire ;
   const idClient = req.body.IdClient
 
@@ -542,7 +542,7 @@ app.delete('/comment', (req, res) => {
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
  **/
-app.put('/status', (req, res) =>{
+app.put('/api/status', (req, res) =>{
   const Status = req.body.Status
   const IdClient= req.body.IdClient
   
@@ -559,7 +559,7 @@ app.put('/status', (req, res) =>{
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
  **/
-app.get('/filterNom', (req, res) =>{
+app.get('/api/filterNom', (req, res) =>{
   const sqlInsert = "SELECT DISTINCT `Nom` FROM `clients`"
   db.query(sqlInsert,(err, result) => {
       if(err) throw err ;
@@ -574,7 +574,7 @@ app.get('/filterNom', (req, res) =>{
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
  **/
-app.get('/filterVille', (req, res) =>{
+app.get('/api/filterVille', (req, res) =>{
   const sqlInsert = "SELECT DISTINCT `Ville` FROM `clients`"
   db.query(sqlInsert,(err, result) => {
       if(err) throw err ;
@@ -590,7 +590,7 @@ app.get('/filterVille', (req, res) =>{
  * @param {String} ville que le patron a choisi pour faire son trie  
  * 
  **/
-app.get('/usersville/:ville', (req, res) =>{
+app.get('/api/usersville/:ville', (req, res) =>{
   const ville = req.params.ville
   
   const sqlInsert = "SELECT * FROM `clients` WHERE `Ville` = ?"
@@ -607,7 +607,7 @@ app.get('/usersville/:ville', (req, res) =>{
  * @method GET
  * @param {String} status que le patron a choisi pour faire son trie  
   **/
-app.get('/usersstatus/:status', (req, res) =>{
+app.get('/api/usersstatus/:status', (req, res) =>{
   const status = req.params.status
 
   const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
@@ -624,7 +624,7 @@ app.get('/usersstatus/:status', (req, res) =>{
  * @method GET
  * @param {String} nom que le patron a choisi pour faire son trie  
   **/
-app.get('/usersnom/:nom', (req,res) =>{
+app.get('/api/usersnom/:nom', (req,res) =>{
   const nom = req.params.nom
 
   const sqlInsert = "SELECT * FROM `clients` WHERE `Nom` = ?"
@@ -643,7 +643,7 @@ app.get('/usersnom/:nom', (req,res) =>{
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
   **/ 
-app.get('/menu', (req, res) =>{
+app.get('/api/menu', (req, res) =>{
   db.query('select * FROM menu ', (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -655,7 +655,7 @@ app.get('/menu', (req, res) =>{
  * @author Cécile Bonnet <c.bonnet@gmail.com>
  * @method GET
   **/ 
-app.get('/categories', (req, res) =>{
+app.get('/api/categories', (req, res) =>{
   db.query('select NomCategorie FROM categories ', (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -668,7 +668,7 @@ app.get('/categories', (req, res) =>{
  * @method GET
  * @param {String} idcommande de la commande en cours 
   **/ 
-app.get('/loadingBasket/:IdCommande', (req, res) =>{
+app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
   const idCommande = req.params.id_comm
 
   const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
@@ -686,7 +686,7 @@ app.get('/loadingBasket/:IdCommande', (req, res) =>{
  * @param {Number} idNumber du produit à ajouter à la commande 
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
-app.post('/intermediateBasket', (req, res) => {
+app.post('/api/intermediateBasket', (req, res) => {
   const idCommande = req.body.IdCommande
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
@@ -708,7 +708,7 @@ app.post('/intermediateBasket', (req, res) => {
  * @param {Number} idNumber du produit à ajouter à la commande 
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
-app.put('/changingquantity', (req, res) =>{
+app.put('/api/changingquantity', (req, res) =>{
   const idCommande = req.body.IdCommande
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
@@ -727,7 +727,7 @@ app.put('/changingquantity', (req, res) =>{
  * @param {Number} idClient de la personne qui passe la commande 
  * 
   **/ 
-app.post('/orders', (req, res) => {
+app.post('/api/orders', (req, res) => {
   const idClient = req.body.IdClient
 
   const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
@@ -746,7 +746,7 @@ app.post('/orders', (req, res) => {
  * @method GET
  * 
 **/ 
-app.get('/historical', (req, res) =>{
+app.get('/api/historical', (req, res) =>{
   const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
   db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
@@ -760,7 +760,7 @@ app.get('/historical', (req, res) =>{
  * @method GET
  * 
 **/ 
-app.get('/year', (req, res) =>{
+app.get('/api/year', (req, res) =>{
   const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
   db.query(sqlInsert,['H'], (err, result) => {
     if(err) throw err ;
@@ -895,7 +895,6 @@ app.get('/api/age-stat', (req, res)=>{
 app.get('/api/avis', (req, res)=>{
   const sqlGet="SELECT Avis, IdClient from avis";
   db.query(sqlGet, (err, result)=>{
-    console.log("res : ", result)
     res.send(result)
   })
 });

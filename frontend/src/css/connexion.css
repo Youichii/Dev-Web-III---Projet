@@ -255,6 +255,19 @@ input:-webkit-autofill {
 	background: #2A2A2A;/*#D57F0D; */
 }
 
+#cadre_connexion a:link {
+	text-decoration: none;
+}
+#cadre_connexion a:active {
+	text-decoration: none;
+	background-color: #7a939e;
+}
+#cadre_connexion a:hover {
+	text-decoration: none;
+}
+#cadre_connexion a:focus {
+	text-decoration: none;
+}
 
 @media only screen and (max-width: 1450px) {
 	.c_cadre {grid-template-columns: 26% 48% 26%;}

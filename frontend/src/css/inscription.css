@@ -458,6 +458,20 @@ input:-webkit-autofill {
 	grid-row-end: 18;
 }
 
+#cadre_inscription a:link {
+	text-decoration: none;
+}
+#cadre_inscription a:active {
+	text-decoration: none;
+	background-color: #7a939e;
+}
+#cadre_inscription a:hover {
+	text-decoration: none;
+}
+#cadre_inscription a:focus {
+	text-decoration: none;
+}
+
 
 @media only screen and (max-width: 1550px) {
 	.c_cadre_inscription {grid-template-columns: 25% 50% 25%;}
