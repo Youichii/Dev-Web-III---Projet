@@ -6,7 +6,6 @@
 
 .navbar{ 
     background-color: black;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 20% 20% 15% 20% 20%;
     grid-template-rows: 100%;
     display: grid;
@@ -57,6 +56,8 @@ li:hover{
     background-size: cover;
     background-image:url(../img/img5.jpeg);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
+    background-position-y: 852px;
+    /* margin: 0px 10px 0px 10px; */
 }
 .accueil_bv {
     grid-column-start: 3;
@@ -168,9 +169,5 @@ li:hover{
 
 body {
     margin:0px;
-}
-#selec{
-    background-color: rgba(255, 165, 0, 0);
-    border: none;
-    color: blue;
+    background-color: black;
 }

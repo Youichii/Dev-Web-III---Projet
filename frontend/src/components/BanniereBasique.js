@@ -2,14 +2,11 @@ import logo from "../img/LogoD.png"
 import { NavLink } from 'react-router-dom';
 import instagram from "../img/Instagram.png";
 import facebook from "../img/Facebook.png";
-import twitter from "../img/Twitter.png";
 import telephone from "../img/Telephone.png";
 
 const BanniereBasique = ({page}) => {
     require('../css/banniereBasique.css');
-    //<li className="logo_bv"><img id="img" src={logo} alt="Logo_Bannière" /></li> 
-    
-    //<div className="cadreLogoCNF"><img className="logoCNF" /></div>
+
     return(
         <nav className="navbar banniere_visiteur">          
             
