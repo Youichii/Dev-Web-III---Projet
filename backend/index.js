@@ -660,7 +660,8 @@ app.get('/api/usersnom/:nom', (req,res) =>{
  * @method GET
   **/ 
 app.get('/api/menu', (req, res) =>{
-  db.query('select * FROM menu ', (err, result) => {
+  const sqlGet = "SELECT * FROM `menu`"
+  db.query(sqlGet, (err, result) => {
     if(err) throw err ;
     res.send(result);
     console.log(result)
@@ -673,9 +674,9 @@ app.get('/api/menu', (req, res) =>{
  * @method GET
   **/ 
 app.get('/api/categories', (req, res) =>{
-  db.query('select NomCategorie FROM categories ', (err, result) => {
+  const sqlGet = "SELECT `NomCategorie` FROM `categories`"
+  db.query(sqlGet, (err, result) => {
     if(err) throw err ;
-    console.log("ici   " + result)
     res.send(result);
   })
 })
@@ -1156,5 +1157,4 @@ app.post("/api/commande_prete", function (req, res){
           res.send({status:"success"});
       }
   }); 
-});
 });
