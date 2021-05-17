@@ -26,5 +26,7 @@ transporter.sendMail(mailOptions, (err, info) => {
     console.log("Info: ", info);
     res.json({
       message: "Email successfully sent."
+      
     });
+    console.log(res)
   });
