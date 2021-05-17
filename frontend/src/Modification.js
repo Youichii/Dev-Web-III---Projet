@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Dropdown from './components/DropDown'
-import Button from './components/Button/Button'
+import Button from './components/Button/Bouton'
 import Axios from 'axios'
 import Input from './components/Input/Input'
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-import { useEffect, useState } from 'react';
 
 const Modification = () => {
     require('./css/modification.css');
@@ -73,23 +72,61 @@ const Modification = () => {
 		});
 	} 
 
+    /**
+     * Reçoit toutes les heures d'ouverture du restaurant
+     * 
+     * @author Aurélien Brille
+     */
+
     const getHoraires = () => {
         Axios.get(`/api/coord/horaires`).then((response)=> {
             setHorairesList(response.data)
         })
     }
 
+    /**
+     * Reçoit toutes les catégories du menu
+     * 
+     * @author Cécile Bonnet
+     */
+
     const getCategorie =() => {
-        Axios.get('/categories').then((response) =>{
+        Axios.get('/api/categories').then((response) =>{
             setTitres(response.data)
         })
     }
 
+    /**
+     * Reçoit toutes les produits du menu
+     * 
+     * @author Cécile Bonnet
+     */
+
     const getMenu =() => {
-        Axios.get('/menu').then((response) =>{
+        Axios.get('/api/menu').then((response) =>{
             setContenu(response.data)
         })
     }
+
+    /**
+     * Supprime un produit de la carte
+     * 
+     * @author Aurélien Brille
+     */
+
+    const DelProduit = (id) => {
+        Axios.delete(`/api/menu`, {
+            id : id
+        }).then((response) => {
+            
+        })
+    }
+
+    /**
+     * Reçoit toutes les coordonnées du restaurant (adresse, mail,..)
+     * 
+     * @author Aurélien Brille
+     */
 
     const getCoordonnees = () => {
         getHoraires();
@@ -343,7 +380,10 @@ const Modification = () => {
                                         <span className="price">{contenu_filtre.Prix.toFixed(2) + "€" }</span>
                                     </div>
                                     <div className="bas">  
-                                        <span className="description">{contenu_filtre.Description}</span>  
+                                        <span className="description">{contenu_filtre.Description}</span>
+                                        <form>
+                                            <button onClick={DelProduit()}>X</button>
+                                        </form>  
                                     </div>
                     
                                     
