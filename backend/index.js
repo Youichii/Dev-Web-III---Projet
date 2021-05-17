@@ -37,6 +37,7 @@ app.get('/api/client/:utilisateur', (req,res) => {
   const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
+    console.log(err + result)
   })
 })
 

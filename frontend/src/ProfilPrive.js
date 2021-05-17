@@ -6,7 +6,7 @@ import Button from './components/Button/Bouton'
 import Input from './components/Input/Input'
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-import  { useHistory } from 'react-router-dom';
+import  { useHistory, Redirect } from 'react-router-dom';
 
 const ProfilPrive = () => {
     require('./css/profilPrive.css')
@@ -21,11 +21,11 @@ const ProfilPrive = () => {
     const [mail, setMail] = useState('');
     const [telephone, setTelephone] = useState('')
     const [statutConnexion, setStatutConnexion] = useState(false);
-	const [utilisateur, setUtilisateur] = useState('');
+	const [utilisateur, setUtilisateur] = useState(0);
 
     const history = useHistory();
 	const redirection= function onfinish(data){
-		return history.push('/') ;
+		return history.push('/connexion') ;
 	}
 
 	/**
@@ -39,7 +39,7 @@ const ProfilPrive = () => {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setStatutConnexion(false);}
+			else {redirection()}
 		});
 	}, []);
 
@@ -64,12 +64,10 @@ const ProfilPrive = () => {
         })
     }
     
-    const getClient = () => {
+    const getClient = () => {        
         Axios.get(`http://localhost:3001/api/client/${utilisateur}`).then((response)=> {
-            if(response){
             setlisteClients(response.data)
-            }
-            else redirection();
+
         })
     }
 
