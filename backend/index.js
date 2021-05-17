@@ -33,11 +33,13 @@ app.get('/', (req,res) => {
 //Profil Privé
 
 app.get('/api/client/:utilisateur', (req,res) => {
+  
   const utilisateur = req.params.utilisateur
+  console.log("utilisateur =  " + utilisateur)
   const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
-    console.log(err + result)
+    console.log("resultat = " + result)
   })
 })
 

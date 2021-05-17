@@ -6,7 +6,7 @@ import Button from './components/Button/Bouton'
 import Input from './components/Input/Input'
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-import  { useHistory, Redirect } from 'react-router-dom';
+import  { useHistory } from 'react-router-dom';
 
 const ProfilPrive = () => {
     require('./css/profilPrive.css')
@@ -60,7 +60,6 @@ const ProfilPrive = () => {
             pseudo : pseudo,
             utilisateur : utilisateur,
         }).then(() => {
-            console.log("Hello")
         })
     }
     
@@ -80,7 +79,6 @@ const ProfilPrive = () => {
             ville : ville,
 
         }).then(() => {
-            console.log("Hello")
         })
     }
 
