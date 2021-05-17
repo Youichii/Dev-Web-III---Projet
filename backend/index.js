@@ -174,7 +174,6 @@ app.get('/api/coordonnees', (req, res) => {
 })
 
 
-
 /**
  * Crée les différents éléments nécessaires à la création de cookies - sessions
  * 
@@ -365,14 +364,6 @@ app.get('/api/users/:idClient/address', (req, res) => {
   db.query(sqlInsert, [identifiant], (err, result) => {
     res.send(result) ;
   })
-app.get('/api/users/:utilisateur/address', (req, res) => {
-    const identifiant = req.params.utilisateur 
-    
-    const sqlInsert = "SELECT Mail, Prenom, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
-    db.query(sqlInsert, [identifiant], (err, result) => {
-      console.log("err : ", err);
-      res.send(result) ;
-    })
 })
 
 /**
@@ -663,7 +654,6 @@ app.get('/api/menu', (req, res) =>{
   db.query('select * FROM menu ', (err, result) => {
     if(err) throw err ;
     res.send(result);
-    console.log(result)
   })
 })
 
@@ -675,7 +665,6 @@ app.get('/api/menu', (req, res) =>{
 app.get('/api/categories', (req, res) =>{
   db.query('select NomCategorie FROM categories ', (err, result) => {
     if(err) throw err ;
-    console.log("ici   " + result)
     res.send(result);
   })
 })
@@ -1156,5 +1145,4 @@ app.post("/api/commande_prete", function (req, res){
           res.send({status:"success"});
       }
   }); 
-});
 });
