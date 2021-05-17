@@ -96,15 +96,21 @@ const Connexion = () => {
 				} else {
 					setStatutConnexion(true);
 					setUtilisateur(reponse.data[0].IdClient);
-					redirection() ;
+					redirection(reponse.data[0].IdClient) ;
 				}
 			});
 		}
     }
 
 	const history = useHistory();
-	const redirection= function onfinish(data){
-		return history.push('/') ;
+	const redirection = function onfinish(donnees){
+		if (donnees === 1){
+			return history.push('/stat') ;
+		}
+		else if (donnees === 2) {
+			return history.push('/staff') ;
+		} 
+		else {return history.push('/') ;}
 	}
 
 	return (

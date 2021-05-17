@@ -42,7 +42,7 @@ li:hover{
 
 .banniere_patron {
     display: grid;
-	grid-template-columns: 10% 8% 13% 13% 13% 13% 13% 8% 0% 8%;
+	grid-template-columns: 10% 4% 12% 12% 12% 12% 12% 12% 5% 8%;
     grid-template-rows: 34% 40% 26%;
 	grid-gap: 2px;
 	padding: 5px;
@@ -88,9 +88,15 @@ li:hover{
     grid-row-start: 2;
     grid-row-end: 3;
 }
-.deconnexion_bp {
+.newsletter_bp {
     grid-column-start: 7;
 	grid-column-end: 8;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.deconnexion_bp {
+    grid-column-start: 8;
+	grid-column-end: 9;
     grid-row-start: 2;
     grid-row-end: 3;
 }

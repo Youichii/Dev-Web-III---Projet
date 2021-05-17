@@ -22,13 +22,16 @@ const BannierePatron = ({ onClick, page }) => {
             <NavLink to='/communaute' className="communaute_bp"  style={(page === "communaute")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
                 <li>Communauté</li>
             </NavLink>
+            <NavLink to='/FormMail' className="newsletter_bp"  style={(page === "formmail")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
+                <li>Newsletter</li>
+            </NavLink>
             <NavLink to='/' className="deconnexion_bp"  style={(page === "accueil")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
                 <li onClick={onClick}>Déconnexion</li>
             </NavLink>
             <div className="reseaux_sociaux_bp">
-                <div className="insta_bp"><a href="https://instagram.com/chicknfishlln?igshid=p8js0ke3rqbc"><img id="instagram_bp" src={instagram} /></a></div>
-                <div className="fb_bp"><a href="https://www.facebook.com/ChickNFishLLN/"><img id="facebook_bp" src={facebook} /></a></div>
-                <div className="tel_bp"> <NavLink to='/informations'><img id="telephone_bp" src={telephone} /></NavLink></div>
+                <div className="insta_bp"><a href="https://instagram.com/chicknfishlln?igshid=p8js0ke3rqbc"><img id="instagram_bp" src={instagram} alt="icone d'instagram"/></a></div>
+                <div className="fb_bp"><a href="https://www.facebook.com/ChickNFishLLN/"><img id="facebook_bp" src={facebook} alt="icone de facebook" /></a></div>
+                <div className="tel_bp"> <NavLink to='/informations'><img id="telephone_bp" src={telephone} alt="icone de téléphone" /></NavLink></div>
             </div>
         </nav>
     )
