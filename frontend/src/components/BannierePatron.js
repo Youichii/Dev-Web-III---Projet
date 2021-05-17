@@ -10,7 +10,7 @@ const BannierePatron = ({ onClick, page }) => {
     return (
         <nav className="navbar_bp banniere_patron">          
             <li className="logo_bp"><img id="img_bp" src={logo} alt="Logo_Bannière" /></li> 
-            <NavLink to='/statistiques' className="statistiques_bp" style={(page === "statistiques")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
+            <NavLink to='/stat' className="statistiques_bp" style={(page === "statistiques")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
                 <li>Statistiques</li>
             </NavLink>
             <NavLink to='/modification' className="modification_bp"  style={(page === "modification")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>

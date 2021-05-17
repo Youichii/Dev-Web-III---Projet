@@ -326,7 +326,7 @@ const Inscription = () => {
 
     return (
 		<div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+			{statutConnexion ? <BanniereConnection page="inscription" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="inscription" />}
 			<div className="inscription c_cadre_inscription">
 				<div id="cadre_inscription" className="i_info_inscription c_info_inscription">			
 					<NavLink to="/connexion" className="i_bouton_con">CONNEXION</NavLink>

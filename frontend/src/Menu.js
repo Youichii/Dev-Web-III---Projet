@@ -43,7 +43,7 @@ const Menu = () => {
     
     return ( 
         <div> 
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="menu" />}
+            {statutConnexion ? <BanniereConnection page="menu" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="menu" />}
             <div className = "Menu"> 
                 
                 <BarreLateraleGauche/>

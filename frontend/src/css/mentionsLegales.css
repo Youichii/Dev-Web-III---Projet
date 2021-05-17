@@ -5,8 +5,29 @@
     text-align:center
 }
 .couleurPrincipale {
-    color:#FF0000
+    color:#fd5959;
 }
 .bg {
-    background-color:#D3D3D3
+    background-color:black;
+}
+
+.cadre_mentionslegales {
+    color:white;
+    padding: 50px 150px 50px 150px;
+}
+
+.cadre_mentionslegales a:link {
+    color : #72a9d8;
+}
+.cadre_mentionslegales a:active {
+    color : #72a9d8;
+}
+.cadre_mentionslegales a:visited {
+    color : #72a9d8;
+}
+.cadre_mentionslegales a:hover {
+    color : #3990da;
+}
+.cadre_mentionslegales a:focus {
+    color : #3990da;
 }

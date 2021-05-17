@@ -63,7 +63,7 @@ const Accueil = () => {
 
     return (
         <div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
+			{statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
             <div className="hero-container">
                 <div className="hero-img">
                     <ul className="defilement-img">

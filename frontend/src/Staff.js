@@ -282,7 +282,7 @@ const Staff = () => {
 
     return (
         <div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+			{statutConnexion ? <BanniereConnection page="staff" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div className="staff c_page">
 
                 <div className="c_cadre_commandes_afaire i_cadre_attente">

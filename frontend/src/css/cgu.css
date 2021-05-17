@@ -1,13 +1,14 @@
 .c_cgu {
-    padding: 50px 400px 50px 400px;
+    padding: 50px 150px 50px 150px;
+    color: white;
 }
 .titre {
     text-align: center;
     font-size: 26px;
-    color: #050596;
+    color: #cca052;
 }
 .article {
-    color: #050596;
+    color: #cca052;
     font-size: 22px;
     font-weight: bold;
 }
@@ -17,4 +18,20 @@
 }
 .lien {
     font-size: 13px;
+}
+
+.c_cgu a:link {
+    color : #72a9d8;
+}
+.c_cgu a:active {
+    color : #72a9d8;
+}
+.c_cgu a:visited {
+    color : #72a9d8;
+}
+.c_cgu a:hover {
+    color : #3990da;
+}
+.c_cgu a:focus {
+    color : #3990da;
 }

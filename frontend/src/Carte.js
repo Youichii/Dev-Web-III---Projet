@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Axios from "axios";
-import BanniereBasique from './components/BanniereBasique.js';
-import BanniereConnection from './components/BanniereConnection.js';
 import PDFMenu from './pdf/ChickNFish_Menu.pdf';
 
 const Carte = () => {

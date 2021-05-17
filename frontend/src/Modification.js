@@ -173,7 +173,7 @@ const Modification = () => {
 
     return (
         <div onLoad={getCoordonnees}>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="modification" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             
             <Dropdown title= "Horaires" className="dd-wraper"
                 content={

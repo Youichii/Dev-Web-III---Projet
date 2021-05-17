@@ -105,7 +105,7 @@ const ProfilPrive = () => {
 
     return (
         <div>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={username}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="profilprive" onClick={deconnexion} client={username}/> : <BanniereBasique />}
             <div onLoad={getClient} className="profilPrive">
                 <Header title= {"Votre profil" } headerclass="profilheader"  />
                 <Picture />

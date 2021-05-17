@@ -1,4 +1,5 @@
-import logo from "../img/LogoD.png"
+//import logo from "../img/LogoD.png";
+import logo from "../img/ChickNFishLogo.png"
 import { NavLink } from 'react-router-dom';
 import instagram from "../img/Instagram.png";
 import facebook from "../img/Facebook.png";
