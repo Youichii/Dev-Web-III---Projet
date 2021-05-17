@@ -56,9 +56,9 @@ div ul{
     95%{left: -200%;}
 
 }
-.defilement-img{
+/*.defilement-img{
     animation: slide 5s  linear infinite;
-}
+}*/
 
 .commentaires{
     display: grid;

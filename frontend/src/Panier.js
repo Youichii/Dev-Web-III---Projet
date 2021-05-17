@@ -3,7 +3,7 @@ import BoutonPanier from './components/BoutonPanier';
 import AdresseCommande from './components/AdresseCommande';
 import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 const Panier = () => {
@@ -351,7 +351,7 @@ const Panier = () => {
 
     return (
         <div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateurCON}/> : <BanniereBasique />}
+			{statutConnexion ? <BanniereConnection page="panier" onClick={deconnexion} client={utilisateurCON}/> : <BanniereBasique />}
             <div className="panier">
                 <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
                 <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import BoutonCommunautee from './components/BoutonCommunautee'; 
 import React from 'react';
@@ -362,7 +362,7 @@ const Communaute = () => {
     return(
 
         <div>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="communaute" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <fieldset id = "recherche">
 
                 <select id="selectVille" onChange={()=>Trie()}>

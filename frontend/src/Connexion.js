@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import InputInformations from './components/InputInformations';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import { NavLink } from 'react-router-dom';
 import  { useHistory } from 'react-router-dom';
@@ -96,20 +96,26 @@ const Connexion = () => {
 				} else {
 					setStatutConnexion(true);
 					setUtilisateur(reponse.data[0].IdClient);
-					redirection() ;
+					redirection(reponse.data[0].IdClient) ;
 				}
 			});
 		}
     }
 
 	const history = useHistory();
-	const redirection= function onfinish(data){
-		return history.push('/') ;
+	const redirection = function onfinish(donnees){
+		if (donnees === 1){
+			return history.push('/stat') ;
+		}
+		else if (donnees === 2) {
+			return history.push('/staff') ;
+		} 
+		else {return history.push('/') ;}
 	}
 
 	return (
 		<div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="connexion" />}
 			<div className="connexion c_cadre">
 				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 					<div className="i_bouton_connexion">CONNEXION</div>

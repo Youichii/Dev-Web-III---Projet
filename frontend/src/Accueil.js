@@ -5,7 +5,7 @@ import img3 from '../src/img/img3.jpeg'
 import img4 from '../src/img/img4.jpeg'
 //import AvisClients from './components/AvisClients'
 import Axios from 'axios';
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 import './css/Accueil.css';
@@ -63,7 +63,7 @@ const Accueil = () => {
 
     return (
         <div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+			{statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
             <div className="hero-container">
                 <div className="hero-img">
                     <ul className="defilement-img">

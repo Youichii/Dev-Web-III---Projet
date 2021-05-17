@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import React from 'react';
 import Axios from "axios";
 import BanniereConnection from './components/BanniereConnection';
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 
 const Menu = () => {
     require("./css/carte.css")
@@ -43,7 +43,7 @@ const Menu = () => {
     
     return ( 
         <div> 
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="menu" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="menu" />}
             <div className = "Menu"> 
                 
                 <BarreLateraleGauche/>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Axios from "axios";
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 
@@ -87,7 +87,7 @@ import BanniereConnection from './components/BanniereConnection.js';
 
      return(
         <div>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="formmail" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div className="email-container">
                 <div className="formulaire-email">
 

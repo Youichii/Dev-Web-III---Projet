@@ -3,7 +3,7 @@ import Dropdown from './components/DropDown'
 import Button from './components/Button/Bouton'
 import Axios from 'axios'
 import Input from './components/Input/Input'
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 const Modification = () => {
@@ -210,7 +210,7 @@ const Modification = () => {
 
     return (
         <div onLoad={getCoordonnees}>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            {statutConnexion ? <BanniereConnection page="modification" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             
             <Dropdown title= "Horaires" className="dd-wraper"
                 content={

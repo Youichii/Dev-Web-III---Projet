@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import Button from './components/Button/Bouton'
 import Input from './components/Input/Input'
-import BanniereBasique from './BanniereBasique.js';
+import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import  { useHistory, Redirect } from 'react-router-dom';
 
@@ -108,74 +108,74 @@ const ProfilPrive = () => {
     }
     
     return (
-        <div onLoad={getClient}>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={pseudo}/> : <BanniereBasique />}
-            <div className="profilPrive">
-                <Header title= {"Votre profil" } headerclass="profilheader"  />
-                <Picture />
-                <div className="privateinfo">                    
-                    <div className="gauche">
-                        {listeClients.map((val) =>{
-                            return (
-                            <label>
-                                <h1>
-                                    {val.Pseudo}
-                                </h1>
-                            </label>
-                            );
-                        })}
-                        <form onSubmit={submitUsername}> 
-                            <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setPseudo}/>
-                            <Button />
-                        </form>
-                        {listeClients.map((val) =>{
-                            return (
-                                <p>
-                                    {val.Nom} | {val.Prenom}<br />
-                                    {(val.Anniversaire).slice(0,10)}
-                                </p>
-                                );  
-                        })}                   
-                        {listeClients.map((val) => {
-                            return (
-                                <p>{val.Rue} {val.Numero}, <br />
-                                {val.Zip} {val.Ville}
-                                </p>
+            <div>  
+                {statutConnexion ? <BanniereConnection page="profilprive" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+                <div onLoad={getClient} className="profilPrive">
+                    <Header title= {"Votre profil" } headerclass="profilheader"  />
+                    <Picture />
+                    <div className="privateinfo">                    
+                        <div className="gauche">
+                            {listeClients.map((val) =>{
+                                return (
+                                <label>
+                                    <h1>
+                                        {val.Pseudo}
+                                    </h1>
+                                </label>
                                 );
-                        })}
-                        <form onSubmit={submitAdress}>
-                            <Input name="Street" max="50" placeholder="Rue" setFunc={setRue}/><br/>
-                            <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumero}/><br/>
-                            <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
-                            <Input name="City" max="40" placeholder="Ville" setFunc={setVille}/><br/>
-                            <Button />
-                        </form>
-                        {listeClients.map((val) =>{
-                            return (
-                                <p>
-                                        {val.Gsm}
-                                </p>
-                                );  
-                        })} 
-                        <form onSubmit={submitPhone}>
-                            <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelephone}/><br/>
-                            <Button/>
-                        </form>
-                        {listeClients.map((val) =>{
-                            return (
-                                <p>
-                                        {val.Mail}
-                                </p>
-                                );  
-                        })}
-                        <form onSubmit={submitMail}>
-                            <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
-                            <Button />
-                        </form>
+                            })}
+                            <form onSubmit={submitUsername}> 
+                                <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setPseudo}/>
+                                <Button />
+                            </form>
+                            {listeClients.map((val) =>{
+                                return (
+                                    <p>
+                                        {val.Nom} | {val.Prenom}<br />
+                                        {(val.Anniversaire).slice(0,10)}
+                                    </p>
+                                    );  
+                            })}                   
+                            {listeClients.map((val) => {
+                                return (
+                                    <p>{val.Rue} {val.Numero}, <br />
+                                    {val.Zip} {val.Ville}
+                                    </p>
+                                    );
+                            })}
+                            <form onSubmit={submitAdress}>
+                                <Input name="Street" max="50" placeholder="Rue" setFunc={setRue}/><br/>
+                                <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumero}/><br/>
+                                <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
+                                <Input name="City" max="40" placeholder="Ville" setFunc={setVille}/><br/>
+                                <Button />
+                            </form>
+                            {listeClients.map((val) =>{
+                                return (
+                                    <p>
+                                            {val.Gsm}
+                                    </p>
+                                    );  
+                            })} 
+                            <form onSubmit={submitPhone}>
+                                <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelephone}/><br/>
+                                <Button/>
+                            </form>
+                            {listeClients.map((val) =>{
+                                return (
+                                    <p>
+                                            {val.Mail}
+                                    </p>
+                                    );  
+                            })}
+                            <form onSubmit={submitMail}>
+                                <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
+                                <Button />
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div>            
-        </div>
+                </div>            
+            </div>
         )
     }
 
