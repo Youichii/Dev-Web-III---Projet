@@ -82,11 +82,11 @@ const Accueil = () => {
                     <h1>Avis de nos clients</h1>
                     {donneeAvis.map((val)=>{
                         return(
-                            <>
-                                <h2>{val.IdClient}</h2>
-                                <p>{val.Prenom}</p>
+                            <div className="avis">
+                                <h2>{val.Prenom}</h2>
+                                <p>{val.Avis}</p>
                                 
-                            </>
+                            </div>
                         )
                     })}
                     

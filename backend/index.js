@@ -902,7 +902,7 @@ app.get('/api/age-stat', (req, res)=>{
  * @returns /
  **/
 app.get('/api/avis', (req, res)=>{
-  const sqlGet="SELECT Avis.Avis as Avis, Clients.Prenom as Prenom from Avis, Clients where Avis.idClients = Clients.idClients";
+  const sqlGet="SELECT avis.Avis as Avis, clients.Prenom as Prenom from avis, clients where avis.IdClient = clients.IdClient";
   db.query(sqlGet, (err, result)=>{
     res.send(result)
   })

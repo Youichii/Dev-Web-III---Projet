@@ -99,15 +99,15 @@ div ul{
 
 .avis{
     box-sizing: border-box;
-    border: solid;
-    border-color: rgb(145, 110, 35);
-    border-radius: 0.1%;
+    border: 1px solid rgb(223, 142, 22);
+    margin: 1%;
 }
 
 
 
 .commentaires h1, h2, p{
     margin: 10px;
+    color: rgb(255, 255, 255);
 }
 
 
