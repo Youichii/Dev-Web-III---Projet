@@ -114,7 +114,7 @@ const Carte = () => {
             var panier = {method: 'GET', 
             headers: {'Content-type':'application/json'}
             }; 
-            fetch(`/loadingBasket/${id_comm}`, panier)
+            fetch(`/loadingBasket/${utilisateur}`, panier)
             .then(response=>{ 
                 return response.json()
             })
