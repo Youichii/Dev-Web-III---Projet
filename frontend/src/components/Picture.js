@@ -1,6 +1,3 @@
-import Button from './Button/Button'
-
-
 const Picture = ( { url, desc } ) => {
     return (
         <div className="profilepicture">

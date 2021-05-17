@@ -2,26 +2,31 @@ import Header from './components/Header'
 import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import Button from './components/Button/Button'
+import Button from './components/Button/Bouton'
 import Input from './components/Input/Input'
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import  { useHistory } from 'react-router-dom';
 
 const ProfilPrive = () => {
     require('./css/profilPrive.css')
     Axios.defaults.withCredentials = true;
 
-    const [username, setUsername] = useState('');
-    const [clientInfosList, setClientInfosList] = useState([]);
-    const [street, setStreet] = useState('');
+    const [pseudo, setPseudo] = useState('');
+    const [listeClients, setlisteClients] = useState([]);
+    const [rue, setRue] = useState('');
     const [zipCode, setZip] = useState('');
-    const [city, setCity] = useState('');
-    const [number, setNumber] = useState('');
+    const [ville, setVille] = useState('');
+    const [numero, setNumero] = useState('');
     const [mail, setMail] = useState('');
-    const [phone, setPhone] = useState('')
+    const [telephone, setTelephone] = useState('')
     const [statutConnexion, setStatutConnexion] = useState(false);
-	const [utilisateur, setUtilisateur] = useState(10000000000);
+	const [utilisateur, setUtilisateur] = useState('');
 
+    const history = useHistory();
+	const redirection= function onfinish(data){
+		return history.push('/') ;
+	}
 
 	/**
 	 * Vérifie si l'utilisateur est connecté au chargement de la page
@@ -51,8 +56,8 @@ const ProfilPrive = () => {
 	} 
 
     const submitUsername = () => {
-        Axios.put('/api/client/username', {
-            username : username,
+        Axios.put('/api/client/pseudo', {
+            pseudo : pseudo,
             utilisateur : utilisateur,
         }).then(() => {
             console.log("Hello")
@@ -61,17 +66,20 @@ const ProfilPrive = () => {
     
     const getClient = () => {
         Axios.get(`http://localhost:3001/api/client/${utilisateur}`).then((response)=> {
-            setClientInfosList(response.data)
+            if(response){
+            setlisteClients(response.data)
+            }
+            else redirection();
         })
     }
 
     const submitAdress = () => {
         Axios.put('http://localhost:3001/api/client/adress', {
             utilisateur : utilisateur,
-            street : street,
-            number : number,
+            rue : rue,
+            numero : numero,
             zipCode : zipCode,
-            city : city,
+            ville : ville,
 
         }).then(() => {
             console.log("Hello")
@@ -79,9 +87,9 @@ const ProfilPrive = () => {
     }
 
     const submitPhone = () => {
-        Axios.put('http://localhost:3001/api/client/phone', {
+        Axios.put('http://localhost:3001/api/client/telephone', {
             utilisateur : utilisateur,
-            phone : phone
+            telephone : telephone
         }).then ((response) => {
             if (response){
                 window.alert("Ce numéro de téléphone existe déjà !")
@@ -101,79 +109,76 @@ const ProfilPrive = () => {
         })
     }
     
-    if(utilisateur){
-        return (
-            <div onLoad={getClient}>
-                {statutConnexion ? <BanniereConnection onClick={deconnexion} client={username}/> : <BanniereBasique />}
-                <div className="profilPrive">
-                    <Header title= {"Votre profil" } headerclass="profilheader"  />
-                    <Picture />
-                    <div className="privateinfo">                    
-                        <div className="gauche">
-                            {clientInfosList.map((val) =>{
-                                return (
-                                <label>
-                                    <h1>
-                                        {val.Pseudo}
-                                    </h1>
-                                </label>
+    return (
+        <div onLoad={getClient}>
+            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={pseudo}/> : <BanniereBasique />}
+            <div className="profilPrive">
+                <Header title= {"Votre profil" } headerclass="profilheader"  />
+                <Picture />
+                <div className="privateinfo">                    
+                    <div className="gauche">
+                        {listeClients.map((val) =>{
+                            return (
+                            <label>
+                                <h1>
+                                    {val.Pseudo}
+                                </h1>
+                            </label>
+                            );
+                        })}
+                        <form onSubmit={submitUsername}> 
+                            <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setPseudo}/>
+                            <Button />
+                        </form>
+                        {listeClients.map((val) =>{
+                            return (
+                                <p>
+                                    {val.Nom} | {val.Prenom}<br />
+                                    {(val.Anniversaire).slice(0,10)}
+                                </p>
+                                );  
+                        })}                   
+                        {listeClients.map((val) => {
+                            return (
+                                <p>{val.Rue} {val.Numero}, <br />
+                                {val.Zip} {val.Ville}
+                                </p>
                                 );
-                            })}
-                            <form onSubmit={submitUsername}> 
-                                <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setUsername}/>
-                                <Button />
-                            </form>
-                            {clientInfosList.map((val) =>{
-                                return (
-                                    <p>
-                                        {val.Nom} | {val.Prenom}<br />
-                                        {(val.Anniversaire).slice(0,10)}
-                                    </p>
-                                    );  
-                            })}                   
-                            {clientInfosList.map((val) => {
-                                return (
-                                    <p>{val.Rue} {val.Numero}, <br />
-                                    {val.Zip} {val.Ville}
-                                    </p>
-                                    );
-                            })}
-                            <form onSubmit={submitAdress}>
-                                <Input name="Street" max="50" placeholder="Rue" setFunc={setStreet}/><br/>
-                                <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumber}/><br/>
-                                <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
-                                <Input name="City" max="40" placeholder="Ville" setFunc={setCity}/><br/>
-                                <Button />
-                            </form>
-                            {clientInfosList.map((val) =>{
-                                return (
-                                    <p>
-                                            {val.Gsm}
-                                    </p>
-                                    );  
-                            })} 
-                            <form onSubmit={submitPhone}>
-                                <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setPhone}/><br/>
-                                <Button/>
-                            </form>
-                            {clientInfosList.map((val) =>{
-                                return (
-                                    <p>
-                                            {val.Mail}
-                                    </p>
-                                    );  
-                            })}
-                            <form onSubmit={submitMail}>
-                                <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
-                                <Button />
-                            </form>
-                        </div>
+                        })}
+                        <form onSubmit={submitAdress}>
+                            <Input name="Street" max="50" placeholder="Rue" setFunc={setRue}/><br/>
+                            <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumero}/><br/>
+                            <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
+                            <Input name="City" max="40" placeholder="Ville" setFunc={setVille}/><br/>
+                            <Button />
+                        </form>
+                        {listeClients.map((val) =>{
+                            return (
+                                <p>
+                                        {val.Gsm}
+                                </p>
+                                );  
+                        })} 
+                        <form onSubmit={submitPhone}>
+                            <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelephone}/><br/>
+                            <Button/>
+                        </form>
+                        {listeClients.map((val) =>{
+                            return (
+                                <p>
+                                        {val.Mail}
+                                </p>
+                                );  
+                        })}
+                        <form onSubmit={submitMail}>
+                            <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMail}/><br/>
+                            <Button />
+                        </form>
                     </div>
-                </div>            
-            </div>
+                </div>
+            </div>            
+        </div>
         )
     }
-    else return <div></div>
-};
 
 export default ProfilPrive

@@ -104,7 +104,7 @@ const Connexion = () => {
 
 	const history = useHistory();
 	const redirection= function onfinish(data){
-		return history.push('/') ;
+		return history.push('/profil-prive') ;
 	}
 
 	return (
