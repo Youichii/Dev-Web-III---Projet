@@ -5,7 +5,7 @@
 
 .footer {
     display: grid;
-	grid-template-columns:  22% 7% 2% 10% 2% 11% 2% 13% 2% 5% 13% 9%;
+	grid-template-columns:  18% 8% 2% 12% 2% 13% 2% 14% 2% 7% 8% 10%;
     grid-template-rows: 23% 55% 9%;
 	grid-gap: 2px;
 	/* padding: 5px; */
@@ -81,131 +81,6 @@
     line-height: 20px;
 }
 
-/*.regles_legales {
-    grid-column-start: 2;
-	grid-column-end: 3;
-
-    display: grid;
-	grid-template-columns: 66% 34%;
-    grid-template-rows: 21% 5% 17% 17% 17% 17% 5%;
-    grid-gap: 2px;
-    padding: 13px 5px 5px 30px;
-    color: white;
-    font-family:"Lucida Sans", sans-serif;
-    text-align: left;
-    border-right: 1px solid white;
+@media only screen and (max-width: 1680px) {
+	.foot {font-size: 15px;}
 }
-.titre_mention {
-    grid-row-start: 1;
-	grid-row-end: 2;
-    grid-column-start: 1;
-	grid-column-end: 2;
-    border-bottom: 1px solid white;
-}
-.mentions_legales {
-    grid-row-start: 3;
-	grid-row-end: 4;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}
-.confidentialite {
-    grid-row-start: 4;
-	grid-row-end: 5;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}
-.cookies {
-    grid-row-start: 5;
-	grid-row-end: 6;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}
-.cgu {
-    grid-row-start: 6;
-	grid-row-end: 7;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}
-
-.footer a:link {
-	color:white;
-	text-decoration:none;
-} 
-.footer a:visited {
-	color: white;
-	text-decoration:none; 
-} 
-.footer a:hover {
-	color: white;
-	text-decoration:none; 
-}
-.footer a:active {
-	color:white;
-}
-
-
-.titre_coucou {
-    border-bottom: 1px solid white;
-}
-
-
-.aide {
-    grid-column-start: 4;
-	grid-column-end: 5;
-
-    display: grid;
-	grid-template-columns: 66% 34%;
-    grid-template-rows: 21% 5% 17% 17% 17% 17% 5%;
-    grid-gap: 2px;
-    padding: 13px 5px 5px 30px;
-    color: white;
-    font-family:"Lucida Sans", sans-serif;
-    text-align: left;
-    border-right: 1px solid white;
-}
-.titre_aide {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    border-bottom: 1px solid white;
-}
-.appeler {
-    grid-row-start: 3;
-	grid-row-end: 4;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}
-
-.coucou {
-    grid-column-start: 6;
-	grid-column-end: 7;
-
-    display: grid;
-	grid-template-columns: 66% 34%;
-    grid-template-rows: 21% 5% 17% 17% 17% 17% 5%;
-    grid-gap: 2px;
-    padding: 13px 5px 5px 30px;
-    color: white;
-    font-family:"Lucida Sans", sans-serif;
-    text-align: left;
-}
-.titre_coucou {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    border-bottom: 1px solid white;
-}
-.coucou_texte {
-    grid-row-start: 3;
-	grid-row-end: 4;
-    grid-column-start: 1;
-	grid-column-end: 3;
-    font-size: 14px;
-}*/
