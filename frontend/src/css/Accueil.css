@@ -110,6 +110,9 @@ div ul{
     color: rgb(255, 255, 255);
 }
 
+.hero-container {
+    margin-bottom: 81px;
+}
 
 @media screen and (min-width:300px) {
     .hero-container{

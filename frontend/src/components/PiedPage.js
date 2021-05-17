@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 const PiedPage = () => {
-	require('./css/piedPage.css')
+	require('../css/piedPage.css')
 	
     return (
         <div className="footer">
