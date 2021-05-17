@@ -80,7 +80,7 @@ const Accueil = () => {
 
                 <div onLoad ={AfficherAvis} className="commentaires">
                     <h1>Avis de nos clients</h1>
-                    {donneeAvis.map((val)=>{
+                    {donneeAvis&&donneeAvis.map((val)=>{
                         return(
                             <div className="avis">
                                 <h2>{val.Prenom}</h2>
