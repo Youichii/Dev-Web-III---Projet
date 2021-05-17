@@ -65,6 +65,8 @@ const Accueil = () => {
         <div>
 			{statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
             <div className="hero-container">
+            <h1>Bienvenu au Chick 'N' Fish</h1>
+            <p>Venez découvrir nos plats frais et préparés maison. </p>
                 <div className="hero-img">
                     <ul className="defilement-img">
                         <li><img className="img" src={img1} alt="image1"></img></li>
@@ -82,7 +84,7 @@ const Accueil = () => {
                         return(
                             <>
                                 <h2>{val.IdClient}</h2>
-                                <p>{val.Avis}</p>
+                                <p>{val.Prenom}</p>
                                 
                             </>
                         )
