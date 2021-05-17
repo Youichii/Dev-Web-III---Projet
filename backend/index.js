@@ -32,55 +32,55 @@ app.get('/', (req,res) => {
 
 //Profil Privé
 
-app.get('/api/client/:clientName', (req,res) => {
-  const name = req.params.clientName
+app.get('/api/client/:utilisateur', (req,res) => {
+  const utilisateur = req.params.utilisateur
   const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
-  db.query(sqlGet, name ,(err, result) => {
-    console.log(result)
+  db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
+    console.log(err + result)
   })
 })
 
 app.put('/api/client/mail', (req, res) => {  
-  const clientName = req.body.clientName
+  const utilisateur = req.body.utilisateur
   const mail = req.body.mail
   console.log(mail)
   const sqlInsert = "UPDATE `clients` SET `Mail` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [mail, clientName], (err, result) => {
+  db.query(sqlInsert, [mail, utilisateur], (err, result) => {
       if(err){
       res.send(err)
     }
   })
 })
 
-app.put('/api/client/phone', (req, res) => {  
-  const clientName = req.body.clientName
-  const phone= req.body.phone
+app.put('/api/client/telephone', (req, res) => {  
+  const utilisateur = req.body.utilisateur
+  const telephone= req.body.telephone
   const sqlInsert = "UPDATE `clients` SET `Gsm` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [phone, clientName], (err, result) => {
+  db.query(sqlInsert, [telephone, utilisateur], (err, result) => {
     if(err){
       res.send(err)
     }
   })
 })
 
-app.put('/api/client/username', (req, res) => {  
-  const username = req.body.username
-  const clientName = req.body.clientName  //to take the variable from the html page
+app.put('/api/client/pseudo', (req, res) => {  
+  const pseudo = req.body.pseudo
+  const utilisateur = req.body.utilisateur  //to take the variable from the html page
   const sqlInsert = "UPDATE `clients` SET `Pseudo` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [username, clientName], (err, result) => {
+  db.query(sqlInsert, [pseudo, utilisateur], (err, result) => {
   })
 })
 
 app.put('/api/client/adress', (req, res) => {
-  const clientName = req.body.clientName  
-  const street = req.body.street
-  const number = req.body.number 
+  const utilisateur = req.body.utilisateur  
+  const rue = req.body.rue
+  const numero = req.body.numero 
   const zipCode = req.body.zipCode
-  const city = req.body.city
-  console.log(clientName, street, number, zipCode, city)
+  const ville = req.body.ville
+  console.log(utilisateur, rue, numero, zipCode, ville)
   const sqlInsert = "UPDATE `clients` SET `Rue` = ?, `Numero` = ?, `Zip` = ?, `Ville` = ? WHERE `clients`.`IdClient` = ?;"
-  db.query(sqlInsert, [street, number, zipCode, city, clientName], (err, result) => {
+  db.query(sqlInsert, [rue, numero, zipCode, ville, utilisateur], (err, result) => {
   })
 })
 
@@ -142,19 +142,27 @@ app.put('/api/coord/address', (req, res) => {
   })
 })
 
-// app.post('/api/menu',(req, res) => {
-//   const categorie = req.body.categorie
-//   const produit = req.body.produit
-//   const prix = req.body.prix
-//   const description = req.body.description
-//   const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
-//   db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
-//     if(err){
-//       res.send(err)
-//       console.log(err)
-//     }
-//   })
-// })
+app.delete('/api/menu', (req, res) => {
+  const idProduit = req.body.id
+  const sqlGet = "DELETE FROM `menu` WHERE `IdProduit` = ?"
+  db.query(sqlGet, idProduit, (err,result) => {
+    res.send(result)
+  })
+})
+
+app.post('/api/menu',(req, res) => {
+  const categorie = req.body.categorie
+  const produit = req.body.produit
+  const prix = req.body.prix
+  const description = req.body.description
+  const sqlGet = "INSERT INTO `menu`(`IdCategorie`, `Produit`, `Prix`, `Description`) VALUES (?,?,?,?);"
+  db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
+    if(err){
+      res.send(err)
+      console.log(err)
+    }
+  })
+})
 
 // Informations
 
@@ -357,6 +365,14 @@ app.get('/api/users/:idClient/address', (req, res) => {
   db.query(sqlInsert, [identifiant], (err, result) => {
     res.send(result) ;
   })
+app.get('/api/users/:utilisateur/address', (req, res) => {
+    const identifiant = req.params.utilisateur 
+    
+    const sqlInsert = "SELECT Mail, Prenom, Rue, Numero, Zip, Ville FROM `clients` where IdClient = ?" ; 
+    db.query(sqlInsert, [identifiant], (err, result) => {
+      console.log("err : ", err);
+      res.send(result) ;
+    })
 })
 
 /**
@@ -647,6 +663,7 @@ app.get('/api/menu', (req, res) =>{
   db.query('select * FROM menu ', (err, result) => {
     if(err) throw err ;
     res.send(result);
+    console.log(result)
   })
 })
 
@@ -658,6 +675,7 @@ app.get('/api/menu', (req, res) =>{
 app.get('/api/categories', (req, res) =>{
   db.query('select NomCategorie FROM categories ', (err, result) => {
     if(err) throw err ;
+    console.log("ici   " + result)
     res.send(result);
   })
 })
@@ -1138,4 +1156,5 @@ app.post("/api/commande_prete", function (req, res){
           res.send({status:"success"});
       }
   }); 
+});
 });

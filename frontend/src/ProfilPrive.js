@@ -2,27 +2,31 @@ import Header from './components/Header'
 import Picture from './components/Picture'
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import Button from './components/Button/Button'
+import Button from './components/Button/Bouton'
 import Input from './components/Input/Input'
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
+import  { useHistory, Redirect } from 'react-router-dom';
 
 const ProfilPrive = () => {
     require('./css/profilPrive.css')
     Axios.defaults.withCredentials = true;
 
-    const [username, setUsername] = useState('');
-    const clientName = "1";
-    const [clientInfosList, setClientInfosList] = useState([]);
-    const [street, setStreet] = useState('');
+    const [pseudo, setPseudo] = useState('');
+    const [listeClients, setlisteClients] = useState([]);
+    const [rue, setRue] = useState('');
     const [zipCode, setZip] = useState('');
-    const [city, setCity] = useState('');
-    const [number, setNumber] = useState('');
+    const [ville, setVille] = useState('');
+    const [numero, setNumero] = useState('');
     const [mail, setMail] = useState('');
-    const [phone, setPhone] = useState('')
+    const [telephone, setTelephone] = useState('')
     const [statutConnexion, setStatutConnexion] = useState(false);
-	const [utilisateur, setUtilisateur] = useState(10000000000);
+	const [utilisateur, setUtilisateur] = useState(0);
 
+    const history = useHistory();
+	const redirection= function onfinish(data){
+		return history.push('/connexion') ;
+	}
 
 	/**
 	 * Vérifie si l'utilisateur est connecté au chargement de la page
@@ -35,7 +39,7 @@ const ProfilPrive = () => {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
 			}
-			else {setStatutConnexion(false);}
+			else {redirection()}
 		});
 	}, []);
 
@@ -52,27 +56,28 @@ const ProfilPrive = () => {
 	} 
 
     const submitUsername = () => {
-        Axios.put('/api/client/username', {
-            username : username,
-            clientName : clientName,
+        Axios.put('/api/client/pseudo', {
+            pseudo : pseudo,
+            utilisateur : utilisateur,
         }).then(() => {
             console.log("Hello")
         })
     }
     
-    const getClient = () => {
-        Axios.get(`/api/client/${clientName}`).then((response)=> {
-            setClientInfosList(response.data)
+    const getClient = () => {        
+        Axios.get(`http://localhost:3001/api/client/${utilisateur}`).then((response)=> {
+            setlisteClients(response.data)
+
         })
     }
 
     const submitAdress = () => {
-        Axios.put('/api/client/adress', {
-            clientName : clientName,
-            street : street,
-            number : number,
+        Axios.put('http://localhost:3001/api/client/adress', {
+            utilisateur : utilisateur,
+            rue : rue,
+            numero : numero,
             zipCode : zipCode,
-            city : city,
+            ville : ville,
 
         }).then(() => {
             console.log("Hello")
@@ -80,9 +85,9 @@ const ProfilPrive = () => {
     }
 
     const submitPhone = () => {
-        Axios.put('/api/client/phone', {
-            clientName : clientName,
-            phone : phone
+        Axios.put('http://localhost:3001/api/client/telephone', {
+            utilisateur : utilisateur,
+            telephone : telephone
         }).then ((response) => {
             if (response){
                 window.alert("Ce numéro de téléphone existe déjà !")
@@ -91,8 +96,8 @@ const ProfilPrive = () => {
     }
 
     const submitMail = () => {
-        Axios.put('/api/client/mail', {
-            clientName : clientName,
+        Axios.put('http://localhost:3001/api/client/mail', {
+            utilisateur : utilisateur,
             mail : mail
         }).then ((response) => {
             if (response){
@@ -102,16 +107,15 @@ const ProfilPrive = () => {
         })
     }
     
-
     return (
-        <div>
-            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={username}/> : <BanniereBasique />}
-            <div onLoad={getClient} className="profilPrive">
+        <div onLoad={getClient}>
+            {statutConnexion ? <BanniereConnection onClick={deconnexion} client={pseudo}/> : <BanniereBasique />}
+            <div className="profilPrive">
                 <Header title= {"Votre profil" } headerclass="profilheader"  />
                 <Picture />
                 <div className="privateinfo">                    
                     <div className="gauche">
-                        {clientInfosList.map((val) =>{
+                        {listeClients.map((val) =>{
                             return (
                             <label>
                                 <h1>
@@ -121,10 +125,10 @@ const ProfilPrive = () => {
                             );
                         })}
                         <form onSubmit={submitUsername}> 
-                            <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setUsername}/>
+                            <Input name="Username" min="5" placeholder="Changer le pseudo" setFunc={setPseudo}/>
                             <Button />
                         </form>
-                        {clientInfosList.map((val) =>{
+                        {listeClients.map((val) =>{
                             return (
                                 <p>
                                     {val.Nom} | {val.Prenom}<br />
@@ -132,7 +136,7 @@ const ProfilPrive = () => {
                                 </p>
                                 );  
                         })}                   
-                        {clientInfosList.map((val) => {
+                        {listeClients.map((val) => {
                             return (
                                 <p>{val.Rue} {val.Numero}, <br />
                                 {val.Zip} {val.Ville}
@@ -140,13 +144,13 @@ const ProfilPrive = () => {
                                 );
                         })}
                         <form onSubmit={submitAdress}>
-                            <Input name="Street" max="50" placeholder="Rue" setFunc={setStreet}/><br/>
-                            <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumber}/><br/>
+                            <Input name="Street" max="50" placeholder="Rue" setFunc={setRue}/><br/>
+                            <Input type="number" name="Number" min="1" placeholder="Numéro" setFunc={setNumero}/><br/>
                             <Input type="number" name="Zip" maxLength="6" placeholder="Code Postal" setFunc={setZip}/><br/>
-                            <Input name="City" max="40" placeholder="Ville" setFunc={setCity}/><br/>
+                            <Input name="City" max="40" placeholder="Ville" setFunc={setVille}/><br/>
                             <Button />
                         </form>
-                        {clientInfosList.map((val) =>{
+                        {listeClients.map((val) =>{
                             return (
                                 <p>
                                         {val.Gsm}
@@ -154,10 +158,10 @@ const ProfilPrive = () => {
                                 );  
                         })} 
                         <form onSubmit={submitPhone}>
-                            <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setPhone}/><br/>
+                            <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelephone}/><br/>
                             <Button/>
                         </form>
-                        {clientInfosList.map((val) =>{
+                        {listeClients.map((val) =>{
                             return (
                                 <p>
                                         {val.Mail}
@@ -172,7 +176,7 @@ const ProfilPrive = () => {
                 </div>
             </div>            
         </div>
-    )
-};
+        )
+    }
 
 export default ProfilPrive
