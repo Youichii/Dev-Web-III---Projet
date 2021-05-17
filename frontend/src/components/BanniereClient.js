@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import logo from "../img/LogoD.png"
+import logo from "../img/ChickNFishLogo.png"
 import instagram from "../img/Instagram.png";
 import facebook from "../img/Facebook.png";
 import telephone from "../img/Telephone.png";
