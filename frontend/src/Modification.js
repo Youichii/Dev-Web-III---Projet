@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Dropdown from './components/DropDown'
 import Button from './components/Button/Button'
 import Axios from 'axios'
 import Input from './components/Input/Input'
 import BanniereBasique from './BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-import { useEffect, useState } from 'react';
 
 const Modification = () => {
     require('./css/modification.css');
@@ -88,6 +87,14 @@ const Modification = () => {
     const getMenu =() => {
         Axios.get('/menu').then((response) =>{
             setContenu(response.data)
+        })
+    }
+
+    const DelProduit = (id) => {
+        Axios.delete(`http://localhost:3001/api/menu`, {
+            id : id
+        }).then((response) => {
+            
         })
     }
 
@@ -343,7 +350,10 @@ const Modification = () => {
                                         <span className="price">{contenu_filtre.Prix.toFixed(2) + "€" }</span>
                                     </div>
                                     <div className="bas">  
-                                        <span className="description">{contenu_filtre.Description}</span>  
+                                        <span className="description">{contenu_filtre.Description}</span>
+                                        <form>
+                                            <button onClick={DelProduit()}>X</button>
+                                        </form>  
                                     </div>
                     
                                     
