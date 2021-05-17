@@ -82,7 +82,7 @@ const Accueil = () => {
                         return(
                             <>
                                 <h2>{val.IdClient}</h2>
-                                <p>{val.Avis}</p>
+                                <p>{val.Prenom}</p>
                                 
                             </>
                         )
