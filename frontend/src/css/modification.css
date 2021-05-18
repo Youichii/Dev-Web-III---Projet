@@ -1,6 +1,4 @@
-html {
-    background-color: black;
-}
+
 
 div.dd-wraper {
     font-size: calc(0.2em + 1vw);
@@ -70,10 +68,6 @@ li {
 div.horaires {
     margin-bottom: 20%;
     padding-left: 5%;
-}
-
-div.content {
-    margin-top: 5%;
 }
 
 div.dd-wraper-2 {
