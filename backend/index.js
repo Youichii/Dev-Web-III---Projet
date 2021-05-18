@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
-  database : 'profilprive'
+  database : 'chicknfish'
 })
 app.listen(3001, () => {
   console.log("running on port 3001");
