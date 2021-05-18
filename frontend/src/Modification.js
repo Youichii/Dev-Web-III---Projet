@@ -34,7 +34,7 @@ const Modification = () => {
     const [titres, setTitres] = useState([]);
     const [contenu, setContenu]= useState([]);
 
-    const [categorie, setCategorie] = useState("blank");
+    const [categorie, setCategorie] = useState("");
     const [prix, setPrix] = useState("");
     const [description, setDescription] = useState("");
     const [produit, setProduit] = useState("");
@@ -114,13 +114,13 @@ const Modification = () => {
      * @author Aurélien Brille
      */
 
-    const DelProduit = (id) => {
+    /*const DelProduit = (id) => {
         Axios.delete(`/api/menu`, {
             id : id
         }).then((response) => {
             
         })
-    }
+    }*/
 
     /**
      * Reçoit toutes les coordonnées du restaurant (adresse, mail,..)
@@ -166,7 +166,6 @@ const Modification = () => {
                 description : description,
             }).then((response) => {
                 if (response) {
-                    window.alert("Veuillez spécifier la catégorie du produit")
                 }
 
             })
@@ -382,7 +381,7 @@ const Modification = () => {
                                     <div className="bas">  
                                         <span className="description">{contenu_filtre.Description}</span>
                                         <form>
-                                            <button onClick={DelProduit()}>X</button>
+                                            <button>X</button>
                                         </form>  
                                     </div>
                     
@@ -393,11 +392,11 @@ const Modification = () => {
                                 <select onChange={(e) => {
                                     setCategorie(e.target.value)}} name="categorie">
                                     <option value="blank"></option>
-                                    <option value={titre.IdCategorie}>{titre.NomCategorie}</option>
+                                    <option value={titre.NomCategorie.slice(0,3)}>{titre.NomCategorie}</option>
                                 </select>
-                                <Input placeholder="Produit" setFunc={setProduit}/>
+                                <Input placeholder="Produit" max="20" setFunc={setProduit}/>
                                 <Input type="number" min="0.00" max="999.99" step="0.01" placeholder="Prix" setFunc={setPrix}/>
-                                <Input min="0" placeholder="Description" setFunc={setDescription}/>
+                                <Input min="0" max="40" placeholder="Description" setFunc={setDescription}/>
                                 <Button text="+"/>
                             </form>
 

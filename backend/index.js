@@ -161,7 +161,7 @@ app.post('/api/menu',(req, res) => {
   db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
     if(err){
       res.send(err)
-      console.log(err)
+      console.log(err + " &&& " + res)
     }
   })
 })
