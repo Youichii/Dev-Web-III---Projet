@@ -23,7 +23,7 @@ body {
 .c_cadre {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 70% 20% ;
+	grid-template-rows: 10% 70% 172px;
 	grid-gap: 2px;
 	padding: 5px;
 }
@@ -38,9 +38,9 @@ body {
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
-	grid-row-end: 6;
+	grid-row-end: 3;
 
-	height : 650px ;
+	height : 594px ;
 	border : solid;
 	border-color : grey;
 	background-color:var(--bg);
@@ -286,7 +286,7 @@ input:-webkit-autofill {
 	.i_bouton_inscription {font-size: 21px;
 							padding: 17px 0px 0px 0px;}
 	.i_titre_connexion {font-size: 20px;}
-	.c_zones_info {grid-template-rows: 8% 21% 8% 20% 4% 23% 12%;
+	.c_zones_info {grid-template-rows: 7% 20% 7% 9% 4% 11% 12%;
 					grid-template-columns: 1% 98% 1%;}
 	.i_info_connexion {height: 485px;}
 	.c_info_connexion {grid-template-rows: 4% 12% 6% 16% 15% 15% 15% 18%;}

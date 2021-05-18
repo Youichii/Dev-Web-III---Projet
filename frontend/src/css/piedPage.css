@@ -5,69 +5,82 @@
 
 .footer {
     display: grid;
-	grid-template-columns: 34.5% 31% 34.5%;
-    grid-template-rows: auto;
+	grid-template-columns:  18% 8% 2% 12% 2% 13% 2% 14% 2% 7% 8% 10%;
+    grid-template-rows: 23% 55% 9%;
 	grid-gap: 2px;
-	padding: 5px;
+	/* padding: 5px; */
+    /* margin: 0px 100px 0px 100px; */
 
-    height: 150px;
-    background-color: black;
-}
-.regles_legales {
-    grid-column-start: 1;
-	grid-column-end: 2;
-
-    display: grid;
-	grid-template-columns: auto;
-    grid-template-rows: 24% 17% 17% 17% 17% 5%;
-    grid-gap: 2px;
-    padding: 13px 5px 5px 30px;
-    color: white;
-    font-family:"Lucida Sans", sans-serif;
-}
-.titre_mention {
-    grid-row-start: 1;
-	grid-row-end: 2;
+    height: 41px;
+    /* background-color: #7c6d52; */
+    background-size: cover;
+    background-image:url(../img/PiedPage.PNG);
+    background-position-y: 62px;
 }
 .mentions_legales {
     grid-row-start: 2;
 	grid-row-end: 3;
-    font-size: 14px;
+    grid-column-start: 2;
+	grid-column-end: 3;
+    text-align: center;
 }
 .confidentialite {
-    grid-row-start: 3;
-	grid-row-end: 4;
-    font-size: 14px;
+    grid-row-start: 2;
+	grid-row-end: 3;
+    grid-column-start: 4;
+	grid-column-end: 5;
+    text-align: center;
 }
 .cookies {
-    grid-row-start: 4;
-	grid-row-end: 5;
-    font-size: 14px;
+    grid-row-start: 2;
+	grid-row-end: 3;
+    grid-column-start: 6;
+	grid-column-end: 7;
+    text-align: center;
 }
 .cgu {
-    grid-row-start: 5;
-	grid-row-end: 6;
-    font-size: 14px;
+    grid-row-start: 2;
+	grid-row-end: 3;
+    grid-column-start: 8;
+	grid-column-end: 9;
+    text-align: center;
+}
+.appeler {
+    grid-row-start: 2;
+	grid-row-end: 3;
+    grid-column-start: 10;
+	grid-column-end: 11;
+    text-align: center;
 }
 
-.regles_legales a:link {
+.footer a:link {
 	color:white;
 	text-decoration:none;
 } 
-.regles_legales a:visited {
+.footer a:visited {
 	color: white;
 	text-decoration:none; 
 } 
-.regles_legales a:hover {
+.footer a:hover {
 	color: white;
 	text-decoration:none; 
+    border-bottom: 1px solid white;
 }
-.regles_legales a:active {
+.footer a:active {
 	color:white;
 }
 
-.aide {
-    grid-column-start: 2;
-	grid-column-end: 3;
+.copyright {
+    grid-row-start: 2;
+	grid-row-end: 3;
+    grid-column-start: 12;
+    grid-column-end: 13;
+    font-size: 12px;
     color: white;
+    text-align: center;
+    line-height: 20px;
+}
+
+@media only screen and (max-width: 1680px) {
+	.foot {font-size: 15px;}
 }

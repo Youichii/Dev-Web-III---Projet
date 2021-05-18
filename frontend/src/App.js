@@ -14,12 +14,13 @@ import Historique from './Historique';
 import Modification from './Modification'
 import Stat from './Stat';
 import Cookie from './Cookies';
-import PiedPage from './PiedPage';
+import PiedPage from './components/PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
 
 
 function App() {
+  require("./css/app.css");
   return (
     <Router>
       <div className="App">

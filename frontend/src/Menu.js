@@ -45,12 +45,10 @@ const Menu = () => {
         <div> 
             {statutConnexion ? <BanniereConnection page="menu" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="menu" />}
             <div className = "Menu"> 
-                
                 <BarreLateraleGauche/>
                 <Carte />
                 <BarreLateraleDroite />
             </div>
-
         </div>
     )
 }

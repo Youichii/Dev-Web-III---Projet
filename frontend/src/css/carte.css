@@ -13,10 +13,10 @@ code {
 }
 
 .Menu{
-    margin-top:40px;
+    margin-top: 81px;
+    margin-bottom: 81px;
     grid-template-columns: 20% 60% 20%; 
     display : grid; 
-    height: 60px;
     /* width:10px; */
     text-overflow: scroll;
     background-color: black;

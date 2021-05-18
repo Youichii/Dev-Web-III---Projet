@@ -342,7 +342,19 @@ app.put('/api/orders/states', (req, res) => {
  */
 app.delete('/api/orders', (req, res) => {
   const commande  = req.body.commande ;
-
+  
+  const sqlInsert3 = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total \
+  FROM commandes \
+  JOIN menu ON menu.IdProduit = commandes.IdProduit \
+  JOIN reservations ON reservations.IdCommande = commandes.IdCommande \
+  WHERE reservations.IdCommande = ? \
+  GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande';
+  db.query(sqlInsert3, [commande], (err, result) => {
+    const sqlInsert4 = "INSERT INTO historique (`IdClient`, `CateCommande`, `Ville`, `Produits`, `Total`) VALUES (?, ?, ?, ?, ?)";
+    console.log("dataaa : ", result);
+    db.query(sqlInsert4, [result[0].IdClient, result[0].DateCommande, result[0].Produits, result[0].Total], (err, result) => {
+    })
+  })
   const sqlInsert1 = "DELETE FROM `commandes` where `IdCommande` = ?;";
   db.query(sqlInsert1, [commande], (err, result) => {
   })
