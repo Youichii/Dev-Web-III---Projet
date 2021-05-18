@@ -6,23 +6,25 @@
   min-width: 1024px;
   min-height: 1024px;
   display: grid;
+  position: relative;
 }
 .formulaire-email{
   margin: 20px;
-  display: flex;
-  height: 500px;
-  justify-content: center;
-  align-items: center;
+  height: auto;
   border: solid;
   border-color: rgb(204, 171, 61);
+  
 }
 
 .champ-formulaire{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
+  flex-direction:column;
+  width: 70%;
   background-color: white;
+  margin: 150px;
+  padding: 30px;
+  
+  
 }
 
 .champ-formulaire textarea {
@@ -46,4 +48,6 @@
   border-radius: 0.5px;
  
 }
+
+
 
