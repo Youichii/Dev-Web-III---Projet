@@ -25,7 +25,7 @@ code {
   border-color:rgb(184, 184, 184);
   border-width:1px;
   background-color: rgb(0, 0, 0);
- 
+  margin-bottom: 81px;
 }
 
 /* coordonnées */ 
@@ -176,7 +176,7 @@ height: max-content;
 #recherche{
   background-color: #2b2a2a5c; 
   border-style:solid;
-  
+  margin-top: 81px;
 }
 
 

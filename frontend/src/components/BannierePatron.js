@@ -22,7 +22,7 @@ const BannierePatron = ({ onClick, page }) => {
             <NavLink to='/communaute' className="communaute_bp"  style={(page === "communaute")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
                 <li>Communauté</li>
             </NavLink>
-            <NavLink to='/FormMail' className="newsletter_bp"  style={(page === "formmail")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
+            <NavLink to='/newsletter' className="newsletter_bp"  style={(page === "formmail")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>
                 <li>Newsletter</li>
             </NavLink>
             <NavLink to='/' className="deconnexion_bp"  style={(page === "accueil")?{color:"var(--survol_bouton)", borderBottom: "solid 1px var(--survol_bouton)"}:{}}>

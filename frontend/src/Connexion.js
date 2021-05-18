@@ -6,7 +6,6 @@ import BanniereConnection from './components/BanniereConnection.js';
 import { NavLink } from 'react-router-dom';
 import  { useHistory } from 'react-router-dom';
 
-
 const Connexion = () => {
 	require('./css/connexion.css');
 	Axios.defaults.withCredentials = true;

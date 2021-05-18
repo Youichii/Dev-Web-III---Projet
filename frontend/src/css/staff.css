@@ -24,6 +24,7 @@
 	grid-template-rows: 495px 495px 495px;
 	grid-gap: 45px; 
 	padding: 0px;
+	margin-bottom: 93px;
 }
 .i_cadre_attente {
 	grid-column-start: 1;
