@@ -795,7 +795,7 @@ transporter.verify((err, success)=>{
 /**
  * Post dans le quel on récupère du SQL, on définit les options d'envoie et l'envoie en lui même
  * @author Noelle Khazoum <kh.noelle@gmail.com>
- * @method  forEach permet de récupérer les mails et de les ajouter à une liste
+ * @method  POST permet de récupérer les mails et de les ajouter à une liste
  * @param /
  * @returns {list} mailList Renvoie la liste qui contient les adresse mails.
  */
@@ -843,7 +843,7 @@ app.post("/envoye", function (req, res){
 /**
  * Récupère à l'aide d'un GET les genres de la table Clients et compte le nombre pour chaque genre
  * @author Noelle Khazoum <kh.noelle@gmail.com>
- * @method /
+ * @method GET
  * @param /
  **/
 app.get('/api/genre-stat', (req, res)=>{
@@ -858,7 +858,7 @@ app.get('/api/genre-stat', (req, res)=>{
 /**
  * Récupère à l'aide d'un GET les Villes de la table Clients et compte le nombre pour chaque ville
  * @author Noelle Khazoum <kh.noelle@gmail.com>
- * @method /
+ * @method GET
  * @param /
  **/
 app.get('/api/localisation-stat', (req, res)=>{
@@ -872,7 +872,7 @@ app.get('/api/localisation-stat', (req, res)=>{
 /**
  * Récupère à l'aide d'un GET les ages de la table Clients et compte le nombre pour chaque age
  * @author Noelle Khazoum <kh.noelle@gmail.com>
- * @method /
+ * @method GET
  * @param /
  **/
 app.get('/api/age-stat', (req, res)=>{
@@ -888,9 +888,8 @@ app.get('/api/age-stat', (req, res)=>{
 /** 
  * Récupères les avis et les prénoms des clients de la table Avis
  * @author Noelle Khazoum <kh.noelle@gmail.com>
- * @method /
+ * @method GET
  * @param/
- * @returns /
  **/
 app.get('/api/avis', (req, res)=>{
   const sqlGet="SELECT Avis, IdClient from avis";
