@@ -114,13 +114,14 @@ const Modification = () => {
      * @author Aurélien Brille
      */
 
-    /*const DelProduit = (id) => {
+    const DelProduit = (id) => {
+        window.alert(id)
         Axios.delete(`/api/menu`, {
             id : id
         }).then((response) => {
             
         })
-    }*/
+    }
 
     /**
      * Reçoit toutes les coordonnées du restaurant (adresse, mail,..)
@@ -381,7 +382,7 @@ const Modification = () => {
                                     <div className="bas">  
                                         <span className="description">{contenu_filtre.Description}</span>
                                         <form>
-                                            <button>X</button>
+                                            <button className={contenu_filtre.IdProduit} onClick={event => {DelProduit(event.target.className)}}>X</button>
                                         </form>  
                                     </div>
                     
@@ -395,7 +396,7 @@ const Modification = () => {
                                     <option value={titre.NomCategorie.slice(0,3)}>{titre.NomCategorie}</option>
                                 </select>
                                 <Input placeholder="Produit" max="20" setFunc={setProduit}/>
-                                <Input type="number" min="0.00" max="999.99" step="0.01" placeholder="Prix" setFunc={setPrix}/>
+                                <Input type="number" min="0.00" max="999.99" step="0.10" placeholder="Prix" setFunc={setPrix}/>
                                 <Input min="0" max="40" placeholder="Description" setFunc={setDescription}/>
                                 <Button text="+"/>
                             </form>
