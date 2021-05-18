@@ -94,7 +94,7 @@ div ul{
     border-radius: 0.1%;
     text-align: left;
     bottom: -400px;
-    overflow: scroll;
+    overflow-y: scroll;
     max-height: 30%;
 }
 
