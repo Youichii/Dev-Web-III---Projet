@@ -144,15 +144,15 @@ app.put('/api/coord/address', (req, res) => {
   })
 })
 
-app.delete('/api/menu', (req, res) => {
-  const idProduit = req.body.id
+app.delete('/api/menu/:idProduit', (req, res) => {
+  const idProduit = req.params.idProduit
   const sqlGet = "DELETE FROM `menu` WHERE `IdProduit` = ?"
   db.query(sqlGet, idProduit, (err,result) => {
     res.send(result)
   })
 })
 
-app.post('/api/menu',(req, res) => {
+app.post('/api/menu/',(req, res) => {
   const categorie = req.body.categorie
   const produit = req.body.produit
   const prix = req.body.prix
@@ -161,7 +161,7 @@ app.post('/api/menu',(req, res) => {
   db.query(sqlGet, [categorie, produit, prix, description ], (err, result) => {
     if(err){
       res.send(err)
-      console.log(err + " &&& " + res)
+      
     }
   })
 })

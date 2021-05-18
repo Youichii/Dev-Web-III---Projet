@@ -115,9 +115,8 @@ const Modification = () => {
      */
 
     const DelProduit = (id) => {
-        window.alert(id)
-        Axios.delete(`/api/menu`, {
-            id : id
+        const idProduit = id
+        Axios.delete(`/api/menu/${idProduit}`, {
         }).then((response) => {
             
         })
