@@ -11,8 +11,8 @@ var path = require('path');
 
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: "Stegosaure915",
+  user: 'Aurélien',
+  password: "132aurelien1401",
   database : 'chicknfish'
 })
 app.listen(3001, () => {
@@ -31,17 +31,34 @@ app.get('/', (req,res) => {
 });
 
 //Profil Privé
+/**
+ * Récupère l'identifiant du client connecté et renvoi toutes ses informations pour sa page de profilprive
+ * 
+ * @author Aurélien Brille
+ * @method GET
+ * @param  {number} utilisateur  Id du client connecté
+ * @return {object} les informations personnelles du client excepté son mot de passe
+ */ 
 
 app.get('/api/client/:utilisateur', (req,res) => {
   
   const utilisateur = req.params.utilisateur
-  console.log("utilisateur =  " + utilisateur)
-  const sqlGet = "SELECT * FROM `clients` WHERE `IdClient` = ?"
+  const sqlGet = "SELECT `Pseudo`, `Nom`, `Prenom`, `Rue`, `Numero`, `Ville`, `Anniversaire`, `Gsm`, `Mail`, `Genre` FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
-    console.log("resultat = " + result)
   })
 })
+
+/**
+ * Récupère l'identifiant du client correspondant à son ID de connexion et modifie son adresse mail
+ * 
+ * @author Aurélien Brille
+ * @method PUT
+ * @param  {string} utilisateur  Id du client connecté
+ * @param {string} mail adresse mail du client
+ * @return {object} renvoi une erreur si l'email existe déjà
+ */ 
+
 
 app.put('/api/client/mail', (req, res) => {  
   const utilisateur = req.body.utilisateur
@@ -55,6 +72,16 @@ app.put('/api/client/mail', (req, res) => {
   })
 })
 
+/**
+ * Récupère l'identifiant du client correspondant ç son ID de connexion et modifie son téléphone
+ * 
+ * @author Aurélien Brille
+ * @method PUT
+ * @param  {string} utilisateur  Id du client connecté
+ * @param {string} telephone telephone du client
+ * @return {object} renvoi une erreur si le téléphone existe déjà
+ */ 
+
 app.put('/api/client/telephone', (req, res) => {  
   const utilisateur = req.body.utilisateur
   const telephone= req.body.telephone
@@ -66,6 +93,15 @@ app.put('/api/client/telephone', (req, res) => {
   })
 })
 
+/**
+ * Récupère l'identifiant du client correspondant à son ID de connexion et modifie son pseudo
+ * 
+ * @author Aurélien Brille
+ * @method PUT
+ * @param  {string} utilisateur  Id du client connecté
+ * @param {string} pseudo pseudo du client à modifier
+ */ 
+
 app.put('/api/client/pseudo', (req, res) => {  
   const pseudo = req.body.pseudo
   const utilisateur = req.body.utilisateur  //to take the variable from the html page
@@ -73,6 +109,18 @@ app.put('/api/client/pseudo', (req, res) => {
   db.query(sqlInsert, [pseudo, utilisateur], (err, result) => {
   })
 })
+
+/**
+ * Récupère l'identifiant du client correspondant à son ID de connexion et modifie son adresse
+ * 
+ * @author Aurélien Brille
+ * @method PUT
+ * @param  {string} utilisateur  Id du client connecté
+ * @param {string} rue nom de la rue du client
+ * @param {number} numero  numéro de la rue
+ * @param {string} ville nom de la ville du client
+ * @param {number} zipCode code postal du client
+ */ 
 
 app.put('/api/client/adress', (req, res) => {
   const utilisateur = req.body.utilisateur  
@@ -89,6 +137,14 @@ app.put('/api/client/adress', (req, res) => {
 
 //Modification des informations
 
+/**
+ * Récupère toutes les heures d'ouverture du restaurant
+ * 
+ * @author Aurélien Brille
+ * @method GET
+ * @return {object} contient cahque jour de la semaine avec ses herues associées
+ */
+
 app.get('/api/coord/horaires', (req,res) => {
   const sqlGet = "SELECT * FROM `horaires`"
   db.query(sqlGet,(err, result) => {
@@ -96,6 +152,19 @@ app.get('/api/coord/horaires', (req,res) => {
   })
 })
 
+/**
+ * Modifie les heures d'ouvertures de chaque jour
+ * 
+ * @author Aurélien Brille
+ * @method PUT
+ * @param {string} lundi
+ * @param {string} mardi 
+ * @param {string} mercredi
+ * @param {string} jeudi
+ * @param {string} vendredi
+ * @param {string} samedi
+ * @param {string} dimanche
+ */ 
 app.put('/api/coord/horaires', (req,res) => {
   console.log("getting request")
   const lundi = req.body.Lundi
