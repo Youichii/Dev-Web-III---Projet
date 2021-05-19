@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "axios": "^0.21.1",
-    "react-confirm-alert": "^2.7.0"
+    "react-confirm-alert": "^2.7.0",
+    "react-ga": "^3.3.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.12.0",
