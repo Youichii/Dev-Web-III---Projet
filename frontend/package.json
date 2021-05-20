@@ -17,6 +17,7 @@
     "react-cookie-consent": "^6.2.3",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    "react-loading": "^2.0.3",
     "react-native-sha256": "^1.4.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",

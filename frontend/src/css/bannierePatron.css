@@ -11,7 +11,7 @@
     display: grid;
     width:auto;
     text-align: center;
-    font-size: calc(0.5em + 1vw);
+    font-size: calc(0.2em + 1vw);
 
 }
 .navbar_bp li{
@@ -43,7 +43,7 @@ li:hover{
 .banniere_patron {
     display: grid;
 	grid-template-columns: 10% 4% 12% 12% 12% 12% 12% 12% 5% 8%;
-    grid-template-rows: 34% 40% 26%;
+    grid-template-rows: 26% 44% 30%;
 	grid-gap: 2px;
 	padding: 5px;
     background-size: cover;
@@ -67,7 +67,7 @@ li:hover{
 }
 #img_bp{
     height: auto;
-    width: 72%;
+    width: 60%;
     cursor:default;
 } 
 .logo_bp {

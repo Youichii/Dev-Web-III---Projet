@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import React from 'react'
 import Informations from './Informations';
 import Staff from './Staff';
@@ -17,10 +18,25 @@ import Cookie from './Cookies';
 import PiedPage from './components/PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
+import Chargement from './Chargement';
+
+
 
 
 function App() {
   require("./css/app.css");
+
+  const [etat, setEtat] = useState({loading:true});
+
+  useEffect(()=> {
+    setTimeout(() => {
+        setEtat({loading: false})
+    }, 5000)
+  });
+
+  if (etat.loading) {
+    return <Chargement />;
+  }
   return (
     <Router>
       <div className="App">
@@ -85,6 +101,10 @@ function App() {
 
             <Route exact path="/MentionsLegales"> 
               <MentionsLegales/>
+            </Route>
+
+            <Route exact path="/Chargement"> 
+              <Chargement/>
             </Route>
 
           </Switch>
