@@ -241,17 +241,17 @@ input:-webkit-autofill {
 	color:var(--erreur);
 	background-color: var(--bg);
 }
-::-webkit-scrollbar {/*taille*/
+.connexion ::-webkit-scrollbar {/*taille*/
 	width: 6px; 
 }
-::-webkit-scrollbar-thumb {/*couleur normale*/
+.connexion ::-webkit-scrollbar-thumb {/*couleur normale*/
 	background: #b1acaa; /*#42434a; /* #F7C27E;*/ 
 	border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover { 
+.connexion ::-webkit-scrollbar-thumb:hover { 
 	background: #696969;/*#F3A43B; */
 }
-::-webkit-scrollbar-thumb:active {
+.connexion ::-webkit-scrollbar-thumb:active {
 	background: #2A2A2A;/*#D57F0D; */
 }
 
@@ -307,4 +307,3 @@ input:-webkit-autofill {
 						grid-column-end: 8;
 						font-size: 15px;}
 }
-  
