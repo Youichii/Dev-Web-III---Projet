@@ -8,6 +8,34 @@ import telephone from "../img/Telephone.png";
 const BanniereBasique = ({page}) => {
     require('../css/banniereBasique.css');
 
+    const documents = ["mentions_legales", "confidentialite", "cookies", "cgu", "appeler"];
+    let  niveau = 0 ;
+
+    const glisserGauche = () => {
+        document.getElementsByClassName(documents[niveau])[0].style.display = "none";
+        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
+        if (niveau === 0) {
+            niveau = 4;
+        }
+        else {
+            niveau -= 1 ;
+        }
+        document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
+        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
+    }
+    const glisserDroite = () => {
+        document.getElementsByClassName(documents[niveau])[0].style.display = "none";
+        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
+        if (niveau === 4) {
+            niveau = 0;
+        }
+        else {
+            niveau += 1 ;
+        }
+        document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
+        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
+    }
+
     return(
         <nav className="navbar banniere_visiteur">          
             
