@@ -50,13 +50,12 @@ li:hover{
 .banniere_visiteur {
     display: grid;
 	grid-template-columns: 10% 8% 13% 13% 13% 13% 13% 8% 8%;
-    grid-template-rows: 34% 40% 26%;
+    grid-template-rows: 24% 48% 29%;
 	grid-gap: 2px;
 	padding: 5px;
     background-size: cover;
-    background-image:url(../img/img5.jpeg);
+    background-image:url(../img/imgBanniere.PNG);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
-    background-position-y: 852px;
     /* margin: 0px 10px 0px 10px; */
 }
 .accueil_bv {
@@ -74,7 +73,7 @@ li:hover{
 }
 #img{
     height: auto;
-    width: 72%;
+    width: 52%;
     cursor:default;
 } 
 .logo_bv {
@@ -110,7 +109,8 @@ li:hover{
     grid-row-end: 3;
 }
 #instagram {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .fb_bv {
@@ -120,7 +120,8 @@ li:hover{
     grid-row-end: 3;
 }
 #facebook {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .tel_bv {
@@ -130,7 +131,8 @@ li:hover{
     grid-row-end: 3;
 }
 #telephone {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .reseaux_sociaux {
@@ -176,4 +178,38 @@ li:hover{
 body {
     margin:0px;
     background-color: black;
+}
+
+
+@media only screen and (max-width: 1410px) {
+    .banniere_visiteur {grid-template-columns: 10% 7% 13% 13% 13% 13% 13% 7% 10%;}
+}
+@media only screen and (max-width: 1150px) {
+    .banniere_visiteur {grid-template-columns: 10% 5% 13% 13% 13% 13% 13% 6% 12%;}
+}
+@media only screen and (max-width: 820px) {
+    .banniere_visiteur {grid-template-columns: 10% 4% 13% 13% 13% 13% 13% 5% 13%;}
+}
+@media only screen and (max-width: 720px) {
+    .banniere_visiteur {grid-template-columns: 10% 3% 13% 13% 13% 13% 13% 3% 15%;}
+}
+
+@media only screen and (max-width: 720px) {
+    .reseaux_sociaux{grid-row-end: 4;
+        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: auto;}
+    .insta_bv{grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bv{grid-column-start: 1;
+        grid-column-end: 2;}
+    .tel_bv{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .banniere_visiteur{grid-template-columns: 10% 7% 13% 13% 13% 13% 13% 8% 7%;
+        grid-template-rows: 34% 36% 31%;}
+    #instagram {width: 25px;}
+    #facebook {width: 25px;}
+    #telephone {width: 25px;}
+    #img {width: 140%;}
 }
