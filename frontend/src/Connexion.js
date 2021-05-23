@@ -87,7 +87,13 @@ const Connexion = () => {
 	 */
 	const recupererClient = () => {
 		if (verificationValeurs()) {
-			Axios.get(`/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+			Axios.post(`/api/connect-users`, 
+				{"headers": {"content-type": "application/json"},
+				data:{
+					mail: mail_valide,
+					pwd: mdp_valide
+				}				
+			}).then((reponse) => {
 				if (reponse.data.message) {
 					setStatutConnexion(false);
 					setUtilisateur(10000000000);

@@ -204,9 +204,9 @@ app.use(session({
  * @param  {string} mdp    mot de passe de l'utilisateur
  * @return {object}        l'identifiant du client, sinon un message d'erreur
  */ 
-app.get('/api/connect-users/:mail/:pwd', function(request, response) {
-	var email = request.params.mail;
-	var mdp = request.params.pwd;
+app.post('/api/connect-users', function(request, response) {
+	var email = request.body.data.mail;
+	var mdp = request.body.data.pwd;
 	if (email && mdp) {
 		db.query('SELECT IdClient, Mdp FROM clients WHERE Mail = ?', [email], function(error, results, fields) {
 			if (results.length > 0) {
