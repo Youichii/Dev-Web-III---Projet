@@ -16,7 +16,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "Stegosaure915",
-  database : 'chicknfish'
+  database : 'profilprive'
 })
 app.listen(3001, () => {
   console.log("running on port 3001");
@@ -210,10 +210,9 @@ app.get('/api/connect-users/:mail/:pwd', function(request, response) {
 	if (email && mdp) {
 		db.query('SELECT IdClient, Mdp FROM clients WHERE Mail = ?', [email], function(error, results, fields) {
 			if (results.length > 0) {
-        bcrypt.compare(mdp, results[0].password, (error, response) => {
-          if (response) {
-            response.session.user = results;
-            console.log(request.session.user);
+        bcrypt.compare(mdp, results[0].Mdp, (error, response1) => {
+          if (response1) {
+            request.session.user = results;
             response.send(results);
           } else {
             response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
@@ -224,7 +223,6 @@ app.get('/api/connect-users/:mail/:pwd', function(request, response) {
 	} 
   else {
 		response.send({message:'ko', msg:"Nom d'utilisateur et/ou mot de passe vide"});
-		response.end();
 	}
 });
 
@@ -290,9 +288,9 @@ app.post('/api/users', (req, res) => {
   const neswletter = req.body.nwsletter ;
 
   console.log("body : ", req.body);
-  const sqlVerif = "select IdClient from clients where Mail = '?'";
+  const sqlVerif = "select IdClient from clients where Mail = ?";
   db.query(sqlVerif, mail, (err, result) => {
-    if (result !== undefined) {
+    if (result.length !== 0) {
       res.send({message:false});
     }
     else {
@@ -304,7 +302,6 @@ app.post('/api/users', (req, res) => {
     
         const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, hash, numero, postal, ville, neswletter], (err, resultRequete) => {
-          console.log("result :", resultRequete);
           res.send(resultRequete);
         });
       });

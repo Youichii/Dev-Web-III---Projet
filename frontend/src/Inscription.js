@@ -245,9 +245,9 @@ const Inscription = () => {
 					}
 				}
 
-				var jour = document.getElementById('selection_jour').selectedIndex;
+				var jour = document.getElementById('selection_jour').value;
 				var mois = document.getElementById('selection_mois').selectedIndex;
-				var annee = document.getElementById('selection_annee').selectedIndex;
+				var annee = document.getElementById('selection_annee').value;
 				var date = annee + "-" + mois + "-" + jour ;
 
 				let neswletter_cochee ;
