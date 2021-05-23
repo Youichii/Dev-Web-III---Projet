@@ -3,16 +3,19 @@ const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 
+
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'Aurélien',
-  password: "132aurelien1401",
+  user: 'root',
+  password: "Stegosaure915",
   database : 'chicknfish'
 })
 app.listen(3001, () => {
@@ -253,8 +256,8 @@ app.get('/api/coordonnees', (req, res) => {
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
-  key:"userId",
-	secret: 'secret',
+  key:"userConnect",
+	secret: 'fI_9@lWfK?OujV?U|P2k5gC#tp?Hc|',
 	resave: false,
 	saveUninitialized: false,
   cookie: { expires: new Date(Date.now() + 1800000) }
@@ -270,24 +273,25 @@ app.use(session({
  * @param  {string} mdp    mot de passe de l'utilisateur
  * @return {object}        l'identifiant du client, sinon un message d'erreur
  */ 
-app.get('/api/connect-users/:mail/:pwd', function(request, response) {
-	var email = request.params.mail;
-	var mdp = request.params.pwd;
+app.post('/api/connect-users', function(request, response) {
+	var email = request.body.data.mail;
+	var mdp = request.body.data.pwd;
 	if (email && mdp) {
-		db.query('SELECT IdClient FROM clients WHERE Mail = ? and Mdp = ?', [email, mdp], function(error, results, fields) {
+		db.query('SELECT IdClient, Mdp FROM clients WHERE Mail = ?', [email], function(error, results, fields) {
 			if (results.length > 0) {
-        request.session.user = results ;
-        response.send(results);
-			} 
-      else {
-				response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
-			}			
-			response.end();
+        bcrypt.compare(mdp, results[0].Mdp, (error, response1) => {
+          if (response1) {
+            request.session.user = results;
+            response.send(results);
+          } else {
+            response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
+          }
+        });
+      }
 		});
 	} 
   else {
 		response.send({message:'ko', msg:"Nom d'utilisateur et/ou mot de passe vide"});
-		response.end();
 	}
 });
 
@@ -352,15 +356,22 @@ app.post('/api/users', (req, res) => {
   const ville = req.body.ville ;
   const neswletter = req.body.nwsletter ;
 
+  console.log("body : ", req.body);
   const sqlVerif = "select IdClient from clients where Mail = ?";
-  db.query(sqlVerif, [mail], (err, result) => {
-    if (result.length > 0) {
+  db.query(sqlVerif, mail, (err, result) => {
+    if (result.length !== 0) {
       res.send({message:false});
     }
     else {
-      const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-      db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, pwd, numero, postal, ville, neswletter], (err, result) => {
-        res.send(result);
+      bcrypt.hash(pwd, saltRounds, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+    
+        const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, hash, numero, postal, ville, neswletter], (err, resultRequete) => {
+          res.send(resultRequete);
+        });
       });
     }
   });

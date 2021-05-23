@@ -11,7 +11,7 @@
     display: grid;
     width:auto;
     text-align: center;
-    font-size: calc(0.5em + 1vw);
+    font-size: calc(0.2em + 1vw);
 
 }
 .navbar li{
@@ -50,7 +50,7 @@ li:hover{
 .banniere_visiteur {
     display: grid;
 	grid-template-columns: 10% 8% 13% 13% 13% 13% 13% 8% 8%;
-    grid-template-rows: 34% 40% 26%;
+    grid-template-rows: 26% 44% 30%;
 	grid-gap: 2px;
 	padding: 5px;
     background-size: cover;
@@ -74,7 +74,7 @@ li:hover{
 }
 #img{
     height: auto;
-    width: 72%;
+    width:60%;
     cursor:default;
 } 
 .logo_bv {

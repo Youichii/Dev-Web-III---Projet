@@ -1,0 +1,21 @@
+
+.cadre_chargement {
+    display: grid;
+	grid-template-columns:42% 16% 42%;
+	grid-template-rows: 388px 150px 389px;
+	grid-gap: 2px;
+	padding: 5px;
+
+    background-color: black;
+}
+
+.bubbles {
+    grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+body {
+    margin: 0px;
+}
