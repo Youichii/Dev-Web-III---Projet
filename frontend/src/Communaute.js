@@ -405,15 +405,18 @@ const Communaute = () => {
 
                         <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Status === 1)?{color:"red"}:{color:"white"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
                     
-                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')}/>
+                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')} />
                         
                         <div className="mail">{utilisateur.Mail}</div>
 
-                        <div className="tel">{utilisateur.Gsm}</div>
+                        <div className="tel">{utilisateur.GSM}</div>
 
                         <div className="ville">{utilisateur.Ville}</div>
 
                         <div className="age">{utilisateur.Anniversaire}</div>
+
+                        <div className="genre">{utilisateur.Genre}</div>
+
 
                         <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.IdClient} ></input>
 

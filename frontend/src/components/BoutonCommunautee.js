@@ -1,7 +1,7 @@
 
 const BoutonCommunautee = ({ className, id, style, onClick, value }) => {
     return (
-        <button className={className} id = {id} onClick={onClick} >{value}</button>
+        <button className={className} id = {id} onClick={onClick} style={style} >{value}</button>
     )
 
 }

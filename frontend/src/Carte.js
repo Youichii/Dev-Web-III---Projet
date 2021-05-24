@@ -15,8 +15,9 @@ const Carte = () => {
     const [idCommandes, setIdCommande] = useState(10000000000)
     const [statutConnexion, setStatutConnexion] = useState(true);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
+    const [conditions, setCondition] = useState(false)
     
-    let condition = false; 
+    
 
 	/**
 	 * Vérifie si l'utilisateur est connecté au chargement de la page
@@ -46,7 +47,6 @@ const Carte = () => {
         .then(json =>{ 
             setTitres(json)
         })
-        
 
         var remplirMenu = {method: 'GET', 
             headers: {'Content-type':'application/json'}
@@ -62,14 +62,20 @@ const Carte = () => {
         var verifEntreReservation = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch('/api/orders/users/{:utilisateur}', verifEntreReservation)
+        fetch(`/api/orders/users/${3}`, verifEntreReservation)
         .then(response=>{ 
+           
             return response.json()
         })
         .then(json =>{ 
-            setIdCommande(json)
+            setIdCommande(json[0].IdCommande)   
+            
         }) 
-        
+
+        }, [])
+
+
+    useEffect(()=>{
         
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
@@ -81,8 +87,14 @@ const Carte = () => {
         .then(json =>{ 
             setPanier(json)
         }) 
+        if (idCommandes !== 10000000000){
+            console.log("condition = true au chargement ")
+            setCondition(true)
+            // console.log(conditions)
+        }
 
     }, [])
+   
     
     /**
      * Remplie le panier de commande selon ce que le client ajoute ou retire
@@ -92,6 +104,7 @@ const Carte = () => {
      */
     function panier(idProduit) {
         
+       
         if(idCommandes === 10000000000){
             var premiereEntre = { method:'POST', 
             headers: {'Content-Type':'application/json'},
@@ -102,14 +115,16 @@ const Carte = () => {
             .then(res => {
                 return res.json();
             })
-            condition = true; 
+            console.log("Condition = true  dans le panier")
+            setCondition(true)
+            
         }
-
+       
         else{
             let qtt = Number(document.getElementById(idProduit+"compteur").value)
 
             if(qtt === 1){
-            
+                 
                 var remplirPanier = { method:'POST', 
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify({  IdCommande : idCommandes, 
@@ -122,16 +137,17 @@ const Carte = () => {
                     return res.json();
                 })
     
+               
                 var panier = {method: 'GET', 
                 headers: {'Content-type':'application/json'}
                 }; 
-                fetch(`api/loadingBasket/${idCommandes}`, panier)
+                fetch(`/api/loadingBasket/${idCommandes}`, panier)
                 .then(response=>{ 
                     return response.json()
                 })
                 .then(json =>{ 
                     setPanier(json)
-                }) 
+                })  
             }
     
             else{
@@ -148,16 +164,17 @@ const Carte = () => {
                 }) 
             }
 
-            var panier = {method: 'GET', 
-            headers: {'Content-type':'application/json'}
-            }; 
-            fetch(`/api/loadingBasket/${idCommandes}`, panier)
-            .then(response=>{ 
-                return response.json()
-            })
-            .then(json =>{ 
-                setPanier(json)
-            }) 
+            
+                var panier = {method: 'GET', 
+                headers: {'Content-type':'application/json'}
+                }; 
+                fetch(`/api/loadingBasket/${idCommandes}`, panier)
+                .then(response=>{ 
+                    return response.json()
+                })
+                .then(json =>{ 
+                    setPanier(json)
+                }) 
         }   
     }
         
@@ -188,7 +205,7 @@ const Carte = () => {
                 ))}   
             </div>
         
-            <span className="symbolpanier">Panier &#128722;
+           {statutConnexion ?  <span className="symbolpanier">Panier &#128722;
                 <div id="panier" >
                     {paniers&&paniers.map(contenu_filtre => (
                                     <div className='commande'>
@@ -199,7 +216,7 @@ const Carte = () => {
                                    
                     ))}
                 
-                </div>
+                </div> 
                                
                     
                      
@@ -207,10 +224,10 @@ const Carte = () => {
              
                     </div>
                 
-            </span>
-            {condition && statutConnexion ? <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
+            </span> : <span></span>}
+            { statutConnexion ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
             
-            <span>Click on the image to download it:</span>
+            
             <a href={PDFMenu} download>
             Cliquez sur le lien pour le telecharger 
             </a>
