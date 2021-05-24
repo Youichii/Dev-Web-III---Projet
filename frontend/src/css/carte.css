@@ -28,7 +28,7 @@ code {
   ::-webkit-scrollbar {
     width: 5px;
     margin-top:1%;
-    border-radius: 2àpx;;
+    border-radius: 2px;;
   }
   
   /* Track */
@@ -78,7 +78,7 @@ code {
     margin-right: 10%;
     margin-left:5%;
     color: black;
-    font-size: 80%;
+    font-size: calc(0.8em + 0.8vw);
     font-weight: 1000;
     text-align: center;
     background-size:cover;
@@ -172,14 +172,14 @@ span.symbolpanier:hover div{
 
 .titre{
   color: brown;
-  font-size: large;
+  font-size: calc(0.8em + 1vw);
   text-decoration:underline;
   text-decoration-color: brown;
 }
 
 .contenu{
   color:#ff6e40; 
-  font-size:medium;
+  font-size: calc(0.7em + 0.7vw);
   margin-top:200%;
   margin-bottom: 30px; 
 }
@@ -193,11 +193,11 @@ span.symbolpanier:hover div{
 .price{ 
   color:#ff6e40; 
   float: right;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .description{
-  font-size:small;
+  font-size: calc(0.5em + 0.5vw);
   color:#e0a96b;
   float:left;
   width: 60%;

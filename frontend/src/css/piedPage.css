@@ -5,18 +5,21 @@
 
 .footer {
     display: grid;
-	grid-template-columns:  18% 8% 2% 12% 2% 13% 2% 14% 2% 7% 8% 10%;
+	grid-template-columns:  11% 8% 2% 12% 2% 13% 2% 14% 2% 7% 3% 10%;
     grid-template-rows: 23% 55% 9%;
 	grid-gap: 2px;
 	/* padding: 5px; */
     /* margin: 0px 100px 0px 100px; */
-
-    height: 41px;
     /* background-color: #7c6d52; */
-    background-size: cover;
-    background-image:url(../img/PiedPage.PNG);
-    background-position-y: 62px;
+    background-color: rgb(112, 72, 11);
+    font-size: calc(0.1em + 0.8vw);
+    min-width: 300px;
+    position: absolute;
+    height: 5%;
+    width: 100%;
+    color: rgb(252, 252, 252);
 }
+
 .mentions_legales {
     grid-row-start: 2;
 	grid-row-end: 3;
@@ -57,28 +60,22 @@
 	color:white;
 	text-decoration:none;
 } 
+
 .footer a:visited {
-	color: white;
-	text-decoration:none; 
-} 
-.footer a:hover {
-	color: white;
-	text-decoration:none; 
-    border-bottom: 1px solid white;
-}
-.footer a:active {
-	color:white;
+    color: white;
 }
 
+.footer a:hover {
+	color: rgb(156, 156, 156);
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+
 .copyright {
-    grid-row-start: 2;
-	grid-row-end: 3;
+    margin-top: 5%;
     grid-column-start: 12;
-    grid-column-end: 13;
-    font-size: 12px;
-    color: white;
-    text-align: center;
-    line-height: 20px;
+    grid-column-end: 12;
+    font-size: calc(0.4em + 0.5vw);
 }
 
 @media only screen and (max-width: 1680px) {

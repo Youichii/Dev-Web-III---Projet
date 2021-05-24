@@ -1,14 +1,8 @@
 /* ------------------------------------- Profil Privé ------------------------------------- */
 
-* {
-	background-color: black;
-}
-
 div.profilPrive {
 	text-decoration: underline;
-	left: 1%;
 	color : rgb(255, 255, 255);
-	position: absolute;
 	height: 100%;
 	width: 100%;
 	min-width: 300px;
@@ -39,7 +33,7 @@ div.picture img {
 div.privateinfo{
 	width: 100%;
 	height: fit-content;
-	min-height: 1000px;
+	min-height: 550px;
 	background-image: url("../img/poulet.jpg");
 	background-size: cover;
 	font-size: calc(1em + 1vw);
@@ -58,6 +52,11 @@ div.gauche {
 	opacity: 0.8;
 	font-size: calc(1em + 1vw);
 }
+
+div.gauche input {
+	background-color: black;
+}
+
 
 
 input{
