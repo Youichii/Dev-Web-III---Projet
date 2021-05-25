@@ -17,6 +17,7 @@ code {
     margin-bottom: 81px;
     grid-template-columns: 20% 60% 20%; 
     display : grid; 
+    /* height: 60px; */
     /* width:10px; */
     text-overflow: scroll;
     background-color: black;
@@ -57,7 +58,8 @@ code {
     grid-column: 1;
     grid-row-start: 1;
     grid-row-end: 4;
-    background-image: url("../img/Cadre_Menu_Gauche.jpg");
+    background-image: url("../img/img5.jpeg");
+    background-position-x: left ;
     margin-left: 10%;
     margin-right:5%;
     background-size:cover;
@@ -74,7 +76,8 @@ code {
     grid-column:3;
     grid-row: 1;
     /* grid-row-end: 4; */
-    background-image: url("../img/Cadre_Menu_Droit.jpg");
+    background-image: url("../img/img5.jpeg");
+    background-position-x: right;
     margin-right: 10%;
     margin-left:5%;
     color: black;

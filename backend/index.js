@@ -511,7 +511,7 @@ app.get('/api/orders/:identifiantCommande', (req, res) => {
   FROM commandes AS C  \
   JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
   JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-  WHERE C.IdCommande = ?";
+  WHERE C.IdCommande = ? ";
   db.query(sqlInsert, [identifiantCommande], (err, result) => {
     res.send(result) ;
   })
@@ -526,9 +526,7 @@ app.get('/api/orders/:identifiantCommande', (req, res) => {
  */
 app.get('/api/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
-  const sqlInsert = "select IdCommande \
-  FROM reservations \
-  WHERE IdClient=? AND IdEtat = 'PAN'";
+  const sqlInsert = "select IdCommande FROM reservations WHERE IdClient=? AND IdEtat = 'PAN'";
   db.query(sqlInsert, [identifiantClient], (err, result) => {
     res.send(result) ;
   })
@@ -619,7 +617,7 @@ app.post('/api/comment', (req, res) =>{
 /**
  * Supprime à l'aide d'un DELETE le commentaire que le client veut supprimer en utilisant l'id du client à qui il a été fait ainsi que le commentaire pour le retrouver. 
  * @author Cécile Bonnet <c.bonnet@gmail.com>
- * @method POST
+ * @method DELETE
  * @param {Number} récupère l'id du client chez qui le patron a écrit un nouveau 
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
@@ -638,7 +636,7 @@ app.delete('/api/comment', (req, res) => {
 /**
  * Modifie le status d'un client si le patron à modifier son status (Blacklister/Deblacklister)
  * @author Cécile Bonnet <c.bonnet@gmail.com>
- * @method POST
+ * @method PUT
  * @param {Number} récupère l'id du client chez qui le patron a écrit un nouveau 
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
@@ -770,9 +768,13 @@ app.get('/api/categories', (req, res) =>{
  * @param {String} idcommande de la commande en cours 
   **/ 
 app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
-  const idCommande = req.params.id_comm
+  const idCommande = req.params.idCommandes
 
-  const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
+  const sqlInsert =   'SELECT IdCommande, menu.IdProduit, SUM(Quantite) AS Quantite , Produit, SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)  GROUP BY `Produit`, `IdCommande`, IdProduit, `Quantite`,  `Prix`'
+                      
+                      
+                       
+                     
   db.query(sqlInsert,[idCommande], (err, result) => {
     if(err) throw err ;
     res.send(result);
@@ -810,7 +812,7 @@ app.post('/api/intermediateBasket', (req, res) => {
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
 app.put('/api/changingquantity', (req, res) =>{
-  const idCommande = req.body.IdCommande
+  const idCommande = req.body.idCommandes
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
   
@@ -849,7 +851,7 @@ app.post('/api/orders', (req, res) => {
  * 
 **/ 
 app.get('/api/historical', (req, res) =>{
-  const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
+    const sqlInsert = 'SELECT * from historique '
   db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);
