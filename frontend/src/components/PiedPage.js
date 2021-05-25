@@ -7,9 +7,9 @@ const PiedPage = () => {
     const documents = ["mentions_legales", "confidentialite", "cookies", "cgu", "appeler"];
     let  niveau = 0 ;
 
-    const glisserGauche = () => {
+    const glisserGaucheF = () => {
         document.getElementsByClassName(documents[niveau])[0].style.display = "none";
-        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
+        document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
         if (niveau === 0) {
             niveau = 4;
         }
@@ -17,11 +17,11 @@ const PiedPage = () => {
             niveau -= 1 ;
         }
         document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
-        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
+        document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
     }
-    const glisserDroite = () => {
+    const glisserDroiteF = () => {
         document.getElementsByClassName(documents[niveau])[0].style.display = "none";
-        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
+        document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
         if (niveau === 4) {
             niveau = 0;
         }
@@ -29,7 +29,7 @@ const PiedPage = () => {
             niveau += 1 ;
         }
         document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
-        document.getElementsByClassName("rond" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
+        document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const PiedPage = () => {
             }
         }
         window.addEventListener('resize', handleResize)
-      })
+    })
 	
     return (
         <div className="footer">
@@ -63,14 +63,14 @@ const PiedPage = () => {
                 <NavLink to='/cgu' className="cgu">Conditions générales d'utilisation</NavLink>
                 <NavLink to='/informations' className="appeler">Nous appeler</NavLink>
                 <div className="copyright">© Copyright 2021 ChickNFish</div>
-                <div className="bouton_gauche"><input type="button" value="‹" onClick={glisserGauche} /></div>
-                <div className="bouton_droite"><input type="button" value="›" onClick={glisserDroite} /></div>
+                <div className="bouton_gauche"><input type="button" value="‹" onClick={glisserGaucheF} /></div>
+                <div className="bouton_droite"><input type="button" value="›" onClick={glisserDroiteF} /></div>
                 <div className="avancement">
-                    <div className="rond1"></div>
-                    <div className="rond2"></div>
-                    <div className="rond3"></div>
-                    <div className="rond4"></div>
-                    <div className="rond5"></div>
+                    <div className="rondF1"></div>
+                    <div className="rondF2"></div>
+                    <div className="rondF3"></div>
+                    <div className="rondF4"></div>
+                    <div className="rondF5"></div>
                 </div>
         </div>
     );

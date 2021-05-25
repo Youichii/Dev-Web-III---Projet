@@ -14,9 +14,9 @@
 	grid-gap: 2px;
     height: 41px;
     background-size: cover;
-    /* background-image:url(../img/PiedPage.PNG); */
-    background-image:url(../img/tempsnip.png);
-    background-position-y: 62px;
+    background-image:url(../img/PiedPage.PNG);
+    /* background-image:url(../img/tempsnip.png); */
+    /* background-position-y: 62px; */
 
     position: fixed;     
     bottom: 0px; 
@@ -111,11 +111,11 @@
     grid-row-end: 4;
     grid-column-start: 3;
     grid-column-end: 4;
-    grid-template-columns:  30% 8% 8% 8% 8% 8% 25%;
+    grid-template-columns:  28% 8% 8% 8% 8% 8% 25%;
     grid-template-rows: auto;
 	grid-gap: 2px;
 }
-.rond1 {
+.rondF1 {
     background-color: var(--rempli);
     border-radius: 17px;
     height: 9px;
@@ -123,7 +123,7 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
-.rond2 {
+.rondF2 {
     background-color: var(--vide);
     border-radius: 17px;
     height: 9px;
@@ -131,7 +131,7 @@
     grid-column-start: 3;
     grid-column-end: 4;
 }
-.rond3 {
+.rondF3 {
     background-color: var(--vide);
     border-radius: 17px;
     height: 9px;
@@ -139,7 +139,7 @@
     grid-column-start: 4;
     grid-column-end: 5;
 }
-.rond4 {
+.rondF4 {
     background-color: var(--vide);
     border-radius: 17px;
     height: 9px;
@@ -147,7 +147,7 @@
     grid-column-start: 5;
     grid-column-end: 6;
 }
-.rond5 {
+.rondF5 {
     background-color: var(--vide);
     border-radius: 17px;
     height: 9px;
