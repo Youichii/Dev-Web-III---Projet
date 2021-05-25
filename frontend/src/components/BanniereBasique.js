@@ -5,56 +5,61 @@ import instagram from "../img/Instagram.png";
 import facebook from "../img/Facebook.png";
 import telephone from "../img/Telephone.png";
 import { useEffect } from 'react';
+import menu from "../img/menuLogo.png";
+import croix from '../img/croixMenu.png';
 
 const BanniereBasique = ({page}) => {
     require('../css/banniereBasique.css');
 
-    const pages = ["accueil_bv", "informations_bv", "menu_bv", "connexion_bv", "inscription_bv"];
-    let  niveau = 0 ;
+    const afficherMenu = () => {
+        document.getElementsByClassName("navbar")[0].className  = "navbar menu_detail";
+        document.getElementsByClassName("accueil_bv")[0].style.display  = "initial";
+        document.getElementsByClassName("informations_bv")[0].style.display  = "initial";
+        document.getElementsByClassName("menu_bv")[0].style.display  = "initial";
+        document.getElementsByClassName("connexion_bv")[0].style.display  = "initial";
+        document.getElementsByClassName("inscription_bv")[0].style.display  = "initial";
+        document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "grid";
+        document.getElementsByClassName("croix_menubv")[0].style.display  = "initial";
+        document.getElementsByClassName("menu_imgbv")[0].style.display  = "none";
+    }
 
-    const glisserGaucheBV = () => {
-        document.getElementsByClassName(pages[niveau])[0].style.display = "none";
-        document.getElementsByClassName("rondBV" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
-        if (niveau === 0) {
-            niveau = 4;
-        }
-        else {
-            niveau -= 1 ;
-        }
-        document.getElementsByClassName(pages[niveau])[0].style.display = "initial";
-        document.getElementsByClassName("rondBV" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
+    const cacherMenu = () => {
+        document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
+        document.getElementsByClassName("accueil_bv")[0].style.display  = "none";
+        document.getElementsByClassName("informations_bv")[0].style.display  = "none";
+        document.getElementsByClassName("menu_bv")[0].style.display  = "none";
+        document.getElementsByClassName("connexion_bv")[0].style.display  = "none";
+        document.getElementsByClassName("inscription_bv")[0].style.display  = "none";
+        document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "none";
+        document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
+        document.getElementsByClassName("menu_imgbv")[0].style.display  = "initial";
     }
-    const glisserDroiteBV = () => {
-        document.getElementsByClassName(pages[niveau])[0].style.display = "none";
-        document.getElementsByClassName("rondBV" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
-        if (niveau === 4) {
-            niveau = 0;
-        }
-        else {
-            niveau += 1;
-        }
-        document.getElementsByClassName(pages[niveau])[0].style.display = "initial";
-        document.getElementsByClassName("rondBV" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
-    }
+
+    
 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth > 900) {
-                document.getElementsByClassName(pages[0])[0].style.display = "initial";
-                document.getElementsByClassName(pages[1])[0].style.display = "initial";
-                document.getElementsByClassName(pages[2])[0].style.display = "initial";
-                document.getElementsByClassName(pages[3])[0].style.display = "initial";
-                document.getElementsByClassName(pages[4])[0].style.display = "initial";
+            if (window.innerWidth > 495) {
+                document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
+                document.getElementsByClassName("accueil_bv")[0].style.display  = "initial";
+                document.getElementsByClassName("informations_bv")[0].style.display  = "initial";
+                document.getElementsByClassName("menu_bv")[0].style.display  = "initial";
+                document.getElementsByClassName("connexion_bv")[0].style.display  = "initial";
+                document.getElementsByClassName("inscription_bv")[0].style.display  = "initial";
+                document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "grid";
+                document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
+                document.getElementsByClassName("menu_imgbv")[0].style.display  = "none";
             }
             else {
-                for (let i = 0 ; i < pages.length ; i++) {
-                    if (i === niveau) {
-                        document.getElementsByClassName(pages[i])[0].style.display = "initial";
-                    }
-                    else {
-                        document.getElementsByClassName(pages[i])[0].style.display = "none";
-                    }
-                }
+                document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
+                document.getElementsByClassName("accueil_bv")[0].style.display  = "none";
+                document.getElementsByClassName("informations_bv")[0].style.display  = "none";
+                document.getElementsByClassName("menu_bv")[0].style.display  = "none";
+                document.getElementsByClassName("connexion_bv")[0].style.display  = "none";
+                document.getElementsByClassName("inscription_bv")[0].style.display  = "none";
+                document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "none";
+                document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
+                document.getElementsByClassName("menu_imgbv")[0].style.display  = "initial";
             }
         }
         window.addEventListener('resize', handleResize)
@@ -84,15 +89,8 @@ const BanniereBasique = ({page}) => {
                 <div className="fb_bv"><a href="https://www.facebook.com/ChickNFishLLN/"><img id="facebook" src={facebook} /></a></div>
                 <div className="tel_bv"> <NavLink to='/informations'><img id="telephone" src={telephone} /></NavLink></div>
             </div>
-            <div className="bouton_gauche"><input type="button" value="‹" onClick={glisserGaucheBV} /></div>
-                <div className="bouton_droite"><input type="button" value="›" onClick={glisserDroiteBV} /></div>
-            <div className="avancement">
-                    <div className="rondBV1"></div>
-                    <div className="rondBV2"></div>
-                    <div className="rondBV3"></div>
-                    <div className="rondBV4"></div>
-                    <div className="rondBV5"></div>
-                </div>
+            <li className="menu_imgbv"><img id="img_menu" src={menu} alt="Logo_Menu" onClick={afficherMenu}/></li> 
+            <li className="croix_menubv"><img id="croix_menu" src={croix} alt="croix_menu" onClick={cacherMenu}/></li> 
         </nav>
     )
 
