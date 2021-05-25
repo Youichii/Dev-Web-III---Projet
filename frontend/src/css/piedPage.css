@@ -18,7 +18,8 @@
     /* background-image:url(../img/tempsnip.png); */
     /* background-position-y: 62px; */
 
-    position: fixed;     
+    /* position: fixed;      */
+    position: unset;
     bottom: 0px; 
     width: 100%;
 }
@@ -165,12 +166,12 @@
     padding: 0px;
 }
 
-::-webkit-scrollbar {/*taille*/
+/* ::-webkit-scrollbar {
 	width: 6px; 
 }
-::-webkit-scrollbar-thumb {/*couleur normale*/
-	background: none; /*#42434a; /* #F7C27E;*/ 
-}
+::-webkit-scrollbar-thumb {
+	background: none;
+} */
 
 
 

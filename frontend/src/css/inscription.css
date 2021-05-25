@@ -16,7 +16,7 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 10% 1290px 240px ;
+	grid-template-rows: 6% 1290px 189px;
 	grid-gap: 2px;
 	padding: 5px;
 }
