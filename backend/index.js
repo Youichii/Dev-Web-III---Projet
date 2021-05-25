@@ -829,10 +829,11 @@ app.put('/api/changingquantity', (req, res) =>{
  * 
   **/ 
 app.post('/api/orders', (req, res) => {
-  const idClient = req.body.IdClient
+  const idClient = req.body
+  const idCommande = req.body 
 
-  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
-  db.query(sqlInsert,[idClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
+  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdClient, DateCommande, HLivree, IdMethode, IdEtat, Commentaire, Rue, Numero, Zip, Ville, PayementLiquide)  VALUES (?,?,?,?,?,?,?,?,?,?,?,? )'
+  db.query(sqlInsert,[idCommande, idClient, null, null, null, 'PAN', null,  null, null, null, null, null], (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
