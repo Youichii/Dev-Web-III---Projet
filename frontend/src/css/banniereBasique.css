@@ -308,14 +308,15 @@ body {
     /* #img {width: 122%;} */
 }
 @media only screen and (max-width: 820px) {
-    .banniere_visiteur {grid-template-columns: 10% 4% 13% 13% 13% 13% 13% 5% 13%;}
+    .banniere_visiteur {grid-template-columns: 10% 4% 13% 13% 13% 13% 13% 5% 13%;
+        grid-template-rows: 24% 36% 9% 25%;}
 }
 
 @media only screen and (max-width: 720px) {
     /* .banniere_visiteur {grid-template-columns: 10% 3% 13% 13% 13% 13% 13% 3% 15%;} */
-    .banniere_visiteur .avancement {grid-row-start: 3;
-        grid-row-end: 4;}
-    .reseaux_sociaux{grid-row-end: 4;
+    .banniere_visiteur .avancement {grid-row-start: 4;
+        grid-row-end: 5;}
+    .reseaux_sociaux{grid-row-end: 5;
         grid-template-rows: 33% 33% 33%;
         grid-template-columns: auto;}
     .insta_bv{grid-row-start: 1;
@@ -326,8 +327,8 @@ body {
         grid-column-end: 2;
         grid-row-start: 3;
         grid-row-end: 4;}
-    .banniere_visiteur{grid-template-columns: 10% 7% 13% 13% 13% 13% 13% 8% 7%;
-        grid-template-rows: 34% 36% 31%;}
+    .banniere_visiteur{grid-template-columns: 10% 7% 13% 8% 22% 8% 13% 8% 7%;
+        grid-template-rows: 24% 31% 12% 25%;}
     #instagram {width: 25px;}
     #facebook {width: 25px;}
     #telephone {width: 25px;}
