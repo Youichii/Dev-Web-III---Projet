@@ -276,10 +276,13 @@ app.use(session({
 app.post('/api/connect-users', function(request, response) {
 	var email = request.body.data.mail;
 	var mdp = request.body.data.pwd;
+  console.log(request.body.data)
 	if (email && mdp) {
 		db.query('SELECT IdClient, Mdp FROM clients WHERE Mail = ?', [email], function(error, results, fields) {
+      console.log(results)
 			if (results.length > 0) {
         bcrypt.compare(mdp, results[0].Mdp, (error, response1) => {
+          console.log(response1)
           if (response1) {
             request.session.user = results;
             response.send(results);
@@ -579,7 +582,7 @@ app.get('/api/hours', (req, res) => {
  * @method GET
  **/
 app.get('/api/users', (req, res) =>{
-  db.query('select * FROM clients ', (err, result) => {
+  db.query('select * FROM clients where IdClient != 1', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
@@ -647,7 +650,7 @@ app.put('/api/status', (req, res) =>{
   const Status = req.body.Status
   const IdClient= req.body.IdClient
   
-  const sqlInsert = " UPDATE clients SET `Status`= ? WHERE IdClient = ?;" 
+  const sqlInsert = " UPDATE clients SET `Statut`= ? WHERE IdClient = ?;" 
   db.query(sqlInsert, [Status, IdClient], (err, result) => {
     if(err) throw err; 
     res.send(result); 
@@ -711,7 +714,7 @@ app.get('/api/usersville/:ville', (req, res) =>{
 app.get('/api/usersstatus/:status', (req, res) =>{
   const status = req.params.status
 
-  const sqlInsert = "SELECT * FROM `clients` WHERE `Status` = ?"
+  const sqlInsert = "SELECT * FROM `clients` WHERE `Statut` = ?"
   db.query(sqlInsert,[status],(err, result) => {
       if(err) throw err ;
       res.send(result);
@@ -901,7 +904,7 @@ app.get('/api/historical', (req, res) =>{
  * 
 **/ 
 app.get('/api/year', (req, res) =>{
-  const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `reservations` WHERE `IdEtat` = ? '
+  const sqlInsert = 'SELECT DISTINCT LEFT (`DateCommande`, 4) as Annee FROM `historique`'
   db.query(sqlInsert,['H'], (err, result) => {
     if(err) throw err ;
     res.send(result);

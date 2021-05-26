@@ -275,7 +275,7 @@ const Communaute = () => {
             var remplirCommunauteStatus = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch(`/usersstatus/${valueStatus}`, remplirCommunauteStatus)
+            fetch(`api/usersstatus/${valueStatus}`, remplirCommunauteStatus)
             .then(response =>{
                 return response.json()
             })
@@ -291,7 +291,7 @@ const Communaute = () => {
             var remplirCommunauteNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`/usersnom/${valueNom}`, remplirCommunauteNom)
+            fetch(`api/usersnom/${valueNom}`, remplirCommunauteNom)
             .then(response=>{
                 return response.json()
             })
@@ -403,9 +403,9 @@ const Communaute = () => {
 
                     <div  className = "coordonnes">
 
-                        <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Status === 1)?{color:"red"}:{color:"white"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
-                    
-                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')} />
+                        <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Statut === 0)?{color:"white"}:{color:"red"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
+                   
+                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Statut === 0)?('Blacklister'):('Dé-Blacklister')} />
                         
                         <div className="mail">{utilisateur.Mail}</div>
 
@@ -413,7 +413,7 @@ const Communaute = () => {
 
                         <div className="ville">{utilisateur.Ville}</div>
 
-                        <div className="age">{utilisateur.Anniversaire}</div>
+                        <div className="age">{utilisateur.Anniversaire.slice(0,10)}</div>
 
                         <div className="genre">{utilisateur.Genre}</div>
 
