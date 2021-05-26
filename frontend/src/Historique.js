@@ -10,7 +10,7 @@ const Historique = () => {
 
     let [historiques, setHistoriques] = useState(null)
     let[annees, setAnnees]= useState([])
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState([]);
     const [statutConnexion, setStatutConnexion] = useState(false);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
 
@@ -46,7 +46,6 @@ const Historique = () => {
     let mois = [{"Id":"01", "Mois":"Janvier"},{"Id":'02', "Mois":"Février"},{"Id":'03', "Mois":"Mars"},{"Id":'04', "Mois":"Avril"},{"Id":'05', "Mois":"Mai"},{"Id":'06', "Mois":"Juin"},{"Id":'07', "Mois":"Juillet"},{"Id":'08', "Mois":"Août"},{"Id":'09', "Mois":"Septembre"},{"Id":'10', "Mois":"Octobre"},{"Id":'11', "Mois":"Novembre"},{"Id":'12', "Mois":"Décembre"} ]
    
     useEffect(()=>{
-
         var remplirHistorique = {method : 'GET',
         headers:{'Content-type':'application/json'}
         }
@@ -55,7 +54,7 @@ const Historique = () => {
             return response.json()
         })
         .then(json =>{
-            setHistoriques(json)
+            setHistoriques(json);
         })
 
         var remplirAnnees = {method : 'GET',
@@ -75,7 +74,7 @@ const Historique = () => {
         <div>
             {statutConnexion ? <BanniereConnection page="historique" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             {historiques&&historiques.map(historique =>  
-                setDate.push(historique.DateCommande) 
+                date.push(historique.DateCommande) 
             )}
             <div id = 'cadre'>
                 {annees&&annees.map(annee => 

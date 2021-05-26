@@ -39,7 +39,6 @@ function App() {
   }
   return (
     <Router>
-      <div className="App">
         <div className="content">
           <Switch>
 
@@ -111,7 +110,6 @@ function App() {
         </div>
         <Cookie/>
         <PiedPage />
-      </div>
     </Router>
   );
 }

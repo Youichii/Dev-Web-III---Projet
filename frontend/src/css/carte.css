@@ -21,7 +21,7 @@ code {
     /* width:10px; */
     text-overflow: scroll;
     background-color: black;
-    
+    padding: 0px 0px 60px 0px;
   }
   
   /* Scrollbar Perso */
