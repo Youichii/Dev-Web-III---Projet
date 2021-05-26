@@ -21,7 +21,7 @@ const ProfilPrive = () => {
     const [mail, setMail] = useState('');
     const [telephone, setTelephone] = useState('')
     const [statutConnexion, setStatutConnexion] = useState(false);
-	const [utilisateur, setUtilisateur] = useState(0);
+	const [utilisateur, setUtilisateur] = useState('');
 
     const history = useHistory();
 	const redirection= function onfinish(data){
@@ -33,11 +33,14 @@ const ProfilPrive = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	useEffect(async () => {
+	useEffect( () => {
 		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
                 setStatutConnexion(true);
 			    setUtilisateur(reponse.data.user[0].IdClient);
+                Axios.get(`http://localhost:3001/api/client/${reponse.data.user[0].IdClient}`).then((response)=> {
+                setlisteClients(response.data)
+                })
                 
                 
 			}
@@ -62,13 +65,6 @@ const ProfilPrive = () => {
             pseudo : pseudo,
             utilisateur : utilisateur,
         }).then(() => {
-        })
-    }
-    
-    const getClient = () => {        
-        Axios.get(`http://localhost:3001/api/client/${utilisateur}`).then((response)=> {
-            setlisteClients(response.data)
-
         })
     }
 
@@ -108,9 +104,9 @@ const ProfilPrive = () => {
     }
     
     return (
-            <div style={{margin: "0px 0px 1295px 0px"}}>  
+            <div style={{margin: "0px 0px 10% 0px"}}>  
                 {statutConnexion ? <BanniereConnection page="profilprive" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
-                <div onLoad={getClient} className="profilPrive">                    
+                <div className="profilPrive">                    
                     <Header title= {"Votre profil" } headerclass="profilheader"  />
                     <Picture />
                     <div className="privateinfo">                    
