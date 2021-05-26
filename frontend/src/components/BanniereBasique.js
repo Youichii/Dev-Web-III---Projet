@@ -11,7 +11,7 @@ import croix from '../img/croixMenu.png';
 const BanniereBasique = ({page}) => {
     require('../css/banniereBasique.css');
 
-    const afficherMenu = () => {
+    const afficherMenuBV = () => {
         document.getElementsByClassName("navbar")[0].className  = "navbar menu_detail";
         document.getElementsByClassName("accueil_bv")[0].style.display  = "initial";
         document.getElementsByClassName("informations_bv")[0].style.display  = "initial";
@@ -23,7 +23,7 @@ const BanniereBasique = ({page}) => {
         document.getElementsByClassName("menu_imgbv")[0].style.display  = "none";
     }
 
-    const cacherMenu = () => {
+    const cacherMenuBV = () => {
         document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
         document.getElementsByClassName("accueil_bv")[0].style.display  = "none";
         document.getElementsByClassName("informations_bv")[0].style.display  = "none";
@@ -34,8 +34,6 @@ const BanniereBasique = ({page}) => {
         document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
         document.getElementsByClassName("menu_imgbv")[0].style.display  = "initial";
     }
-
-    
 
     useEffect(() => {
         function handleResize() {
@@ -89,8 +87,8 @@ const BanniereBasique = ({page}) => {
                 <div className="fb_bv"><a href="https://www.facebook.com/ChickNFishLLN/"><img id="facebook" src={facebook} /></a></div>
                 <div className="tel_bv"> <NavLink to='/informations'><img id="telephone" src={telephone} /></NavLink></div>
             </div>
-            <li className="menu_imgbv"><img id="img_menu" src={menu} alt="Logo_Menu" onClick={afficherMenu}/></li> 
-            <li className="croix_menubv"><img id="croix_menu" src={croix} alt="croix_menu" onClick={cacherMenu}/></li> 
+            <li className="menu_imgbv"><img id="img_menu" src={menu} alt="Logo_Menu" onClick={afficherMenuBV}/></li> 
+            <li className="croix_menubv"><img id="croix_menu" src={croix} alt="croix_menu" onClick={cacherMenuBV}/></li> 
         </nav>
     )
 

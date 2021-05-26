@@ -114,7 +114,8 @@ const Connexion = () => {
 
 	return (
 		<div>
-			{statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="connexion" />}
+			{/* {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="connexion" />} */}
+			{statutConnexion ? <BanniereBasique page="connexion" /> : <BanniereConnection onClick={deconnexion} client={utilisateur}/>}
 			<div className="connexion c_cadre">
 				<div id="cadre_connexion" className="i_info_connexion c_info_connexion">
 					<div className="i_bouton_connexion">CONNEXION</div>

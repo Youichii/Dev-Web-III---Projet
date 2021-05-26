@@ -1,5 +1,3 @@
-/* Barre de navigation */
-
 :root {
 	--survol_bouton : #dfb54f;
 }
@@ -12,7 +10,6 @@
     width:auto;
     text-align: center;
     font-size: calc(0.5em + 1vw);
-
 }
 .navbar li{
     height: fit-content;
@@ -22,8 +19,6 @@
     /* display : block; */
     color: white;
     text-decoration: none;
-    /* margin-top:15%; */
-
 }
 
 .navbar a:hover{
@@ -32,9 +27,6 @@
     border-bottom: solid 1px var(--survol_bouton);
     cursor:default;
 }
-
-
-  
 #menu dl, dt, dd, ul, li {
     margin: 0;
     padding: 0;
@@ -44,7 +36,6 @@
 li:hover{
     cursor:pointer;
 }
-
 
 
 .banniere_visiteur {
@@ -145,10 +136,9 @@ li:hover{
     grid-template-columns: 33% 33% 33% 1%;
     grid-template-rows: 15% 69% 15%;
 	grid-gap: 2px;
-	/* padding: 5px; */
 }
 
-.cadreLogoCNF {
+/* .cadreLogoCNF {
     grid-column-start: 1;
 	grid-column-end: 2;
     grid-row-start: 1;
@@ -162,7 +152,7 @@ li:hover{
     max-width: 100%;  
     height: auto;  
     background-image: url(../img/LogoD.png);
-}
+} */
 
 .reseaux_sociaux a:hover{
     color:white;

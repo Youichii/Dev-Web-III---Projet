@@ -3,9 +3,10 @@ import BanniereStaff from './BanniereStaff.js';
 import BannierePatron from './BannierePatron.js';
 import BanniereClient from './BanniereClient.js';
 
-const BanniereConnection = ({onClick, client, page, connexion}) => {
+const BanniereConnection = ({onClick, clientX, page, connexion}) => {
     //require('../css/banniereConnection.css');
 
+    let client = 1;
     if (client === 1) {
         return (
             <BannierePatron page={page} onClick={onClick}></BannierePatron>
@@ -23,11 +24,6 @@ const BanniereConnection = ({onClick, client, page, connexion}) => {
     }
 
 }
-
-/*BanniereConnection.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
 
 BanniereConnection.propTypes = {
     onClick : PropTypes.func

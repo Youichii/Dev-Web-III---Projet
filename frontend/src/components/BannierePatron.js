@@ -4,9 +4,70 @@ import logo from "../img/ChickNFishLogo.png"
 import instagram from "../img/Instagram.png";
 import facebook from "../img/Facebook.png";
 import telephone from "../img/Telephone.png";
+import { useEffect } from 'react';
+import menu from "../img/menuLogo.png";
+import croix from '../img/croixMenu.png';
 
 const BannierePatron = ({ onClick, page }) => {
     require('../css/bannierePatron.css');
+
+    const afficherMenuBP = () => {
+        document.getElementsByClassName("navbar_bp")[0].className  = "navbar_bp menu_detailbp";
+        document.getElementsByClassName("statistiques_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("modification_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("historique_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("communaute_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("newsletter_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("deconnexion_bp")[0].style.display  = "initial";
+        document.getElementsByClassName("reseaux_sociaux_bp")[0].style.display  = "grid";
+        document.getElementsByClassName("croix_menubp")[0].style.display  = "initial";
+        document.getElementsByClassName("menu_imgbp")[0].style.display  = "none";
+    }
+
+    const cacherMenuBP = () => {
+        document.getElementsByClassName("navbar_bp")[0].className  = "navbar_bp banniere_patron";
+        document.getElementsByClassName("statistiques_bp")[0].style.display  = "none";
+        document.getElementsByClassName("modification_bp")[0].style.display  = "none";
+        document.getElementsByClassName("historique_bp")[0].style.display  = "none";
+        document.getElementsByClassName("communaute_bp")[0].style.display  = "none";
+        document.getElementsByClassName("newsletter_bp")[0].style.display  = "none";
+        document.getElementsByClassName("deconnexion_bp")[0].style.display  = "none";
+        document.getElementsByClassName("reseaux_sociaux_bp")[0].style.display  = "none";
+        document.getElementsByClassName("croix_menubp")[0].style.display  = "none";
+        document.getElementsByClassName("menu_imgbp")[0].style.display  = "initial";
+    }
+
+    useEffect(() => {
+        function handleResize() {
+            console.log("oui");
+            if (window.innerWidth > 740) {
+                document.getElementsByClassName("navbar_bp")[0].className  = "navbar_bp banniere_patron";
+                document.getElementsByClassName("statistiques_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("modification_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("historique_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("communaute_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("newsletter_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("deconnexion_bp")[0].style.display  = "initial";
+                document.getElementsByClassName("reseaux_sociaux_bp")[0].style.display  = "grid";
+                document.getElementsByClassName("croix_menubp")[0].style.display  = "none";
+                document.getElementsByClassName("menu_imgbp")[0].style.display  = "none";
+            }
+            else {
+                document.getElementsByClassName("navbar_bp")[0].className  = "navbar_bp banniere_patron";
+                document.getElementsByClassName("statistiques_bp")[0].style.display  = "none";
+                document.getElementsByClassName("modification_bp")[0].style.display  = "none";
+                document.getElementsByClassName("historique_bp")[0].style.display  = "none";
+                document.getElementsByClassName("communaute_bp")[0].style.display  = "none";
+                document.getElementsByClassName("newsletter_bp")[0].style.display  = "none";
+                document.getElementsByClassName("deconnexion_bp")[0].style.display  = "none";
+                document.getElementsByClassName("reseaux_sociaux_bp")[0].style.display  = "none";
+                document.getElementsByClassName("croix_menubp")[0].style.display  = "none";
+                document.getElementsByClassName("menu_imgbp")[0].style.display  = "initial";
+            }
+        }
+        window.addEventListener('resize', handleResize)
+    })
+
     return (
         <nav className="navbar_bp banniere_patron">          
             <li className="logo_bp"><img id="img_bp" src={logo} alt="Logo_Bannière" /></li> 
@@ -33,15 +94,12 @@ const BannierePatron = ({ onClick, page }) => {
                 <div className="fb_bp"><a href="https://www.facebook.com/ChickNFishLLN/"><img id="facebook_bp" src={facebook} alt="icone de facebook" /></a></div>
                 <div className="tel_bp"> <NavLink to='/informations'><img id="telephone_bp" src={telephone} alt="icone de téléphone" /></NavLink></div>
             </div>
+            <li className="menu_imgbp"><img id="img_menu" src={menu} alt="Logo_Menu" onClick={afficherMenuBP}/></li> 
+            <li className="croix_menubp"><img id="croix_menu" src={croix} alt="croix_menu" onClick={cacherMenuBP}/></li> 
         </nav>
     )
 
 }
-
-/*BannierePatron.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
 
 BannierePatron.propTypes = {
     onClick : PropTypes.func

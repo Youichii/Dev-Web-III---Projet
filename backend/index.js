@@ -200,7 +200,7 @@ app.use(session({
  * @param  {string} email  mail de l'utilisateur
  * @param  {string} mdp    mot de passe de l'utilisateur
  * @return {object}        l'identifiant du client, sinon un message d'erreur
- */ 
+ */
 app.get('/api/connect-users/:mail/:pwd', function(request, response) {
 	var email = request.params.mail;
 	var mdp = request.params.pwd;

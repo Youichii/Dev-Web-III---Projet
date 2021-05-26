@@ -1,5 +1,3 @@
-/* Barre de navigation */
-
 :root {
 	--survol_bouton : #dfb54f;
 }
@@ -19,7 +17,7 @@
 }
 
 .navbar_bp a{
-    display : block;
+    /* display : block; */
     color: white;
     text-decoration: none;
     /* margin-top:15%; */
@@ -33,6 +31,11 @@
     cursor:default;
 }
 
+.navbar_bp dl, dt, dd, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 
 li:hover{
     cursor:pointer;
@@ -42,14 +45,13 @@ li:hover{
 
 .banniere_patron {
     display: grid;
-	grid-template-columns: 10% 4% 12% 12% 12% 12% 12% 12% 5% 8%;
+	grid-template-columns: 10% 4% 12% 12% 12% 12% 12% 12% 5% 7%;
     grid-template-rows: 34% 40% 26%;
 	grid-gap: 2px;
 	padding: 5px;
     background-size: cover;
-    background-image:url(../img/img5.jpeg);
+    background-image:url(../img/imgBanniere.PNG);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
-    background-position-y: 852px;
     /* margin: 0px 10px 0px 10px; */
 }
 .statistiques_bp {
@@ -67,7 +69,7 @@ li:hover{
 }
 #img_bp{
     height: auto;
-    width: 72%;
+    width: 95px;
     cursor:default;
 } 
 .logo_bp {
@@ -109,7 +111,8 @@ li:hover{
     grid-row-end: 3;
 }
 #instagram_bp {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .fb_bp {
@@ -119,7 +122,8 @@ li:hover{
     grid-row-end: 3;
 }
 #facebook_bp {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .tel_bp {
@@ -129,7 +133,8 @@ li:hover{
     grid-row-end: 3;
 }
 #telephone_bp {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .reseaux_sociaux_bp {
@@ -156,7 +161,146 @@ li:hover{
     cursor:pointer;
 }
 
+.menu_imgbp {
+    grid-column-start: 9;
+    grid-column-end: 10;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display:none;
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    height: 34px;
+    width: 36.5px;
+}
+#img_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#img_menu:hover{
+    cursor: pointer;
+}
+
+.croix_menubp {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display:none; 
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    margin: 24px 0px 0px 0px;
+    height: 34px;
+    width: 36.5px;
+}
+#croix_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#croix_menu:hover{
+    cursor: pointer;
+}
+.menu_detailbp {
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    height: 60%;
+    width: 100%;
+    grid-template-columns: 36% 28% 19.9% 10% 4%;
+    grid-template-rows: 10% 16% 6% 4% 6% 4% 6% 4% 6% 4% 6% 4% 6% 4% 1% 7%;
+    grid-gap: 2px;
+	padding: 5px;
+    background-size: cover;
+    background-image:url(../img/imgBanniere.PNG);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
     margin:0px;
     background-color: black;
+}
+
+@media only screen and (max-width: 1410px) {
+    .banniere_patron {grid-template-columns: 10% 5% 12% 12% 12% 12% 12% 12% 3% 8%;}
+}
+@media only screen and (max-width: 1150px) {
+    .banniere_patron {grid-template-columns: 10% 4% 11% 11% 11% 11% 11% 11% 4% 13%;}
+    .navbar_bp li {font-size: 15px;}
+}
+@media only screen and (max-width: 820px) {
+    .reseaux_sociaux_bp{grid-row-end: 4;
+        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: auto;}
+    .insta_bp{grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bp{grid-column-start: 1;
+        grid-column-end: 2;}
+    .tel_bp{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .banniere_patron{grid-template-columns: 10% 5% 12% 12% 12% 12% 12% 12% 5% 5%;
+        grid-template-rows: 26% 36% 31%;}
+    #instagram_bp {width: 25px;}
+    #facebook_bp {width: 25px;}
+    #telephone_bp {width: 25px;}
+    #img_bp {width: 95px;}
+}
+@media only screen and (max-width: 740px) {
+    .banniere_patron {grid-template-columns: 10% 7% 13% 13% 13% 13% 2% 10% 10% 4%;
+        grid-template-rows: 26% 36% 31%;}
+    .statistiques_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .modification_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 5;
+        grid-row-end: 6;}
+    .historique_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 7;
+        grid-row-end: 8;}
+    .communaute_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 9;
+        grid-row-end: 10;}
+    .newsletter_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 11;
+        grid-row-end: 12;}
+    .deconnexion_bp {display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 13;
+        grid-row-end: 14;}
+    .menu_imgbp{display:initial;}
+    .insta_bp{grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bp{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .tel_bp{grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .reseaux_sociaux_bp{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 16;
+        grid-row-end: 17;
+        grid-template-rows: auto;
+        grid-template-columns: 33% 33% 33%;}
+    #img_bp{display: block;}
 }
