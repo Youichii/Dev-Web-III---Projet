@@ -8,6 +8,7 @@ const PiedPage = () => {
     let  niveau = 0 ;
 
     const glisserGaucheF = () => {
+        console.log("gauche ancien:", niveau);
         document.getElementsByClassName(documents[niveau])[0].style.display = "none";
         document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
         if (niveau === 0) {
@@ -16,10 +17,12 @@ const PiedPage = () => {
         else {
             niveau -= 1 ;
         }
+        console.log("gauche nouveau:", niveau);
         document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
         document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
     }
     const glisserDroiteF = () => {
+        console.log("droite ancien:", niveau);
         document.getElementsByClassName(documents[niveau])[0].style.display = "none";
         document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--vide)";
         if (niveau === 4) {
@@ -28,6 +31,7 @@ const PiedPage = () => {
         else {
             niveau += 1 ;
         }
+        console.log("droite nouveau:", niveau);
         document.getElementsByClassName(documents[niveau])[0].style.display = "initial";
         document.getElementsByClassName("rondF" + (niveau + 1))[0].style.backgroundColor = "var(--rempli)";
     }

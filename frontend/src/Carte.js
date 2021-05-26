@@ -16,7 +16,7 @@ const Carte = () => {
     const [statutConnexion, setStatutConnexion] = useState(true);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
     const [conditions, setCondition] = useState(false)
-    const [totals, setTotal] = useState(10000000000)
+    const [totals, setTotal] = useState(null)
     
 
 	/**
@@ -61,17 +61,17 @@ const Carte = () => {
                             setPanier(json)
                         }) 
                         
-                        var totalCommande = {method: 'GET', 
-                        headers: {'Content-type':'application/json'}
-                        }; 
-                        fetch(`/api/total/${idCommandes}`, totalCommande)
-                        .then(response=>{ 
-                            return response.json()
-                        })
-                        .then(json =>{ 
-                            setTotal(json.Prix)
-                            console.log(json)
-                        }) 
+                        // var totalCommande = {method: 'GET', 
+                        // headers: {'Content-type':'application/json'}
+                        // }; 
+                        // fetch(`/api/total/${idCommandes}`, totalCommande)
+                        // .then(response=>{ 
+                        //     return response.json()
+                        // })
+                        // .then(json =>{ 
+                        //     setTotal(json.PrixTotal)
+                        //     console.log(json)
+                        // }) 
                     }
 
                     else{
@@ -209,17 +209,17 @@ const Carte = () => {
         }) 
 
 
-        var totalCommande = {method: 'GET', 
-        headers: {'Content-type':'application/json'}
-        }; 
-        fetch(`/api/total/${idCommandes}`, totalCommande)
-        .then(response=>{ 
-            return response.json()
-        })
-        .then(json =>{ 
-            console.log("total", json)
-            setTotal(json)
-        })        
+        // var totalCommande = {method: 'GET', 
+        // headers: {'Content-type':'application/json'}
+        // }; 
+        // fetch(`/api/total/${idCommandes}`, totalCommande)
+        // .then(response=>{ 
+        //     return response.json()
+        // })
+        // .then(json =>{ 
+        //     console.log("total", json)
+        //     setTotal(json.PrixTotal)
+        // })        
     }
         
 
@@ -259,7 +259,7 @@ const Carte = () => {
                         </div>          
                     ))}
 
-                    <div className="total">Total de la commande :  {totals} </div>
+                    {/* <div className="total">Total de la commande :  {totals} </div> */}
                     
                 </div>  
                                 </span> : 
