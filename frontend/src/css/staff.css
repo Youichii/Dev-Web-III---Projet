@@ -13,12 +13,12 @@
   }
   /*var(--bg_boutons)*/
   
-  * {
+staff * {
 	  font-family:"Lucida Sans", sans-serif; ; /*modern, monospace;*/
 	  background-color: black;
-  }
+}
   
-  .c_page {
+.c_page {
 	display: grid;
 	grid-template-columns: 100% ;
 	grid-template-rows: 495px 495px 495px;

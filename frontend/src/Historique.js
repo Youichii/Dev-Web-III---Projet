@@ -65,7 +65,8 @@ const Historique = () => {
             return response.json()
         })
         .then(json =>{
-            setAnnees(json)
+            console.log("json : ", json);
+            setAnnees(json);
         })
 
     },[])
