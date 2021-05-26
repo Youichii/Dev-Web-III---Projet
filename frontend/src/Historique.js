@@ -73,9 +73,7 @@ const Historique = () => {
     return(
         <div>
             {statutConnexion ? <BanniereConnection page="historique" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
-            {historiques&&historiques.map(historique =>  
-                date.push(historique.DateCommande) 
-            )}
+        
             <div id = 'cadre'>
                 {annees&&annees.map(annee => 
                     <details>

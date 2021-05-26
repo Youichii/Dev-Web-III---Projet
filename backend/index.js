@@ -584,7 +584,7 @@ app.get('/api/hours', (req, res) => {
  * @method GET
  **/
 app.get('/api/users', (req, res) =>{
-  db.query('select * FROM clients where IdClient != 1', (err, result) => {
+  db.query('select * FROM clients where IdClient Not IN (1,2)', (err, result) => {
     if(err) throw err ;
     res.send(result);
   })
