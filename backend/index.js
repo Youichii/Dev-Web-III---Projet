@@ -46,11 +46,9 @@ app.get('/', (req,res) => {
 app.get('/api/client/:utilisateur', (req,res) => {
   
   const utilisateur = req.params.utilisateur
-  console.log(utilisateur)
   const sqlGet = "SELECT `Pseudo`, `Nom`, `Prenom`, `Rue`, `Numero`, `Zip`, `Ville`, `Anniversaire`, `Gsm`, `Mail`, `Genre` FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
-    console.log("Result = " + res.data + "  Erreur =" + err)
   })
 })
 
@@ -947,7 +945,7 @@ transporter.verify((err, success)=>{
 app.post("/envoye", function (req, res){
   const listMail = [];
 
-  const sqlGet = "SELECT Prenom,  Mail FROM Clients where Newsletter =1";
+  const sqlGet = "SELECT Prenom,  Mail FROM clients where Newsletter =1";
   db.query(sqlGet, (err, result)=>{
       res.send(result);
       result.forEach(Clients => {
@@ -1007,7 +1005,7 @@ app.get('/api/genre-stat', (req, res)=>{
  * @param /
  **/
 app.get('/api/localisation-stat', (req, res)=>{
-  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM Clients group by Ville";
+  const sqlSelect = "SELECT Ville, COUNT (*) as nombre  FROM clients group by Ville";
   db.query(sqlSelect, (err, result)=>{
       res.send(result);
       console.log(result)
@@ -1021,7 +1019,7 @@ app.get('/api/localisation-stat', (req, res)=>{
  * @param /
  **/
 app.get('/api/age-stat', (req, res)=>{
-  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM Clients";
+  const sqlSelect = "SELECT Prenom, YEAR(CURDATE()) - YEAR(Anniversaire) AS AgeClient FROM clients";
   db.query(sqlSelect,(err, result)=>{
       res.send(result);
       console.log(result)
