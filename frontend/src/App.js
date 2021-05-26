@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Informations from './Informations';
 import Staff from './Staff';
 import Panier from './Panier';
@@ -17,12 +17,18 @@ import Cookie from './Cookies';
 import PiedPage from './PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
+import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory';
+import { initGA } from './components/Compteurs';
+//import GA from './components/Compteurs'
 
 
 function App() {
+  useEffect(()=>{initGA();},[]);
   return (
     <Router>
       <div className="App">
+        
         <div className="content">
           <Switch>
 

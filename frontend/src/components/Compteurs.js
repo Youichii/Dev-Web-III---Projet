@@ -1,5 +1,9 @@
-import React from 'react';
 import ReactGA from 'react-ga';
 
-ReactGA.initialize(G-CS9BFVGJDC);
+export const initGA = () => {
+    ReactGA.initialize('G-X4NE1ZB97L');   
+}
 
+export const GApageVue = (page)=>{
+    ReactGA.pageview(page);
+}

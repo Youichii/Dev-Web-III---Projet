@@ -9,8 +9,12 @@ import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 
 import './css/Accueil.css';
+import { GApageVue } from './components/Compteurs';
+
 
 const Accueil = () => {
+
+    useEffect(()=> {GApageVue("Accueil");},[])
 
     const [donneeAvis, setDonneeAvis] = useState([]);
 
