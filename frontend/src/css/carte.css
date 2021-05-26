@@ -117,9 +117,9 @@ span.symbolpanier:hover div{
   width: 57%;
   height :40%; 
   overflow-y:scroll ;
-  color:#be5833;
+  /* color:#be5833; */
   background-color: black;
-  border-color:#e49622;
+  border-color:rgb(104, 110, 104);
 
 }
 
@@ -218,3 +218,23 @@ span.symbolpanier:hover div{
   margin-bottom:75px;
 }
 
+/*________Commande du panier_________*/ 
+
+.nomProduit{
+  color : rgb(199, 28, 16);
+
+}
+.quantitee{
+  color:rgb(104, 110, 104);
+}
+.prixTotal{
+  color:rgb(104, 110, 104);
+}
+
+#panier{
+  border-bottom: whitesmoke;
+  border-bottom-style:thin;
+}
+/* .total{
+  color:red
+} */

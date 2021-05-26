@@ -527,7 +527,9 @@ app.get('/api/orders/:identifiantCommande', (req, res) => {
 app.get('/api/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
   const sqlInsert = "select IdCommande FROM reservations WHERE IdClient=? AND IdEtat = 'PAN'";
+  
   db.query(sqlInsert, [identifiantClient], (err, result) => {
+    console.log(result)
     res.send(result) ;
   })
 })
@@ -768,15 +770,33 @@ app.get('/api/categories', (req, res) =>{
  * @param {String} idcommande de la commande en cours 
   **/ 
 app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
-  const idCommande = req.params.idCommandes
+  const idCommande = req.params.IdCommande
+  console.log("id de la commande", idCommande)
 
-  const sqlInsert =   'SELECT IdCommande, menu.IdProduit, SUM(Quantite) AS Quantite , Produit, SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)  GROUP BY `Produit`, `IdCommande`, IdProduit, `Quantite`,  `Prix`'
-                      
-                      
-                       
-                     
+  const sqlInsert =   'SELECT menu.IdProduit, SUM(Quantite) AS Quantite , Produit, SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) where IdCommande = ?   GROUP BY `Produit`, `IdCommande`, IdProduit'
+                            
   db.query(sqlInsert,[idCommande], (err, result) => {
     if(err) throw err ;
+    console.log(result)
+    res.send(result);
+  })
+})
+
+/**
+ * Récupère à l'aide d'un GET le total d'une commande  
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method GET
+ * @param {String} idcommande de la commande en cours 
+  **/ 
+
+app.get('/api/total/:IdCommande', (req, res) =>{
+  const idCommande = req.params.IdCommande
+  console.log(idCommande)
+  const sqlInsert = 'SELECT SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) WHERE `IdCommande` = ?'
+
+  db.query(sqlInsert,[idCommande], (err, result) => {
+    if(err) throw err ;
+    console.log(result)
     res.send(result);
   })
 })
@@ -812,7 +832,7 @@ app.post('/api/intermediateBasket', (req, res) => {
  * @param {Number} quantite du produit à ajouter à la commande
   **/ 
 app.put('/api/changingquantity', (req, res) =>{
-  const idCommande = req.body.idCommandes
+  const idCommande = req.body.IdCommande
   const idProduit = req.body.IdProduit
   const quantite = req.body.Quantite
   
@@ -831,12 +851,14 @@ app.put('/api/changingquantity', (req, res) =>{
  * 
   **/ 
 app.post('/api/orders', (req, res) => {
-  const idClient = req.body
-  const idCommande = req.body 
+  const idClient = req.body.IdClient
+  console.log(idClient)
+ 
 
-  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdClient, DateCommande, HLivree, IdMethode, IdEtat, Commentaire, Rue, Numero, Zip, Ville, PayementLiquide)  VALUES (?,?,?,?,?,?,?,?,?,?,?,? )'
-  db.query(sqlInsert,[idCommande, idClient, null, null, null, 'PAN', null,  null, null, null, null, null], (err, result) => {
+  const sqlInsert = 'INSERT INTO `reservations` (IdClient, DateCommande, HLivree, IdMethode, IdEtat, Commentaire, Rue, Numero, Zip, Ville, PayementLiquide)  VALUES (?,?,?,?,?,?,?,?,?,?,?)'
+  db.query(sqlInsert,[idClient, null, null, null, 'PAN', null,  null, null, null, null, null], (err, result) => {
     if(err) throw err ;
+    console.log(err)
     res.send(result);
   })
 })

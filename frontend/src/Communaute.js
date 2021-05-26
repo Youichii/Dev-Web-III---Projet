@@ -263,42 +263,42 @@ const Communaute = () => {
             })
         }
 
-        // else if (valueVille === '' && valueStatus !== '' && valueNom === ''){
+        else if (valueVille === '' && valueStatus !== '' && valueNom === ''){
 
-        //     if(valueStatus === "Blacklisté"){
-        //         valueStatus=1
-        //     }
-        //     else{
-        //         valueStatus=0
-        //     }
+            if(valueStatus === "Blacklisté"){
+                valueStatus=1
+            }
+            else{
+                valueStatus=0
+            }
 
-            // var remplirCommunauteStatus = {method : 'GET',
-            // headers:{'Content-type':'application/json'}
-            // }
-            // fetch(`/usersstatus/${valueStatus}`, remplirCommunauteStatus)
-            // .then(response =>{
-            //     return response.json()
-            // })
-            // .then(json =>{
-            //     setUtilisateurs(json)
-            // })
+            var remplirCommunauteStatus = {method : 'GET',
+            headers:{'Content-type':'application/json'}
+            }
+            fetch(`/usersstatus/${valueStatus}`, remplirCommunauteStatus)
+            .then(response =>{
+                return response.json()
+            })
+            .then(json =>{
+                setUtilisateurs(json)
+            })
 
-        // }
+        }
 
-        // else if (valueVille === '' && valueStatus === '' && valueNom !== ''){
+        else if (valueVille === '' && valueStatus === '' && valueNom !== ''){
             
-        //     // GET qui va chercher les profils sur base du nom selectionné 
-        //     var remplirCommunauteNom = {method : 'GET',    
-        //     headers:{'Content-type':'application/json'}
-        //     }
-        //     fetch(`/usersnom/${valueNom}`, remplirCommunauteNom)
-        //     .then(response=>{
-        //         return response.json()
-        //     })
-        //     .then(json =>{
-        //         setUtilisateurs(json)
-        //     })
-        // }
+            // GET qui va chercher les profils sur base du nom selectionné 
+            var remplirCommunauteNom = {method : 'GET',    
+            headers:{'Content-type':'application/json'}
+            }
+            fetch(`/usersnom/${valueNom}`, remplirCommunauteNom)
+            .then(response=>{
+                return response.json()
+            })
+            .then(json =>{
+                setUtilisateurs(json)
+            })
+        }
 
         // else if(valueVille !== '' && valueStatus !== '' && valueNom === ''){
 
@@ -405,15 +405,18 @@ const Communaute = () => {
 
                         <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Status === 1)?{color:"red"}:{color:"white"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
                     
-                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')}/>
+                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')} />
                         
                         <div className="mail">{utilisateur.Mail}</div>
 
-                        <div className="tel">{utilisateur.Gsm}</div>
+                        <div className="tel">{utilisateur.GSM}</div>
 
                         <div className="ville">{utilisateur.Ville}</div>
 
                         <div className="age">{utilisateur.Anniversaire}</div>
+
+                        <div className="genre">{utilisateur.Genre}</div>
+
 
                         <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.IdClient} ></input>
 
