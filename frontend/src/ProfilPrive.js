@@ -33,11 +33,13 @@ const ProfilPrive = () => {
 	 * 
 	 * @author Clémentine Sacré <c.sacre@students.ephec.be>
 	 */
-	useEffect(()=> {
+	useEffect(async () => {
 		Axios.get("/api/connexion").then((reponse) => {
 			if (reponse.data.loggedIn === true) {
-				setStatutConnexion(true);
-				setUtilisateur(reponse.data.user[0].IdClient);
+                setStatutConnexion(true);
+			    setUtilisateur(reponse.data.user[0].IdClient);
+                
+                
 			}
 			else {redirection()}
 		});
@@ -106,9 +108,9 @@ const ProfilPrive = () => {
     }
     
     return (
-            <div>  
+            <div style={{margin: "0px 0px 1295px 0px"}}>  
                 {statutConnexion ? <BanniereConnection page="profilprive" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
-                <div onLoad={getClient} className="profilPrive">
+                <div onLoad={getClient} className="profilPrive">                    
                     <Header title= {"Votre profil" } headerclass="profilheader"  />
                     <Picture />
                     <div className="privateinfo">                    

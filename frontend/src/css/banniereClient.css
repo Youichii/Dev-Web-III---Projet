@@ -9,33 +9,17 @@
     display: grid;
     width:auto;
     text-align: center;
-    font-size: calc(0.2em + 1vw);
-
-
+    font-size: calc(0.5em + 1vw);
 }
 
-.banniere_connecte {
-    display: grid;
-	grid-template-columns: 10% 8% 13% 13% 13% 13% 13% 8% 0% 8%;
-    grid-template-rows: 26% 44% 30%;
-	grid-gap: 2px;
-	padding: 5px;
-    background-size: cover;
-    background-image:url(../img/img5.jpeg);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
-    background-position-y: 852px;
-    /* margin: 0px 10px 0px 10px; */
-}
 .c_barre_nav li{
     height: fit-content;
 }
 
 .c_barre_nav a{
-    display : block;
+    /* display : block; */
     color: white;
     text-decoration: none;
-    /* margin-top:15%; */
-
 }
 
 .c_barre_nav a:hover{
@@ -44,11 +28,26 @@
     border-bottom: solid 1px var(--survol_bouton);
     cursor:default;
 }
+.c_barre_nav dl, dt, dd, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 li:hover{
     cursor:pointer;
 }
 
-
+.banniere_connecte {
+    display: grid;
+	grid-template-columns: 10% 8% 13% 13% 13% 13% 13% 8% 8%;
+    grid-template-rows: 24% 48% 29%;
+	grid-gap: 2px;
+	padding: 5px;
+    background-size: cover;
+    background-image:url(../img/imgBanniere.PNG);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
+    /* margin: 0px 10px 0px 10px; */
+}
 .accueil_bc {
     grid-column-start: 3;
 	grid-column-end: 4;
@@ -64,7 +63,7 @@ li:hover{
 }
 #img_bc{
     height: auto;
-    width: 60%;
+    width: 95px;
     cursor:default;
 } 
 .logo_bc {
@@ -100,7 +99,8 @@ li:hover{
     grid-row-end: 3;
 }
 #instagram_bc {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .fb_bc {
@@ -110,7 +110,8 @@ li:hover{
     grid-row-end: 3;
 }
 #facebook_bc {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .tel_bc {
@@ -120,12 +121,13 @@ li:hover{
     grid-row-end: 3;
 }
 #telephone_bc {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .reseaux_sociaux_bc {
-    grid-column-start: 10;
-	grid-column-end: 11;
+    grid-column-start: 9;
+	grid-column-end: 10;
     grid-row-start: 1;
     grid-row-end: 2;
 
@@ -133,7 +135,6 @@ li:hover{
     grid-template-columns: 33% 33% 33% 1%;
     grid-template-rows: 15% 69% 15%;
 	grid-gap: 2px;
-	/* padding: 5px; */
 }
 
 .cadreLogoCNF {
@@ -163,3 +164,152 @@ li:hover{
     cursor:pointer;
 }
 
+.menu_imgbc {
+    grid-column-start: 9;
+    grid-column-end: 10;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display:none;
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    height: 34px;
+    width: 36.5px;
+}
+#img_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#img_menu:hover{
+    cursor: pointer;
+}
+
+.croix_menubc {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display:none; 
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    margin: 24px 0px 0px 0px;
+    height: 34px;
+    width: 36.5px;
+}
+#croix_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#croix_menu:hover{
+    cursor: pointer;
+}
+.menu_detailbc {
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    height: 60%;
+    width: 100%;
+    grid-template-columns: 36% 28% 19.9% 10% 4%;
+    grid-template-rows: 10% 16% 6% 4% 6% 4% 6% 4% 6% 4% 6% 4% 7% 12%;
+    grid-gap: 2px;
+	padding: 5px;
+    background-size: cover;
+    background-image:url(../img/imgBanniere.PNG);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    margin:0px;
+    background-color: black;
+}
+
+@media only screen and (max-width: 1410px) {
+    .banniere_connecte {grid-template-columns: 10% 7% 13% 13% 13% 13% 13% 7% 9%;}
+}
+@media only screen and (max-width: 1150px) {
+    .banniere_connecte {grid-template-columns: 10% 5% 13% 13% 13% 13% 13% 6% 12%;}
+}
+@media only screen and (max-width: 820px) {
+    .banniere_connecte {grid-template-columns: 10% 4% 13% 13% 13% 13% 13% 5% 13%;}
+}
+@media only screen and (max-width: 720px) {
+    .banniere_connecte {grid-template-columns: 10% 3% 13% 13% 13% 13% 13% 3% 15%;}
+}
+
+@media only screen and (max-width: 720px) {
+    .reseaux_sociaux_bc{grid-row-end: 4;
+        grid-template-rows: 33% 33% 33%;
+        grid-template-columns: auto;}
+    .insta_bc{grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bc{grid-column-start: 1;
+        grid-column-end: 2;}
+    .tel_bc{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .banniere_connecte{grid-template-columns: 10% 7% 13% 13% 13% 13% 13% 10% 6% 0%;
+        grid-template-rows: 26% 36% 31%;}
+    #instagram_bc {width: 25px;}
+    #facebook_bc {width: 25px;}
+    #telephone_bc {width: 25px;}
+    #img_bc {width: 95px;}
+}
+
+@media only screen and (max-width: 560px) {
+    .banniere_connecte {grid-template-columns: 10% 7% 14% 14% 14% 14% 14% 3% 6% 0%;}
+}
+
+@media only screen and (max-width: 495px) {
+    .banniere_connecte {grid-template-columns: 10% 7% 13% 13% 13% 13% 2% 10% 10% 4%;
+        grid-template-rows: 26% 36% 31%;}
+    .accueil_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .informations_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 5;
+        grid-row-end: 6;}
+    .menu_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 7;
+        grid-row-end: 8;}
+    .profilpv_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 9;
+        grid-row-end: 10;}
+    .deconnexion_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 11;
+        grid-row-end: 12;}
+    .menu_imgbc{display:initial;}
+    .insta_bc{grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bc{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .tel_bc{grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .reseaux_sociaux_bc{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 14;
+        grid-row-end: 15;
+        grid-template-rows: auto;
+        grid-template-columns: 33% 33% 33%;}
+    #img_bc{display: block;}
+}

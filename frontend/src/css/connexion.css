@@ -25,7 +25,7 @@ body {
 	grid-template-columns: 30% 40% 30%;
 	grid-template-rows: 10% 70% 172px;
 	grid-gap: 2px;
-	padding: 5px;
+	padding: 0px 0px 37px 0px;
 }
 .c_info_connexion {
 	display: grid;
@@ -227,10 +227,6 @@ a:active {
 	background-color: var(--bg);
 }
 
-input {
-	font-family:DejaVu Sans Mono, monospace;
-	font-size:15px;
-}
 input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px var(--bg) inset;
 	-webkit-text-fill-color:white;
@@ -241,17 +237,17 @@ input:-webkit-autofill {
 	color:var(--erreur);
 	background-color: var(--bg);
 }
-::-webkit-scrollbar {/*taille*/
+.connexion ::-webkit-scrollbar {/*taille*/
 	width: 6px; 
 }
-::-webkit-scrollbar-thumb {/*couleur normale*/
+.connexion ::-webkit-scrollbar-thumb {/*couleur normale*/
 	background: #b1acaa; /*#42434a; /* #F7C27E;*/ 
 	border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover { 
+.connexion ::-webkit-scrollbar-thumb:hover { 
 	background: #696969;/*#F3A43B; */
 }
-::-webkit-scrollbar-thumb:active {
+.connexion ::-webkit-scrollbar-thumb:active {
 	background: #2A2A2A;/*#D57F0D; */
 }
 
@@ -277,10 +273,12 @@ input:-webkit-autofill {
 	.c_cadre {grid-template-columns: 18% 64% 18%;}
 }
 @media only screen and (max-width: 850px) {
-	.c_cadre {grid-template-columns: 9% 82% 9%;}
+	.c_cadre {grid-template-columns: 9% 82% 9%;
+		padding: 0px 0px 18px 0px;}
 }
 @media only screen and (max-width: 710px) {
-	.c_cadre {grid-template-columns: 5% 90% 5%;}
+	.c_cadre {grid-template-columns: 5% 90% 5%;
+		padding: 0px 0px 120px 0px;}
 	.i_bouton_connexion {font-size: 21px;
 						padding: 17px 0px 0px 0px;}
 	.i_bouton_inscription {font-size: 21px;
@@ -291,6 +289,10 @@ input:-webkit-autofill {
 	.i_info_connexion {height: 485px;}
 	.c_info_connexion {grid-template-rows: 4% 12% 6% 16% 15% 15% 15% 18%;}
 }
+@media only screen and (max-width:495px) {
+	.c_cadre{padding: 0px 0px 131px 0px;}
+}
+
 @media only screen and (max-width:400px) {
 	.i_titre_connexion {font-size: 17px;}
 	.i_bouton_connexion {font-size: 18px;}
@@ -306,5 +308,5 @@ input:-webkit-autofill {
 	.i_titre_connexion {grid-column-start: 2;
 						grid-column-end: 8;
 						font-size: 15px;}
+	.c_cadre{padding: 0px 0px 147px 0px;}
 }
-  

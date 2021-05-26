@@ -31,7 +31,7 @@ function App() {
   useEffect(()=> {
     setTimeout(() => {
         setEtat({loading: false})
-    }, 5000)
+    }, 1000)
   });
 
   if (etat.loading) {
@@ -39,7 +39,6 @@ function App() {
   }
   return (
     <Router>
-      <div className="App">
         <div className="content">
           <Switch>
 
@@ -111,7 +110,6 @@ function App() {
         </div>
         <Cookie/>
         <PiedPage />
-      </div>
     </Router>
   );
 }
