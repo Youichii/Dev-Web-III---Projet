@@ -492,7 +492,7 @@
       border-width: 2px;	
       outline:  none;
   }
-  div > label {
+  .panier div > label {
       font-size: 20px;
   }
   
@@ -633,7 +633,7 @@
   }*/
   
   
-  div > label {
+.panier div > label {
       font-size:26px;
   }
   
@@ -698,7 +698,7 @@
       background-color:#736051;
   }
   
-  .label-info {
+  .panier .label-info {
       padding: 0px 0px 0px 11px;
   }
   .heures_possible:hover{
@@ -760,7 +760,7 @@
       #bouton_annuler2 { font-size:18px;
           width: 87px;}
       .nombre_aliment, #info_aliments input[type=text] {font-size:11.3px}
-      div > label {font-size: 20px;}
+      .panier div > label {font-size: 20px;}
       .c_quantite_aliment {grid-template-columns: 25% 14% 21% 14% 25%;}
       
       .i_info_ligne > div {font-size: 16px;} /*12*/
