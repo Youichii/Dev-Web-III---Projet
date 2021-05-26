@@ -46,11 +46,9 @@ app.get('/', (req,res) => {
 app.get('/api/client/:utilisateur', (req,res) => {
   
   const utilisateur = req.params.utilisateur
-  console.log(utilisateur)
   const sqlGet = "SELECT `Pseudo`, `Nom`, `Prenom`, `Rue`, `Numero`, `Zip`, `Ville`, `Anniversaire`, `Gsm`, `Mail`, `Genre` FROM `clients` WHERE `IdClient` = ?"
   db.query(sqlGet, utilisateur ,(err, result) => {
     res.send(result)
-    console.log("Result = " + res.data + "  Erreur =" + err)
   })
 })
 
