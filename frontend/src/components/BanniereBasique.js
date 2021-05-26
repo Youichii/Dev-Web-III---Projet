@@ -36,6 +36,7 @@ const BanniereBasique = ({page}) => {
     }
 
     useEffect(() => {
+        console.log("page : ", page);
         function handleResize() {
             if (window.innerWidth > 495) {
                 document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
