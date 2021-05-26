@@ -54,7 +54,10 @@ const Carte = () => {
                             return response.json()
                         })
                         .then(json =>{ 
-                            console.log("on charge le panier")
+                            console.log('table du panier', json[0].Quantite)
+                            json.map(maping=> 
+                                document.getElementById(maping.IdProduit + 'compteur').value = maping.Quantite
+                            )
                             setPanier(json)
                         }) 
                         
@@ -66,7 +69,8 @@ const Carte = () => {
                             return response.json()
                         })
                         .then(json =>{ 
-                            setTotal(json)
+                            setTotal(json.Prix)
+                            console.log(json)
                         }) 
                     }
 
@@ -124,8 +128,9 @@ const Carte = () => {
         })
         .then(json =>{ 
             setContenu(json)
-        }) 
-
+        })
+        
+        
     }, [])
 
     /**
@@ -136,6 +141,19 @@ const Carte = () => {
      */
     function panier(idProduit) {
         let qtt = Number(document.getElementById(idProduit+"compteur").value)
+        console.log("quantité du produit", qtt)
+
+        if(qtt === 0){
+            var supprimerCommandeA0 = { method : 'DELETE',
+            headers : {'Content-Type':'application/json'}
+            };
+            
+            fetch('/api/deleteZero', supprimerCommandeA0)
+            .then(response => {
+                console.log('supprimer')
+                return response.json();
+            }) 
+        }
 
         if(qtt === 1){
                 
@@ -237,21 +255,20 @@ const Carte = () => {
                         <div className='commande'>
                         <div className='nomProduit'>{contenu_filtre.Produit}</div>
                         <div className='quantitee'>{contenu_filtre.Prix}€ X {contenu_filtre.Quantite}</div>
-                        <div className='prixTotal'>Total: {contenu_filtre.Quantite*contenu_filtre.Prix}€</div>
+                        <div className='prixTotal'>Total: {contenu_filtre.PrixTotal}€</div>
                         </div>          
                     ))}
 
-                    {/* {totals&&totals.map(total => (
-                        <div className="total">Total de la commande : {total.Prix}</div>
-                    ))} */}
+                    <div className="total">Total de la commande :  {totals} </div>
+                    
                 </div>  
                                 </span> : 
             <span></span>}
 
             { statutConnexion ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
  
-            <a href={PDFMenu} download>
-            Cliquez sur le lien pour le telecharger 
+            <a href={PDFMenu} download id="menuT">
+           Menu Téléchargeable  
             </a>
             
         </div>

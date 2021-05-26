@@ -773,7 +773,7 @@ app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
   const idCommande = req.params.IdCommande
   console.log("id de la commande", idCommande)
 
-  const sqlInsert =   'SELECT menu.IdProduit, SUM(Quantite) AS Quantite , Produit, SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) where IdCommande = ?   GROUP BY `Produit`, `IdCommande`, IdProduit'
+  const sqlInsert =   'SELECT menu.IdProduit, SUM(Quantite) AS Quantite, Prix , Produit,  Prix*Quantite as PrixTotal  FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) where IdCommande = ? and Quantite != 0  GROUP BY `Produit`, `IdCommande`, IdProduit, Prix, PrixTotal'
                             
   db.query(sqlInsert,[idCommande], (err, result) => {
     if(err) throw err ;
@@ -792,12 +792,26 @@ app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
 app.get('/api/total/:IdCommande', (req, res) =>{
   const idCommande = req.params.IdCommande
   console.log(idCommande)
-  const sqlInsert = 'SELECT SUM(Prix) as Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) WHERE `IdCommande` = ?'
+  const sqlInsert = 'SELECT SUM(Menu.Prix*Commandes.Quantite) AS TotalCommande FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) WHERE IdCommande = ? '
 
   db.query(sqlInsert,[idCommande], (err, result) => {
     if(err) throw err ;
     console.log(result)
     res.send(result);
+  })
+})
+
+/**
+ * Supprime à l'aide d'un DELETE le commentaire que le client veut supprimer en utilisant l'id du client à qui il a été fait ainsi que le commentaire pour le retrouver. 
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method DELETE
+ **/
+app.delete('/api/deleteZero', (req, res) => {
+  console.log("je supprime un truc")
+  const sqlInsert = "DELETE FROM `commandes` WHERE `Quantite`= 0"
+  db.query(sqlInsert, (err, result) => {
+      if(err) throw err;  
+      res.send(result) ;
   })
 })
 

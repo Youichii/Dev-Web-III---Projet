@@ -13,7 +13,7 @@ code {
 }
 
 .Menu{
-    margin-top: 81px;
+    margin-top: 25px;
     margin-bottom: 81px;
     grid-template-columns: 20% 60% 20%; 
     display : grid; 
@@ -109,16 +109,17 @@ span.symbolpanier:hover div{
 }
 
 #panier{
-  position:fixed;
+  position:absolute;
   right:0px;
   bottom:0px;
-  top:410px;
+  top:52%;
   left:21%;
   width: 57%;
   height :40%; 
   overflow-y:scroll ;
   /* color:#be5833; */
   background-color: black;
+  border-style: solid;
   border-color:rgb(104, 110, 104);
 
 }
@@ -133,6 +134,19 @@ span.symbolpanier:hover div{
 .symbolpanier{
   float: left;
   color:blanchedalmond;
+}
+
+.symbolpayer:hover{
+  text-decoration: blanchedalmond;
+}
+
+#menuT:hover{
+  color:blueviolet;
+  text-decoration-color: blueviolet;
+  
+}
+#menuT{
+  margin-right:15px;
 }
 
 
@@ -174,10 +188,14 @@ span.symbolpanier:hover div{
 /* ...... Contenu d'un cadre catégorie.....  */
 
 .titre{
-  color: brown;
-  font-size: calc(0.8em + 1vw);
-  text-decoration:underline;
-  text-decoration-color: brown;
+  color: rgb(223 142 22);
+  font-size: 30;
+ 
+}
+
+.titre:hover{
+  margin-left:10px;
+ /* color:#ff2600 */
 }
 
 .contenu{
@@ -187,10 +205,14 @@ span.symbolpanier:hover div{
   margin-bottom: 30px; 
 }
 
-.valeur{  
+input.valeur{  
   width: 30px;
   background-color: #5b5454;
   float: right;
+  margin-top:3px;
+  border-radius: 3px;
+  border-right:-5px;
+
 }
 
 .price{ 
