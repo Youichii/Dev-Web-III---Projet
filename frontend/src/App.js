@@ -31,7 +31,7 @@ function App() {
   useEffect(()=> {
     setTimeout(() => {
         setEtat({loading: false})
-    }, 5000)
+    }, 1000)
   });
 
   if (etat.loading) {
