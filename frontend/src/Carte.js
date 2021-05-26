@@ -8,14 +8,16 @@ const Carte = () => {
     require('./css/carte.css');
     Axios.defaults.withCredentials = true;
     
-    const [tableau_panier, setTableau]= useState([]);
+  
     const [titres, setTitres] = useState(null)
     const [paniers, setPanier] = useState(null)
     const [contenu, setContenu]= useState(null)
-    let id_comm = 20;
+    const [idCommandes, setIdCommande] = useState(10000000000)
     const [statutConnexion, setStatutConnexion] = useState(true);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
-
+    const [conditions, setCondition] = useState(false)
+    const [totals, setTotal] = useState(10000000000)
+    
 
 	/**
 	 * Vérifie si l'utilisateur est connecté au chargement de la page
@@ -27,12 +29,83 @@ const Carte = () => {
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);
-			}
-			else {setStatutConnexion(false);}
-		});
-	}, []);
 
-        
+                var verifEntreReservation = {method: 'GET', 
+                headers: {'Content-type':'application/json'}
+                }; 
+                fetch(`/api/orders/users/${reponse.data.user[0].IdClient}`, verifEntreReservation)
+                .then(response=>{ 
+                    return response.json()
+                })
+                .then(json =>{
+                    console.log("value de retour json", json) 
+
+                    if(json.length === 1){
+                        console.log("On récupère un id qui existe déjà")
+                        setIdCommande(json[0].IdCommande)  //Il y a une commande en attente dans le panier de commande avec un IdCommande 
+                        console.log(json[0].IdCommande) 
+                        let idCommandes = json[0].IdCommande
+
+                        var panier = {method: 'GET', 
+                        headers: {'Content-type':'application/json'}
+                        }; 
+                        fetch(`/api/loadingBasket/${idCommandes}`, panier)
+                        .then(response=>{ 
+                            return response.json()
+                        })
+                        .then(json =>{ 
+                            console.log('table du panier', json[0].Quantite)
+                            json.map(maping=> 
+                                document.getElementById(maping.IdProduit + 'compteur').value = maping.Quantite
+                            )
+                            setPanier(json)
+                        }) 
+                        
+                        var totalCommande = {method: 'GET', 
+                        headers: {'Content-type':'application/json'}
+                        }; 
+                        fetch(`/api/total/${idCommandes}`, totalCommande)
+                        .then(response=>{ 
+                            return response.json()
+                        })
+                        .then(json =>{ 
+                            setTotal(json.Prix)
+                            console.log(json)
+                        }) 
+                    }
+
+                    else{
+                        console.log("Créeation table")
+                        var premiereEntre = { method:'POST', 
+                        headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({  IdClient : reponse.data.user[0].IdClient })
+                        };
+                        fetch('/api/orders', premiereEntre)
+                        .then(res => {
+                            return res.json();
+                        })
+                        .then(data =>{ 
+                            console.log("Vérification que la table a bien été créé")
+                            var verifEntreReservation = {method: 'GET', 
+                            headers: {'Content-type':'application/json'}
+                            }; 
+                            console.log(reponse.data.user[0].IdClient)
+                            fetch(`/api/orders/users/${reponse.data.user[0].IdClient}`, verifEntreReservation)
+                            .then(response=>{ 
+                                return response.json()
+                            })
+                            .then(json =>{ 
+                                setIdCommande(json[0].IdCommande)
+                                console.log("l'id de la nouvelle commande est : ", json[0].IdCommande)
+                            })
+                        })
+                    } 
+                }) 
+            }
+            else {setStatutConnexion(false);}
+        }) 
+	}, []);
+    
     useEffect(()=>{
 
         var remplirCategorie = {method: 'GET', 
@@ -45,33 +118,21 @@ const Carte = () => {
         .then(json =>{ 
             setTitres(json)
         })
-        
 
         var remplirMenu = {method: 'GET', 
             headers: {'Content-type':'application/json'}
         }; 
         fetch('/api/menu', remplirMenu)
-            .then(response=>{ 
-                return response.json()
-            })
-            .then(json =>{ 
-                setContenu(json)
-            }) 
-           
+        .then(response=>{ 
+            return response.json()
+        })
+        .then(json =>{ 
+            setContenu(json)
+        })
         
-        var panier = {method: 'GET', 
-        headers: {'Content-type':'application/json'}
-        }; 
-        fetch(`/api/loadingBasket/${id_comm}`, panier)
-            .then(response=>{ 
-                return response.json()
-            })
-            .then(json =>{ 
-                setPanier(json)
-            }) 
-
+        
     }, [])
-    
+
     /**
      * Remplie le panier de commande selon ce que le client ajoute ou retire
      * @author Cécile Bonnet <c.bonnet@gmail.com>
@@ -79,29 +140,26 @@ const Carte = () => {
      * 
      */
     function panier(idProduit) {
- 
-        let compteur = 0 
-        if(compteur === 0){
-            var premiereEntre = { method:'POST', 
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdCommande : Number(id_comm), 
-                                    IdClient : Number(utilisateur)                     
-                                })
-            }
-            fetch('/api/orders', premiereEntre)
-            .then(res => {
-                return res.json();
-            })
-        compteur += 1
+        let qtt = Number(document.getElementById(idProduit+"compteur").value)
+        console.log("quantité du produit", qtt)
+
+        if(qtt === 0){
+            var supprimerCommandeA0 = { method : 'DELETE',
+            headers : {'Content-Type':'application/json'}
+            };
+            
+            fetch('/api/deleteZero', supprimerCommandeA0)
+            .then(response => {
+                console.log('supprimer')
+                return response.json();
+            }) 
         }
 
-        let qtt = Number(document.getElementById(idProduit+"compteur").value)
-
         if(qtt === 1){
-            
+                
             var remplirPanier = { method:'POST', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdCommande : id_comm, 
+            body: JSON.stringify({  IdCommande : idCommandes, 
                                     IdProduit : idProduit,
                                     Quantite : qtt
                                 })  
@@ -111,23 +169,24 @@ const Carte = () => {
                 return res.json();
             })
 
+            
             var panier = {method: 'GET', 
             headers: {'Content-type':'application/json'}
             }; 
-            fetch(`api/loadingBasket/${id_comm}`, panier)
+            fetch(`/api/loadingBasket/${idCommandes}`, panier)
             .then(response=>{ 
                 return response.json()
             })
             .then(json =>{ 
                 setPanier(json)
-            }) 
+            })  
         }
 
         else{
             var changerquantite = { method:'PUT', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdCommande : Number(id_comm), 
-                                    IdProduit : Number(idProduit),
+            body: JSON.stringify({  IdCommande : idCommandes, 
+                                    IdProduit : idProduit,
                                     Quantite : qtt
                                 }) 
             }
@@ -136,16 +195,31 @@ const Carte = () => {
                 return res.json();
             }) 
         }
+
+        
         var panier = {method: 'GET', 
         headers: {'Content-type':'application/json'}
         }; 
-        fetch(`/api/loadingBasket/${id_comm}`, panier)
-            .then(response=>{ 
-                return response.json()
-            })
-            .then(json =>{ 
-                setPanier(json)
-            }) 
+        fetch(`/api/loadingBasket/${idCommandes}`, panier)
+        .then(response=>{ 
+            return response.json()
+        })
+        .then(json =>{ 
+            setPanier(json)
+        }) 
+
+
+        var totalCommande = {method: 'GET', 
+        headers: {'Content-type':'application/json'}
+        }; 
+        fetch(`/api/total/${idCommandes}`, totalCommande)
+        .then(response=>{ 
+            return response.json()
+        })
+        .then(json =>{ 
+            console.log("total", json)
+            setTotal(json)
+        })        
     }
         
 
@@ -166,7 +240,7 @@ const Carte = () => {
                                     </div>
                                     <div className="bas">  
                                     <span className="description">{contenu_filtre.Description}</span>  
-                                    <span>{statutConnexion ? <input id= {contenu_filtre.IdProduit+ "compteur"} className="valeur" type ="number"  step="1" min="0" defaultValue="0" onChange= {()=>panier(contenu_filtre.IdProduit)}></input>:<span></span>}</span>
+                                    <span>{statutConnexion ? <input id= {contenu_filtre.IdProduit+ "compteur"} className="valeur" type ="number"  step="1" min="0"  defaultValue="0" onChange= {()=>panier(contenu_filtre.IdProduit)}></input>:<span></span>}</span>
                                     </div>
                                 </div>
                             ))}
@@ -175,31 +249,26 @@ const Carte = () => {
                 ))}   
             </div>
         
-            <span className="symbolpanier">Panier &#128722;
+           {statutConnexion ?  <span className="symbolpanier">Panier &#128722;
                 <div id="panier" >
                     {paniers&&paniers.map(contenu_filtre => (
-                                    <div className='commande'>
-                                    <div className='titre'>{contenu_filtre.Produit}</div>
-                                    <div className='description'>Total: {contenu_filtre.Quantite*contenu_filtre.Prix}€</div>
-                                    <div className='price'>{contenu_filtre.Prix}€ X {contenu_filtre.Quantite}</div>
-                                    </div>
-                                   
+                        <div className='commande'>
+                        <div className='nomProduit'>{contenu_filtre.Produit}</div>
+                        <div className='quantitee'>{contenu_filtre.Prix}€ X {contenu_filtre.Quantite}</div>
+                        <div className='prixTotal'>Total: {contenu_filtre.PrixTotal}€</div>
+                        </div>          
                     ))}
-                
-                </div>
-                               
+
+                    <div className="total">Total de la commande :  {totals} </div>
                     
-                     
-                    <div id="total">
-             
-                    </div>
-                
-            </span>
-            <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink>
-            
-            <span>Click on the image to download it:</span>
-            <a href={PDFMenu} download>
-            Cliquez sur le lien pour le telecharger 
+                </div>  
+                                </span> : 
+            <span></span>}
+
+            { statutConnexion ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
+ 
+            <a href={PDFMenu} download id="menuT">
+           Menu Téléchargeable  
             </a>
             
         </div>

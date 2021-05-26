@@ -513,7 +513,7 @@ app.get('/api/orders/:identifiantCommande', (req, res) => {
   FROM commandes AS C  \
   JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
   JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-  WHERE C.IdCommande = ?";
+  WHERE C.IdCommande = ? ";
   db.query(sqlInsert, [identifiantCommande], (err, result) => {
     res.send(result) ;
   })
@@ -528,10 +528,10 @@ app.get('/api/orders/:identifiantCommande', (req, res) => {
  */
 app.get('/api/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
-  const sqlInsert = "select IdCommande \
-  FROM reservations \
-  WHERE IdClient=? AND IdEtat = 'PAN'";
+  const sqlInsert = "select IdCommande FROM reservations WHERE IdClient=? AND IdEtat = 'PAN'";
+  
   db.query(sqlInsert, [identifiantClient], (err, result) => {
+    console.log(result)
     res.send(result) ;
   })
 })
@@ -621,7 +621,7 @@ app.post('/api/comment', (req, res) =>{
 /**
  * Supprime à l'aide d'un DELETE le commentaire que le client veut supprimer en utilisant l'id du client à qui il a été fait ainsi que le commentaire pour le retrouver. 
  * @author Cécile Bonnet <c.bonnet@gmail.com>
- * @method POST
+ * @method DELETE
  * @param {Number} récupère l'id du client chez qui le patron a écrit un nouveau 
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
@@ -640,7 +640,7 @@ app.delete('/api/comment', (req, res) => {
 /**
  * Modifie le status d'un client si le patron à modifier son status (Blacklister/Deblacklister)
  * @author Cécile Bonnet <c.bonnet@gmail.com>
- * @method POST
+ * @method PUT
  * @param {Number} récupère l'id du client chez qui le patron a écrit un nouveau 
  * commentaire
  * @param {String} commentaire que le patron a fait sur le client
@@ -772,12 +772,48 @@ app.get('/api/categories', (req, res) =>{
  * @param {String} idcommande de la commande en cours 
   **/ 
 app.get('/api/loadingBasket/:IdCommande', (req, res) =>{
-  const idCommande = req.params.id_comm
+  const idCommande = req.params.IdCommande
+  console.log("id de la commande", idCommande)
 
-  const sqlInsert = 'SELECT IdCommande, menu.IdProduit, Quantite, Produit, Prix FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit)'
+  const sqlInsert =   'SELECT menu.IdProduit, SUM(Quantite) AS Quantite, Prix , Produit,  Prix*Quantite as PrixTotal  FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) where IdCommande = ? and Quantite != 0  GROUP BY `Produit`, `IdCommande`, IdProduit, Prix, PrixTotal'
+                            
   db.query(sqlInsert,[idCommande], (err, result) => {
     if(err) throw err ;
+    console.log(result)
     res.send(result);
+  })
+})
+
+/**
+ * Récupère à l'aide d'un GET le total d'une commande  
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method GET
+ * @param {String} idcommande de la commande en cours 
+  **/ 
+
+app.get('/api/total/:IdCommande', (req, res) =>{
+  const idCommande = req.params.IdCommande
+  console.log(idCommande)
+  const sqlInsert = 'SELECT SUM(Menu.Prix*Commandes.Quantite) AS TotalCommande FROM commandes JOIN menu ON (menu.IdProduit = commandes.IdProduit) WHERE IdCommande = ? '
+
+  db.query(sqlInsert,[idCommande], (err, result) => {
+    if(err) throw err ;
+    console.log(result)
+    res.send(result);
+  })
+})
+
+/**
+ * Supprime à l'aide d'un DELETE le commentaire que le client veut supprimer en utilisant l'id du client à qui il a été fait ainsi que le commentaire pour le retrouver. 
+ * @author Cécile Bonnet <c.bonnet@gmail.com>
+ * @method DELETE
+ **/
+app.delete('/api/deleteZero', (req, res) => {
+  console.log("je supprime un truc")
+  const sqlInsert = "DELETE FROM `commandes` WHERE `Quantite`= 0"
+  db.query(sqlInsert, (err, result) => {
+      if(err) throw err;  
+      res.send(result) ;
   })
 })
 
@@ -832,10 +868,13 @@ app.put('/api/changingquantity', (req, res) =>{
   **/ 
 app.post('/api/orders', (req, res) => {
   const idClient = req.body.IdClient
+  console.log(idClient)
+ 
 
-  const sqlInsert = 'INSERT INTO `reservations` (IdCommande, IdMethode, DateCommande, HLivree, IdEtat, Commentaire, Rue, Numero, Zip, Ville )  VALUES (?,?,?,?,?,?,?,?,?,? )'
-  db.query(sqlInsert,[idClient, null, null, null, 'PAN', null,  null, null, null, null], (err, result) => {
+  const sqlInsert = 'INSERT INTO `reservations` (IdClient, DateCommande, HLivree, IdMethode, IdEtat, Commentaire, Rue, Numero, Zip, Ville, PayementLiquide)  VALUES (?,?,?,?,?,?,?,?,?,?,?)'
+  db.query(sqlInsert,[idClient, null, null, null, 'PAN', null,  null, null, null, null, null], (err, result) => {
     if(err) throw err ;
+    console.log(err)
     res.send(result);
   })
 })
@@ -850,7 +889,7 @@ app.post('/api/orders', (req, res) => {
  * 
 **/ 
 app.get('/api/historical', (req, res) =>{
-  const sqlInsert = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total FROM commandes JOIN menu ON menu.IdProduit = commandes.IdProduit JOIN reservations ON reservations.IdCommande = commandes.IdCommande GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande'
+    const sqlInsert = 'SELECT * from historique '
   db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);

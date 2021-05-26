@@ -11,58 +11,46 @@
     display: grid;
     width:auto;
     text-align: center;
-    font-size: calc(0.2em + 1vw);
+    font-size: calc(0.5em + 1vw);
 
 }
 .navbar_bs li{
     height: fit-content;
 }
-
 .navbar_bs a{
-    display : block;
     color: white;
     text-decoration: none;
-    /* margin-top:15%; */
-
 }
-
 .navbar_bs a:hover{
     color : var(--survol_bouton);
     text-decoration-color: var(--survol_bouton);
     border-bottom: solid 1px var(--survol_bouton);
     cursor:default;
 }
-
-
-  
-#menu dl, dt, dd, ul, li {
+.navbar_bs dl, dt, dd, ul, li {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
-
 li:hover{
     cursor:pointer;
 }
 
-
-
 .banniere_staff {
     display: grid;
 	grid-template-columns: 10% 21% 13% 13% 13% 21% 8%;
-    grid-template-rows: 26% 44% 30%;
+    grid-template-rows: 34% 40% 26%;
 	grid-gap: 2px;
 	padding: 5px;
     background-size: cover;
-    background-image:url(../img/img5.jpeg);
+    background-image:url(../img/imgBanniere.PNG);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
-    background-position-y: 852px;
     /* margin: 0px 10px 0px 10px; */
 }
 
 #img_bs{
     height: auto;
-    width: 60%;
+    width: 95px;
     cursor:default;
 } 
 .logo_bs {
@@ -98,7 +86,8 @@ li:hover{
     grid-row-end: 3;
 }
 #instagram_bs {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .fb_bs {
@@ -108,7 +97,8 @@ li:hover{
     grid-row-end: 3;
 }
 #facebook_bs {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .tel_bs {
@@ -118,7 +108,8 @@ li:hover{
     grid-row-end: 3;
 }
 #telephone_bs {
-    width: 70%;
+    /* width: 70%; */
+    width: 30px;
 }
 
 .reseaux_sociaux_bs {
@@ -146,7 +137,119 @@ li:hover{
     cursor:pointer;
 }
 
+
+.menu_imgbs {
+    grid-column-start: 9;
+    grid-column-end: 10;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display:none;
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    height: 34px;
+    width: 36.5px;
+}
+#img_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#img_menu:hover{
+    cursor: pointer;
+}
+
+.croix_menubs {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display:none; 
+    border: 1px white solid;
+    padding: 1px;
+    opacity: 0.5;
+    margin: 24px 0px 0px 0px;
+    height: 34px;
+    width: 36.5px;
+}
+#croix_menu{
+    height: auto;
+    width: 28px;
+    cursor:default;
+} 
+#croix_menu:hover{
+    cursor: pointer;
+}
+.menu_detailbs {
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    height: 60%;
+    width: 100%;
+    grid-template-columns: 36% 28% 19.9% 10% 4%;
+    grid-template-rows: 10% 24% 6% 4% 6% 4% 6% 4% 21% 10%;
+    grid-gap: 2px;
+	padding: 5px;
+    background-size: cover;
+    background-image:url(../img/imgBanniere.PNG);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
     margin:0px;
     background-color: black;
+}
+
+
+
+@media only screen and (max-width: 1300px) {
+    .banniere_staff {grid-template-columns: 10% 20% 13% 13% 13% 19% 10%;}
+} 
+@media only screen and (max-width: 950px) {
+    .banniere_staff {grid-template-columns: 10% 20% 13% 13% 13% 15% 13%;}
+}
+
+@media only screen and (max-width: 720px) {
+    .banniere_staff {grid-template-columns: 10% 15% 15% 15% 15% 10% 17%;}
+}
+
+@media only screen and (max-width: 550px) {
+    .banniere_staff {grid-template-columns: 10% 7% 13% 13% 13% 13% 2% 10% 10% 4%;
+        grid-template-rows: 26% 36% 31%;}
+    .staff_bs{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;}
+    .profilpv_bs{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 5;
+        grid-row-end: 6;}
+    .deconnexion_bs{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 7;
+        grid-row-end: 8;}
+    .menu_imgbs{display:initial;}
+    .insta_bs{grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .fb_bs{grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .tel_bs{grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;}
+    .reseaux_sociaux_bs{display: none;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 10;
+        grid-row-end: 11;
+        grid-template-rows: auto;
+        grid-template-columns: 33% 33% 33%;}
+    #img_bs{display: block;}
 }

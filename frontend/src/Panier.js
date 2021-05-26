@@ -444,7 +444,6 @@ const Panier = () => {
                     <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annulerInfo} />
                 </div>
             </div>
-            <PiedPage />
         </div>
     );
 }
