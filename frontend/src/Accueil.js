@@ -26,7 +26,6 @@ const Accueil = () => {
 	 */
 	useEffect(()=> {
 		Axios.get("/api/connexion").then((reponse) => {
-            console.log("etat : ",reponse.data.loggedIn)
 			if (reponse.data.loggedIn === true) {
 				setStatutConnexion(true);
 				setUtilisateur(reponse.data.user[0].IdClient);

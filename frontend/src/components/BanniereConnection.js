@@ -3,7 +3,7 @@ import BanniereStaff from './BanniereStaff.js';
 import BannierePatron from './BannierePatron.js';
 import BanniereClient from './BanniereClient.js';
 
-const BanniereConnection = ({onClick, client, page, connexion}) => {
+const BanniereConnection = ({onClick, client, page}) => {
 
     if (client === 1) {
         return (

@@ -33,23 +33,25 @@ const BanniereStaff = ({ onClick, page }) => {
 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth > 550) {
-                document.getElementsByClassName("navbar_bs")[0].className  = "navbar_bs banniere_staff";
-                document.getElementsByClassName("staff_bs")[0].style.display  = "initial";
-                document.getElementsByClassName("profilpv_bs")[0].style.display  = "initial";
-                document.getElementsByClassName("deconnexion_bs")[0].style.display  = "initial";
-                document.getElementsByClassName("reseaux_sociaux_bs")[0].style.display  = "grid";
-                document.getElementsByClassName("croix_menubs")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbs")[0].style.display  = "none";
-            }
-            else {
-                document.getElementsByClassName("navbar_bs")[0].className  = "navbar_bs banniere_staff";
-                document.getElementsByClassName("staff_bs")[0].style.display  = "none";
-                document.getElementsByClassName("profilpv_bs")[0].style.display  = "none";
-                document.getElementsByClassName("deconnexion_bs")[0].style.display  = "none";
-                document.getElementsByClassName("reseaux_sociaux_bs")[0].style.display  = "none";
-                document.getElementsByClassName("croix_menubs")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbs")[0].style.display  = "initial";
+            if (document.getElementsByClassName("navbar_bs")[0] !== undefined) {
+                if (window.innerWidth > 550) {
+                    document.getElementsByClassName("navbar_bs")[0].className  = "navbar_bs banniere_staff";
+                    document.getElementsByClassName("staff_bs")[0].style.display  = "initial";
+                    document.getElementsByClassName("profilpv_bs")[0].style.display  = "initial";
+                    document.getElementsByClassName("deconnexion_bs")[0].style.display  = "initial";
+                    document.getElementsByClassName("reseaux_sociaux_bs")[0].style.display  = "grid";
+                    document.getElementsByClassName("croix_menubs")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbs")[0].style.display  = "none";
+                }
+                else {
+                    document.getElementsByClassName("navbar_bs")[0].className  = "navbar_bs banniere_staff";
+                    document.getElementsByClassName("staff_bs")[0].style.display  = "none";
+                    document.getElementsByClassName("profilpv_bs")[0].style.display  = "none";
+                    document.getElementsByClassName("deconnexion_bs")[0].style.display  = "none";
+                    document.getElementsByClassName("reseaux_sociaux_bs")[0].style.display  = "none";
+                    document.getElementsByClassName("croix_menubs")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbs")[0].style.display  = "initial";
+                }
             }
         }
         window.addEventListener('resize', handleResize)

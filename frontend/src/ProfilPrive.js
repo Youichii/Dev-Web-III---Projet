@@ -104,11 +104,10 @@ const ProfilPrive = () => {
     }
     
     return (
-            <div style={{margin: "0px 0px 10% 0px"}}>  
+            <div>  
                 {statutConnexion ? <BanniereConnection page="profilprive" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
                 <div className="profilPrive">                    
                     <Header title= {"Votre profil" } headerclass="profilheader"  />
-                    <Picture />
                     <div className="privateinfo">                    
                         <div className="gauche">
                             {listeClients.map((val) =>{
