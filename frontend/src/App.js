@@ -31,7 +31,7 @@ function App() {
   require("./css/app.css");
 
   const [etat, setEtat] = useState({loading:true});
-
+  useEffect(()=>{initGA();},[]);
   useEffect(()=> {
     setTimeout(() => {
         setEtat({loading: false})
@@ -41,7 +41,7 @@ function App() {
   if (etat.loading) {
     return <Chargement />;
   }
-  useEffect(()=>{initGA();},[]);
+  
   return (
     <Router>
       <div className="App">
