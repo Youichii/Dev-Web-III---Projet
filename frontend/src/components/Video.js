@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoPlayer from 'react-video-js-player';
-import intro from '../video/intro.mp4'
+import intro from '../video/cnf.MOV'
 
 
 const Video =()=>{
