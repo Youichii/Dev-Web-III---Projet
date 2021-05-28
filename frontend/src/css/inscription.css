@@ -16,7 +16,7 @@ html {
 .c_cadre_inscription {
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 6% 1290px 189px;
+	grid-template-rows: 6% 1207px 189px;
 	grid-gap: 2px;
 	padding: 5px;
 }
@@ -82,7 +82,7 @@ html {
 .c_champs_informations {
 	display: grid;
 	grid-template-columns: 31% 9% 20% 9% 31%;
-	grid-template-rows: 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 8% 2.5% 10% 4% 5% 3% 2.5% 8% 2%;
+	grid-template-rows: 2.5% 10% 2.5% 10% 2.5% 10% 2.5% 10% 2.5% 10% 2.5% 10% 4.5% 10% 4% 4% 0% 0% 0% 0%;
 	grid-gap: 0px;
 	padding: 5px;
 	background-color: var(--bg);
@@ -173,6 +173,7 @@ html {
 	grid-row-end: 5;
 
 	background-color: var(--bg);
+	margin: 13px 0px 0px 0px;
 }
 .i_titre_postal_insc{
 	grid-column-start: 1;
@@ -302,22 +303,22 @@ html {
 
 	background-color: var(--bg);
 }
-.i_titre_captcha{
+/* .i_titre_captcha{
 	grid-column-start: 1;
 	grid-column-end: 6;
 	grid-row-start: 18;
 	grid-row-end: 19;
 
 	background-color: var(--bg);
-}
-.i_champ_captcha{
+} */
+/* .i_champ_captcha{
 	grid-column-start: 1;
 	grid-column-end: 6;
 	grid-row-start: 19;
 	grid-row-end: 20;
 
 	background-color: var(--bg);
-}
+} */
 .i_bouton_envoi_insc{
 	grid-column-start: 2;
 	grid-column-end: 8;
@@ -406,18 +407,18 @@ html {
 	-webkit-text-fill-color:white;
 }
 
-::-webkit-scrollbar {/*taille*/
+::-webkit-scrollbar {
 	width: 6px; 
 }
-::-webkit-scrollbar-thumb {/*couleur normale*/
-	background: #b1acaa; /*#42434a; /* #F7C27E;*/ 
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
 	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover { 
-	background: #696969;/*#F3A43B; */
+	background: #696969;
 }
 ::-webkit-scrollbar-thumb:active {
-	background: #2A2A2A;/*#D57F0D; */
+	background: #2A2A2A;
 }
 
 .message_erreur {
@@ -449,7 +450,7 @@ html {
 	text-decoration:none; 
 }
 .i_champ_politique a:active {
-	color:var(--survol_bouton); /*#f9af4f;*/
+	color:var(--survol_bouton); 
 }
 .politique_erreur {
 	grid-column-start: 1;
@@ -488,7 +489,7 @@ html {
 }
 @media only screen and (max-width: 804px) {
 	.c_cadre_inscription {grid-template-columns: 5% 90% 5%;
-						grid-template-rows: 10% 1206px 240px;}
+						grid-template-rows: 6% 1206px 196px;}
 	.i_bouton_con {font-size: 21px;}
 	.i_bouton_insc {font-size: 21px;}
 	.c_info_inscription {grid-template-rows: 2% 6% 3% 6% 77% 6%;
@@ -498,11 +499,6 @@ html {
 	.selec_jour {width: 24%;}
 	.inscription select {height: 51px;
 		padding: 5px 8px 5px 10px;}
-
-	.i_champ_captcha {grid-row-start: 22;
-			grid-row-end: 23;}
-	.i_titre_captcha {grid-row-start: 21;
-				grid-row-end: 22;}
 	.i_champ_politique {grid-row-start: 19;
 		grid-row-end: 20;
 		font-size: 16px;}
@@ -521,7 +517,7 @@ html {
 					grid-row-end: 14;}
 	.i_titre_telephone {grid-row-start: 12;
 						grid-row-end: 13;}
-	.c_champs_informations {grid-template-rows: 2.5% 7% 2.5% 7% 2.5% 7% 2.5% 7% 1% 2% 7% 2.5% 7% 2.5% 7% 2.5% 8% 5% 6% 2% 3% 6% 0.5%;}
+	.c_champs_informations {grid-template-rows: 3% 8% 3% 8% 3% 8% 3% 8% 1% 2% 8% 3% 8% 3% 8% 3% 8% 5% 4.5% 2% 3% 6% 0.5%;}
 	.i_titre_sexe {grid-column-start: 1;
 		grid-column-end: 3;
 		grid-row-start: 10;

@@ -603,18 +603,18 @@ staff * {
 	border-radius: 10px 0px 0px 10px;
 }
 
-::-webkit-scrollbar {/*taille*/
+::-webkit-scrollbar {
 	width: 6px; 
 }
-::-webkit-scrollbar-thumb {/*couleur normale*/
-	background: var(--bg_survol); /*#42434a; /* #F7C27E;*/ 
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
 	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover { 
-	background: #696969;/*#F3A43B; */
+	background: #696969;
 }
 ::-webkit-scrollbar-thumb:active {
-	background: var(--bg_ligne2);/*#D57F0D; */
+	background: #2A2A2A;
 }
  
 @media only screen and (max-width: 1700px) {

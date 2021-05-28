@@ -213,17 +213,21 @@ const Panier = () => {
     const supprimerCommande = () => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : id_commande})
+               //body: JSON.stringify({commande : id_commande})
+               body: JSON.stringify({commande : IDCommande})
         };
         fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
         .then(donnees => {
-            console.log("supprimer ok");
+            redirectionMenu() ;
         })
     }
-
+    const historyMenu = useHistory();
+	const redirectionMenu = function onfinish(){
+        return historyMenu.push('/menu') ;
+	}
 
     /**
      * Vérifie si l'utilisateur est connecté au chargement de la page

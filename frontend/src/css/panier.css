@@ -706,19 +706,19 @@
   }
   
   
-  ::-webkit-scrollbar {/*taille*/
-      width: 6px; 
-  }
-  ::-webkit-scrollbar-thumb {/*couleur normale*/
-      background: #F7C27E; 
-      border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover { 
-      background: #CCA78D;/*#F3A43B; */
-  }
-  ::-webkit-scrollbar-thumb:active {
-      background: var(--brun_fonce);/*#D57F0D; */
-  }
+::-webkit-scrollbar {
+	width: 6px; 
+}
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}
   
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {

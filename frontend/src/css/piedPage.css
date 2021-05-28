@@ -81,7 +81,7 @@
 	grid-row-end: 3;
     grid-column-start: 12;
     grid-column-end: 13;
-    font-size: 12px;
+    font-size: 11px;
     color: white;
     text-align: center;
     line-height: 20px;
@@ -176,7 +176,7 @@
 
 
 @media only screen and (max-width: 1680px) {
-	.footer {font-size: 15px;}
+	.footer {font-size: 14px;}
     .bouton_gauche {display : none;}
     .bouton_droite {display : none;}
     .mentions_legales {display : initial;}
@@ -186,22 +186,22 @@
     .appeler {display : initial;}
 }
 @media only screen and (max-width: 1586px) {
-    .footer {grid-template-columns: 13% 9% 2% 13% 2% 14% 2% 15% 2% 8% 7% 11%;}
+    .footer {grid-template-columns: 12% 9% 2% 13% 2% 14% 2% 16% 2% 8% 7% 11%;}
 }
 @media only screen and (max-width: 1460px) {
-    .footer {grid-template-columns: 9% 10% 2% 14% 2% 15% 2% 17% 2% 9% 4% 12%;}
+    .footer {grid-template-columns: 9% 9% 2% 14% 2% 15% 2% 17% 2% 9% 4% 13%;}
 }
 @media only screen and (max-width: 1320px) {
     .footer {grid-template-columns: 9% 10% 2% 14% 2% 15% 2% 17% 2% 9% 4% 12%;}
-    .copyright{font-size: 11px;}
+    .copyright{font-size: 10px;}
 }
 @media only screen and (max-width: 1290px) {
     .footer {grid-template-columns: 5% 11% 2% 15% 2% 16% 2% 18% 2% 10% 2% 13%;
-        font-size: 14px;}
+        font-size: 13px;}
 }
 @media only screen and (max-width: 1135px) {
     .footer {font-size: 12px;
-        grid-template-columns: 7% 11% 2% 16% 2% 18% 2% 20% 2% 9% 1% 7%;}
+        grid-template-columns: 6% 11% 1% 18% 1% 19% 1% 22% 1% 9% 1% 7%;}
     .copyright {font-size: 9px;
         grid-column-start: 10;
         line-height: 45px;
