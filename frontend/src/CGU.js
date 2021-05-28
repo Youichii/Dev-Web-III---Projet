@@ -42,7 +42,7 @@ const CGU = () => {
 	} 
 
     return (
-        <div>
+        <div className="cgu">
             {statutConnexion ? <BanniereConnection onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
             <div className="c_cgu">
                 <div className="titre">Conditions générales d'utilisation</div>
