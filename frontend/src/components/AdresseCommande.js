@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types'
 
-const AdresseCommande = ({ className_div, className_label, form, Text, id, name, type, placeholder }) => {
-    return (
-        <div className={className_div}> 
-            <label className="label_adresse" for={form}>{Text}</label><br /> 
-            <input id={id} name={name} type={type} placeholder={placeholder} /> 
-        </div>
-    )
+const AdresseCommande = ({ className_div, form, Text, id, name, type, placeholder, readOnly }) => {
+    if (readOnly) {
+        return (
+            <div className={className_div}> 
+                <label className="label_adresse" for={form}>{Text}</label><br /> 
+                <input id={id} name={name} type={type} value={placeholder} readOnly/> 
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className={className_div}> 
+                <label className="label_adresse" for={form}>{Text}</label><br /> 
+                <input id={id} name={name} type={type} placeholder={placeholder} /> 
+            </div>
+        )
+    }
 
 }
-
-/*AdresseCommande.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
 
 AdresseCommande.propTypes = {
     informations : PropTypes.string,

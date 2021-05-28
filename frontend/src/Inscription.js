@@ -405,10 +405,7 @@ const Inscription = () => {
 					<div className="i_champ_politique">
 						<input type="checkbox" id="politique_utilisateur" required onClick={polConfidentialite}/><span className="pol"> J'accepte les <a href="https://www.privacypolicies.com/live/3ed9c526-0710-45e2-9a58-ec772750de85">termes et conditions</a> & <a href="https://www.privacypolicies.com/live/5b2841b7-4ad5-46a7-ac31-25ea7960e6f3">politique de confidentialité</a></span>
 					</div>
-					{/* <div className="i_titre_captcha pol">CAPTCHA</div>
-					<div className="i_champ_captcha">
-						<input type="text" id="captcha_user" required />
-					</div> */}
+
 					<div className='message_erreur politique_erreur' id="politique_erreur"></div>
 
 					<div className="message_erreur" id="erreur_inscription"></div>
