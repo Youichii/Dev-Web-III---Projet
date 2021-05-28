@@ -19,6 +19,13 @@ div.dd-header {
     
 }
 
+fieldset.cadre {
+    border-radius: 50px;
+    width : 90%;
+    margin-top : 1%;
+    background-color: rgba(180, 180, 180, 0.582);
+}
+
 ul.listHoraires {
     text-align: left;
     padding-inline-start: 1%;
@@ -36,7 +43,30 @@ div.dd-header_action:hover {
     cursor: pointer;
 }
 
-button {
+div.element_menu{
+    background-color: rgba(0, 0, 0, 0.918);
+    border-radius: 10px;
+    margin-bottom: 1%;
+    width: 70%;
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: silver;
+}
+
+div.bas {
+    margin-top : 1%;
+    
+}
+
+span.description {
+    font-size: calc(0.6em + 1vw);
+    font-style: italic;
+    color: rgb(156, 156, 156);
+}
+
+button.btn , button.delete_menu {
     background-color: darkgoldenrod;
     display: inline-block;
     border-radius: 100px;
@@ -45,18 +75,35 @@ button {
     text-shadow: 2px white;
     margin-left: 2%;
     margin-top: 2%;
+    margin-bottom: 3%;
+
 }
 
-input {
+input.input_modif {
     width :30%;
-    border-radius: 5px;
-    font-size: calc(0.1em + 1vw);
+    border-radius: 10px;
+    font-size: calc(0.3em + 1vw);
     margin : 1%;
     opacity: 0.9;
     
 }
 
-form {
+span.contenu, span.price {
+    font-size : calc(0.7em + 1vw);
+    margin-right : 1%;
+}
+
+span.price {
+    color : silver;
+}
+
+summary.titre {
+    font-size : calc(1em + 1vw);
+    text-decoration: underline;
+    margin-bottom: 1%;
+}
+
+form.form_modif {
     width: 100%;
     display: inline-block;
 }
@@ -95,7 +142,6 @@ div.dd-wraper-2 button {
 }
 
 div.dd-wraper-3 {
-    font-size: calc(0.2em + 1vw);
     margin: 1%;
     padding : 1%;
     font-weight: 800;
@@ -124,4 +170,10 @@ input.Delete {
 }
 ::-webkit-scrollbar-thumb:active {
 	background: #2A2A2A;
+}
+
+select.categorie {
+    border-radius: 20px;
+    width: fit-content;
+    font-size: calc(0.4em + 1vw);
 }

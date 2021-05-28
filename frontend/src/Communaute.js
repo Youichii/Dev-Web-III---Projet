@@ -275,7 +275,7 @@ const Communaute = () => {
             var remplirCommunauteStatus = {method : 'GET',
             headers:{'Content-type':'application/json'}
             }
-            fetch(`api/usersstatus/${valueStatus}`, remplirCommunauteStatus)
+            fetch(`/api/usersstatus/${valueStatus}`, remplirCommunauteStatus)
             .then(response =>{
                 return response.json()
             })
@@ -291,7 +291,7 @@ const Communaute = () => {
             var remplirCommunauteNom = {method : 'GET',    
             headers:{'Content-type':'application/json'}
             }
-            fetch(`api/usersnom/${valueNom}`, remplirCommunauteNom)
+            fetch(`/api/usersnom/${valueNom}`, remplirCommunauteNom)
             .then(response=>{
                 return response.json()
             })
