@@ -473,7 +473,7 @@
       grid-row-start: 2;
       grid-row-end: 3;
   }
-  input[type=text], .i_code_postal > input[type=number], .i_numero_maison  > input[type=number]{
+  input[type=text], .c_adresse select, .i_code_postal > input[type=number], .i_numero_maison  > input[type=number]{
       width: 100%;
       height: 30px;
       border-radius: 0px/0px;
@@ -487,11 +487,13 @@
       font-family: modern, monospace;
       font-size: 20px;
   }
-  input[type=text]:focus, .i_code_postal > input[type=number]:focus, .i_numero_maison  > input[type=number]:focus{
+  input[type=text]:focus, .c_adresse select:hover, .i_code_postal > input[type=number]:focus, .i_numero_maison  > input[type=number]:focus{
       border-color:#CCA78D;
       border-width: 2px;	
       outline:  none;
   }
+  .selection_ville {height: 42px;}
+  
   .panier div > label {
       font-size: 20px;
   }

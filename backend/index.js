@@ -570,6 +570,18 @@ app.get('/api/hours', (req, res) => {
   })
 })
 
+/**
+ * Récupère les différentes villes où il est possible de se faire livrer
+ * 
+ * @author Clémentine Sacré <c.sacre@students.ephec.be>
+ * @method GET
+ */
+ app.get('/api/villes', (req, res) => {
+  const sqlInsert = "SELECT * FROM ville";
+  db.query(sqlInsert, [], (err, result) => {
+    res.send(result) ;
+  })
+})
 
 
 
