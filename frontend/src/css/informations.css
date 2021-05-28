@@ -1,6 +1,6 @@
 /*----------------------------------- INFORMATIONS -------------------------------------------------------- */
 div.Informations h1 {
-	font-size: calc(1em + 1vw);
+	font-size: calc(1.5em + 1vw);
 }
 
 div .Informations {
@@ -37,11 +37,11 @@ iframe {
 
 ul.Days {
 	text-align: left;
-	width: 25%;
+	width: 10%;
 	height: 100%;
 	margin-bottom: 5%;
 	margin-top: 5%;
-	min-width: 150px ;
+	min-width: 50px ;
 	display: inline-block;
 
 }
@@ -58,7 +58,8 @@ ul.Hours {
 }
 
 ul, p {
-	padding-inline-start: 3%;
+	padding-inline-start: 0%;
+
 }
 
 ::-webkit-scrollbar {
