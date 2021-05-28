@@ -59,15 +59,15 @@ div.gauche input {
 
 
 
-/*input{
+input.input_modif{
 	height: fit-content;
 	width: fit-content;
 	color: white;
 	font-size: calc(0.3em + 1vw);
 	margin: 5%;
-}*/
+}
 
-button {
+button.btn{
 	height: fit-content;
 	width: fit-content;
 	color: rgb(252, 252, 252);
