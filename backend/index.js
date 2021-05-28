@@ -276,13 +276,13 @@ app.use(session({
 app.post('/api/connect-users', function(request, response) {
 	var email = request.body.data.mail;
 	var mdp = request.body.data.pwd;
-  console.log(request.body.data)
+  console.log("body : ", request.body.data)
 	if (email && mdp) {
 		db.query('SELECT IdClient, Mdp FROM clients WHERE Mail = ?', [email], function(error, results, fields) {
-      console.log(results)
+      console.log("resu : ", results)
 			if (results.length > 0) {
         bcrypt.compare(mdp, results[0].Mdp, (error, response1) => {
-          console.log(response1)
+          console.log("type : ", response1)
           if (response1) {
             request.session.user = results;
             response.send(results);
@@ -290,6 +290,9 @@ app.post('/api/connect-users', function(request, response) {
             response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
           }
         });
+      }
+      else {
+        response.send({message:'ko', msg:"Mauvais nom d'utilisateur et/ou de mot de passe"});
       }
 		});
 	} 
@@ -359,7 +362,6 @@ app.post('/api/users', (req, res) => {
   const ville = req.body.ville ;
   const neswletter = req.body.nwsletter ;
 
-  console.log("body : ", req.body);
   const sqlVerif = "select IdClient from clients where Mail = ?";
   db.query(sqlVerif, mail, (err, result) => {
     if (result.length !== 0) {
@@ -370,7 +372,6 @@ app.post('/api/users', (req, res) => {
         if (err) {
           console.log(err);
         }
-    
         const sqlInsert = "INSERT INTO `clients`(`Nom`, `Prenom`, `Rue`, `Anniversaire`, `Gsm`, `Mail`, `Genre`, `Mdp`, `Numero`, `Zip`, `Ville`, `Newsletter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         db.query(sqlInsert, [name, firstname, rue, birthday, phone, mail, gender, hash, numero, postal, ville, neswletter], (err, resultRequete) => {
           res.send(resultRequete);
