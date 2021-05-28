@@ -1,4 +1,4 @@
-.container-stat{
+div.container-stat{
     position: absolute;
     height: 100%;
     width: 1000%;
@@ -12,3 +12,17 @@ div.container-stat h1{
     font-family: 'Courier New', Courier, monospace;
     font-size: 40px;
 }
+
+.chart-stat{
+    display: flex;
+    flex-direction: row;
+}
+
+.compteruGA a{
+    color: white;
+    text-decoration: none;
+    float: right;
+    size: 30px;
+    text-decoration-color: white;
+}
+

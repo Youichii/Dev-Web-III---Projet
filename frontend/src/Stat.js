@@ -55,7 +55,8 @@ function Stat() {
 			<Chart />
 		</div>
 		<div className="compteurGA">
-			<h1>Voir mes statistiques sur Google Analytics</h1>
+			<a href="https://analytics.google.com/analytics/web/?authuser=2#/p272964150/reports/defaulthome?params=_u..nav%3Ddefault">Google Analytics</a>
+
 		</div>
         
         
