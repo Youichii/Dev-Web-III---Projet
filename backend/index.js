@@ -812,6 +812,7 @@ app.delete('/api/deleteZero', (req, res) => {
   console.log("je supprime un truc")
   const sqlInsert = "DELETE FROM `commandes` WHERE `Quantite`= 0"
   db.query(sqlInsert, (err, result) => {
+    console.log("hihi c'est pas supprimé")
       if(err) throw err;  
       res.send(result) ;
   })

@@ -666,7 +666,7 @@ staff * {
 	.i_bouton_suivant{height: 22px;
 		width: 31px;
 		font-size: 13px;}
-	.c_item5{    padding: 0px 4px 0px 4px;}
+	.cadre_aliment{    padding: 0px 4px 0px 4px;}
 	.detailCommandeAfaire{margin: 5px 3px 6px 3px;
 	    grid-column-end: 17;}
 	.detailCommandeEnCours{margin: 5px 3px 6px 3px;
@@ -683,7 +683,7 @@ staff * {
 
 
 
-.c_item5 {
+.cadre_aliment {
 	grid-row-start: 3;
 	grid-row-end: 4;
 	grid-column-start: 2;
@@ -698,7 +698,7 @@ staff * {
 	background-color: #181616;
 	border-radius: 0px 0px 11px 11px;
 }
-.c_item1 {
+.c_encours {
 	color:black;
 	grid-row-start: 4;
 	grid-row-end: 5;
@@ -711,7 +711,7 @@ staff * {
 	margin: 15px;
 }
 
-.c_type2 {
+.cadre_encours {
 	grid-row-start: 3;
 	grid-row-end: 4;
 	grid-column-start: 1;
@@ -723,7 +723,7 @@ staff * {
 	padding: 5px 15px 5px 15px;
 }
 
-.c_item3 {
+.c_envoye {
 	color:black;
 	grid-row-start: 6;
 	grid-row-end: 7;
@@ -736,7 +736,7 @@ staff * {
 	margin: 15px;
 }
 
-.c_type3 {
+.cadre_envoye {
 	grid-row-start: 5;
 	grid-row-end: 6;
 	grid-column-start: 1;
@@ -748,7 +748,7 @@ staff * {
 	padding: 5px 15px 5px 15px;
 }
 
-.c_item6 {
+.c_afaire {
 	color:black;
 	grid-row-start: 2;
 	grid-row-end: 3;
@@ -761,7 +761,7 @@ staff * {
 	margin: 15px;
 }
 
-.c_type1 {
+.cadre_afaire {
 	grid-row-start: 1;
 	grid-row-end: 2;
 	grid-column-start: 1;

@@ -194,7 +194,7 @@ const Staff = () => {
             document.getElementsByClassName("detailCommandeAfaire")[0].style.gridRowEnd = indice + 3 ;
             document.getElementsByClassName("detailCommandeAfaire")[0].style.display = "grid" ;
             setCondAfaire(false);
-            classe = "i_item7" ;
+            classe = "i_afaire" ;
             classeDetail = "detailCommandeAfaire" ;
         }
         else if (identifiant === "encours") {
@@ -202,7 +202,7 @@ const Staff = () => {
             document.getElementsByClassName("detailCommandeEnCours")[0].style.gridRowEnd = indice + 3 ;
             document.getElementsByClassName("detailCommandeEnCours")[0].style.display = "grid" ;
             setCondEncours(false);
-            classe = "i_item2" ;
+            classe = "i_encours" ;
             classeDetail = "detailCommandeEnCours" ;
         }
         else {
@@ -210,7 +210,7 @@ const Staff = () => {
             document.getElementsByClassName("detailCommandeEnvoyee")[0].style.gridRowEnd = indice + 3 ;
             document.getElementsByClassName("detailCommandeEnvoyee")[0].style.display = "grid" ;
             setCondEnvoyee(false);
-            classe = "i_item4" ;
+            classe = "i_envoye" ;
             classeDetail = "detailCommandeEnvoyee" ;
         }
 
@@ -270,7 +270,7 @@ const Staff = () => {
 
         donnees.filter(element => element.IdEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
         if (condAfaire) {
-            document.getElementById("i_item7").style.gridTemplateRows = nbr_lignes_afaire ;
+            document.getElementById("i_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
         }
         return (
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdCommande)} onMouseLeave={() => ancienBg(elem.IdCommande, type_couleur)} onClick_panier={() => chargementPanier(elem, "afaire")} onClick_ok={() => ajouterCommande(elem, "ENC")}  />        
@@ -294,7 +294,7 @@ const Staff = () => {
 
         donnees.filter(element => element.IdEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
         if (condEncours) {
-            document.getElementById("i_item2").style.gridTemplateRows = nbr_lignes_encours ;
+            document.getElementById("i_encours").style.gridTemplateRows = nbr_lignes_encours ;
         }
         return (
 
@@ -319,7 +319,7 @@ const Staff = () => {
 
         donnees.filter(element => element.IdEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
         if (condEnvoyee) {
-            document.getElementById("i_item4").style.gridTemplateRows = nbr_lignes_envoye ;
+            document.getElementById("i_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
         }
         return (
             <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdCommande)} onMouseLeave={() => ancienBg(elem.IdCommande, type_couleur)} onClick_panier={() => chargementPanier(elem, "envoye")} onClick_ok={() => supprimerCommande(elem.IdCommande)}  />
@@ -340,21 +340,21 @@ const Staff = () => {
                         <div className="i_prix_titre">Prix</div>
                     </div>
 
-                    <div className="c_item5">
-                        <div className="c_type1">Commandes à faire</div>
-                        <div className="c_item6" id="i_item7">
+                    <div className="cadre_aliment">
+                        <div className="cadre_afaire">Commandes à faire</div>
+                        <div className="c_afaire" id="i_afaire">
                             {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elementsAfaire)}
                             <div className="detailCommandeAfaire"></div>
                         </div>
                         
-                        <div className="c_type2">Commandes en cours</div>
-                        <div className="c_item1" id="i_item2">
+                        <div className="cadre_encours">Commandes en cours</div>
+                        <div className="c_encours" id="i_encours">
                             {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elementsEncours)}
                             <div className="detailCommandeEnCours"></div>
                         </div>
 
-                        <div className="c_type3">Commandes envoyées</div>
-                        <div className="c_item3" id="i_item4">
+                        <div className="cadre_envoye">Commandes envoyées</div>
+                        <div className="c_envoye" id="i_envoye">
                             {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elementsEnvoye)}
                             <div className="detailCommandeEnvoyee"></div>
                         </div>
