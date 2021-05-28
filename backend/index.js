@@ -369,7 +369,7 @@ app.get('/api/orders/users/:identifiantCommande', (req, res) => {
 
 })
 
-app.get('/api/order/user/:utilisateur', (req, res) => { 
+app.get('/api/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
 
   const sqlInsert = "select IdCommande \
@@ -557,7 +557,7 @@ app.get('/categories', (req, res) =>{
 //   })
 // })
 
-app.post('/api/orders', (req, rest)=> {
+app.post('/api/orders', (req, res)=> {
   const IdCommande = req.body.IdCommande
   const IdClient = req.body.IdClient
 
@@ -917,7 +917,7 @@ app.post("/api/valider_commande", function (req, res){
 
 app.post("/api/commande_prete", function (req, res){
 
-  let texte_utf ;
+  let texte_utf, texte_html ;
   let sujet ;
   if (req.body.methode === "LIV"){
     sujet = `Votre commande N${req.body.idcommande} est en route !`;
@@ -1153,7 +1153,7 @@ app.get('/apitest/orders/:identifiantCommande', (req, res) => {
 })
 
 
-app.get('/apitest/order/user/:utilisateur', (req, res) => { 
+app.get('/apitest/orders/users/:utilisateur', (req, res) => { 
   const identifiantClient = req.params.utilisateur ;
 
   const sqlInsert = "select IdCommande \
