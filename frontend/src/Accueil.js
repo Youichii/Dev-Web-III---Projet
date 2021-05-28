@@ -7,14 +7,14 @@ import img4 from '../src/img/img4.jpeg'
 import Axios from 'axios';
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-
+import Video from './components/Video';
 import './css/Accueil.css';
 import { GApageVue } from './components/Compteurs';
 
 
 const Accueil = () => {
 
-    useEffect(()=> {GApageVue("Accueil");},[])
+    useEffect(()=> {GApageVue("/");},[])
 
     const [donneeAvis, setDonneeAvis] = useState([]);
 
@@ -81,20 +81,28 @@ const Accueil = () => {
                     </ul>
             
                 </div>
-
-                <div onLoad ={AfficherAvis} className="commentaires">
-                    <h1>Avis de nos clients</h1>
-                    {donneeAvis&&donneeAvis.map((val)=>{
-                        return(
-                            <div className="avis">
-                                <h2>{val.Prenom}</h2>
-                                <p>{val.Avis}</p>
-                                
-                            </div>
-                        )
-                    })}
+                <div className="section2">
+                    <div className="video-acc"> 
+                        <Video autoPlay loop/>
                     
+                    </div>
+
+                    <div onLoad ={AfficherAvis} className="commentaires">
+                        <h1>Avis de nos clients</h1>
+                        {donneeAvis&&donneeAvis.map((val)=>{
+                            return(
+                                <div className="avis">
+                                    <h2>{val.Prenom}</h2>
+                                    <p>{val.Avis}</p>
+                                    
+                                </div>
+                            )
+                        })}
+                        
+                    </div>
+
                 </div>
+
             </div>
         </div>
 
