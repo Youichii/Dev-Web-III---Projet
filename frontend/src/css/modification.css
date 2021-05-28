@@ -23,7 +23,7 @@ fieldset.cadre {
     border-radius: 50px;
     width : 90%;
     margin-top : 1%;
-    background-color: rgba(180, 180, 180, 0.582);
+    background-color: rgba(0, 0, 0, 0.582);
 }
 
 ul.listHoraires {
@@ -44,7 +44,7 @@ div.dd-header_action:hover {
 }
 
 div.element_menu{
-    background-color: rgba(0, 0, 0, 0.918);
+    background-color: rgba(0, 0, 0, 0.705);
     border-radius: 10px;
     margin-bottom: 1%;
     width: 70%;
