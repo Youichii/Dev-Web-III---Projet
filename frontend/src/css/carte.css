@@ -23,7 +23,15 @@ code {
     background-color: black;
     padding: 0px 0px 60px 0px;
   }
-  
+#PrixTotal{
+  font-size : 18px; 
+  color:#aba8b9;
+  border-top:dotted;
+  border-top-color: #aba8b9;
+  border-top-width:thin  ;
+  float:right;
+
+}
   /* Scrollbar Perso */
   
   ::-webkit-scrollbar {
@@ -103,13 +111,27 @@ code {
     #bordPrincipa{
       grid-column: 1;
     }
+    #panier{
+      position:absolute;
+      right:0px;
+      bottom:0px;
+      top:58%;
+      left:10%;
+      width: 57%;
+      height :40%; 
+      overflow-y:scroll ;
+      /* color:#be5833; */
+      background-color: black;
+      border-style: solid;
+      border-color:rgb(104, 110, 104);
+  
+    }
   }
 
   /* Boutton sous le cadre */
 
 .symbolpanier div{
   visibility: hidden;
-
 }
 
 span.symbolpanier:hover div{
@@ -117,35 +139,39 @@ span.symbolpanier:hover div{
   /* background-color: rgb(240, 222, 144); */
   border-color:black;
   border-style:solid;
+  
 
 }
 
-#panier{
-  position:absolute;
-  right:0px;
-  bottom:0px;
-  top:52%;
-  left:21%;
-  width: 57%;
-  height :40%; 
-  overflow-y:scroll ;
-  /* color:#be5833; */
-  background-color: black;
-  border-style: solid;
-  border-color:rgb(104, 110, 104);
+  #panier{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    top:55%;
+    left:21%;
+    width: 57%;
+    height :40%;
+    overflow-y:scroll ;
+    /* color:#be5833; */
+    background-color: black;
+    border-style: solid;
+    border-color:rgb(104, 110, 104);
 
-}
+  }
 
 
 .symbolpayer{
   float:right;
  color:blanchedalmond;
  text-decoration: none;
+ float: right;
 }
 
 .symbolpanier{
   float: left;
   color:blanchedalmond;
+  margin-left:7%
+  
 }
 
 .symbolpayer:hover{
@@ -159,6 +185,7 @@ span.symbolpanier:hover div{
 }
 #menuT{
   margin-right:15px;
+  float: left;
 }
 
 
@@ -255,6 +282,7 @@ input.valeur{
 
 .nomProduit{
   color : rgb(199, 28, 16);
+ 
 
 }
 .quantitee{
@@ -267,6 +295,7 @@ input.valeur{
 #panier{
   border-bottom: whitesmoke;
   border-bottom-style:thin;
+  /* background-color: #383838; */
 }
 /* .total{
   color:red

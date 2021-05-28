@@ -54,14 +54,25 @@ const Carte = () => {
                             return response.json()
                         })
                         .then(json =>{ 
-                            console.log(paniers)
                             if(paniers === null || paniers.length !== 0){
-                            json.map(maping=> 
-                                document.getElementById(maping.IdProduit + 'compteur').value = maping.Quantite
-                            )
+                                json.map(maping=> 
+                                    document.getElementById(maping.IdProduit + 'compteur').value = maping.Quantite
+                                )
                             }
                             setPanier(json)
-                        }) 
+                        })
+                        var totalCommande = {method: 'GET', 
+                        headers: {'Content-type':'application/json'}
+                        }; 
+                        fetch(`/api/total/${idCommandes}`, totalCommande)
+                        .then(response=>{ 
+                            return response.json()
+                        })
+                        .then(json =>{ 
+                            console.log("total", json)
+                            setTotal(json)
+                        })  
+                        
                     }
 
                     else{
@@ -222,17 +233,18 @@ const Carte = () => {
         }) 
 
 
-        // var totalCommande = {method: 'GET', 
-        // headers: {'Content-type':'application/json'}
-        // }; 
-        // fetch(`/api/total/${idCommandes}`, totalCommande)
-        // .then(response=>{ 
-        //     return response.json()
-        // })
-        // .then(json =>{ 
-        //     console.log("total", json)
-        //     setTotal(json.PrixTotal)
-        // })        
+        var totalCommande = {method: 'GET', 
+        headers: {'Content-type':'application/json'}
+        }; 
+        fetch(`/api/total/${idCommandes}`, totalCommande)
+        .then(response=>{ 
+            return response.json()
+        })
+        .then(json =>{ 
+            console.log("total", json.TotalCommande)
+            setTotal(json.TotalCommande)
+        })   
+          
     }
         
 
@@ -257,10 +269,14 @@ const Carte = () => {
                                     </div>
                                 </div>
                             ))}
+                           
                         </details>
                     </fieldset>
                 ))}   
             </div>
+            <a href={PDFMenu} download id="menuT">
+                Menu Téléchargeable  
+            </a>
         
            {statutConnexion ?  <span className="symbolpanier">Panier &#128722;
                 <div id="panier" >
@@ -271,18 +287,19 @@ const Carte = () => {
                         <div className='prixTotal'>Total: {contenu_filtre.PrixTotal}€</div>
                         </div>          
                     ))}
-
-                    {/* <div className="total">Total de la commande :  {totals} </div> */}
+                    {totals&&totals.map(mapp => 
+                    <span id="PrixTotal"  >Total de la commande : {mapp.TotalCommande}€</span>
+                    
+                    )}
+                    
                     
                 </div>  
                                 </span> : 
             <span></span>}
-
+            
             { statutConnexion && ( paniers === null || paniers.length !== 0)  ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
  
-            <a href={PDFMenu} download id="menuT">
-           Menu Téléchargeable  
-            </a>
+           
             
         </div>
     );
