@@ -36,32 +36,33 @@ const BanniereBasique = ({page}) => {
     }
 
     useEffect(() => {
-        console.log("page : ", page);
         function handleResize() {
-            if (window.innerWidth > 495) {
-                document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
-                document.getElementsByClassName("accueil_bv")[0].style.display  = "initial";
-                document.getElementsByClassName("informations_bv")[0].style.display  = "initial";
-                document.getElementsByClassName("menu_bv")[0].style.display  = "initial";
-                document.getElementsByClassName("connexion_bv")[0].style.display  = "initial";
-                document.getElementsByClassName("inscription_bv")[0].style.display  = "initial";
-                document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "grid";
-                document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbv")[0].style.display  = "none";
-            }
-            else {
-                document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
-                document.getElementsByClassName("accueil_bv")[0].style.display  = "none";
-                document.getElementsByClassName("informations_bv")[0].style.display  = "none";
-                document.getElementsByClassName("menu_bv")[0].style.display  = "none";
-                document.getElementsByClassName("connexion_bv")[0].style.display  = "none";
-                document.getElementsByClassName("inscription_bv")[0].style.display  = "none";
-                document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "none";
-                document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbv")[0].style.display  = "initial";
+            if (document.getElementsByClassName("navbar")[0] !== undefined) {
+                if (window.innerWidth > 495) {
+                    document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
+                    document.getElementsByClassName("accueil_bv")[0].style.display  = "initial";
+                    document.getElementsByClassName("informations_bv")[0].style.display  = "initial";
+                    document.getElementsByClassName("menu_bv")[0].style.display  = "initial";
+                    document.getElementsByClassName("connexion_bv")[0].style.display  = "initial";
+                    document.getElementsByClassName("inscription_bv")[0].style.display  = "initial";
+                    document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "grid";
+                    document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbv")[0].style.display  = "none";
+                }
+                else {
+                    document.getElementsByClassName("navbar")[0].className  = "navbar banniere_visiteur";
+                    document.getElementsByClassName("accueil_bv")[0].style.display  = "none";
+                    document.getElementsByClassName("informations_bv")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_bv")[0].style.display  = "none";
+                    document.getElementsByClassName("connexion_bv")[0].style.display  = "none";
+                    document.getElementsByClassName("inscription_bv")[0].style.display  = "none";
+                    document.getElementsByClassName("reseaux_sociaux")[0].style.display  = "none";
+                    document.getElementsByClassName("croix_menubv")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbv")[0].style.display  = "initial";
+                }
             }
         }
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResize);
     })
 
     return(

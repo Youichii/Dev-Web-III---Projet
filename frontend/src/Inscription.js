@@ -281,7 +281,12 @@ const Inscription = () => {
 						document.getElementById("erreur_inscription").innerHTML = "";
 						let mail_valide = document.getElementById("mail_utilisateur").value ;
 						let mdp_valide = document.getElementById("mdp_utilisateur").value;
-						Axios.get(`/api/connect-users/${mail_valide}/${mdp_valide}`).then((reponse) => {
+						Axios.post(`/api/connect-users`, {"headers": {"content-type": "application/json"},
+						data:{
+							mail: mail_valide,
+							pwd: mdp_valide
+						}				
+						}).then((reponse) => {
 							if (reponse.data.message) {
 								setStatutConnexion(false);
 								setUtilisateur(10000000000);

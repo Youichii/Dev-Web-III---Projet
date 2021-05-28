@@ -10,6 +10,7 @@ import croix from '../img/croixMenu.png';
 
 const BanniereClient = ({ onClick, page }) => {
     require('../css/banniereClient.css');
+    //let classesBC = {general : "c_barre_nav", elements : ["accueil_bc", "informations_bc", "menu_bc", "profilpv_bc", "deconnexion_bc"], reseaux : "reseaux_sociaux_bc", croix:"croix_menubc", menu:"menu_imgbc", detail : "menu_detailbc", banniere:"banniere_connecte"};
 
     const afficherMenuBC = () => {
         document.getElementsByClassName("c_barre_nav")[0].className  = "c_barre_nav menu_detailbc";
@@ -37,27 +38,29 @@ const BanniereClient = ({ onClick, page }) => {
 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth > 495) {
-                document.getElementsByClassName("c_barre_nav")[0].className  = "c_barre_nav banniere_connecte";
-                document.getElementsByClassName("accueil_bc")[0].style.display  = "initial";
-                document.getElementsByClassName("informations_bc")[0].style.display  = "initial";
-                document.getElementsByClassName("menu_bc")[0].style.display  = "initial";
-                document.getElementsByClassName("profilpv_bc")[0].style.display  = "initial";
-                document.getElementsByClassName("deconnexion_bc")[0].style.display  = "initial";
-                document.getElementsByClassName("reseaux_sociaux_bc")[0].style.display  = "grid";
-                document.getElementsByClassName("croix_menubc")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbc")[0].style.display  = "none";
-            }
-            else {
-                document.getElementsByClassName("c_barre_nav")[0].className  = "c_barre_nav banniere_connecte";
-                document.getElementsByClassName("accueil_bc")[0].style.display  = "none";
-                document.getElementsByClassName("informations_bc")[0].style.display  = "none";
-                document.getElementsByClassName("menu_bc")[0].style.display  = "none";
-                document.getElementsByClassName("profilpv_bc")[0].style.display  = "none";
-                document.getElementsByClassName("deconnexion_bc")[0].style.display  = "none";
-                document.getElementsByClassName("reseaux_sociaux_bc")[0].style.display  = "none";
-                document.getElementsByClassName("croix_menubc")[0].style.display  = "none";
-                document.getElementsByClassName("menu_imgbc")[0].style.display  = "initial";
+            if (document.getElementsByClassName("c_barre_nav")[0] !== undefined) {
+                if (window.innerWidth > 495) {
+                    document.getElementsByClassName("c_barre_nav")[0].className  = "c_barre_nav banniere_connecte";
+                    document.getElementsByClassName("accueil_bc")[0].style.display  = "initial";
+                    document.getElementsByClassName("informations_bc")[0].style.display  = "initial";
+                    document.getElementsByClassName("menu_bc")[0].style.display  = "initial";
+                    document.getElementsByClassName("profilpv_bc")[0].style.display  = "initial";
+                    document.getElementsByClassName("deconnexion_bc")[0].style.display  = "initial";
+                    document.getElementsByClassName("reseaux_sociaux_bc")[0].style.display  = "grid";
+                    document.getElementsByClassName("croix_menubc")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbc")[0].style.display  = "none";
+                }
+                else {
+                    document.getElementsByClassName("c_barre_nav")[0].className  = "c_barre_nav banniere_connecte";
+                    document.getElementsByClassName("accueil_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("informations_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("profilpv_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("deconnexion_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("reseaux_sociaux_bc")[0].style.display  = "none";
+                    document.getElementsByClassName("croix_menubc")[0].style.display  = "none";
+                    document.getElementsByClassName("menu_imgbc")[0].style.display  = "initial";
+                }
             }
         }
         window.addEventListener('resize', handleResize)
