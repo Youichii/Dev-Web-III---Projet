@@ -19,6 +19,10 @@ import PiedPage from './components/PiedPage';
 import CGU from './CGU';
 import MentionsLegales from './MentionsLegales';
 import Chargement from './Chargement';
+import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory';
+import { initGA } from './components/Compteurs';
+//import GA from './components/Compteurs'
 
 
 
@@ -37,8 +41,11 @@ function App() {
   if (etat.loading) {
     return <Chargement />;
   }
+  useEffect(()=>{initGA();},[]);
   return (
     <Router>
+      <div className="App">
+        
         <div className="content">
           <Switch>
 
@@ -110,6 +117,7 @@ function App() {
         </div>
         <Cookie/>
         <PiedPage />
+      </div>
     </Router>
   );
 }

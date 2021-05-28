@@ -49,10 +49,17 @@ function Stat() {
 	} 
 
   return (
-    <>
-        {statutConnexion ? <BanniereConnection page="statistiques" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="statistiques" />}
-        <Chart />
-    </>
+    <div className="container-stat">
+		{statutConnexion ? <BanniereConnection page="statistiques" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="statistiques" />}
+		<div className="chart-stat">
+			<Chart />
+		</div>
+		<div className="compteurGA">
+			<h1>Voir mes statistiques sur Google Analytics</h1>
+		</div>
+        
+        
+    </div>
     
   );
 
