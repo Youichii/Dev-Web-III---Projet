@@ -948,9 +948,9 @@ app.post("/envoye", function (req, res){
   const sqlGet = "SELECT Prenom,  Mail FROM clients where Newsletter =1";
   db.query(sqlGet, (err, result)=>{
       res.send(result);
-      result.forEach(Clients => {
-          listMail.push(Clients.Mail);
-          let clientPrenom = Clients.Prenom;
+      result.forEach(clients => {
+          listMail.push(clients.Mail);
+          let clientPrenom = clients.Prenom;
           return listMail, clientPrenom;  
       })
   });
