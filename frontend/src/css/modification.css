@@ -23,7 +23,7 @@ fieldset.cadre {
     border-radius: 50px;
     width : 90%;
     margin-top : 1%;
-    background-color: rgba(0, 0, 0, 0.582);
+    background-color: rgba(0, 0, 0, 0.445);
 }
 
 ul.listHoraires {
@@ -106,6 +106,7 @@ summary.titre {
 form.form_modif {
     width: 100%;
     display: inline-block;
+    background-color: ;
 }
 
 li {
@@ -142,6 +143,7 @@ div.dd-wraper-2 button {
 }
 
 div.dd-wraper-3 {
+    font-size : calc(0.2em + 1vw);
     margin: 1%;
     padding : 1%;
     font-weight: 800;
@@ -176,4 +178,14 @@ select.categorie {
     border-radius: 20px;
     width: fit-content;
     font-size: calc(0.4em + 1vw);
+}
+
+ul.listHoraires li, div.divCoord form.form_modif {    
+    margin-bottom: 1%;
+    width: 70%;
+    border-radius: 20px;
+    padding-left: 2%;
+    padding-top: 2%;
+    background-color: rgba(0, 0, 0, 0.425);
+
 }

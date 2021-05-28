@@ -120,7 +120,7 @@ div.avis{
     margin: 1%;
 }
 
-div.commentaires h1, h2, p{
+div.commentaires h1, div.commentaires h2, div.commentaires p{
     margin: 10px;
     color: rgb(255, 255, 255);
 }
@@ -151,7 +151,7 @@ div.video-acc{
     .commentaires {
         width: 30%;
     }
-    .commentaires h1, h2,  p{
+    .commentaires h1, .commentaires h2,  .commentaires p{
         font-size: small;
     }
 
@@ -172,7 +172,7 @@ div.video-acc{
     .commentaires {
         width: 40%;
     }
-    .commentaires h1, h2,  p{
+    .commentaires h1, .commentaires h2,  .commentaires p{
         font-size: small;
     }
 
@@ -192,7 +192,7 @@ div.video-acc{
     .commentaires {
         width: 40%;
     }
-    .commentaires h1, h2,  p{
+    .commentaires h1, .commentaires h2, .commentaires p{
         font-size: medium;
     }
 }
@@ -214,7 +214,7 @@ div.video-acc{
     .commentaires {
         width: 60%;
     }
-    .commentaires h1, h2,  p{
+    .commentaires h1, .commentaires h2,  .commentaires p{
         font-size: large;
     }
 }

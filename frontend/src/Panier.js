@@ -6,6 +6,7 @@ import Axios from "axios";
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import  { useHistory } from 'react-router-dom';
+import Chargement from './Chargement';
 
 const Panier = () => {
     require('./css/panier.css');
@@ -21,6 +22,9 @@ const Panier = () => {
     let id_commande =  100000000000;
     const [statutConnexion, setStatutConnexion] = useState(false);
 	const [utilisateurCON, setUtilisateur] = useState(10000000000);
+    const [villes, setVilles] = useState([]);
+    const [valeursPretes, setValeursPretes] = useState(false);
+    const [villeEncours, setVilleEncours] = useState("");
 
 
 	/**
@@ -57,12 +61,11 @@ const Panier = () => {
 
     /**
      * Permet de créer une liste contenant les heures encore disponibles pour passer commande
+     * ainsi que les différentes villes disponibles pour faire livrer sa commande
      * 
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     useEffect(() => {
-        document.getElementById("place").checked = true ;
-        document.getElementById("mistercash").checked = true ;
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
@@ -86,7 +89,49 @@ const Panier = () => {
             }
             setHeures(intermediaire);
         })
+
+        var specifications = { method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+        };
+        fetch(`/api/villes`, specifications)
+        .then(res => {
+            return res.json();
+        })
+        .then(donnees => {
+            setVilles(donnees);          
+        })
+
     }, []);
+
+    useEffect(() => {
+        console.log("villes pr$etes : ", villes, " valeurs = ", valeursPretes);
+        if (valeursPretes) {
+            document.getElementById("place").checked = true ;
+            document.getElementById("mistercash").checked = true ;
+            let valeurs = "" ;            
+            villes.map(ville => valeurs += `<option value=${ville.IdVille}>${ville.nomVille}</option>`) ;
+            if (villes.length > 0) {
+                document.getElementById("selection_ville").innerHTML = valeurs ;
+            }
+
+            setVilleEncours(document.getElementById("selection_ville").value);
+            // let index = document.getElementById("selection_ville").value ;
+            // console.log("ville : ", villes, " index : ", index);
+            // let zip = villes.filter(ville=> ville.IdVille === parseInt(index))[0].codePostal;
+            // console.log("zip = ", zip) ;
+            // document.getElementById("code_postal").innerHTML = zip ;
+        }
+    }, [villes, valeursPretes]);
+
+    useEffect(() => {
+        if (valeursPretes) {
+            let index = document.getElementById("selection_ville").value ;
+            console.log("ville : ", villes, " index : ", index);
+            let zip = villes.filter(ville=> ville.IdVille === parseInt(index))[0].codePostal;
+            console.log("zip = ", zip) ;
+            document.getElementById("code_postal").innerHTML = zip ;
+        }
+    }, [villeEncours]);
 
 
     /**
@@ -360,102 +405,126 @@ const Panier = () => {
         )
     }
 
-    return (
-        <div>
-			{statutConnexion ? <BanniereConnection page="panier" onClick={deconnexion} client={utilisateurCON}/> : <BanniereBasique />}
-            <div className="panier">
-                <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
-                <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>
+    /**
+     * Vérifie si les valeurs en asynchrone sont arrivées
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+    useEffect(() => {
+        if (villes.length !== 0 && donnees_panier !== null && donnees_adresse !== null && heures.length !== 0 ) {
+            setValeursPretes(true);
 
-                <div className="i_avancement1 c_avancement1">
-                    <div id="i_ligne_avant_1"></div>
-                    <div id="i_numero_1">1</div>
-                </div>
+        }
+    }, [villes, donnees_panier, donnees_adresse, heures, IDCommande]);
 
-                <div className="i_avancement2 c_avancement2">
-                    <div id="i_ligne_avant_2"></div>
-                    <div id="i_numero_2">2</div>
-                </div>
+    if (!valeursPretes) {
+        return (
+            <Chargement />
+        );
+    }
+    
+    else {
+        return (
+            <div>
+                {statutConnexion ? <BanniereConnection page="panier" onClick={deconnexion} client={utilisateurCON}/> : <BanniereBasique />}
+                <div className="panier">
+                    <div id="i_grise_etape1">Courage,<br />vous y êtes presque !</div>
+                    <div id="i_grise_etape2">Plus qu'un clic,<br />et c'est parti !</div>
 
-                <div className="c_info_panier i_info_panier">
-                    <div className="c_titres_panier i_titres_panier">
-                        <div className="i_titre_produit titres">Produit</div>
-                        <div className="i_titre_quantite titres" id="titre_qtite">Quantité</div>
-                        <div className="i_titre_prix titres">Prix</div>
-                    </div>
-                
-                    <div className="i_info_aliments c_info_aliments" id="info_aliments">
-                        {donnees_panier && donnees_panier.map(affichageAliments)}
-                    </div>
-
-                    <div className="c_cadre_total i_cadre_total">
-                    <div className="i_titre_total">Total</div>
-                        <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
-                    </div>
-                </div>
-
-                <div className="i_boutons1 c_boutons1">
-                    <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={validerPanier} />
-                    <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimerCommande} />
-                </div>
-
-                <div className="c_info_reception i_info_reception">
-                    <div className="i_heure" id="elem_heure">
-                        <label class="label_informations" for="heure_livraison">Heure</label><br />
-                        <div id="heure_livraison">
-                            <select className="decorated" name="heures_reserv" id="heures_reserv">
-                                {heures.map(heure => (
-                                    <option class="choix_heure" value={`${heure.h}:${heure.m}`}>{heure.h}{":"}{heure.m}</option>
-                                ))}
-                            </select>
-                        </div>								
+                    <div className="i_avancement1 c_avancement1">
+                        <div id="i_ligne_avant_1"></div>
+                        <div id="i_numero_1">1</div>
                     </div>
 
-                    <div className="i_apres_heure"></div>
+                    <div className="i_avancement2 c_avancement2">
+                        <div id="i_ligne_avant_2"></div>
+                        <div id="i_numero_2">2</div>
+                    </div>
 
-                    <div className="i_moy_reception">
-                        <label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
-                        <div className="c_reception">
-                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" onClick={cacherAdresse}/>
-                            <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficherAdresse}/>
+                    <div className="c_info_panier i_info_panier">
+                        <div className="c_titres_panier i_titres_panier">
+                            <div className="i_titre_produit titres">Produit</div>
+                            <div className="i_titre_quantite titres" id="titre_qtite">Quantité</div>
+                            <div className="i_titre_prix titres">Prix</div>
+                        </div>
+                    
+                        <div className="i_info_aliments c_info_aliments" id="info_aliments">
+                            {donnees_panier && donnees_panier.map(affichageAliments)}
+                        </div>
+
+                        <div className="c_cadre_total i_cadre_total">
+                        <div className="i_titre_total">Total</div>
+                            <div id='prix_total' className='i_prix_total'>{total}{" €"}</div>
                         </div>
                     </div>
 
-                    <div className="i_apres_reception"></div>
-                    
-                    <div className="i_payement">
-                        <label class="label_informations" for="mode_payement">Mode de payement</label><br />
-                        <div className="i_mode_payement c_mode_payement">
-                            <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="liquide" form="liquide" text="Liquide"/>
-                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="mistercash" form="mistercash" text="Mistercash" />
-                        </div>
+                    <div className="i_boutons1 c_boutons1">
+                        <BoutonPanier className="i_bouton_envoyer1" id_div="elem_bouton_envoyer1" id_elem="bouton_envoyer1" name="bout_envoyer1" value="Suivant" onClick={validerPanier} />
+                        <BoutonPanier className="i_bouton_annuler1" id_div="elem_bouton_annuler1" id_elem="bouton_annuler1" name="bout_annuler1" value="Annuler" onClick={supprimerCommande} />
                     </div>
-                    
-                    <div class="i_apres_payement"></div>
-                    
-                    {donnees_adresse && donnees_adresse.map(info => (
-                        <div className="i_adresse c_adresse" id="zone_adresse">
-                            <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
-                            <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
-                            <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip}/>
-                            <AdresseCommande className_div="i_ville" fom="ville" Text="Ville" id="ville" name="nom_ville" type="text" placeholder={info.Ville}/>
+
+                    <div className="c_info_reception i_info_reception">
+                        <div className="i_heure" id="elem_heure">
+                            <label class="label_informations" for="heure_livraison">Heure</label><br />
+                            <div id="heure_livraison">
+                                <select className="decorated" name="heures_reserv" id="heures_reserv">
+                                    {heures.map(heure => (
+                                        <option class="choix_heure" value={`${heure.h}:${heure.m}`}>{heure.h}{":"}{heure.m}</option>
+                                    ))}
+                                </select>
+                            </div>								
                         </div>
-                    ))}
-                    
-                </div>
 
-                <div className="i_commentaire" id="elem_commentaire">
-                    <label for="commentaire" id="titre_elem_commentaire">Commentaire</label><br />
-                    <textarea placeholder="Texte prédéfini" id="commentaire" wrap="hard"></textarea>
-                </div>
+                        <div className="i_apres_heure"></div>
 
-                <div className="i_boutons2 c_boutons2">
-                    <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouterCommande} />
-                    <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annulerInfo} />
+                        <div className="i_moy_reception">
+                            <label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
+                            <div className="c_reception">
+                                <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" onClick={cacherAdresse}/>
+                                <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficherAdresse}/>
+                            </div>
+                        </div>
+
+                        <div className="i_apres_reception"></div>
+                        
+                        <div className="i_payement">
+                            <label class="label_informations" for="mode_payement">Mode de payement</label><br />
+                            <div className="i_mode_payement c_mode_payement">
+                                <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="liquide" form="liquide" text="Liquide"/>
+                                <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="mistercash" form="mistercash" text="Mistercash" />
+                            </div>
+                        </div>
+                        
+                        <div class="i_apres_payement"></div>
+                        
+                            {donnees_adresse && donnees_adresse.map(info => (
+                                <div className="i_adresse c_adresse" id="zone_adresse">
+                                    <AdresseCommande className_div="i_adresse_livraison" fom="adresse_livraison" Text="Adresse de livraison" id="adresse_livraison" name="add_livraison" type="text" placeholder={info.Rue}/>
+                                    <AdresseCommande className_div="i_numero_maison" fom="numero_maison" Text="Numéro" id="numero_maison" name="num_maison" type="number" placeholder={info.Numero}/>
+                                    <AdresseCommande className_div="i_code_postal" fom="code_postal" Text="Code postal" id="code_postal" name="num_postal" type="number" placeholder={info.Zip} readOnly={true}/>
+                                    <div className="i_ville">
+                                        <label className="label_adresse" for="ville">Ville</label><br /> 
+                                        <select id="selection_ville" className="selec_ville" defaultValue="0">
+                                        </select>
+                                    </div>
+                                </div>
+                            ))}
+                        
+                    </div>
+
+                    <div className="i_commentaire" id="elem_commentaire">
+                        <label for="commentaire" id="titre_elem_commentaire">Commentaire</label><br />
+                        <textarea placeholder="Texte prédéfini" id="commentaire" wrap="hard"></textarea>
+                    </div>
+
+                    <div className="i_boutons2 c_boutons2">
+                        <BoutonPanier className="i_bouton_envoyer2" id_div="elem_bouton_envoyer2" id_elem="bouton_envoyer2" name="bout_envoyer2" value="Valider" onClick={ajouterCommande} />
+                        <BoutonPanier className="i_bouton_annuler2" id_div="elem_bouton_annuler2" id_elem="bouton_annuler2" name="bout_annuler2" value="Retour" onClick={annulerInfo} />
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Panier;

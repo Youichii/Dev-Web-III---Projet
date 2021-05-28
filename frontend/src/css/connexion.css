@@ -55,7 +55,7 @@
 	text-align: center;
 	padding: 23px 0px 0px 0px;
 	color: white;
-	background-color: var(--principale);
+	background-color: #a79177;
 }
 .i_bouton_inscription {
 	grid-column-start: 5;
@@ -73,7 +73,7 @@
 
 
 .i_bouton_inscription:hover{
-	color: var(--principale);
+	color: #a79177;
 	background-color:#667D88;
 }
 
@@ -119,7 +119,7 @@
 	color : white;	
 }
 #texte_utilisateur:focus {
-	border-color:var(--principale);
+	border-color:#a79177;
 	border-width: 2px;	
 	outline:  none;
 }
@@ -154,7 +154,7 @@
 	color : white;
 }
 #texte_mdp:focus {
-	border-color:var(--principale);
+	border-color:#a79177;
 	border-width: 2px;	
 	outline:  none;
 }
@@ -170,7 +170,7 @@
 }
 
 #bouton_connexion_envoi {
-	background-color: var(--principale);
+	background-color: #a79177;
     border: none;
     color: white;
     width: 79%;
@@ -179,7 +179,7 @@
 	cursor: pointer;
 }
 #bouton_connexion_envoi:hover{
-	background-color:var(--survol_bouton);
+	background-color:#82705b;
 }
 
 .i_mdp_oubli {

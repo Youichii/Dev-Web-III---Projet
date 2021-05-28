@@ -29,17 +29,17 @@ import { initGA } from './components/Compteurs';
 
 function App() {
 
-  const [etat, setEtat] = useState({loading:true});
-  useEffect(()=>{initGA();},[]);
-  useEffect(()=> {
-    setTimeout(() => {
-        setEtat({loading: false})
-    }, 1000)
-  });
+  // const [etat, setEtat] = useState({loading:true});
+  // useEffect(()=>{initGA();},[]);
+  // useEffect(()=> {
+  //   setTimeout(() => {
+  //       setEtat({loading: false})
+  //   }, 1000)
+  // });
 
-  if (etat.loading) {
-    return <Chargement />;
-  }
+  // if (etat.loading) {
+  //   return <Chargement />;
+  // }
   
   return (
     <Router>

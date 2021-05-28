@@ -2,17 +2,18 @@ import {useEffect, useState} from 'react';
 import Axios from "axios";
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-
+import Chargement from './Chargement';
 
 const Historique = () => {
     require("./css/historique.css")
     Axios.defaults.withCredentials = true;
 
-    let [historiques, setHistoriques] = useState(null)
-    let[annees, setAnnees]= useState([])
+    const [historiques, setHistoriques] = useState(null);
+    const[annees, setAnnees]= useState([]);
     const [date, setDate] = useState(null);
     const [statutConnexion, setStatutConnexion] = useState(false);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
+    const [valeursPretesHIST, setValeursPretesHIST] = useState(false);
 
 
 	/**
@@ -71,45 +72,64 @@ const Historique = () => {
 
     },[])
 
-    return(
-        <div>
-            {statutConnexion ? <BanniereConnection page="historique" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
-        
-            <div id = 'cadre'>
-                {annees&&annees.map(annee => 
-                    <details>
-                        <summary className='annee'>{annee.Annee }</summary>
-                        {mois.map(remplirMois =>                       
-                            <details>
-                                <summary className='mois'>{remplirMois.Mois}</summary> 
-                                <table className="tableau">
-                                    <tr className="titres">
-                                        <th> Id de la commande </th>
-                                        <th> Date de la command </th>
-                                        <th> Id du client </th>
-                                        <th> Ville de commande </th>
-                                        <th> Contenu de la commande </th>
-                                        <th> Total de la commande </th>                                       
-                                    </tr>
-                                    {historiques&&historiques.filter(historique =>
-                                    String(historique.DateCommande).slice(5,7) === remplirMois.Id &&  String(historique.DateCommande).slice(0,4) === annee.Annee )
-                                    .map(remplirHistorique =>
-                                        <tr className='ligneHistorique'>
-                                            <td className="ligne">{remplirHistorique.IdHistComm}</td>
-                                            <td className="ligne">{remplirHistorique.DateCommande.slice(0,10)}</td>
-                                            <td className="ligne">{remplirHistorique.IdClient}</td>
-                                            <td className="ligne">{remplirHistorique.Ville}</td>
-                                            <td className="ligne">{remplirHistorique.Produits}</td>
-                                            <td className="ligne">{remplirHistorique.Total}€</td>
+    /**
+         * Vérifie si les valeurs en asynchrone sont arrivées
+         * 
+         * @author Clémentine Sacré <c.sacre@students.ephec.be>
+         */
+    useEffect(() => {
+        if (historiques !== null && annees.length > 0) {
+            setValeursPretesHIST(true);
+        }
+    }, [historiques, annees]);
+
+    if (!valeursPretesHIST) {
+        return (
+            <Chargement />
+        );
+    }
+
+    else {
+        return(
+            <div>
+                {statutConnexion ? <BanniereConnection page="historique" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+            
+                <div id = 'cadre'>
+                    {annees&&annees.map(annee => 
+                        <details>
+                            <summary className='annee'>{annee.Annee }</summary>
+                            {mois.map(remplirMois =>                       
+                                <details>
+                                    <summary className='mois'>{remplirMois.Mois}</summary> 
+                                    <table className="tableau">
+                                        <tr className="titres">
+                                            <th> Id de la commande </th>
+                                            <th> Date de la command </th>
+                                            <th> Id du client </th>
+                                            <th> Ville de commande </th>
+                                            <th> Contenu de la commande </th>
+                                            <th> Total de la commande </th>                                       
                                         </tr>
-                                    )} 
-                                </table>
-                            </details> 
-                        )}  
-                    </details>             
-                )}
+                                        {historiques&&historiques.filter(historique =>
+                                        String(historique.DateCommande).slice(5,7) === remplirMois.Id &&  String(historique.DateCommande).slice(0,4) === annee.Annee )
+                                        .map(remplirHistorique =>
+                                            <tr className='ligneHistorique'>
+                                                <td className="ligne">{remplirHistorique.IdHistComm}</td>
+                                                <td className="ligne">{remplirHistorique.DateCommande.slice(0,10)}</td>
+                                                <td className="ligne">{remplirHistorique.IdClient}</td>
+                                                <td className="ligne">{remplirHistorique.Ville}</td>
+                                                <td className="ligne">{remplirHistorique.Produits}</td>
+                                                <td className="ligne">{remplirHistorique.Total}€</td>
+                                            </tr>
+                                        )} 
+                                    </table>
+                                </details> 
+                            )}  
+                        </details>             
+                    )}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 export default Historique; 
