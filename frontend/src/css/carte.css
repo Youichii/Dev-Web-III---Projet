@@ -220,8 +220,8 @@ span.symbolpanier:hover div{
 input.valeur{  
   width: 30px;
   background-color: #5b5454;
-  float: right;
-  margin-top:3px;
+  float : right;
+  margin-top:1%;
   border-radius: 3px;
   border-right:-5px;
 
@@ -230,7 +230,6 @@ input.valeur{
 .price{ 
   color:#ff6e40; 
   float: right;
-  margin-bottom:20px;
 }
 
 .description{
