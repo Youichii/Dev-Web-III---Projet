@@ -62,18 +62,6 @@ const Carte = () => {
                             }
                             setPanier(json)
                         }) 
-                        
-                        // var totalCommande = {method: 'GET', 
-                        // headers: {'Content-type':'application/json'}
-                        // }; 
-                        // fetch(`/api/total/${idCommandes}`, totalCommande)
-                        // .then(response=>{ 
-                        //     return response.json()
-                        // })
-                        // .then(json =>{ 
-                        //     setTotal(json.PrixTotal)
-                        //     console.log(json)
-                        // }) 
                     }
 
                     else{
@@ -157,32 +145,54 @@ const Carte = () => {
                 return response.json();
             }) 
         }
-
-        if(qtt === 1){
-                
-            var remplirPanier = { method:'POST', 
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({  IdCommande : idCommandes, 
-                                    IdProduit : idProduit,
-                                    Quantite : qtt
-                                })  
+       
+        if(qtt === 1 ){
+            let controle = false
+            paniers.filter(mapp => mapp.IdProduit === idProduit).map(mapp => controle = true)
+            console.log(controle)
+            if(controle){
+                var changerquantite = { method:'PUT', 
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({  IdCommande : idCommandes, 
+                                        IdProduit : idProduit,
+                                        Quantite : qtt
+                                    }) 
+                }
+                fetch('/api/changingquantity',changerquantite)
+                .then(res => {
+                    return res.json();
+                }) 
             }
-            fetch('/api/intermediateBasket', remplirPanier)
-            .then(res => {
-                return res.json();
-            })
+            else{
+                fetch('/api/changingquantity',changerquantite)
+                .then(res => {
+                    return res.json();
+                }) 
+                    
+                var remplirPanier = { method:'POST', 
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({  IdCommande : idCommandes, 
+                                        IdProduit : idProduit,
+                                        Quantite : qtt
+                                    })  
+                }
+                fetch('/api/intermediateBasket', remplirPanier)
+                .then(res => {
+                    return res.json();
+                })
 
-            
-            var panier = {method: 'GET', 
-            headers: {'Content-type':'application/json'}
-            }; 
-            fetch(`/api/loadingBasket/${idCommandes}`, panier)
-            .then(response=>{ 
-                return response.json()
-            })
-            .then(json =>{ 
-                setPanier(json)
-            })  
+                
+                var panier = {method: 'GET', 
+                headers: {'Content-type':'application/json'}
+                }; 
+                fetch(`/api/loadingBasket/${idCommandes}`, panier)
+                .then(response=>{ 
+                    return response.json()
+                })
+                .then(json =>{ 
+                    setPanier(json)
+                })  
+            }
         }
 
         else{
