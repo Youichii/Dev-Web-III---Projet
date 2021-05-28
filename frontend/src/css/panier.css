@@ -16,9 +16,9 @@
   .panier {
       display: grid;
       grid-template-columns: 5% 40% 5% 5% 35% 10%;
-      grid-template-rows: 48px 485px 21px 189px 52px;
+      grid-template-rows: 48px 474px 21px 189px 52px;
       grid-gap: 0px;
-      padding: 5px;
+      padding: 10px;
       margin: 0px 0px 2px 0px;
   }
   .c_info_panier {
@@ -90,7 +90,7 @@
   }
   .titres {
       font-size: 22px;
-      background-color:#F7C27E;
+      background-color:#a79177;
       text-align: center;
       padding: 6px;
       border-radius: 5px;
@@ -230,7 +230,7 @@
       grid-column-end: 4;
       
       text-align: center;
-      background-color: #F7C27E;
+      background-color: #a79177;
       border-radius: 5px;
       padding: 6px 0px 0px 0px;
   }
@@ -488,7 +488,7 @@
       font-size: 20px;
   }
   input[type=text]:focus, .c_adresse select:hover, .i_code_postal > input[type=number]:focus, .i_numero_maison  > input[type=number]:focus{
-      border-color:#CCA78D;
+      border-color:#a79177;
       border-width: 2px;	
       outline:  none;
   }
@@ -593,7 +593,7 @@
   
   
   #i_grise_etape1 {
-      background-color:#F7C27E ;
+      background-color:#88745c ;
       grid-column-start: 4;
       grid-column-end: 7;
       grid-row-start: 1;
@@ -604,7 +604,7 @@
       font-size: 60px;
   }
   #i_grise_etape2 {
-      background-color:#F7C27E ;
+      background-color:#88745c ;
       grid-column-start: 1;
       grid-column-end: 4;
       grid-row-start: 1;

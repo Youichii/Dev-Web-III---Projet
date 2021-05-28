@@ -4,18 +4,19 @@ import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import BoutonCommunautee from './components/BoutonCommunautee'; 
 import React from 'react';
-
+import Chargement from './Chargement';
 
 const Communaute = () => {
     require("./css/communaute.css")
     Axios.defaults.withCredentials = true;
 
-    let [utilisateurs, setUtilisateurs] = useState(null)
-    let[commentaires, setCommentaires] = useState(null)
-    let [nom, setNom] = useState(null)
-    let [ville, setVille] = useState(null)
+    const [utilisateurs, setUtilisateurs] = useState(null)
+    const [commentaires, setCommentaires] = useState(null)
+    const [nom, setNom] = useState(null)
+    const [ville, setVille] = useState(null)
     const [statutConnexion, setStatutConnexion] = useState(false);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
+    const [valeursPretesCOMM, setValeursPretesCOMM] = useState(false);
 
 
 	/**
@@ -359,82 +360,102 @@ const Communaute = () => {
         
     }
 
-    return(
 
-        <div>
-            {statutConnexion ? <BanniereConnection page="communaute" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
-            <fieldset id = "recherche">
+    /**
+     * Vérifie si les valeurs en asynchrone sont arrivées
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     useEffect(() => {
+        if (utilisateurs !== null && commentaires !== null  && nom !== null  && ville !== null ) {
+            setValeursPretesCOMM(true);
+        }
+    }, [utilisateurs, commentaires, nom, ville]);
 
-                <select id="selectVille" onChange={()=>Trie()}>
-
-                    <option value=''>--Selectionnez un ville--</option>
-
-                    {ville&&ville.map(utilisateur => 
-                       
-                        <option>{utilisateur.Ville}</option>
-                        
-                    )}
+    if (!valeursPretesCOMM) {
+        return (
+            <Chargement />
+        );
+    }
     
-                </select>
-                
-                <select id="selectStatus" onChange={()=>Trie()}>
+    else {
+        return(
 
-                    <option value=''>--Selectionnez un status--</option>
-                    <option>Non-Blacklisté</option>
-                    <option>Blacklisté</option>
-                                
-                </select>
+            <div>
+                {statutConnexion ? <BanniereConnection page="communaute" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique />}
+                <fieldset id = "recherche">
 
-                <select id="selectName" onChange={()=>Trie()}>
-                    
-                    <option value=''>--Selectionnez un Nom--</option>
-                    {nom&&nom.map(utilisateur => 
-                        <option>{utilisateur.Nom}</option>
-                    )}
-                                
-                </select>
-                
+                    <select id="selectVille" onChange={()=>Trie()}>
 
-            </fieldset>
+                        <option value=''>--Selectionnez un ville--</option>
 
-            <div id = "communaute"> 
-
-                {utilisateurs&&utilisateurs.map(utilisateur => (
-
-                    <div  className = "coordonnes">
-
-                        <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Statut === 0)?{color:"white"}:{color:"red"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
-                   
-                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Statut === 0)?('Blacklister'):('Dé-Blacklister')} />
+                        {ville&&ville.map(utilisateur => 
                         
-                        <div className="mail">{utilisateur.Mail}</div>
-
-                        <div className="tel">{utilisateur.GSM}</div>
-
-                        <div className="ville">{utilisateur.Ville}</div>
-
-                        <div className="age">{utilisateur.Anniversaire.slice(0,10)}</div>
-
-                        <div className="genre">{utilisateur.Genre}</div>
-
-
-                        <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.IdClient} ></input>
-
-                        
-                        <BoutonCommunautee className='envoyer' id ={'envoyer'+ utilisateur.IdClient} onClick={() => ecrire(utilisateur.IdClient)} value='Envoyer'/>
-
-                        <div id={utilisateur.IdClient+"commentaire"} className ='com'> 
-
-                            {commentaires&&commentaires.filter(commentaire =>  commentaire.IdClient === utilisateur.IdClient).map(commentaire_id => (
-                                <div id = {commentaire_id.Commentaire + commentaire_id.IdClient} > -  {commentaire_id.Commentaire} <BoutonCommunautee className='boutton_supprimer' onClick={() => supprimer(commentaire_id.Commentaire, commentaire_id.IdClient)} value='X'/></div>
-                            ))}   
+                            <option>{utilisateur.Ville}</option>
                             
+                        )}
+        
+                    </select>
+                    
+                    <select id="selectStatus" onChange={()=>Trie()}>
+
+                        <option value=''>--Selectionnez un status--</option>
+                        <option>Non-Blacklisté</option>
+                        <option>Blacklisté</option>
+                                    
+                    </select>
+
+                    <select id="selectName" onChange={()=>Trie()}>
+                        
+                        <option value=''>--Selectionnez un Nom--</option>
+                        {nom&&nom.map(utilisateur => 
+                            <option>{utilisateur.Nom}</option>
+                        )}
+                                    
+                    </select>
+                    
+
+                </fieldset>
+
+                <div id = "communaute"> 
+
+                    {utilisateurs&&utilisateurs.map(utilisateur => (
+
+                        <div  className = "coordonnes">
+
+                            <div className="utilisateur" id={utilisateur.IdClient+"utilisateur"} style={(utilisateur.Statut === 0)?{color:"white"}:{color:"red"}}  >{utilisateur.Prenom} {utilisateur.Nom}</div>
+                    
+                            <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Statut === 0)?('Blacklister'):('Dé-Blacklister')} />
+                            
+                            <div className="mail">{utilisateur.Mail}</div>
+
+                            <div className="tel">{utilisateur.GSM}</div>
+
+                            <div className="ville">{utilisateur.Ville}</div>
+
+                            <div className="age">{utilisateur.Anniversaire.slice(0,10)}</div>
+
+                            <div className="genre">{utilisateur.Genre}</div>
+
+
+                            <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.IdClient} ></input>
+
+                            
+                            <BoutonCommunautee className='envoyer' id ={'envoyer'+ utilisateur.IdClient} onClick={() => ecrire(utilisateur.IdClient)} value='Envoyer'/>
+
+                            <div id={utilisateur.IdClient+"commentaire"} className ='com'> 
+
+                                {commentaires&&commentaires.filter(commentaire =>  commentaire.IdClient === utilisateur.IdClient).map(commentaire_id => (
+                                    <div id = {commentaire_id.Commentaire + commentaire_id.IdClient} > -  {commentaire_id.Commentaire} <BoutonCommunautee className='boutton_supprimer' onClick={() => supprimer(commentaire_id.Commentaire, commentaire_id.IdClient)} value='X'/></div>
+                                ))}   
+                                
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        </div>       
-    )
+                    ))}
+                </div>
+            </div>       
+        )
+    }
 }
 
 export default Communaute; 
