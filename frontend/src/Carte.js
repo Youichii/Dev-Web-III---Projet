@@ -54,10 +54,12 @@ const Carte = () => {
                             return response.json()
                         })
                         .then(json =>{ 
-                            console.log('table du panier', json[0].Quantite)
+                            console.log(paniers)
+                            if(paniers === null || paniers.length !== 0){
                             json.map(maping=> 
                                 document.getElementById(maping.IdProduit + 'compteur').value = maping.Quantite
                             )
+                            }
                             setPanier(json)
                         }) 
                         
@@ -104,6 +106,7 @@ const Carte = () => {
             }
             else {setStatutConnexion(false);}
         }) 
+       
 	}, []);
     
     useEffect(()=>{
@@ -265,7 +268,7 @@ const Carte = () => {
                                 </span> : 
             <span></span>}
 
-            { statutConnexion ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
+            { statutConnexion && ( paniers === null || paniers.length !== 0)  ?  <NavLink to="/panier"><a href="/" className="symbolpayer" >Passer Commande &#128184;</a></NavLink> : <span></span>}
  
             <a href={PDFMenu} download id="menuT">
            Menu Téléchargeable  

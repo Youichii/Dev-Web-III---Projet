@@ -891,7 +891,7 @@ app.post('/api/orders', (req, res) => {
  * 
 **/ 
 app.get('/api/historical', (req, res) =>{
-    const sqlInsert = 'SELECT * from historique '
+    const sqlInsert = 'SELECT IdHistComm, IdClient, DateCommande, Produits, Total, ville.nomVille AS Ville FROM historique JOIN ville ON  historique.Ville = ville.IdVille '
   db.query(sqlInsert, (err, result) => {
     if(err) throw err ;
     res.send(result);

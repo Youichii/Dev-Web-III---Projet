@@ -84,7 +84,8 @@ const Historique = () => {
                                 <summary className='mois'>{remplirMois.Mois}</summary> 
                                 <table className="tableau">
                                     <tr className="titres">
-                                        <th>Date de la command </th>
+                                        <th> Id de la commande </th>
+                                        <th> Date de la command </th>
                                         <th> Id du client </th>
                                         <th> Ville de commande </th>
                                         <th> Contenu de la commande </th>
@@ -94,6 +95,7 @@ const Historique = () => {
                                     String(historique.DateCommande).slice(5,7) === remplirMois.Id &&  String(historique.DateCommande).slice(0,4) === annee.Annee )
                                     .map(remplirHistorique =>
                                         <tr className='ligneHistorique'>
+                                            <td className="ligne">{remplirHistorique.IdHistComm}</td>
                                             <td className="ligne">{remplirHistorique.DateCommande.slice(0,10)}</td>
                                             <td className="ligne">{remplirHistorique.IdClient}</td>
                                             <td className="ligne">{remplirHistorique.Ville}</td>

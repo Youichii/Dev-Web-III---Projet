@@ -93,6 +93,25 @@ code {
     opacity: 1;
   }
 
+@media only screen and (max-width: 720px) {
+    #Sidebareright{
+      background-image: none;
+      grid-column: 3;
+    }
+    #Sidebareleft{
+      background-image: none;
+      grid-column: 1;
+
+    }
+    .Menu{
+      grid-template-columns:5% 90% 5% ; 
+      display : grid; 
+    }
+    #bordPrincipa{
+      grid-column: 1;
+    }
+  }
+
   /* Boutton sous le cadre */
 
 .symbolpanier div{
