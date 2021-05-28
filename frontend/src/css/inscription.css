@@ -67,7 +67,7 @@ html {
 	color: var(--principale);
 	background-color:#667D88;
 }
-.i_titre_connexion {
+.inscription .i_titre_connexion {
 	grid-column-start: 3;
 	grid-column-end: 7;
 	grid-row-start: 4;
