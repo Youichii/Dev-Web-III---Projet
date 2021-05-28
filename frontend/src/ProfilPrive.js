@@ -69,7 +69,7 @@ const ProfilPrive = () => {
     }
 
     const submitAdress = () => {
-        Axios.put('http://localhost:3001/api/client/adress', {
+        Axios.put('/api/client/adress', {
             utilisateur : utilisateur,
             rue : rue,
             numero : numero,
@@ -81,7 +81,7 @@ const ProfilPrive = () => {
     }
 
     const submitPhone = () => {
-        Axios.put('http://localhost:3001/api/client/telephone', {
+        Axios.put('/api/client/telephone', {
             utilisateur : utilisateur,
             telephone : telephone
         }).then ((response) => {
@@ -92,7 +92,7 @@ const ProfilPrive = () => {
     }
 
     const submitMail = () => {
-        Axios.put('http://localhost:3001/api/client/mail', {
+        Axios.put('/api/client/mail', {
             utilisateur : utilisateur,
             mail : mail
         }).then ((response) => {
