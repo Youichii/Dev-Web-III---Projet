@@ -2,11 +2,12 @@ import PropTypes from 'prop-types'
 
 const DetailCommande = ({ informations, type_couleur, bg_bouton, onMouseOver, onMouseLeave, onClick_panier, onClick_ok }) => {
     return (
-        <div className="i_commande c_commande" id={informations.IdClient} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+        <div className="i_commande c_commande" id={informations.IdCommande} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
                 <div className="c_sans_bouton i_sans_bouton" onClick={onClick_panier}>
+                    <div className={`i_id ${type_couleur}`}>{informations.IdCommande}</div> 
                     <div className={`i_nom ${type_couleur}`}>{informations.Prenom}</div> 
                     <div className={`i_contact ${type_couleur}`}>{informations.Gsm}</div> 
-                    <div className={`i_prix_commande ${type_couleur}`}>{informations.Prix}</div> 
+                    <div className={`i_prix_commande ${type_couleur}`}>{informations.Prix} €</div> 
                     <div className={`i_heure_prevue ${type_couleur}`}>{informations.HLivree}</div>
                 </div>
                 <div className={`i_div_bouton ${bg_bouton}`}>
@@ -17,10 +18,6 @@ const DetailCommande = ({ informations, type_couleur, bg_bouton, onMouseOver, on
 
 }
 
-/*DetailCommande.defaultProps = {
-    color: 'steelblue',
-    text : 'Hello'
-}*/
 
 DetailCommande.propTypes = {
     informations : PropTypes.string,

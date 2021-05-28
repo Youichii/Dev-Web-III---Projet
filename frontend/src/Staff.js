@@ -12,6 +12,9 @@ const Staff = () => {
     let compteur_afaire = 1 ;
     let compteur_encours = 1 ;
     let compteur_envoye = 1 ;
+    const [condAfaire, setCondAfaire] = useState(true);
+    const [condEncours, setCondEncours] = useState(true);
+    const [condEnvoyee, setCondEnvoyee] = useState(true);
     const [donnees, setDonnees] = useState(null);
     const [changement, setChangement] = useState(true);
     const [statutConnexion, setStatutConnexion] = useState(false);
@@ -137,6 +140,7 @@ const Staff = () => {
         let ligne_info = document.getElementById(identifiant);
         let couleur_survol = "var(--bg_survol)";
         
+        ligne_info.getElementsByClassName("i_id")[0].style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_survol;
         ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_survol;
@@ -156,11 +160,12 @@ const Staff = () => {
      */
     const ancienBg = (identifiant, couleur) => {
         let ligne_info = document.getElementById(identifiant);
-        let liste_aliments = donnees.filter(element => element.IdClient === identifiant)[0] ;
+        let liste_aliments = donnees.filter(element => element.IdCommande === identifiant)[0] ;
         let couleur_quitter, bg_bouton ;
         (couleur === "couleur_bg1") ? couleur_quitter = "var(--bg_ligne2)" : couleur_quitter = "var(--bg_ligne1)";
         (liste_aliments.IdMethode === "EMP") ? bg_bouton = "var(--bg_bouton_surplace)" : bg_bouton = couleur_quitter;
         
+        ligne_info.getElementsByClassName("i_id")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_nom")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_contact")[0].style.backgroundColor=couleur_quitter;
         ligne_info.getElementsByClassName("i_prix_commande")[0].style.backgroundColor=couleur_quitter;
@@ -180,6 +185,44 @@ const Staff = () => {
      * @param {string} identifiant  type de commande ; à faire, en cours ou envoyé
      */
     const chargementPanier = (informations, identifiant) => {
+        let liste_commandes = donnees.filter(x => x.IdEtat === informations.IdEtat);
+        let indice = liste_commandes.indexOf(informations);
+        let classe, classeDetail ; 
+
+        if (identifiant === "afaire") {
+            document.getElementsByClassName("detailCommandeAfaire")[0].style.gridRowStart = indice + 2 ;
+            document.getElementsByClassName("detailCommandeAfaire")[0].style.gridRowEnd = indice + 3 ;
+            document.getElementsByClassName("detailCommandeAfaire")[0].style.display = "grid" ;
+            setCondAfaire(false);
+            classe = "i_item7" ;
+            classeDetail = "detailCommandeAfaire" ;
+        }
+        else if (identifiant === "encours") {
+            document.getElementsByClassName("detailCommandeEnCours")[0].style.gridRowStart = indice + 2 ;
+            document.getElementsByClassName("detailCommandeEnCours")[0].style.gridRowEnd = indice + 3 ;
+            document.getElementsByClassName("detailCommandeEnCours")[0].style.display = "grid" ;
+            setCondEncours(false);
+            classe = "i_item2" ;
+            classeDetail = "detailCommandeEnCours" ;
+        }
+        else {
+            document.getElementsByClassName("detailCommandeEnvoyee")[0].style.gridRowStart = indice + 2 ;
+            document.getElementsByClassName("detailCommandeEnvoyee")[0].style.gridRowEnd = indice + 3 ;
+            document.getElementsByClassName("detailCommandeEnvoyee")[0].style.display = "grid" ;
+            setCondEnvoyee(false);
+            classe = "i_item4" ;
+            classeDetail = "detailCommandeEnvoyee" ;
+        }
+
+        let taille = "13% ", nbr_lignes = "13% " ;
+        for (let i = 0 ; i < donnees.filter(x => x.IdEtat === informations.IdEtat).length ; i++) {
+            if (i=== indice) {nbr_lignes += "250px ";}
+            else {nbr_lignes += taille;}
+        }
+        console.log("classe : ", classe, " nbr : ", nbr_lignes);
+        document.getElementById(classe).style.gridTemplateRows = nbr_lignes ;
+
+
         let identifiantCommande = informations.IdCommande ;
         fetch(`/api/orders/${identifiantCommande}`, {
             method: 'GET',
@@ -193,19 +236,19 @@ const Staff = () => {
             let info_lieu = '<div class="i_adresse_detail_adresse">Adresse :  <span class="info_client">' + informations.Rue + '</span></div> \
                     <div class="i_adresse_detail_numero">Numéro :  <span class="info_client">' + informations.Numero + '</span></div> \
                     <div class="i_adresse_detail_ville">Ville :  <span class="info_client">' + informations.Ville + '</span></div> \
-                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.Postal + '</span>' ;
+                    <div class="i_adresse_detail_postal">Postal :  <span class="info_client">' + informations.Zip + '</span>' ;
 
             (informations.Commentaire === null) ? info_commentaire = "/" : info_commentaire = informations.Commentaire ;
             (informations.IdMethode === "EMP") ? lieu = '<div class="i_adresse_detail_adresse">Lieu :  <span class="info_client">sur place</span></div>' : lieu = info_lieu ;
 
-            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommade + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
+            let liste_finale = "<div class='i_titre_detail'>Détails de la commande <span class='id_client_detail'>" + informations.IdCommande + "</span> :</div><br><div class='i_aliments_detail' id='c_aliments_detail_" + identifiant + "'>" ;
             for (let i=0 ; i< donnees.length ; i++){
                 liste_finale += "<div class='i_ligne_aliment c_ligne_aliment'><div class='titre_aliment'>○ " + donnees[i]["Produit"] + "</div><div class=quantite_aliment>x&ensp;" + donnees[i]["Quantite"] + "</div></div>";
                 nbr_lignes += "14% " ;
             }
-            liste_finale += '</div><div class="i_commentaire_detail">Commentaire : <br><span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCommande.substring(14, 19) + " - " + informations.DateCommande.substring(8, 10) + "/" + informations.DateCommande.substring(5, 7) + "/" + informations.DateCom.substring(0, 4) + '</span></div>' + lieu + '</div>';
+            liste_finale += '</div><div class="i_payement_detail">Mode de payement : <span class="info_payement">' + ((informations.PayementLiquide === 0) ? "Mistercash" : "Liquide") + '</span></div><div class="i_commentaire_detail">Commentaire : <span class="info_com">' + info_commentaire + '</span></div><div class="i_heure_detail">Heure passée : <span class="info_client">' + informations.DateCommande.substring(14, 19) + " - " + informations.DateCommande.substring(8, 10) + "/" + informations.DateCommande.substring(5, 7) + "/" + informations.DateCommande.substring(0, 4) + '</span></div>' + lieu + '</div>';
                             
-            document.getElementById(identifiant).innerHTML = liste_finale;
+            document.getElementsByClassName(classeDetail)[0].innerHTML = liste_finale;
             document.getElementById("c_aliments_detail_" + identifiant).style.gridTemplateRows = nbr_lignes ;
         })
     }
@@ -218,18 +261,19 @@ const Staff = () => {
      * @param {object} elem contient toutes les informations relatives à une commande
      */
     const elementsAfaire = (elem) => {
-        let taille = "12% ";
-        let nbr_lignes_afaire = "12% " ;
+        let taille = "13% ";
+        let nbr_lignes_afaire = "13% " ;
         let type_couleur, bg_bouton ;
         (compteur_afaire%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_afaire++ ;
         (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.IdEtat === "AFA").map(aliment => nbr_lignes_afaire += taille) ;
-        document.getElementById("cadre_afaire").style.gridTemplateRows = nbr_lignes_afaire ;
-        console.log("informations : ", elem);
+        if (condAfaire) {
+            document.getElementById("i_item7").style.gridTemplateRows = nbr_lignes_afaire ;
+        }
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "afaire")} onClick_ok={() => ajouterCommande(elem, "ENC")}  />        
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdCommande)} onMouseLeave={() => ancienBg(elem.IdCommande, type_couleur)} onClick_panier={() => chargementPanier(elem, "afaire")} onClick_ok={() => ajouterCommande(elem, "ENC")}  />        
         )
     }
 
@@ -241,19 +285,20 @@ const Staff = () => {
      * @param {object} elem contient toutes les informations relatives à une commandem
      */
     const elementsEncours = (elem) => {
-        let taille = "12% ";
-        let  nbr_lignes_encours = "12% ";
+        let taille = "13% ";
+        let  nbr_lignes_encours = "13% ";
         let type_couleur, bg_bouton ;
         (compteur_encours%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_encours++ ;
         (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.IdEtat === "ENC").map(aliment => nbr_lignes_encours += taille) ;
-        document.getElementById("cadre_encours").style.gridTemplateRows = nbr_lignes_encours ;
-
+        if (condEncours) {
+            document.getElementById("i_item2").style.gridTemplateRows = nbr_lignes_encours ;
+        }
         return (
 
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "encours")} onClick_ok={() => ajouterCommande(elem, "ENV")}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdCommande)} onMouseLeave={() => ancienBg(elem.IdCommande, type_couleur)} onClick_panier={() => chargementPanier(elem, "encours")} onClick_ok={() => ajouterCommande(elem, "ENV")}  />
         )
     }
 
@@ -265,18 +310,19 @@ const Staff = () => {
      * @param {object} elem contient toutes les informations relatives à une commande
      */
     const elementsEnvoye = (elem) => {
-        let taille = "12% ";
-        let nbr_lignes_envoye = "12% " ;
+        let taille = "13% ";
+        let nbr_lignes_envoye = "13% " ;
         let type_couleur, bg_bouton ;
         (compteur_envoye%2 === 0) ? type_couleur = "couleur_bg1" : type_couleur = "couleur_bg2" ;
         compteur_envoye++ ;
         (elem.IdMethode === "EMP") ? bg_bouton = "couleur_surplace" : bg_bouton = type_couleur ;
 
         donnees.filter(element => element.IdEtat === "ENV").map(aliment => nbr_lignes_envoye += taille) ;
-        document.getElementById("cadre_envoye").style.gridTemplateRows = nbr_lignes_envoye ;
-
+        if (condEnvoyee) {
+            document.getElementById("i_item4").style.gridTemplateRows = nbr_lignes_envoye ;
+        }
         return (
-            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdClient)} onMouseLeave={() => ancienBg(elem.IdClient, type_couleur)} onClick_panier={() => chargementPanier(elem, "envoye")} onClick_ok={() => supprimerCommande(elem.IdCommande)}  />
+            <DetailCommande informations={elem} type_couleur={type_couleur} bg_bouton={bg_bouton} onMouseOver={() => nouveauBg(elem.IdCommande)} onMouseLeave={() => ancienBg(elem.IdCommande, type_couleur)} onClick_panier={() => chargementPanier(elem, "envoye")} onClick_ok={() => supprimerCommande(elem.IdCommande)}  />
         )
     }
 
@@ -286,75 +332,34 @@ const Staff = () => {
             <div className="staff c_page">
 
                 <div className="c_cadre_commandes_afaire i_cadre_attente">
-                    <div className="c_titre_fileattente i_titre_fileattente">
-                        <div className="file_attente">File d'attente</div>
-                        <div className="barre_haut_attente"></div>
-                        <div className="barre_bas_attente"></div>
-                    </div>
                     <div className="c_titres_commandes i_titres_commandes">
+                        <div className="i_id_commande" id="titre_idcom">Commande</div>
                         <div className="i_heures">Heure</div>
                         <div className="i_noms">Nom</div>
                         <div className="i_contacts">Contact</div>
                         <div className="i_prix_titre">Prix</div>
                     </div>
 
-                    <div className="i_commandes_afaire c_commandes" id="cadre_afaire">
-                        {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elementsAfaire)}
+                    <div className="c_item5">
+                        <div className="c_type1">Commandes à faire</div>
+                        <div className="c_item6" id="i_item7">
+                            {donnees && donnees.filter(element => element.IdEtat === "AFA").map(elementsAfaire)}
+                            <div className="detailCommandeAfaire"></div>
+                        </div>
+                        
+                        <div className="c_type2">Commandes en cours</div>
+                        <div className="c_item1" id="i_item2">
+                            {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elementsEncours)}
+                            <div className="detailCommandeEnCours"></div>
+                        </div>
+
+                        <div className="c_type3">Commandes envoyées</div>
+                        <div className="c_item3" id="i_item4">
+                            {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elementsEnvoye)}
+                            <div className="detailCommandeEnvoyee"></div>
+                        </div>
                     </div>
 
-                    <div className="details_commande">
-                        <div id="afaire" class='info_commande c_info_commande'></div>
-                    </div>
-
-                    <div className="i_bout_cadre_afaire"></div>
-                </div>
-
-                <div className="c_cadre_commandes_encours i_cadre_preparation">
-                    <div className="c_titre_preparation i_titre_preparation">
-                        <div className="en_cours_preparation">En cours de préparation</div>
-                        <div className="barre_haut_preparation"></div>
-                        <div className="barre_bas_preparation"></div>
-                    </div>
-
-                    <div className="c_titres_commandes i_titres_commandes">
-                        <div className="i_heures">Heure</div>
-                        <div className="i_noms">Nom</div>
-                        <div className="i_contacts">Contact</div>
-                        <div className="i_prix_titre">Prix</div>
-                    </div>
-                    <div className="i_commandes_encours c_commandes" id="cadre_encours">
-                        {donnees && donnees.filter(element => element.IdEtat === "ENC").map(elementsEncours)}
-                    </div>
-
-                    <div className="details_commande">
-                        <div id="encours" class='info_commande c_info_commande'></div>
-                    </div>
-
-                    <div className="i_bout_cadre_afaire"></div>
-                </div>
-
-                <div className="c_cadre_commandes_envoye i_cadre_envoi">
-                    <div className="c_titre_envoi i_titre_envoi">
-                        <div className="en_cours_envoi">En cours d'envoi</div>
-                        <div className="barre_haut_envoi"></div>
-                        <div className="barre_bas_envoi"></div>
-                    </div>
-
-                    <div className="c_titres_commandes i_titres_commandes">
-                        <div className="i_heures">Heure</div>
-                        <div className="i_noms">Nom</div>
-                        <div className="i_contacts">Contact</div>
-                        <div className="i_prix_titre">Prix</div>
-                    </div>
-                    <div className="i_commandes_envoye c_commandes" id="cadre_envoye">
-                        {donnees && donnees.filter(element => element.IdEtat === "ENV").map(elementsEnvoye)}
-                    </div>
-
-                    <div className="details_commande">
-                        <div id="envoye" class='info_commande c_info_commande'></div>
-                    </div>
-
-                    <div className="i_bout_cadre_afaire"></div>
                 </div>
             </div>
         </div>

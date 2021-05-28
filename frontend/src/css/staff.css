@@ -7,11 +7,9 @@
 	--texte_commande: white;
 	--bg_boutons: #F7C27E;/*#181616;*/
 	--bg_details: #4D4D4D;
-	/* --bg_bouton_livrer: red; */
   	--bg_bouton_surplace: #f5deb3;
 	--bg_resume_aliments : #565656;
   }
-  /*var(--bg_boutons)*/
   
 staff * {
 	  font-family:"Lucida Sans", sans-serif; ; /*modern, monospace;*/
@@ -21,10 +19,10 @@ staff * {
 .c_page {
 	display: grid;
 	grid-template-columns: 100% ;
-	grid-template-rows: 495px 495px 495px;
+	grid-template-rows: 1000px;
 	grid-gap: 45px; 
 	padding: 0px;
-	margin-bottom: 93px;
+	margin-bottom: 220px;
 }
 .i_cadre_attente {
 	grid-column-start: 1;
@@ -46,7 +44,7 @@ staff * {
 }
 .c_titres_commandes {
 	display: grid;
-	grid-template-columns: 15.4% 23% 25.5% 20% 15%;
+	grid-template-columns: 9.2% 16% 22.6% 21.5% 13.5%;
 	grid-template-rows: auto  ;
 	grid-gap: 2px;
 	background-color: black;
@@ -61,25 +59,25 @@ staff * {
 	border-radius: 9px;
 }
 .i_titres_commandes {
-	grid-column-start: 4;
-	grid-column-end: 7;
+	grid-column-start: 2;
+	grid-column-end: 9;
 	grid-row-start: 2;
 	grid-row-end: 3;
 
-	/*border: solid;*/
 	border-color: #808080;
 	background-color: var(--bg_cadres);
 	border-radius: 11px 11px 0px 0px;
-	padding: 13px;
+	padding: 13px 13px 13px 31px;
 }
 .c_cadre_commandes_afaire {
 	display: grid;
 	grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 4% 5%;
-	grid-template-rows: 0% 16% 150px 220px 10%;
+	grid-template-rows: 3% 7% 88% 2%;
 	grid-gap: 5px;
 	background-color: black;
 	padding: 20px;
 	grid-row-gap: 0px; 
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .c_cadre_commandes_encours {
@@ -109,55 +107,42 @@ staff * {
 	background-color: black;
 	padding: 5px;
 	grid-gap: 0px;
-	/*grid-row-gap : 0px;
-	grid-column-gap: 5px;*/
-	height: 360px;
+	height: 770px;
 	background-color: var(--bg_cadres);
 }
 .c_commande {
 	display: grid;
 	grid-template-columns: 15% 23% 26% 20% 14%;
-	grid-template-rows: 80% auto;
+	grid-template-rows: 100%;
 	grid-gap: 4px;
 	background-color: black;
 	padding: 0px;
 	color : white;
 }
 .c_commande > div {
-	/* text-align: center; */
 	border-radius: 3px;
 	font-size: 22px;
-	/*padding: 5px 2px 0px 2px;*/
 }
 .i_commande {
-	grid-column-start: 2;
+	grid-column-start: 1;
 	grid-column-end: 3;	
 	background-color: var(--bg_cadres);
 }
 .i_bout_cadre_afaire {
-	grid-column-start: 4;
-    grid-column-end: 7;
-    grid-row-start: 5;
-    grid-row-end: 6;
+	grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 7;
+    grid-row-end: 8;
 	background-color:var(--bg_cadres);
 	border-radius:0px 0px 11px 11px;
 }
-/*.i_commande > :hover {
-	background-color: black;
-}*/
-/*.i_commande:hover {
-	background-color: black;
-	overflow: visible;
-}*/
 
 .c_sans_bouton {
 	display: grid;
-	grid-template-columns: 18% 27% 30% 23%;;
+	grid-template-columns: 11% 19% 27% 25.7% 16% 5%;
 	grid-template-rows: auto;
 	grid-gap: 4px;
 	background-color: #181616;
-	/*padding: 0px;*/
-	/*color : white;*/
 }
 .i_sans_bouton {
 	grid-column-start: 1;
@@ -166,79 +151,77 @@ staff * {
 	grid-row-end: 2;
 }
 
-.i_heures {
+.i_id_commande {
 	grid-column-start: 1;
 	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+.i_id {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.i_heures {
+	grid-column-start: 2;
+	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 .i_heure {
-	grid-column-start: 1;
-	grid-column-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3;
 }
 
 .i_noms {
-	grid-column-start: 2;
-	grid-column-end: 3;
+	grid-column-start: 3;
+	grid-column-end: 4;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 .i_nom {
-	grid-column-start: 2;
-	grid-column-end: 3;
+	grid-column-start: 3;
+	grid-column-end: 4;
 	text-align: left;
 	border-radius: 3px;
-	padding: 5px 2px 0px 2px;
+	padding: 5px 15px 0px 15px;
 }
 
 .i_contacts {
-	grid-column-start: 3;
-	grid-column-end: 4;
+	grid-column-start: 4;
+	grid-column-end: 5;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 .i_contact {
-	grid-column-start: 3;
-	grid-column-end: 4;
+	grid-column-start: 4;
+	grid-column-end: 5;
 	text-align: left;
 	border-radius: 3px;
-	padding: 5px 2px 0px 2px;
+	padding: 5px 15px 0px 15px;
 }
 
-/*.i_adresses {
-	grid-column-start: 4;
-	grid-column-end: 5;
-	grid-row-start: 1;
-	grid-row-end: 2;
-}
-.i_adresse {
-	grid-column-start: 4;
-	grid-column-end: 5;
-}*/
 
 .i_prix_titre {
-	grid-column-start: 4;
-	grid-column-end: 5;
+	grid-column-start: 5;
+	grid-column-end: 6;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 .i_prix_commande {
-	grid-column-start: 4;
-	grid-column-end: 5;
+	grid-column-start: 5;
+	grid-column-end: 6;
 	text-align: right;
 	border-radius: 3px;
-	padding: 5px 2px 0px 2px;
+	padding: 5px 15px 0px 15px;
 }
 
-/*.i_heures_prevues {
-	grid-column-start: 6;
-	grid-column-end: 7;
-	grid-row-start: 1;
-	grid-row-end: 2;
-}*/
+
 .i_heure_prevue {
-	grid-column-start: 1; /*6-7*/
-	grid-column-end: 2;
+	grid-column-start: 2; /*6-7*/
+	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
 	text-align: center;
@@ -257,12 +240,13 @@ staff * {
 	background-color: var(--bg_boutons);
     color: black;
     border: none;
-    /*font-style: italic;*/
 	border-radius: 5px;
     cursor: pointer;
 	height: 27px;
     width: 35px;
     font-size: 18px;
+	position: relative;
+    top: -4px;
 }
 .couleur_bg1{
 	background-color : var(--bg_ligne2) ;
@@ -285,11 +269,9 @@ staff * {
 	grid-row-start: 3;
 	grid-row-end: 5;
 	
-	/*border : solid;*/
 	border:none;
 	border-color : #808080;
 	overflow-y: scroll;	
-	/*font-size : 22px;*/
 	background-color: var(--bg_cadres);
 }
 .i_commandes_encours {
@@ -301,7 +283,6 @@ staff * {
 	border:none;
 	border-color : #808080;
 	overflow-y: scroll;
-	/*font-size : 22px;*/
 }
 .i_commandes_envoye {
 	grid-column-start: 4;
@@ -312,11 +293,10 @@ staff * {
 	border:none;
 	border-color : #808080;
 	overflow-y: scroll;	
-	/*font-size : 22px;*/
 }
 
 .details_commande{
-	grid-column-start: 7;
+	grid-column-start: 8;
 	grid-column-end: 10;
 	grid-row-start: 2;
 	grid-row-end: 5;
@@ -337,33 +317,34 @@ staff * {
 	border-color : var(--bg_details);
 	font-size : 20px;
 	color : white;
-	height: 100%;
 	padding: 10px;
+
+	height: 55%;
+	position:fixed;
+	width: 22%;
 }
 .i_titre_detail {
 	grid-column-start: 1;
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 2;
-	background-color:var(--bg_details);
-	font-size: 22px;
+	font-size: 19px;
 }
 .id_client_detail {
-	/* background-color:var(--bg_details); */
 	background-color:var(--bg_titres);
-	/* text-decoration: underline; */
 	border-radius: 7px;
-    padding: 4px;
+    padding: 0px 11px 3px 11px;
 }
 .i_aliments_detail {
 	grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-	background-color:var(--bg_resume_aliments);
 	overflow-y: scroll;	
 	border-radius: 7px;
 	padding: 5px 0px 5px 0px;
+	height: 110px;
+    background-color: grey;
 }
 #c_aliments_detail_id_details_commande {
 	display: grid;
@@ -396,84 +377,87 @@ staff * {
     grid-template-rows: 100%;
 	grid-gap: 4px;
 	padding: 2px;
-	background-color : var(--bg_resume_aliments) ;
 }
 .titre_aliment {
 	grid-column-start: 2;
     grid-column-end: 3;
 
 	padding: 0px 0px 6px 0px;
-	background-color:var(--bg_resume_aliments);
 }
 .quantite_aliment{
 	grid-column-start: 3;
     grid-column-end: 4;
-
-	background-color:var(--bg_resume_aliments);
+}
+.i_payement_detail {
+	grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 5;
+    grid-row-end: 6;
+	color:black;
+	line-height: 45px;
+	padding: 0px 0px 0px 1px;
 }
 .i_heure_detail {
 	grid-column-start: 1;
     grid-column-end: 5;
-    grid-row-start: 3;
-    grid-row-end: 4;
-	background-color:var(--bg_details);
-	color:grey;
-	line-height: 45px;
+    grid-row-start: 4;
+    grid-row-end: 5;
+	color:black;
+	line-height: 28px;
+	padding: 0px 0px 0px 1px;
 }
 .i_commentaire_detail {
 	grid-column-start: 3;
     grid-column-end: 6;
-    grid-row-start: 2;
-    grid-row-end: 3;
-	background-color:var(--bg_resume_aliments);
-	color:rgb(172, 172, 172);
-	line-height: 30px;
+    grid-row-start: 4;
+    grid-row-end: 7;
+	color:black;
+	line-height: 17px;
 	overflow-y: scroll;	
-	border-radius: 7px;
+	/* border-radius: 7px; */
 	padding: 5px 1px 5px 5px;
 }
 .info_client {
 	color : white ; 
-	background-color:var(--bg_details);
 }
 .info_com {
 	color : white ; 
-	background-color:var(--bg_resume_aliments);
+}
+.info_payement {
+	color : white ; 
 }
 .i_adresse_detail_adresse {
-	grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 4;
-    grid-row-end: 5;
-	background-color:var(--bg_details);
-	color:grey;
+	grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+	color: black;
 	line-height: 39px;
+	padding: 0px 0px 0px 10px;
 }
 .i_adresse_detail_numero {
-	grid-column-start: 4;
+	grid-column-start: 5;
     grid-column-end: 6;
-    grid-row-start: 4;
-    grid-row-end: 5;
-	background-color:var(--bg_details);
-	color:grey;
+    grid-row-start: 2;
+    grid-row-end: 3;
+	color: black;
 	line-height: 39px;
 }
 .i_adresse_detail_ville {
-	grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 5;
-    grid-row-end: 6;
-	background-color:var(--bg_details);
-	color:grey;
+	grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 4;
+	color: black;
 	line-height: 36px;
+	padding: 0px 0px 0px 10px;
 }
 .i_adresse_detail_postal {
-	grid-column-start: 3;
+	grid-column-start: 5;
     grid-column-end: 6;
-    grid-row-start: 5;
-    grid-row-end: 6;
-	background-color:var(--bg_details);
-	color:grey;
+    grid-row-start: 3;
+    grid-row-end: 4;
+	color: black;
 	line-height: 39px;
 }
 
@@ -577,7 +561,6 @@ staff * {
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 10;
-	/* background-color:white; */
 }
 .c_titre_envoi {
 	display: grid;
@@ -633,144 +616,210 @@ staff * {
 ::-webkit-scrollbar-thumb:active {
 	background: var(--bg_ligne2);/*#D57F0D; */
 }
-
-@media only screen and (max-width: 1970px) {
-	.c_commande > div {font-size: 20px;}
-	.c_sans_bouton {grid-template-columns: 18% 27% 35% 18%;}
-	.c_commande {grid-gap: 3px;}
-	.c_cadre_commandes_afaire {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
-	.c_cadre_commandes_encours {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
-	.c_cadre_commandes_envoye {grid-template-columns: 8% 8% 8% 14% 14% 14% 8% 15% 7% 1%;}
-	.c_info_commande {grid-template-columns: 12% 40% 9% 28% 6%;}
-}
-@media only screen and (max-width: 1410px) {
-	.c_commande > div {font-size: 20px;}
-	.c_sans_bouton {grid-template-columns: 18% 27% 35% 17.8%;}
-	.c_commande {grid-gap: 3px;}
-
-	.c_cadre_commandes_afaire {grid-template-rows: 7% 16% 140px 201px 10%;
-		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 0px 20px;}
-	.c_cadre_commandes_encours {grid-template-rows: 7% 16% 140px 201px 10%;
-		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 0px 20px;}
-	.c_cadre_commandes_envoye {grid-template-rows: 7% 16% 140px 201px 10%;
-		grid-template-columns: 15% 15% 15% 9% 12% 16% 11% 4%;
-		padding: 20px 20px 0px 20px;}
-	.c_titres_commandes {grid-template-columns: 15.4% 23% 30% 20% 15%;}
-	.i_titre_fileattente {grid-row-start: 1;
-		grid-row-end: 2;
-		grid-column-end: 5;}
-	.barre_haut_attente {display:none;}
-	.barre_bas_attente {display:none;}
-	.barre_haut_preparation {display:none;}
-	.barre_bas_preparation {display:none;}
-	.barre_haut_envoi {display:none;}
-	.barre_bas_envoi {display:none;}
-	.file_attente {grid-column-start: 1;
-		color: white;
-		font-size: 22px;
-		line-height: unset;}
-	.c_titre_fileattente {grid-template-rows: 1% 98% 1%;}
-	.c_titre_preparation {grid-template-rows: 1% 98% 1%;}
-	.c_titre_envoi {grid-template-rows: 1% 98% 1%;}
-	.en_cours_preparation {grid-column-start: 1;
-		color: white;
-		font-size: 22px;
-		line-height: unset;}
-	.en_cours_envoi {grid-column-start: 1;
-		color: white;
-		font-size: 22px;
-		line-height: unset;}
-	.i_titre_preparation {grid-row-start: 1;
-		grid-row-end: 2;
-		grid-column-end: 5;}
-	.i_titre_envoi {grid-row-start: 1;
-		grid-row-end: 2;
-		grid-column-end: 5;}
-	.i_titres_commandes {grid-column-start: 1;
-		grid-column-end: 5;}
-	.i_commandes_afaire {
-		grid-column-start: 1;
-		grid-column-end: 5;}
-	.i_bout_cadre_afaire {grid-column-start: 1;
-		grid-column-end: 5;}
-	.details_commande {grid-column-start: 5;
-		grid-column-end: 8;}
-	.i_commandes_encours {grid-column-start: 1;
-		grid-column-end: 5;}
-	.i_commandes_envoye {grid-column-start: 1;
-		grid-column-end: 5;}							
+ 
+@media only screen and (max-width: 1700px) {
+	.c_sans_bouton {grid-template-columns: 11% 19% 27% 25.4% 16% 5%;}
+	.c_titres_commandes > div{font-size: 19px;}
 }
 
-@media only screen and (max-width: 1100px) {
-	.c_cadre_commandes_afaire {grid-template-rows: 36px 64px 150px 171px 10% 26px;
-		grid-template-columns: 7% 28% 28% 28% 7%;}
-	.c_cadre_commandes_encours {grid-template-rows: 36px 64px 150px 171px 10% 26px;
-		grid-template-columns: 7% 28% 28% 28% 7%;}
-	.c_cadre_commandes_envoye {grid-template-rows: 36px 64px 150px 171px 10% 26px;
-		grid-template-columns: 7% 28% 28% 28% 7%;}
-	.details_commande {grid-row-start: 7;
-		grid-row-end: 8;
-		grid-column-start: 2;
-		grid-column-end: 5;
-		padding: unset;}
-	.i_titres_commandes {grid-column-start: 2;}	
-	.i_commandes_afaire {grid-column-start: 2;}	
-	.i_bout_cadre_afaire {grid-column-start: 2;
-	    grid-row-start: 5;
-    	grid-row-end: 6;}
-	.i_commandes_encours {grid-column-start: 2;}	
-	.i_commandes_envoye {grid-column-start: 2;}	
-	.info_commande {height: 100%;}
-	.c_commandes{height: 100%;}
-	.c_page {grid-template-rows: 1000px 1000px 1000px;}
+@media only screen and (max-width: 1500px) {
+	.c_sans_bouton {grid-template-columns: 11% 19% 26.5% 25.4% 16% 5%;}
+	.c_titres_commandes > div{font-size: 17px;}
+	#titre_idcom {padding: 10px 0px 10px 0px;}
 }
 
+@media only screen and (max-width: 1260px) {
+	.i_id_commande{display:none;}
+}
+@media only screen and (max-width: 1075px) {
+	.i_id_commande{display:none;}
+	.i_contact {display:none}
+	.c_sans_bouton {grid-template-columns: 12% 23% 35.5% 27.7%;}
+	.i_prix_commande {grid-column-start: 4;
+			grid-column-end: 5;}
+	.c_commande {grid-template-columns: 15% 23% 28% 17% 14%;}
+	.i_contacts{display:none}
+	.i_prix_titre {
+		grid-column-start: 4;
+		grid-column-end: 5;}
+	.c_titres_commandes {grid-template-columns: 10.2% 19% 29.6% 22.5% 13.5%;}
+}
+@media only screen and (max-width: 900px) {
+	.c_sans_bouton {grid-template-columns: 12% 23% 35.5% 26.7%;}
+}
 @media only screen and (max-width: 700px) {
-	.c_cadre_commandes_afaire{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
-		grid-template-columns: 4% 28% 31% 28% 4%;}
-	.c_cadre_commandes_encours{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
-		grid-template-columns: 4% 28% 31% 28% 4%;}
-	.c_cadre_commandes_envoye{grid-template-rows: 36px 40px 128px 113px 10% 26px 320px;
-		grid-template-columns: 4% 28% 31% 28% 4%;}
+	.c_sans_bouton {grid-template-columns: 12% 23% 35.5% 25.7%;}
+	.c_commande {grid-template-columns: 15% 23% 27% 17% 14%;}
+}
+
+@media only screen and (max-width: 665px) {
 	.i_contacts { display:none;}
-	.i_contact { display:none;}
-	.c_commande > div {font-size: 14px;}
-	.i_titres_commandes {padding: 4px;}
+	.i_noms {display:none;}
+	.i_heures { grid-column-end: 4;}
+	.i_prix_titre {grid-column-start: 4;}
+	.i_nom {display: none;}
+	.i_contact {display: none;}
+	.c_sans_bouton {grid-template-columns: 18% 31% 47% 4%;}
 	.i_prix_commande {grid-column-start: 3;
 		grid-column-end: 4;}
-	.i_div_bouton {grid-column-start: 4;
-			grid-column-end: 5;}		
-	.i_sans_bouton {grid-column-end: 4;}
-	.c_sans_bouton {grid-template-columns: 27.5% 43% 27%;}
-	.c_commande {grid-template-columns: 21% 30% 26% 20%;}
-	.i_bouton_suivant {height: 19px;
-		width: 26px;
-		font-size: 14px;
-		padding: unset;}
-	.i_prix_titre {
-		grid-column-start: 3;
-		grid-column-end: 4;}
-	.c_titres_commandes {
-		grid-template-columns: 22.4% 32% 20% 23%;}
-	.c_titres_commandes > div {font-size: 17px;
-		padding: 4px 10px 0px 8px;}
-
-	.c_page {grid-template-rows: 790px 790px 790px;}
-	.i_titre_detail {font-size: 18px;}
-	.info_commande {font-size: 14px;}
-	.c_ligne_aliment {grid-template-columns: 2% 71% 22%;}
-	.c_info_commande {grid-template-columns:12% 40% 4% 7% 25% 6%;}
-	.i_commentaire_detail {grid-column-end: 7;
-		font-size: 12px;}
-	.i_titre_detail{grid-column-end: 7;}
-	.i_adresse_detail_postal {grid-column-start: 4;
-		grid-column-end: 7;}
-	.i_adresse_detail_ville {grid-column-end: 4;}
+	.c_commande {grid-template-columns: 15% 32% 37% 22% 22%;}
+	.i_bouton_suivant{height: 22px;
+		width: 31px;
+		font-size: 13px;}
+	.c_item5{    padding: 0px 4px 0px 4px;}
+	.detailCommandeAfaire{margin: 5px 3px 6px 3px;
+	    grid-column-end: 17;}
+	.detailCommandeEnCours{margin: 5px 3px 6px 3px;
+	    grid-column-end: 17;}
+	.detailCommandeEnvoyee{margin: 5px 3px 6px 3px;
+	    grid-column-end: 17;}
+	.i_titre_detail{    font-size: 11px;}
+	.i_payement_detail{display:none;}
+	.i_heure_detail{display:none;}
+	.i_commentaire_detail {
+		grid-column-start: 1;}
+	.c_titres_commandes {grid-template-columns: 18.2% 3% 30.6% 44.5% 13.5%;}
 }
 
-@media only screen and (max-width: 600px) {
-	.c_commande {grid-gap: 4px;}
-	.c_sans_bouton {grid-template-columns: 27.5% 43% 27%;}	
+
+
+.c_item5 {
+	grid-row-start: 3;
+	grid-row-end: 4;
+	grid-column-start: 2;
+	grid-column-end: 9;
+	display:grid;
+	grid-template-columns: auto ;
+	grid-template-rows: 4% 28% 4% 28% 4% 28% 3%;
+	grid-gap: 5px; 
+	padding: 0px 15px 0px 15px;
+	height: 1050px;
+	/* grid-row-gap: 22px; */
+	background-color: #181616;
+	border-radius: 0px 0px 11px 11px;
+}
+.c_item1 {
+	color:black;
+	grid-row-start: 4;
+	grid-row-end: 5;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	overflow-y: scroll;	
+	background-color: #181616;
+	grid-gap: 5px;
+	display: grid;
+	margin: 15px;
+}
+
+.c_type2 {
+	grid-row-start: 3;
+	grid-row-end: 4;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	color:white;
+	background-color: #9a9a99;
+	font-size: 22px;
+    line-height: 20px;
+	padding: 5px 15px 5px 15px;
+}
+
+.c_item3 {
+	color:black;
+	grid-row-start: 6;
+	grid-row-end: 7;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	overflow-y: scroll;	
+	background-color: #181616;
+	grid-gap: 5px;
+	display: grid;
+	margin: 15px;
+}
+
+.c_type3 {
+	grid-row-start: 5;
+	grid-row-end: 6;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	color:white;
+	background-color: #9a9a99;
+	font-size: 22px;
+    line-height: 20px;
+	padding: 5px 15px 5px 15px;
+}
+
+.c_item6 {
+	color:black;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	overflow-y: scroll;	
+	background-color: #181616;
+	grid-gap: 5px;
+	display: grid;
+	margin: 15px;
+}
+
+.c_type1 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	color:white;
+	background-color: #9a9a99;
+	padding: 5px 15px 5px 15px;
+	font-size: 22px;
+    line-height: 20px;
+}
+
+.detailCommandeAfaire{
+	display:none;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	border-radius: 7px;
+	background-color: #9a9a99;
+
+	grid-template-columns: 12% 20% 20% 27% 20% 0%;
+    grid-template-rows: 11% 26% 25% 10% 10% 10%;
+	grid-gap: 4px;
+	row-gap: 8px;
+	padding: 11px;
+	margin: 5px 25px 6px 15px;
+}
+
+.detailCommandeEnCours {
+	display:none;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	border-radius: 7px;
+	background-color: #9a9a99;
+
+	grid-template-columns: 12% 20% 20% 27% 20% 0%;
+    grid-template-rows: 11% 26% 25% 10% 10% 10%;
+	grid-gap: 4px;
+	row-gap: 8px;
+	padding: 11px;
+	margin: 5px 25px 6px 15px;
+}
+
+.detailCommandeEnvoyee {
+	display:none;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	border-radius: 7px;
+	background-color: #9a9a99;
+
+	grid-template-columns: 12% 20% 20% 27% 20% 0%;
+    grid-template-rows: 11% 26% 25% 10% 10% 10%;
+	grid-gap: 4px;
+	row-gap: 8px;
+	padding: 11px;
+	margin: 5px 25px 6px 15px;
 }
