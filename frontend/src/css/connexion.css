@@ -72,20 +72,6 @@
 }
 
 
-/*a:link {
-	color : black;
-	text-decoration:none;
-}
-a:visited {
-	color :black;
-	text-decoration:none;
-}
-a:active {
-	color:black;
-	text-decoration:none;
-}*/
-
-
 .i_bouton_inscription:hover{
 	color: var(--principale);
 	background-color:#667D88;
@@ -237,18 +223,18 @@ input:-webkit-autofill {
 	color:var(--erreur);
 	background-color: var(--bg);
 }
-.connexion ::-webkit-scrollbar {/*taille*/
+::-webkit-scrollbar {
 	width: 6px; 
 }
-.connexion ::-webkit-scrollbar-thumb {/*couleur normale*/
-	background: #b1acaa; /*#42434a; /* #F7C27E;*/ 
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
 	border-radius: 10px;
 }
-.connexion ::-webkit-scrollbar-thumb:hover { 
-	background: #696969;/*#F3A43B; */
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
 }
-.connexion ::-webkit-scrollbar-thumb:active {
-	background: #2A2A2A;/*#D57F0D; */
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
 }
 
 #cadre_connexion a:link {
@@ -287,7 +273,7 @@ input:-webkit-autofill {
 	.c_zones_info {grid-template-rows: 7% 20% 7% 9% 4% 11% 12%;
 					grid-template-columns: 1% 98% 1%;}
 	.i_info_connexion {height: 485px;}
-	.c_info_connexion {grid-template-rows: 4% 12% 6% 13% 15% 15% 15% 18%;}
+	.c_info_connexion {grid-template-rows: 4% 12% 6% 11% 15% 13% 15% 18%;}
 }
 @media only screen and (max-width:495px) {
 	.c_cadre{padding: 0px 0px 131px 0px;}
@@ -309,4 +295,5 @@ input:-webkit-autofill {
 						grid-column-end: 8;
 						font-size: 15px;}
 	.c_cadre{padding: 0px 0px 147px 0px;}
+	.c_zones_info {grid-template-rows: 7% 17% 7% 9% 4% 9% 12%;}
 }

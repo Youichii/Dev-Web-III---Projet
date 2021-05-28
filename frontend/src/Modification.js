@@ -225,7 +225,7 @@ const Modification = () => {
                                         );
                                         })
                                     }
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setLundi}/>
                                         <Button />
                                     </form>   
@@ -242,7 +242,7 @@ const Modification = () => {
                                         })
                                     }
                             
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMardi}/>
                                         <Button />
                                     </form>  
@@ -259,7 +259,7 @@ const Modification = () => {
                                             })
                                         }
                     
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setMercredi}/>
                                         <Button />
                                     </form>    
@@ -276,7 +276,7 @@ const Modification = () => {
                                         })
                                     }
                             
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setJeudi}/>
                                         <Button />   
                                     </form> 
@@ -293,7 +293,7 @@ const Modification = () => {
                                         })
                                     }
                                 
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setVendredi}/>
                                         <Button />  
                                     </form> 
@@ -310,7 +310,7 @@ const Modification = () => {
                                         })
                                     }
                     
-                                    <form onSubmit={submitDay}>
+                                    <form className="form_modif" onSubmit={submitDay}>
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setSamedi}/>
                                         <Button />   
                                     </form> 
@@ -328,7 +328,7 @@ const Modification = () => {
                                         })
                                     }
                                     
-                                    <form>
+                                    <form className="form_modif">
                                         <Input name="lundi" max="50" min="1" type="texte" placeholder="Nouvelles heures" setFunc={setDimanche}/>
                                         <Button/>
                                     </form>    
@@ -339,19 +339,19 @@ const Modification = () => {
             />
             <Dropdown title="Coordonnées" className="dd-wraper-2" content={
                 <div className ="divCoord">
-                    <form onSubmit={submitMailRest}>
+                    <form className="form_modif" onSubmit={submitMailRest}>
                         {coordonneesList.map((val) => {return <p>{val.Mail}</p>})}
                         <Input type="mail" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="Mail" max="50" placeholder="Changer l'adresse mail" setFunc={setMailRest}/>
                         <Button />
                     </form>
                     
-                    <form onSubmit={submitTelRest}>
+                    <form className="form_modif" onSubmit={submitTelRest}>
                         {coordonneesList.map((val) => {return <p>{val.Gsm}</p>})}
                         <Input type="tel" name="Phone" pattern="[0-9]{4,}"  max="14" placeholder="Numéro de téléphone" title="Ne rentrez pas le préfixe du pays, minimum 4 chiffres" setFunc={setTelRest}/>
                         <Button />
                     </form><br /><br />
                     
-                    <form onSubmit={submitAdressRest}>
+                    <form className="form_modif" onSubmit={submitAdressRest}>
                         {coordonneesList.map((val) => {return <p>{val.Rue}</p>})}
                         <Input name="Street" max="50" placeholder="Rue" setFunc={setStreetRest}/><br/>
                         {coordonneesList.map((val) => {return <p>{val.Numero}</p>})}
@@ -373,24 +373,24 @@ const Modification = () => {
                         <details>
                             <summary className="titre" key = {titre.NomCategorie}> {titre.NomCategorie} </summary>
                             {contenu && contenu.filter(contenus => contenus.IdCategorie === titre.NomCategorie.slice(0,3)).map(contenu_filtre => (
-                                <div> 
+                                <div className="element_menu"> 
                                     <div className="haut">
                                         <span className="contenu">{contenu_filtre.Produit}</span>
-                                        <span className="price">{contenu_filtre.Prix.toFixed(2) + "€" }</span>
+                                        <span className="price">- {contenu_filtre.Prix.toFixed(2) + "€" }</span>
                                     </div>
                                     <div className="bas">  
                                         <span className="description">{contenu_filtre.Description}</span>
-                                        <form>
-                                            <button className={contenu_filtre.IdProduit} onClick={event => {DelProduit(event.target.className)}}>X</button>
+                                        <form className="form_modif">
+                                            <button className="delete_menu" id={contenu_filtre.IdProduit} onClick={event => {DelProduit(event.target.id)}}>X</button>
                                         </form>  
                                     </div>
                     
                                     
                                 </div>
                             ))}
-                            <form onSubmit={submitMenu}>
+                            <form className="form_modif" onSubmit={submitMenu}>
                                 <select onChange={(e) => {
-                                    setCategorie(e.target.value)}} name="categorie">
+                                    setCategorie(e.target.value)}} className="categorie">
                                     <option value="blank"></option>
                                     <option value={titre.NomCategorie.slice(0,3)}>{titre.NomCategorie}</option>
                                 </select>

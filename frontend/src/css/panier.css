@@ -16,10 +16,10 @@
   .panier {
       display: grid;
       grid-template-columns: 5% 40% 5% 5% 35% 10%;
-      grid-template-rows: 48px 455px 21px 189px 52px;
+      grid-template-rows: 48px 485px 21px 189px 52px;
       grid-gap: 0px;
       padding: 5px;
-      margin: 0px 0px 32px 0px;
+      margin: 0px 0px 2px 0px;
   }
   .c_info_panier {
       display: grid;
@@ -706,19 +706,19 @@
   }
   
   
-  ::-webkit-scrollbar {/*taille*/
-      width: 6px; 
-  }
-  ::-webkit-scrollbar-thumb {/*couleur normale*/
-      background: #F7C27E; 
-      border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover { 
-      background: #CCA78D;/*#F3A43B; */
-  }
-  ::-webkit-scrollbar-thumb:active {
-      background: var(--brun_fonce);/*#D57F0D; */
-  }
+::-webkit-scrollbar {
+	width: 6px; 
+}
+::-webkit-scrollbar-thumb {
+	background: #b1acaa; 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}
   
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
@@ -760,7 +760,7 @@
       #bouton_annuler2 { font-size:18px;
           width: 87px;}
       .nombre_aliment, #info_aliments input[type=text] {font-size:11.3px}
-      .panier div > label {font-size: 20px;}
+      .panier div > label {font-size: 18px;}
       .c_quantite_aliment {grid-template-columns: 25% 14% 21% 14% 25%;}
       
       .i_info_ligne > div {font-size: 16px;} /*12*/
@@ -808,7 +808,7 @@
               grid-template-columns: 6% 88% 6% 0% 0% 0%;}
       #commentaire {width: 91%;}
       .c_boutons1 {grid-template-columns: 20% 60% 20%;}
-      .c_boutons2 {grid-template-columns:20% 60% 20%;}
+      .c_boutons2 {grid-template-columns:20% 51% 29%}
       #i_grise_etape1 {display:none;}
       #i_grise_etape2 {display:none;}
   

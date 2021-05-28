@@ -28,7 +28,6 @@ import { initGA } from './components/Compteurs';
 
 
 function App() {
-  require("./css/app.css");
 
   const [etat, setEtat] = useState({loading:true});
   useEffect(()=>{initGA();},[]);

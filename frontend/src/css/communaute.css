@@ -102,28 +102,18 @@ code {
   color:white;
 }
 ::-webkit-scrollbar {
-  width: 5px;
-  margin-top:1%;
-  border-radius: 2àpx;;
+	width: 6px; 
 }
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(78, 65, 65); 
+	background: #b1acaa; 
+	border-radius: 10px;
 }
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+::-webkit-scrollbar-thumb:hover { 
+	background: #696969;
 }
-
-/* Cadre de recherche  */
-
+::-webkit-scrollbar-thumb:active {
+	background: #2A2A2A;
+}
 
 
 

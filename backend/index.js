@@ -387,8 +387,8 @@ app.post('/api/users', (req, res) => {
  * @author Clémentine Sacré <c.sacre@students.ephec.be>
  * @method GET
  */ 
-app.get('/api/orders', (req, res) => {
-  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, CL.Mail, RE.IdEtat, RE.HLivree, RE.DateCom, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix  \
+ app.get('/api/orders', (req, res) => {
+  const sqlInsert = "SELECT RE.IdEtat, RE.IdCommande, RE.IdClient, CL.Prenom, CL.Gsm, CL.Mail, RE.IdEtat, RE.HLivree, RE.DateCommande, RE.Commentaire, RE.IdMethode, RE.Rue, RE.Numero, RE.Zip, RE.Ville, cast(sum(CO.Quantite * ME.Prix) AS DECIMAL(10, 1)) as Prix, PayementLiquide  \
   FROM reservations AS RE  \
   JOIN clients AS CL ON RE.IdClient = CL.IdClient  \
   JOIN commandes AS CO ON RE.IdCommande = CO.IdCommande  \
@@ -426,7 +426,6 @@ app.put('/api/orders/states', (req, res) => {
  */
 app.delete('/api/orders', (req, res) => {
   const commande  = req.body.commande ;
-  
   const sqlInsert3 = 'SELECT  reservations.IdClient, reservations.DateCommande, reservations.Ville, GROUP_CONCAT(CONCAT(menu.Produit ," x ", commandes.Quantite) SEPARATOR " ; ") AS Produits, SUM(commandes.Quantite*menu.Prix )AS Total \
   FROM commandes \
   JOIN menu ON menu.IdProduit = commandes.IdProduit \
@@ -435,7 +434,6 @@ app.delete('/api/orders', (req, res) => {
   GROUP BY reservations.IdClient, reservations.Ville, reservations.DateCommande';
   db.query(sqlInsert3, [commande], (err, result) => {
     const sqlInsert4 = "INSERT INTO historique (`IdClient`, `CateCommande`, `Ville`, `Produits`, `Total`) VALUES (?, ?, ?, ?, ?)";
-    console.log("dataaa : ", result);
     db.query(sqlInsert4, [result[0].IdClient, result[0].DateCommande, result[0].Produits, result[0].Total], (err, result) => {
     })
   })
@@ -508,14 +506,14 @@ app.put('/api/orders', (req, res) => {
  * @method GET
  * @param {number} identifiantCommande identifiant de la commande à compléter
  */
-app.get('/api/orders/:identifiantCommande', (req, res) => { 
+ app.get('/api/orders/:identifiantCommande', (req, res) => { 
   const identifiantCommande = req.params.identifiantCommande ;
 
   const sqlInsert = "SELECT C.IdCommande, C.IdProduit, Quantite, Prix, Produit \
   FROM commandes AS C  \
   JOIN menu AS ME ON C.IdProduit = ME.IdProduit  \
   JOIN reservations AS RE ON C.IdCommande = RE.IdCommande \
-  WHERE C.IdCommande = ? ";
+  WHERE C.IdCommande = ?  AND Quantite > 0";
   db.query(sqlInsert, [identifiantCommande], (err, result) => {
     res.send(result) ;
   })

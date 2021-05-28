@@ -5,7 +5,7 @@ import BoutonRadio from './components/BoutonRadio';
 import Axios from "axios";
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
-import PiedPage from './components/PiedPage.js';
+import  { useHistory } from 'react-router-dom';
 
 const Panier = () => {
     require('./css/panier.css');
@@ -61,6 +61,8 @@ const Panier = () => {
      * @author Clémentine Sacré <c.sacre@students.ephec.be>
      */
     useEffect(() => {
+        document.getElementById("place").checked = true ;
+        document.getElementById("mistercash").checked = true ;
         var myInit = { method: 'GET',
                 headers: {'Content-Type': 'application/json'},
         };
@@ -193,10 +195,14 @@ const Panier = () => {
                 return res;
             })
             .then (()=>{
-                console.log("mail envoye");
+                redirectionPanier() ;
             });
         })
     }
+    const historyPanier = useHistory();
+	const redirectionPanier = function onfinish(){
+        return historyPanier.push('/') ;
+	}
 
 
     /**
@@ -207,17 +213,21 @@ const Panier = () => {
     const supprimerCommande = () => {
         var myInit = { method: 'DELETE',
                headers: {'Content-Type': 'application/json'},
-               body: JSON.stringify({commande : id_commande})
+               //body: JSON.stringify({commande : id_commande})
+               body: JSON.stringify({commande : IDCommande})
         };
         fetch(`/api/orders`, myInit)
         .then(res => {
             return res.json();
         })
         .then(donnees => {
-            console.log("supprimer ok");
+            redirectionMenu() ;
         })
     }
-
+    const historyMenu = useHistory();
+	const redirectionMenu = function onfinish(){
+        return historyMenu.push('/menu') ;
+	}
 
     /**
      * Vérifie si l'utilisateur est connecté au chargement de la page
@@ -265,11 +275,11 @@ const Panier = () => {
     const changerPrix = (id_produit, id_prix) => {
         let information = donnees_panier.filter(element => element.IdProduit === id_produit)[0];
         
-        document.getElementById(id_prix + "total").innerHTML = document.getElementById(id_prix).value * information.Prix + " €";
+        document.getElementById(id_prix + "total").innerHTML = (document.getElementById(id_prix).value * information.Prix).toFixed(2) + " €";
         information.Quantite = Number(document.getElementById(id_prix).value);
         let total = 0 ;
         donnees_panier.map(aliment => total+=aliment.Quantite*aliment.Prix);
-        setTotal(total) ;
+        setTotal(total.toFixed(2)) ;
     }
 
 
@@ -342,7 +352,7 @@ const Panier = () => {
                 <div class="aliment_barre" id={element.IdProduit}><hr /></div>
                 <div className={`i_quantite_aliment c_quantite_aliment  ${type_couleur}`}> 
                     <button className='bouton_moins incrementeur' onClick={() => modifierQuantite(element.IdCommande, element.IdProduit, element.Quantite,"moins")} >-</button> 
-                    <input id={`${element.IdCommande}${element.idProd}`} className='nombre_aliment' type='number' value={element.Quantite} readonly="readonly" />
+                    <input id={`${element.IdCommande}${element.IdProduit}`} className='nombre_aliment' type='number' value={element.Quantite} readonly="readonly" />
                     <button className='bouton_plus incrementeur' onClick={() => modifierQuantite(element.IdCommande, element.IdProduit, element.Quantite, "plus")}>+</button>
                 </div> 
                 <div id={`${element.IdCommande}${element.IdProduit}total`} className={`i_prix_aliment ${type_couleur}`}>{(element.Prix*element.Quantite).toFixed(2)}{" €"}</div> 
@@ -406,7 +416,7 @@ const Panier = () => {
                     <div className="i_moy_reception">
                         <label class="label_informations" for="moyen_reception">Moyen de réception</label><br />
                         <div className="c_reception">
-                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" checked="yes" onClick={cacherAdresse}/>
+                            <BoutonRadio className_div="i_place" id_div="radio_place" name="myradio1" value="a_emporter" form="place" text="A emporter" onClick={cacherAdresse}/>
                             <BoutonRadio className_div="i_livrer" id_div="radio_livrer" name="myradio1" value="a_livrer" form="livrer" text="A livrer" onClick={afficherAdresse}/>
                         </div>
                     </div>
@@ -417,7 +427,7 @@ const Panier = () => {
                         <label class="label_informations" for="mode_payement">Mode de payement</label><br />
                         <div className="i_mode_payement c_mode_payement">
                             <BoutonRadio className_div="i_liquide" id_div="radio_liquide" name="myradio2" value="liquide" form="liquide" text="Liquide"/>
-                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="mistercash" form="mistercash" text="Mistercash" checked="yes"/>
+                            <BoutonRadio className_div="i_mistercash" id_div="radio_mistercash" name="myradio2" value="mistercash" form="mistercash" text="Mistercash" />
                         </div>
                     </div>
                     
