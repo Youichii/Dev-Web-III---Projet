@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import BoutonCommunautee from './components/BoutonCommunautee/BoutonCommunautee'; 
 
 const Communaute = () => {
     require("./communaute.css")
@@ -288,7 +289,7 @@ const Communaute = () => {
 
                         <div className="utilisateur" style={{color:utilisateur.Couleur}} id={utilisateur.Identifiant+"utilisateur"} >{utilisateur.Prenom} {utilisateur.Nom}</div>
 
-                        <button className = "blacklist" id={"blacklist" + utilisateur.Identifiant}  onClick={() => changerCouleur(utilisateur.Identifiant)}>{utilisateur.Status}</button>
+                        <BoutonCommunautee className='status' id ={"blacklist" + utilisateur.IdClient} onClick={() => changerCouleur(utilisateur.IdClient)} value={(utilisateur.Status === 0)?('Blacklister'):('Dé-Blacklister')}/>
 
                         <div className="mail">{utilisateur.Mail}</div>
 
@@ -300,12 +301,13 @@ const Communaute = () => {
 
                         <input type="text" placeholder="Commentaire sur le client" className = "text" id = {"text"+utilisateur.Identifiant} ></input>
 
-                        <button className="envoyer" id = {"envoyer" + utilisateur.Identifiant} onClick={() => ecrire(utilisateur.Identifiant)} > Envoyer</button>
+                        <BoutonCommunautee className='envoyer' id ={'envoyer'+ utilisateur.IdClient} onClick={() => ecrire(utilisateur.IdClient)} value='Envoyer'/>
 
                         <div className ='commentaire' id={utilisateur.Identifiant+"commentaire"}> 
 
                             {commentaires&&commentaires.filter(commentaire =>  commentaire.IdUtilisateur === utilisateur.Identifiant).map(commentaire_id => (
-                                <div id = {commentaire_id.IdUtilisateur} > -  {commentaire_id.Commentaire}<button className='boutton_supprimer' onClick={() => supprimer(commentaire_id.IdCommentaire)}>X</button></div>
+                                <div id = {commentaire_id.IdUtilisateur} > -  {commentaire_id.Commentaire} <BoutonCommunautee className='boutton_supprimer' onClick={() => supprimer(commentaire_id.Commentaire, commentaire_id.IdClient)} value='X'/></div>
+                                
                             ))}   
                             
                         </div>
