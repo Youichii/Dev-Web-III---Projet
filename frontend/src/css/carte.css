@@ -14,7 +14,7 @@ code {
 
 .Menu{
     margin-top: 25px;
-    margin-bottom: 81px;
+    margin-bottom: 20%;
     grid-template-columns: 20% 60% 20%; 
     display : grid; 
     /* height: 60px; */
@@ -22,6 +22,7 @@ code {
     text-overflow: scroll;
     background-color: black;
     padding: 0px 0px 60px 0px;
+
   }
   
   /* Scrollbar Perso */
@@ -100,6 +101,7 @@ code {
       grid-template-columns:5% 90% 5% ; 
       display : grid; 
     }
+
     #bordPrincipa{
       grid-column: 1;
     }

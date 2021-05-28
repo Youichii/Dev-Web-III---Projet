@@ -72,7 +72,7 @@ const Informations = () => {
                     Sat={horairesList.map((val) => {return val.Samedi})}
                     Sun={horairesList.map((val) => {return val.Dimanche})}
                     mail={coordonneesList.map((val) => {return val.Mail})}
-                    number={coordonneesList.map((val) => {return val.Numero})}
+                    number={coordonneesList.map((val) => {return val.Gsm})}
                     address={coordonneesList.map((val) => {return (val.Rue + " " + val.Numero + "  ,  " + val.Zip + " " + val.Ville)})} 
                     />} 
                 />
