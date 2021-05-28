@@ -8,7 +8,7 @@ import Axios from 'axios';
 import BanniereBasique from './components/BanniereBasique.js';
 import BanniereConnection from './components/BanniereConnection.js';
 import Video from './components/Video';
-
+import Chargement from './Chargement';
 import './css/Accueil.css';
 import { GApageVue } from './components/Compteurs';
 
@@ -21,6 +21,7 @@ const Accueil = () => {
 
     const [statutConnexion, setStatutConnexion] = useState(false);
 	const [utilisateur, setUtilisateur] = useState(10000000000);
+    const [valeursPretesACC, setValeursPretesACC] = useState(false);
 
 
 	/**
@@ -66,48 +67,66 @@ const Accueil = () => {
         })
     }
 
-    return (
-        <div>
-			{statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
-            <div className="hero-container">
-            <h1>Bienvenu au Chick 'N' Fish</h1>
-            <p>Venez découvrir nos plats frais et préparés maison. </p>
-                <div className="hero-img">
-                    <ul className="defilement-img">
-                        <li><img className="img" src={img1} alt="image1"></img></li>
-                        <li><img className="img" src={img2} alt="image2"></img></li>
-                        <li><img className="img" src={img3} alt="image3"></img></li>
-                        <li><img className="img" src={img4} alt="image4"></img></li>
+    /**
+     * Vérifie si les valeurs en asynchrone sont arrivées
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
+     useEffect(() => {
+        if (donneeAvis.length > 0) {
+            setValeursPretesACC(true);
+        }
+    }, [donneeAvis]);
+
+    if (!valeursPretesACC) {
+        return (
+            <Chargement />
+        );
+    }
+    
+    else {
+        return (
+            <div>
+                {statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
+                <div className="hero-container">
+                <h1>Bienvenu au Chick 'N' Fish</h1>
+                <p>Venez découvrir nos plats frais et préparés maison. </p>
+                    <div className="hero-img">
+                        <ul className="defilement-img">
+                            <li><img className="img" src={img1} alt="image1"></img></li>
+                            <li><img className="img" src={img2} alt="image2"></img></li>
+                            <li><img className="img" src={img3} alt="image3"></img></li>
+                            <li><img className="img" src={img4} alt="image4"></img></li>
+                            
+                        </ul>
+                
+                    </div>
+                    <div className="section2">
+                        <div className="video-acc"> 
+                            <Video autoPlay loop/>
                         
-                    </ul>
-            
-                </div>
-                <div className="section2">
-                    <div className="video-acc"> 
-                        <Video autoPlay loop/>
-                    
+                        </div>
+
+                        <div onLoad ={AfficherAvis} className="commentaires">
+                            <h1>Avis de nos clients</h1>
+                            {donneeAvis&&donneeAvis.map((val)=>{
+                                return(
+                                    <div className="avis">
+                                        <h2>{val.Prenom}</h2>
+                                        <p>{val.Avis}</p>
+                                        
+                                    </div>
+                                )
+                            })}
+                            
+                        </div>
+
                     </div>
 
-                    <div onLoad ={AfficherAvis} className="commentaires">
-                        <h1>Avis de nos clients</h1>
-                        {donneeAvis&&donneeAvis.map((val)=>{
-                            return(
-                                <div className="avis">
-                                    <h2>{val.Prenom}</h2>
-                                    <p>{val.Avis}</p>
-                                    
-                                </div>
-                            )
-                        })}
-                        
-                    </div>
-
                 </div>
-
             </div>
-        </div>
-
-    )
+        )
+    }
 }
 
 export default Accueil;

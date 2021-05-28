@@ -405,8 +405,12 @@ const Panier = () => {
         )
     }
 
+    /**
+     * Vérifie si les valeurs en asynchrone sont arrivées
+     * 
+     * @author Clémentine Sacré <c.sacre@students.ephec.be>
+     */
     useEffect(() => {
-        console.log("test","ville : ", villes,"panier : ", donnees_panier,"adresse : ", donnees_adresse,"heure : ", heures,"id : ");
         if (villes.length !== 0 && donnees_panier !== null && donnees_adresse !== null && heures.length !== 0 ) {
             setValeursPretes(true);
 

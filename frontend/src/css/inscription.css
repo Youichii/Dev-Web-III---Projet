@@ -61,10 +61,10 @@ html {
 	text-align: center;
 	padding: 23px 0px 0px 0px;
 	color: white;
-	background-color: var(--principale);
+	background-color: #a79177;
 }
 .i_bouton_con:hover{
-	color: var(--principale);
+	color: #a79177;
 	background-color:#667D88;
 }
 .inscription .i_titre_connexion {
@@ -118,11 +118,10 @@ html {
 	border: 1px solid var(--bordure);
 	padding: 5px 10px 5px 10px;
 	color: white;
-	/*font-family: DejaVu Sans Mono, monospace;*/
 	font-size: 15px;
 }
 .inscription input[type=text]:focus, .inscription input[type=password]:focus, .inscription input[type=number]:focus {
-	border-color:var(--principale);
+	border-color:#a79177;
 	border-width: 2px;	
 	outline:  none;
 }
@@ -330,7 +329,7 @@ html {
 }
 
 .bouton_ouvert{
-	background-color: var(--principale);
+	background-color: #a79177;
     border: none;
     color: white;
     width: 65%;
@@ -339,13 +338,13 @@ html {
 	cursor: default;
 }
 .bouton_ouvert:hover{
-	background-color:var(--survol_bouton);
+	background-color:#82705b;
 }
 .bouton_bloque:hover{
-	background-color:var(--principale);
+	background-color:#82705b;
 }
 .bouton_bloque{
-	background-color: var(--principale);
+	background-color: #82705b;
     border: none;
     color: white;
     width: 65%;
@@ -375,7 +374,7 @@ html {
 	margin: 0px 12px 0px 0px;
 }
 .inscription select:focus {
-	border-color:var(--principale);
+	border-color:#a79177;
 	border-width: 2px;	
 	outline:  none;
 }
@@ -446,7 +445,7 @@ html {
 	text-decoration:none; 
 } 
 .i_champ_politique a:hover {
-	color: var(--principale);
+	color: #a79177;
 	text-decoration:none; 
 }
 .i_champ_politique a:active {
