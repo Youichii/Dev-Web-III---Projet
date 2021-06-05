@@ -67,24 +67,24 @@ const Accueil = () => {
         })
     }
 
-    /**
-     * Vérifie si les valeurs en asynchrone sont arrivées
-     * 
-     * @author Clémentine Sacré <c.sacre@students.ephec.be>
-     */
-     useEffect(() => {
-        if (donneeAvis.length > 0) {
-            setValeursPretesACC(true);
-        }
-    }, [donneeAvis]);
+    // /**
+    //  * Vérifie si les valeurs en asynchrone sont arrivées
+    //  * 
+    //  * @author Clémentine Sacré <c.sacre@students.ephec.be>
+    //  */
+    //  useEffect(() => {
+    //     if (donneeAvis.length > 0) {
+    //         setValeursPretesACC(true);
+    //     }
+    // }, [donneeAvis]);
 
-    if (!valeursPretesACC) {
-        return (
-            <Chargement />
-        );
-    }
+    // if (!valeursPretesACC) {
+    //     return (
+    //         <Chargement />
+    //     );
+    // }
     
-    else {
+    // else {
         return (
             <div>
                 {statutConnexion ? <BanniereConnection page="acceuil" onClick={deconnexion} client={utilisateur}/> : <BanniereBasique page="acceuil" />}
@@ -126,7 +126,7 @@ const Accueil = () => {
                 </div>
             </div>
         )
-    }
+    // }
 }
 
 export default Accueil;

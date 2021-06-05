@@ -473,7 +473,7 @@
       grid-row-start: 2;
       grid-row-end: 3;
   }
-  input[type=text], .c_adresse select, .i_code_postal > input[type=number], .i_numero_maison  > input[type=number]{
+  .panier input[type=text], .c_adresse select, .i_code_postal > input[type=number], .i_numero_maison  > input[type=number]{
       width: 100%;
       height: 30px;
       border-radius: 0px/0px;
@@ -487,7 +487,7 @@
       font-family: modern, monospace;
       font-size: 20px;
   }
-  input[type=text]:focus, .c_adresse select:hover, .i_code_postal > input[type=number]:focus, .i_numero_maison  > input[type=number]:focus{
+  .panier input[type=text]:focus, .c_adresse select:hover, .i_code_postal > input[type=number]:focus, .i_numero_maison  > input[type=number]:focus{
       border-color:#a79177;
       border-width: 2px;	
       outline:  none;
@@ -722,8 +722,8 @@
 	background: #2A2A2A;
 }
   
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
+  .panier input[type=number]::-webkit-inner-spin-button,
+  .panier input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
   
